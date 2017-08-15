@@ -6,7 +6,7 @@ const nodeExternals = require('webpack-node-externals');
 const flexbugs = require('postcss-flexbugs-fixes');
 const merge = require('webpack-merge');
 
-const libraryName = 'react-icons';
+const libraryName = 'react-grid';
 const outputJsFile = `${libraryName}.js`;
 const outputStyleFile = `${libraryName}.css`;
 
