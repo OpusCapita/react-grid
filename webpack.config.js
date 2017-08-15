@@ -1,14 +1,12 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const flexbugs = require('postcss-flexbugs-fixes');
 const merge = require('webpack-merge');
 
 const libraryName = 'react-grid';
 const outputJsFile = `${libraryName}.js`;
-const outputStyleFile = `${libraryName}.css`;
 
 const getBaseConfiguration = require('./webpack/base.config.js');
 
@@ -34,30 +32,35 @@ const config = merge(getBaseConfiguration(params), {
     rules: [
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: process.env.NODE_ENV === 'production',
-              },
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [flexbugs, precss, autoprefixer],
+              minimize: true,
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [flexbugs, precss, autoprefixer],
-              },
+          },
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [flexbugs, precss, autoprefixer],
+              minimize: true,
             },
-            'sass-loader',
-          ],
-        }),
+          },
+        ],
       },
     ],
   },
-  plugins: [
-    new ExtractTextPlugin({ filename: outputStyleFile }),
-  ],
 });
 
 module.exports = config;
