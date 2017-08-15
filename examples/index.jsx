@@ -14,8 +14,6 @@ import DataGrid from './components/datagrid/datagrid.component';
 
 import './app.component.scss';
 
-require('../images/favicon.ico');
-
 
 const composeEnhancers = (process.env.NODE_ENV !== 'production' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
