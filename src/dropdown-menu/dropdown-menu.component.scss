@@ -1,0 +1,23 @@
+.oc-dropdown-menu {
+  .dropdown-toggle {
+    border: 0!important;
+    padding: 0!important;
+    box-shadow: none!important;
+    background-color: transparent!important;
+    color: inherit!important;
+  }
+
+  .dropdown-menu a {
+    padding: 3px 30px 2px 5px!important;
+  }
+
+  .oc-dropdown-menu-icon {
+    display: inline-block;
+    width: 20px;
+    margin-right: 5px;
+    text-align: center;
+    * {
+      vertical-align: middle;
+    }
+  }
+}
