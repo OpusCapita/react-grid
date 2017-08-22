@@ -1,13 +1,4 @@
-@import '../../styles/colors';
-
-$oc-color-grid-text: $oc-color-primary-azure;
-$oc-color-grid-border: $oc-color-support-lightgray;
-$oc-color-grid-background: $oc-color-white;
-$oc-color-grid-stripe: $oc-color-support-lightgray;
-$oc-color-grid-highlight: #eff2f4;
-$oc-color-grid-selected: #e6e9eb;
-$oc-color-grid-error: $oc-color-red;
-$oc-color-grid-warning: $oc-color-yellow;
+@import 'datagrid.variables.scss';
 
 .oc-datagrid-container {
   display: flex;
@@ -143,11 +134,11 @@ $oc-color-grid-warning: $oc-color-yellow;
 
   // COLUMN RESIZER
   .public_fixedDataTableCell_columnResizerKnob {
-    background-color: $oc-color-primary-orange;
+    background-color: $oc-color-grid-column-resizer;
   }
 
   .public_fixedDataTableColumnResizerLine_main {
-    border-color: $oc-color-primary-orange;
+    border-color: $oc-color-grid-column-resizer;
   }
 
 
@@ -200,8 +191,8 @@ $oc-color-grid-warning: $oc-color-yellow;
         border-color: transparent;
         border-style: solid;
         border-width: 7px;
-        border-right-color: $oc-color-support-gray;
-        border-bottom-color: $oc-color-support-gray;
+        border-right-color: $oc-color-grid-edited;
+        border-bottom-color: $oc-color-grid-edited;
         z-index: 100000;
       }
     }
@@ -212,7 +203,7 @@ $oc-color-grid-warning: $oc-color-yellow;
 .tooltip.bottom {
   margin-top: 0;
   .tooltip-arrow {
-    border-bottom-color: $oc-color-petrol !important;
+    border-bottom-color: $oc-color-grid-tooltip !important;
     &.error {
       border-bottom-color: $oc-color-grid-error !important;
     }
@@ -221,7 +212,7 @@ $oc-color-grid-warning: $oc-color-yellow;
     }
   }
   .tooltip-inner {
-    background-color: $oc-color-petrol !important;
+    background-color: $oc-color-grid-tooltip !important;
     &.error {
       background-color: $oc-color-grid-error !important;
     }
