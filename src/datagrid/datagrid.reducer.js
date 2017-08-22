@@ -2,24 +2,11 @@ import Immutable, { Map, List } from 'immutable';
 import { TYPES } from './datagrid.actions';
 import { INITIAL_STATE } from './datagrid.constants';
 
-/* TODO: Keep some data in session/local
-const getSessionData = (id) => {
-  const data = sessionStorage.getItem(`grid_${id}`);
-  if (data) {
-    return Immutable.fromJS(JSON.parse(data));
-  }
-  return Map();
-};
-
-const setSessionData = (id, data) => {
-  sessionStorage.setItem(`grid_${id}`, JSON.stringify(data));
-}; */
-
 export default function datagridReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
 
     case TYPES.PLATFORM_DATAGRID_INVALIDATE:
-      return state
+  /*     return state
         .deleteIn([action.id, 'data'])
         .deleteIn([action.id, 'allData'])
         .deleteIn([action.id, 'filterData'])
@@ -27,7 +14,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createValidation'])
         .deleteIn([action.id, 'cellMessages'])
-        .deleteIn([action.id, 'session']);
+        .deleteIn([action.id, 'session']);*/
+      return state.delete(action.id);
 
     case TYPES.PLATFORM_DATAGRID_SET_DATA: {
       const data = Immutable.Iterable.isIterable(action.data) ?
@@ -36,6 +24,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn([action.id, 'data'], data)
         .setIn([action.id, 'allData'], data)
+        .setIn([action.id, 'config'], Immutable.fromJS(action.config))
+        .setIn([action.id, 'selectedItems'], Immutable.fromJS(action.selectedItems))
         .mergeIn([action.id, 'session'], {
           isEditing: false,
           isCreating: false,
@@ -58,15 +48,15 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn([action.id, 'data'], action.data)
         .setIn([action.id, 'allData'], action.allData)
-        .mergeIn([action.id, 'user'], {
-          sortColumn: action.column,
-          sortOrder: action.order,
+        .setIn([action.id, 'config', 'sortingData'], {
+          sortColumn: action.sortColumn,
+          sortOrder: action.sortOrder,
         });
 
     case TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN:
       return state
         .setIn(
-          [action.id, 'user', 'columnWidths', action.column],
+          [action.id, 'user', 'columnWidths', action.columnKey],
           action.width,
         );
 

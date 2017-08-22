@@ -1,9 +1,5 @@
-/**
- * DataGrid Actions.
- * @class Actions
- * @memberof Platform.Components.DataGrid
- */
 import { Map } from 'immutable';
+import Utils from './datagrid.utils';
 
 export const TYPES = {
   PLATFORM_DATAGRID_INVALIDATE: 'PLATFORM_DATAGRID_INVALIDATE',
@@ -46,25 +42,20 @@ export const invalidate = id =>
       id,
     });
 
-/**
- * Set data to be shown at data grid.
- * @memberof Platform.Components.DataGrid.Actions
- * @param {String} id - The data grid identifier.
- * @param {Immutable.List} data - The data for the data grid.
- */
-export const setData = (id, data) =>
-  dispatch =>
+export const setData = (id, data, columns) =>
+  (dispatch) => {
+    const config = Utils.loadGridConfig(id);
+    const selectedItems = Utils.loadSelectedItems(id);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SET_DATA,
       id,
       data,
+      config,
+      selectedItems,
     });
+    dispatch(refreshFilterAndSort(id, columns));
+  };
 
-/**
- * Set grid as busy, eg. show spinner
- * @memberof Platform.Components.DataGrid.Actions
- * @param {String} id - The data grid identifier.
- */
 export const setBusy = id =>
   dispatch =>
     dispatch({
@@ -72,11 +63,6 @@ export const setBusy = id =>
       id,
     });
 
-/**
- * Set grid as ready, eg. hide spinner
- * @memberof Platform.Components.DataGrid.Actions
- * @param {String} id - The data grid identifier.
- */
 export const setReady = id =>
   dispatch =>
     dispatch({
@@ -84,28 +70,41 @@ export const setReady = id =>
       id,
     });
 
-export const sort = (id, column, valueGetter, comparator) =>
+export const refreshFilterAndSort = (id, columns) =>
+  (dispatch, getState) => {
+    if (!columns) return false;
+    const sortingData = getState().datagrid.getIn([id, 'config', 'sortingData']);
+    if (!sortingData || sortingData.sortColumn) return false;
+    let foundColumn;
+    columns.forEach((column) => {
+      if (Utils.getColumnKey(column) === sortingData.sortColumn) {
+        foundColumn = column;
+      }
+    });
+    if (foundColumn) {
+      dispatch(sort(id, foundColumn, sortingData.sortOrder));
+    }
+  };
+
+export const sort = (id, column, newSort) =>
   (dispatch, getState) => {
     setBusy(id)(dispatch);
+    const sortOrder = newSort || 'asc';
+    const sortColumn = Utils.getColumnKey(column);
+    const comparator = Utils.getSortComparator(column);
+    const valueGetter = Utils.getSortValueGetter(column);
     const origAllData = getState().datagrid.getIn([id, 'allData']);
-    let data;
-    let order = 'asc';
-    if (
-      getState().datagrid.getIn([id, 'user', 'sortColumn']) === column
-      && getState().datagrid.getIn([id, 'user', 'sortOrder']) === 'asc'
-    ) {
-      order = 'desc';
-    }
     const allData = origAllData.sort((a, b) => {
-      if (order === 'asc') {
+      if (sortOrder === 'asc') {
         return comparator(valueGetter(a), valueGetter(b));
       }
       return comparator(valueGetter(b), valueGetter(a));
     });
+    let data;
     // Sort also filtered data separately
     if (getState().datagrid.getIn([id, 'session', 'isFiltering'], false)) {
       data = getState().datagrid.getIn([id, 'data']).sort((a, b) => {
-        if (order === 'asc') {
+        if (sortOrder === 'asc') {
           return comparator(valueGetter(a), valueGetter(b));
         }
         return comparator(valueGetter(b), valueGetter(a));
@@ -113,23 +112,24 @@ export const sort = (id, column, valueGetter, comparator) =>
     } else {
       data = allData;
     }
+    Utils.saveSortData(id, { sortColumn, sortOrder });
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SORT_COLUMN,
       id,
-      column,
-      order,
+      sortColumn,
+      sortOrder,
       data,
       allData,
     });
     setReady(id)(dispatch);
   };
 
-export const resizeColumn = (id, column, width) =>
+export const resizeColumn = (id, columnKey, width) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN,
       id,
-      column,
+      columnKey,
       width,
     });
 
