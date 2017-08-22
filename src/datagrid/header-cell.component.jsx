@@ -15,11 +15,12 @@ export default class HeaderCell extends React.PureComponent {
   };
 
   static defaultProps = {
-    currentSortOrder: '',
-    currentSortColumn: '',
+    currentSortOrder: null,
+    currentSortColumn: null,
   };
 
   onSortChange = (e) => {
+    if (!Utils.isSortable(this.props.column)) return false;
     e.preventDefault();
     const order = (
       this.props.currentSortColumn === Utils.getColumnKey(this.props.column) &&
@@ -35,17 +36,26 @@ export default class HeaderCell extends React.PureComponent {
   }
 
   render() {
+    const {
+      children,
+      gridId,
+      currentSortColumn,
+      currentSortOrder,
+      column,
+      onSortChange,
+      ...props,
+    } = this.props;
     const cellClassNames = classNames({
       'oc-datagrid-cell-header': true,
       clickable: Utils.isSortable(this.props.column),
     });
     return (
-      <Cell className={cellClassNames} onClick={this.onSortChange}>
-        {this.props.children}
+      <Cell className={cellClassNames} onClick={this.onSortChange} {...props}>
+        {children}
         {
-          this.props.currentSortColumn === Utils.getColumnKey(this.props.column) &&
-          this.props.currentSortOrder &&
-          (this.props.currentSortOrder === 'desc' ? ' ↓' : ' ↑')
+          currentSortColumn === Utils.getColumnKey(column) &&
+          currentSortOrder &&
+          (currentSortOrder === 'desc' ? ' ↓' : ' ↑')
         }
       </Cell>
     );

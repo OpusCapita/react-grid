@@ -48,10 +48,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn([action.id, 'data'], action.data)
         .setIn([action.id, 'allData'], action.allData)
-        .setIn([action.id, 'config', 'sortingData'], {
+        .setIn([action.id, 'config', 'sortingData'], Map({
           sortColumn: action.sortColumn,
           sortOrder: action.sortOrder,
-        });
+        }));
 
     case TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN:
       return state

@@ -73,16 +73,17 @@ export const setReady = id =>
 export const refreshFilterAndSort = (id, columns) =>
   (dispatch, getState) => {
     if (!columns) return false;
-    const sortingData = getState().datagrid.getIn([id, 'config', 'sortingData']);
-    if (!sortingData || sortingData.sortColumn) return false;
+    const sortColumn = getState().datagrid.getIn([id, 'config', 'sortingData', 'sortColumn']);
+    if (!sortColumn) return false;
     let foundColumn;
     columns.forEach((column) => {
-      if (Utils.getColumnKey(column) === sortingData.sortColumn) {
+      if (Utils.getColumnKey(column) === sortColumn) {
         foundColumn = column;
       }
     });
     if (foundColumn) {
-      dispatch(sort(id, foundColumn, sortingData.sortOrder));
+      const sortOrder = getState().datagrid.getIn([id, 'config', 'sortingData', 'sortOrder']);
+      dispatch(sort(id, foundColumn, sortOrder));
     }
   };
 

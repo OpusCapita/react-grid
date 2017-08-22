@@ -49,7 +49,7 @@ const mapStateToProps = (state, ownProps) => {
     isCreating: state.datagrid.getIn([ownProps.id, 'session', 'isCreating'], false),
     isFiltering: state.datagrid.getIn([ownProps.id, 'session', 'isFiltering'], false),
     sortColumn: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortColumn'], null),
-    sortOrder: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortOrder'], 'asc'),
+    sortOrder: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortOrder'], null),
     columnWidths: state.datagrid.getIn([ownProps.id, 'config', 'columnWidths'], Map()),
     selectedItems: state.datagrid.getIn([ownProps.id, 'selectedItems'], List()),
     data: state.datagrid.getIn([ownProps.id, 'data'], List()),
@@ -402,6 +402,7 @@ export default class DataGrid extends React.PureComponent {
         isResizable: !col.disableResizing,
         fixed: !!col.fixed,
         allowCellsRecycling: !!col.allowCellsRecycling,
+        disableSorting: !!col.disableSorting,
       };
       const columnFilterFunction = {
         valueEmptyChecker: val => val === '' || val === null || val === undefined,
@@ -421,6 +422,15 @@ export default class DataGrid extends React.PureComponent {
       }
       if (col.flexGrow) {
         column.flexGrow = col.flexGrow;
+      }
+      if (col.valueType) {
+        column.valueType = col.valueType;
+      }
+      if (col.sortComparator) {
+        column.sortComparator = col.sortComparator;
+      }
+      if (col.sortValueGetter) {
+        column.sortValueGetter = col.sortValueGetter;
       }
       // Cell value rendering
       if (col.cell) {
