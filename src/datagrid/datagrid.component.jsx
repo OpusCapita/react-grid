@@ -1479,7 +1479,11 @@ export default class DataGrid extends React.PureComponent {
       scrollToRow = this.getSelectedItemIndex(this.props.selectedItems.first());
     }
     return (
-      <div className={gridClassName} style={this.props.containerStyle}>
+      <div
+        id={`oc-datagrid-${this.props.id}`}
+        className={gridClassName}
+        style={this.props.containerStyle}
+      >
         { this.props.isBusy && <Spinner /> }
         { actionBar }
         <ResponsiveFixedDataTable

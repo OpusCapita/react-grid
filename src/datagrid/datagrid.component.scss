@@ -150,7 +150,7 @@
 
   // CELL MESSAGES
   .oc-datagrid-tooltip {
-    position: relative;
+    position: static;
     &.error {
       &:before {
         display: block;
