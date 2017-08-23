@@ -6,7 +6,8 @@ export const TYPES = {
   PLATFORM_DATAGRID_BUSY: 'PLATFORM_DATAGRID_BUSY',
   PLATFORM_DATAGRID_READY: 'PLATFORM_DATAGRID_READY',
   PLATFORM_DATAGRID_SET_DATA: 'PLATFORM_DATAGRID_SET_DATA',
-  PLATFORM_DATAGRID_SORT_COLUMN: 'PLATFORM_DATAGRID_SORT_COLUMN',
+  PLATFORM_DATAGRID_APPLY_SORT: 'PLATFORM_DATAGRID_APPLY_SORT',
+  PLATFORM_DATAGRID_SORT_CHANGE: 'PLATFORM_DATAGRID_SORT_CHANGE',
   PLATFORM_DATAGRID_RESIZE_COLUMN: 'PLATFORM_DATAGRID_RESIZE_COLUMN',
   PLATFORM_DATAGRID_EDIT: 'PLATFORM_DATAGRID_EDIT',
   PLATFORM_DATAGRID_CANCEL: 'PLATFORM_DATAGRID_CANCEL',
@@ -31,7 +32,8 @@ export const TYPES = {
   PLATFORM_DATAGRID_SELECT_ALL_ITEMS_CHANGE: 'PLATFORM_DATAGRID_SELECT_ALL_ITEMS_CHANGE',
   PLATFORM_DATAGRID_CLEAR_SELECTED_ITEMS: 'PLATFORM_DATAGRID_CLEAR_SELECTED_ITEMS',
   PLATFORM_DATAGRID_TOGGLE_FILTERING: 'PLATFORM_DATAGRID_TOGGLE_FILTERING',
-  PLATFORM_DATAGRID_FILTER_CELL_VALUE_CHANGE: 'PLATFORM_DATAGRID_FILTER_CELL_VALUE_CHANGE',
+  PLATFORM_DATAGRID_FILTER_DATA_CHANGE: 'PLATFORM_DATAGRID_FILTER_DATA_CHANGE',
+  PLATFORM_DATAGRID_APPLY_FILTERS: 'PLATFORM_DATAGRID_APPLY_FILTERS',
   PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: 'PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE',
 };
 
@@ -41,20 +43,6 @@ export const invalidate = id =>
       type: TYPES.PLATFORM_DATAGRID_INVALIDATE,
       id,
     });
-
-export const setData = (id, data, columns) =>
-  (dispatch) => {
-    const config = Utils.loadGridConfig(id);
-    const selectedItems = Utils.loadSelectedItems(id);
-    dispatch({
-      type: TYPES.PLATFORM_DATAGRID_SET_DATA,
-      id,
-      data,
-      config,
-      selectedItems,
-    });
-    dispatch(refreshFilterAndSort(id, columns));
-  };
 
 export const setBusy = id =>
   dispatch =>
@@ -70,31 +58,84 @@ export const setReady = id =>
       id,
     });
 
-export const refreshFilterAndSort = (id, columns) =>
+export const applyFilters = (id, columns) =>
   (dispatch, getState) => {
-    if (!columns) return false;
-    const sortColumn = getState().datagrid.getIn([id, 'config', 'sortingData', 'sortColumn']);
-    if (!sortColumn) return false;
-    let foundColumn;
-    columns.forEach((column) => {
-      if (Utils.getColumnKey(column) === sortColumn) {
-        foundColumn = column;
-      }
-    });
-    if (foundColumn) {
-      const sortOrder = getState().datagrid.getIn([id, 'config', 'sortingData', 'sortOrder']);
-      dispatch(sort(id, foundColumn, sortOrder));
+    const gridData = getState().datagrid.get(id);
+    const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
+    const allData = gridData.get('allData');
+    setBusy(id)(dispatch);
+    let data;
+    if (filterData.isEmpty()) {
+      data = allData;
+    } else {
+      data = allData.filter((row) => {
+        let hits = 0;
+        filterData.forEach((filterValue, filterColumn) => {
+          columns.forEach((column) => {
+            if (Utils.getColumnKey(column) === filterColumn) {
+              const rowData = row.getIn(column.valueKeyPath);
+              if (rowData || rowData === 0 || rowData === false) {
+                const filterFunctions = Utils.getFilterFunctions(column);
+                if (filterFunctions.filterMatcher(rowData, filterValue)) {
+                  hits += 1;
+                }
+              }
+            }
+          });
+        });
+        return hits === filterData.size;
+      });
     }
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_APPLY_FILTERS,
+      id,
+      data,
+    });
+    setReady(id)(dispatch);
   };
 
-export const sort = (id, column, newSort) =>
+export const filterCellValueChange = (id, columns, column, value) =>
   (dispatch, getState) => {
+    const origFilterData = getState()
+      .datagrid
+      .getIn([id, 'config', 'filteringData', 'filterData'], Map());
+    const columnKey = Utils.getColumnKey(column);
+    const filterFunctions = Utils.getFilterFunctions(column);
+    let filterData;
+    if (filterFunctions.valueEmptyChecker(value)) {
+      filterData = origFilterData.delete(columnKey);
+    } else {
+      filterData = origFilterData.set(columnKey, value);
+    }
+    Utils.saveFilterData(id, filterData);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE,
+      id,
+      filterData,
+    });
+    applyFilters(id, columns)(dispatch, getState);
+  };
+
+export const applySort = (id, columns) =>
+  (dispatch, getState) => {
+    const gridData = getState().datagrid.get(id);
+    const sortData = gridData.getIn(['config', 'sortingData']);
+    if (!sortData) return false;
+    const sortColumn = sortData.get('sortColumn');
+    if (!sortColumn) return false;
+    const sortOrder = sortData.get('sortOrder', 'asc');
+    let column;
+    columns.forEach((col) => {
+      if (Utils.getColumnKey(col) === sortColumn) {
+        column = col;
+      }
+    });
+    if (!column) return false;
+
     setBusy(id)(dispatch);
-    const sortOrder = newSort || 'asc';
-    const sortColumn = Utils.getColumnKey(column);
+    const origAllData = gridData.get('allData');
     const comparator = Utils.getSortComparator(column);
     const valueGetter = Utils.getSortValueGetter(column);
-    const origAllData = getState().datagrid.getIn([id, 'allData']);
     const allData = origAllData.sort((a, b) => {
       if (sortOrder === 'asc') {
         return comparator(valueGetter(a), valueGetter(b));
@@ -103,8 +144,8 @@ export const sort = (id, column, newSort) =>
     });
     let data;
     // Sort also filtered data separately
-    if (getState().datagrid.getIn([id, 'session', 'isFiltering'], false)) {
-      data = getState().datagrid.getIn([id, 'data']).sort((a, b) => {
+    if (gridData.getIn(['config', 'filteringData', 'isFiltering'], false)) {
+      data = gridData.get('data').sort((a, b) => {
         if (sortOrder === 'asc') {
           return comparator(valueGetter(a), valueGetter(b));
         }
@@ -113,26 +154,58 @@ export const sort = (id, column, newSort) =>
     } else {
       data = allData;
     }
-    Utils.saveSortData(id, { sortColumn, sortOrder });
     dispatch({
-      type: TYPES.PLATFORM_DATAGRID_SORT_COLUMN,
+      type: TYPES.PLATFORM_DATAGRID_APPLY_SORT,
       id,
-      sortColumn,
-      sortOrder,
       data,
       allData,
     });
     setReady(id)(dispatch);
+    return true;
+  };
+
+export const sortChange = (id, columns, column, newSort) =>
+  (dispatch, getState) => {
+    const sortOrder = newSort || 'asc';
+    const sortColumn = Utils.getColumnKey(column);
+    Utils.saveSortData(id, { sortColumn, sortOrder });
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_SORT_CHANGE,
+      id,
+      sortColumn,
+      sortOrder,
+    });
+    applySort(id, columns)(dispatch, getState);
+  };
+
+export const setData = (id, data, columns) =>
+  (dispatch, getState) => {
+    const config = Utils.loadGridConfig(id);
+    const selectedItems = Utils.loadSelectedItems(id);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_SET_DATA,
+      id,
+      data,
+      config,
+      selectedItems,
+    });
+    applyFilters(id, columns)(dispatch, getState);
+    applySort(id, columns)(dispatch, getState);
   };
 
 export const resizeColumn = (id, columnKey, width) =>
-  dispatch =>
+  (dispatch, getState) => {
+    const columnWidths = getState()
+      .datagrid
+      .getin([id, 'config', 'columnWidths'])
+      .set(columnKey, width);
+    Utils.saveColumnWidths(id, columnWidths);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN,
       id,
-      columnKey,
-      width,
+      columnWidths,
     });
+  };
 
 export const edit = id =>
   dispatch =>
@@ -484,54 +557,16 @@ export const clearSelectedItems = id =>
     });
 
 export const toggleFiltering = id =>
-  dispatch =>
+  (dispatch, getState) => {
+    const isFiltering = !getState()
+      .datagrid
+      .getIn([id, 'config', 'filteringData', 'isFiltering'], false);
+    Utils.saveIsFiltering(id, isFiltering);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_TOGGLE_FILTERING,
       id,
+      isFiltering,
     });
-
-export const filterCellValueChange = (id, keyPath, value, columnFilterFunctions) =>
-  (dispatch, getState) => {
-    setBusy(id)(dispatch);
-    const state = getState();
-    const allData = state.datagrid.getIn([id, 'allData']);
-    const origFilterData = state.datagrid.getIn([id, 'filterData'], Map());
-    let filterData;
-    if (
-      columnFilterFunctions[keyPath.join('/')] &&
-      columnFilterFunctions[keyPath.join('/')].valueEmptyChecker(value)
-    ) {
-      filterData = origFilterData.delete(keyPath.join('/'));
-    } else {
-      filterData = origFilterData.set(keyPath.join('/'), value);
-    }
-    let data;
-    if (filterData.isEmpty()) {
-      data = allData;
-    } else {
-      data = allData.filter((row) => {
-        let hits = 0;
-        filterData.forEach((filterValue, filterKey) => {
-          const rowData = row.getIn(filterKey.split('/'));
-          if (rowData || rowData === 0 || rowData === false) {
-            if (
-              columnFilterFunctions[filterKey] &&
-              columnFilterFunctions[filterKey].filterMatcher(rowData, filterValue)
-            ) {
-              hits += 1;
-            }
-          }
-        });
-        return hits === filterData.size;
-      });
-    }
-    dispatch({
-      type: TYPES.PLATFORM_DATAGRID_FILTER_CELL_VALUE_CHANGE,
-      id,
-      filterData,
-      data,
-    });
-    setReady(id)(dispatch);
   };
 
 export const validateEditedRows = (id, idKeyPath, columns) =>

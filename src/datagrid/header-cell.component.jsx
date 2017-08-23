@@ -8,6 +8,7 @@ export default class HeaderCell extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     gridId: PropTypes.string.isRequired,
+    columns: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     column: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     currentSortColumn: PropTypes.string,
     currentSortOrder: PropTypes.string,
@@ -29,10 +30,12 @@ export default class HeaderCell extends React.PureComponent {
     if (this.props.onSortChange) {
       this.props.onSortChange(
         this.props.gridId,
+        this.props.columns,
         this.props.column,
         order,
       );
     }
+    return true;
   }
 
   render() {
@@ -41,9 +44,10 @@ export default class HeaderCell extends React.PureComponent {
       gridId,
       currentSortColumn,
       currentSortOrder,
+      columns,
       column,
       onSortChange,
-      ...props,
+      ...props
     } = this.props;
     const cellClassNames = classNames({
       'oc-datagrid-cell-header': true,

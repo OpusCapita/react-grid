@@ -9,8 +9,6 @@ import { injectIntl,
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
-import isNaN from 'lodash/isNaN';
-import moment from 'moment';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
@@ -47,7 +45,8 @@ const mapStateToProps = (state, ownProps) => {
     isBusy: state.datagrid.getIn([ownProps.id, 'session', 'isBusy'], true),
     isEditing: state.datagrid.getIn([ownProps.id, 'session', 'isEditing'], false),
     isCreating: state.datagrid.getIn([ownProps.id, 'session', 'isCreating'], false),
-    isFiltering: state.datagrid.getIn([ownProps.id, 'session', 'isFiltering'], false),
+    isFiltering:
+      state.datagrid.getIn([ownProps.id, 'config', 'filteringData', 'isFiltering'], false),
     sortColumn: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortColumn'], null),
     sortOrder: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortOrder'], null),
     columnWidths: state.datagrid.getIn([ownProps.id, 'config', 'columnWidths'], Map()),
@@ -55,7 +54,7 @@ const mapStateToProps = (state, ownProps) => {
     data: state.datagrid.getIn([ownProps.id, 'data'], List()),
     editData: state.datagrid.getIn([ownProps.id, 'editData'], Map()),
     createData: state.datagrid.getIn([ownProps.id, 'createData'], List()),
-    filterData: state.datagrid.getIn([ownProps.id, 'filterData'], Map()),
+    filterData: state.datagrid.getIn([ownProps.id, 'config', 'filteringData', 'filterData'], Map()),
     cellMessages: state.datagrid.getIn([ownProps.id, 'cellMessages'], Map()),
     createCellMessages: state.datagrid.getIn([ownProps.id, 'createCellMessages'], Map()),
     allDataSize: state.datagrid.getIn([ownProps.id, 'allData'], List()).size,
@@ -78,10 +77,6 @@ export default class DataGrid extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { currentRow: 0, currentColumn: 0 };
-  }
-
-  componentWillMount() {
-    this.columnFilterFunctions = {};
     this.columnDefaultValues = {};        // Used when creating new items
     this.cellRefs = {};
   }
@@ -138,12 +133,12 @@ export default class DataGrid extends React.PureComponent {
     }
   }
 
-  onFilterCellValueChange = (valueKeyPath, value) => {
+  onFilterCellValueChange = (col, value) => {
     this.props.filterCellValueChange(
       this.props.id,
-      valueKeyPath,
+      this.props.columns,
+      col,
       value,
-      this.columnFilterFunctions,
     );
   }
 
@@ -257,7 +252,7 @@ export default class DataGrid extends React.PureComponent {
   }
 
   getFilterItemValue = (valueKeyPath) => {
-    const val = this.props.filterData.get(valueKeyPath.join('/'), '');
+    const val = this.props.filterData.get(valueKeyPath.join('_'), '');
     if (val === null) {
       return '';
     }
@@ -404,13 +399,6 @@ export default class DataGrid extends React.PureComponent {
         allowCellsRecycling: !!col.allowCellsRecycling,
         disableSorting: !!col.disableSorting,
       };
-      const columnFilterFunction = {
-        valueEmptyChecker: val => val === '' || val === null || val === undefined,
-        filterMatcher: (val, filterVal) => (new RegExp(filterVal, 'i')).test(val),
-      };
-      if (col.componentType === 'select') {
-        columnFilterFunction.filterMatcher = (val, filterVal) => val === filterVal;
-      }
       if (col.defaultValue !== undefined) {
         this.columnDefaultValues[column.columnKey] = col.defaultValue;
       }
@@ -564,7 +552,7 @@ export default class DataGrid extends React.PureComponent {
                     type="text"
                     value={this.getFilterItemValue(col.valueKeyPath)}
                     onChange={e => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       editValueParser(e.target.value),
                     )}
                     id={`ocDatagridFilterInput-${this.props.id}-${column.columnKey}`}
@@ -576,14 +564,6 @@ export default class DataGrid extends React.PureComponent {
             }
             break;
           case 'number':
-            columnFilterFunction.valueEmptyChecker = (
-              val => val === '' ||
-              isNaN(val) ||
-              val === null ||
-              val === undefined
-            );
-            columnFilterFunction.filterMatcher = (val, filterVal) =>
-                parseInt(val, 10) === parseInt(filterVal, 10);
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -650,7 +630,7 @@ export default class DataGrid extends React.PureComponent {
                     type="number"
                     value={this.getFilterItemValue(col.valueKeyPath)}
                     onChange={e => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       e.target.value,
                     )}
                     id={`ocDatagridFilterInput-${this.props.id}-${column.columnKey}`}
@@ -664,19 +644,6 @@ export default class DataGrid extends React.PureComponent {
           case 'float':
             editValueParser = val =>
               val.replace(new RegExp(`[^\\d${this.props.decimalSeparator}+-]`, 'g'), '');
-            columnFilterFunction.valueEmptyChecker = val => (
-              val === '' ||
-              isNaN(val) ||
-              val === null ||
-              val === undefined
-            );
-            columnFilterFunction.filterMatcher = (val, filterVal) => {
-              let parsedFilterVal = filterVal;
-              if (this.props.decimalSeparator && this.props.decimalSeparator !== '.') {
-                parsedFilterVal = parsedFilterVal.replace(this.props.decimalSeparator, '.');
-              }
-              return parseFloat(parsedFilterVal) === val;
-            };
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -741,7 +708,7 @@ export default class DataGrid extends React.PureComponent {
                     type="text"
                     value={this.getFilterItemValue(col.valueKeyPath)}
                     onChange={e => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       editValueParser(e.target.value),
                     )}
                     id={`ocDatagridFilterInput-${this.props.id}-${column.columnKey}`}
@@ -828,7 +795,7 @@ export default class DataGrid extends React.PureComponent {
                              selectOptions}
                     value={this.getFilterItemValue(col.valueKeyPath)}
                     onChange={selectedData => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       selectedData && editValueParser(selectedData.value),
                     )}
                     searchable={selectOptions && (selectOptions.length > 9)}
@@ -845,8 +812,6 @@ export default class DataGrid extends React.PureComponent {
             break;
           }
           case 'date': {
-            columnFilterFunction.filterMatcher = (val, filterVal) =>
-              moment(filterVal, 'L').isSame(val, 'day');
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -904,7 +869,7 @@ export default class DataGrid extends React.PureComponent {
                   <DateInput
                     value={this.getFilterItemValue(col.valueKeyPath)}
                     onChange={data => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       editValueParser(data),
                     )}
                     language={this.props.userLanguage}
@@ -924,7 +889,6 @@ export default class DataGrid extends React.PureComponent {
               { value: true, label: this.props.intl.formatMessage({ id: 'Yes' }) },
               { value: false, label: this.props.intl.formatMessage({ id: 'No' }) },
             ];
-            columnFilterFunction.filterMatcher = (val, filterVal) => val === filterVal;
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -991,7 +955,7 @@ export default class DataGrid extends React.PureComponent {
                     options={selectOptions}
                     value={this.getFilterItemValue(col.valueKeyPath)}
                     onChange={selectedData => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       selectedData && editValueParser(selectedData.value),
                     )}
                     searchable={false}
@@ -1011,9 +975,6 @@ export default class DataGrid extends React.PureComponent {
         }
       }
       columns.push(column);
-      if (col.valueKeyPath) {
-        this.columnFilterFunctions[col.valueKeyPath.join('/')] = columnFilterFunction;
-      }
     });
     return columns;
   }
@@ -1107,10 +1068,11 @@ export default class DataGrid extends React.PureComponent {
         header={
           <HeaderCell
             gridId={this.props.id}
+            columns={this.props.columns}
             column={col}
             currentSortColumn={this.props.sortColumn}
             currentSortOrder={this.props.sortOrder}
-            onSortChange={this.props.sort}
+            onSortChange={this.props.sortChange}
           >
             {col.header}
           </HeaderCell>

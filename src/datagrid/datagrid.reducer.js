@@ -29,10 +29,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .mergeIn([action.id, 'session'], {
           isEditing: false,
           isCreating: false,
-          isFiltering: false,
           isBusy: false,
         })
-        .deleteIn([action.id, 'filterData'])
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
         .deleteIn([action.id, 'createValidation'])
@@ -44,21 +42,20 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     case TYPES.PLATFORM_DATAGRID_READY:
       return state.setIn([action.id, 'session', 'isBusy'], false);
 
-    case TYPES.PLATFORM_DATAGRID_SORT_COLUMN:
+    case TYPES.PLATFORM_DATAGRID_APPLY_SORT:
       return state
         .setIn([action.id, 'data'], action.data)
-        .setIn([action.id, 'allData'], action.allData)
+        .setIn([action.id, 'allData'], action.allData);
+
+    case TYPES.PLATFORM_DATAGRID_SORT_CHANGE:
+      return state
         .setIn([action.id, 'config', 'sortingData'], Map({
           sortColumn: action.sortColumn,
           sortOrder: action.sortOrder,
         }));
 
     case TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN:
-      return state
-        .setIn(
-          [action.id, 'user', 'columnWidths', action.columnKey],
-          action.width,
-        );
+      return state.setIn([action.id, 'config', 'columnWidths'], action.columnWidths);
 
     case TYPES.PLATFORM_DATAGRID_EDIT:
       return state.setIn([action.id, 'session', 'isEditing'], true);
@@ -330,23 +327,24 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state.deleteIn([action.id, 'selectedItems']);
 
     case TYPES.PLATFORM_DATAGRID_TOGGLE_FILTERING: {
-      const isFiltering = state.getIn([action.id, 'session', 'isFiltering'], false);
-      if (isFiltering) {
+      if (!action.isFiltering) {
         return state
-          .setIn([action.id, 'session', 'isFiltering'], false)
-          .setIn([action.id, 'data'], state.getIn([action.id, 'allData']))
-          .deleteIn([action.id, 'filterData']);
+          .setIn([action.id, 'config', 'filteringData'], Map({ isFiltering: false }))
+          .setIn([action.id, 'data'], state.getIn([action.id, 'allData']));
       }
       return state
-        .setIn([action.id, 'session', 'isFiltering'], true);
+        .setIn([action.id, 'config', 'filteringData'], Map({ isFiltering: true }));
     }
 
-    case TYPES.PLATFORM_DATAGRID_FILTER_CELL_VALUE_CHANGE:
+    case TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE:
       return state
         .setIn(
-          [action.id, 'filterData'],
+          [action.id, 'config', 'filteringData', 'filterData'],
           action.filterData,
-        )
+        );
+
+    case TYPES.PLATFORM_DATAGRID_APPLY_FILTERS:
+      return state
         .setIn(
           [action.id, 'data'],
           action.data,

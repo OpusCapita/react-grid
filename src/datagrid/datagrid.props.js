@@ -13,7 +13,7 @@ export const propTypes = {
   remove: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
   cancel: PropTypes.func.isRequired,
-  sort: PropTypes.func.isRequired,
+  sortChange: PropTypes.func.isRequired,
   resizeColumn: PropTypes.func.isRequired,
   invalidate: PropTypes.func.isRequired,
   itemSelectionChange: PropTypes.func.isRequired,
