@@ -42,7 +42,7 @@ const plugins = [
     filename: 'styles/[name].[contenthash].css',
     allChunks: true,
   }),
-  new webpack.optimize.UglifyJsPlugin({
+  /* new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: true,
     },
@@ -50,7 +50,7 @@ const plugins = [
       comments: false,
     },
     mangle: true,
-  }),
+  }), */
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery',
