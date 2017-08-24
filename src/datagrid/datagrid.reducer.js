@@ -6,15 +6,6 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
 
     case TYPES.PLATFORM_DATAGRID_INVALIDATE:
-  /*     return state
-        .deleteIn([action.id, 'data'])
-        .deleteIn([action.id, 'allData'])
-        .deleteIn([action.id, 'filterData'])
-        .deleteIn([action.id, 'createData'])
-        .deleteIn([action.id, 'editData'])
-        .deleteIn([action.id, 'createValidation'])
-        .deleteIn([action.id, 'cellMessages'])
-        .deleteIn([action.id, 'session']);*/
       return state.delete(action.id);
 
     case TYPES.PLATFORM_DATAGRID_SET_DATA: {

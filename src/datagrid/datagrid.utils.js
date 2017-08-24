@@ -4,7 +4,7 @@ import isNaN from 'lodash/isNaN';
 
 export default {
   getColumnKey: col => (
-    col.columnKey || col.valueKeyPath.join('_')
+    col.columnKey || col.valueKeyPath.join('/')
   ),
   isSortable: col => (
     col.valueType &&
@@ -97,7 +97,7 @@ export default {
     return [];
   },
   loadGridConfig: (id) => {
-    const columnWidths = localStorage.getItem(`oc_grid_filtering_${id}`);
+    const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${id}`);
     const sortingData = sessionStorage.getItem(`oc_grid_sorting_${id}`);
     const filterData = sessionStorage.getItem(`oc_grid_filtering_${id}`);
     const isFiltering = localStorage.getItem(`oc_grid_isFiltering_${id}`);

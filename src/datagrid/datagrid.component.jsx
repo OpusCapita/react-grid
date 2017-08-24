@@ -110,18 +110,18 @@ export default class DataGrid extends React.PureComponent {
           break;
         }
         case KEY_CODES.RIGHT: {
-          const columnIndex = columns.findIndex(c => c.valueKeyPath.join('_') === columnKey);
+          const columnIndex = columns.findIndex(c => Utils.getColumnKey(c) === columnKey);
           if (columnIndex !== -1 && columnIndex + 1 < columns.length) {
-            const nextColumnKey = columns[columnIndex + 1].valueKeyPath.join('_');
+            const nextColumnKey = Utils.getColumnKey(columns[columnIndex + 1]);
             const nextElement = this.cellRefs[`${this.props.id}_${nextColumnKey}_${rowIndex}`];
             this.moveCellFocus(nextElement, -1, columnIndex + 1);
           }
           break;
         }
         case KEY_CODES.LEFT: {
-          const columnIndex = columns.findIndex(c => c.valueKeyPath.join('_') === columnKey);
+          const columnIndex = columns.findIndex(c => Utils.getColumnKey(c) === columnKey);
           if (columnIndex - 1 >= 0) {
-            const nextColumnKey = columns[columnIndex - 1].valueKeyPath.join('_');
+            const nextColumnKey = Utils.getColumnKey(columns[columnIndex - 1]);
             const nextElement = this.cellRefs[`${this.props.id}_${nextColumnKey}_${rowIndex}`];
             this.moveCellFocus(nextElement, -1, columnIndex - 1);
           }
@@ -251,8 +251,8 @@ export default class DataGrid extends React.PureComponent {
     return val;
   }
 
-  getFilterItemValue = (valueKeyPath) => {
-    const val = this.props.filterData.get(valueKeyPath.join('_'), '');
+  getFilterItemValue = (col) => {
+    const val = this.props.filterData.get(Utils.getColumnKey(col), '');
     if (val === null) {
       return '';
     }
@@ -550,7 +550,7 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FormControl
                     type="text"
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={e => this.onFilterCellValueChange(
                       col,
                       editValueParser(e.target.value),
@@ -628,7 +628,7 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FormControl
                     type="number"
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={e => this.onFilterCellValueChange(
                       col,
                       e.target.value,
@@ -706,7 +706,7 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FormControl
                     type="text"
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={e => this.onFilterCellValueChange(
                       col,
                       editValueParser(e.target.value),
@@ -793,7 +793,7 @@ export default class DataGrid extends React.PureComponent {
                     options={col.filterSelectOptionsMod && selectOptions ?
                              col.filterSelectOptionsMod(selectOptions.slice(), col) :
                              selectOptions}
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={selectedData => this.onFilterCellValueChange(
                       col,
                       selectedData && editValueParser(selectedData.value),
@@ -867,7 +867,7 @@ export default class DataGrid extends React.PureComponent {
               if (!column.cellFilter) {
                 column.cellFilter = () => (
                   <DateInput
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={data => this.onFilterCellValueChange(
                       col,
                       editValueParser(data),
@@ -953,7 +953,7 @@ export default class DataGrid extends React.PureComponent {
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-filter'}
                     options={selectOptions}
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={selectedData => this.onFilterCellValueChange(
                       col,
                       selectedData && editValueParser(selectedData.value),

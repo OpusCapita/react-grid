@@ -60,6 +60,7 @@ export const setReady = id =>
 
 export const applyFilters = (id, columns) =>
   (dispatch, getState) => {
+    if (!columns || !columns.forEach) return false;
     const gridData = getState().datagrid.get(id);
     const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
     const allData = gridData.get('allData');
@@ -92,6 +93,7 @@ export const applyFilters = (id, columns) =>
       data,
     });
     setReady(id)(dispatch);
+    return true;
   };
 
 export const filterCellValueChange = (id, columns, column, value) =>
@@ -118,6 +120,7 @@ export const filterCellValueChange = (id, columns, column, value) =>
 
 export const applySort = (id, columns) =>
   (dispatch, getState) => {
+    if (!columns || !columns.forEach) return false;
     const gridData = getState().datagrid.get(id);
     const sortData = gridData.getIn(['config', 'sortingData']);
     if (!sortData) return false;
@@ -181,6 +184,10 @@ export const sortChange = (id, columns, column, newSort) =>
 export const setData = (id, data, columns) =>
   (dispatch, getState) => {
     const config = Utils.loadGridConfig(id);
+    if (!columns) {
+      delete config.sortingData;
+      delete config.filteringData;
+    }
     const selectedItems = Utils.loadSelectedItems(id);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SET_DATA,
@@ -197,7 +204,7 @@ export const resizeColumn = (id, columnKey, width) =>
   (dispatch, getState) => {
     const columnWidths = getState()
       .datagrid
-      .getin([id, 'config', 'columnWidths'])
+      .getIn([id, 'config', 'columnWidths'], Map())
       .set(columnKey, width);
     Utils.saveColumnWidths(id, columnWidths);
     dispatch({
@@ -531,7 +538,7 @@ export const itemSelectionChange = (
   ctrlPressed = false,
   shiftPressed = false,
 ) =>
-  dispatch =>
+  (dispatch, getState) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_ITEM_SELECTION_CHANGE,
       id,
@@ -540,21 +547,27 @@ export const itemSelectionChange = (
       ctrlPressed,
       shiftPressed,
     });
+    Utils.saveSelectedItems(id, getState().datagrid.getIn([id, 'selectedItems']));
+  }
 
 export const selectAllItemsChange = (id, idKeyPath) =>
-  dispatch =>
+  (dispatch, getState) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SELECT_ALL_ITEMS_CHANGE,
       id,
       idKeyPath,
     });
+    Utils.saveSelectedItems(id, getState().datagrid.getIn([id, 'selectedItems']));
+  }
 
 export const clearSelectedItems = id =>
-  dispatch =>
+  (dispatch, getState) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CLEAR_SELECTED_ITEMS,
       id,
     });
+    Utils.saveSelectedItems(id, getState().datagrid.getIn([id, 'selectedItems']));
+  }
 
 export const toggleFiltering = id =>
   (dispatch, getState) => {
