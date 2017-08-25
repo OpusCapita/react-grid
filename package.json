@@ -68,7 +68,7 @@
     "write-file-webpack-plugin": "^3.4.2"
   },
   "dependencies": {
-    "@opuscapita/react-icons": "^1.1.0",
+    "@opuscapita/react-icons": "1.1.2",
     "classnames": "^2.2.5",
     "fixed-data-table-2": "^0.7.17",
     "immutable": "^3.8.1",
