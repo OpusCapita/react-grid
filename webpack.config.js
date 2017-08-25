@@ -26,10 +26,6 @@ const params = {
 
 const config = merge(getBaseConfiguration(params), {
   devtool: 'source-map',
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM',
-  },
   module: {
     rules: [
       {
