@@ -1,7 +1,7 @@
 {
   "author": "OpusCapita (www.opuscapita.com)",
   "name": "@opuscapita/react-grid",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": false,
   "description": "OpusCapita grid",
   "main": "lib/react-grid.js",
