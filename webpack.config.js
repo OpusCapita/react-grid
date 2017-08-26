@@ -1,7 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
-const nodeExternals = require('webpack-node-externals');
 const flexbugs = require('postcss-flexbugs-fixes');
 const merge = require('webpack-merge');
 
@@ -27,7 +26,22 @@ const params = {
 
 const config = merge(getBaseConfiguration(params), {
   devtool: 'source-map',
-  externals: [nodeExternals()],
+  externals: {
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+      umd: 'react',
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+      umd: 'react-dom',
+    },
+  },
   module: {
     rules: [
       {
