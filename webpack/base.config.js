@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 function getBaseConfiguration(config) {
@@ -34,6 +35,7 @@ function getBaseConfiguration(config) {
         verbose: false,
         dry: false,
       }),
+      new webpack.optimize.ModuleConcatenationPlugin(),
     ],
   };
 }

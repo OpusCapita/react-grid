@@ -169,6 +169,7 @@ export const applySort = (grid, columns) =>
 
 export const sortChange = (grid, columns, column, newSort) =>
   (dispatch, getState) => {
+    console.log(column);
     const sortOrder = newSort || 'asc';
     const sortColumn = Utils.getColumnKey(column);
     Utils.saveSortData(grid, { sortColumn, sortOrder });
@@ -188,8 +189,6 @@ export const setData = (grid, columns, data) =>
     const selectedItems = Utils.loadSelectedItems(grid).filter(item => (
       !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
     ));
-    console.log('isIterable', Immutable.Iterable.isIterable(data));
-    console.log('DATA', immutableData);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SET_DATA,
       id: grid.id,
@@ -197,8 +196,8 @@ export const setData = (grid, columns, data) =>
       config: configData,
       selectedItems,
     });
-/*    applyFilters(grid, columns)(dispatch, getState);
-    applySort(grid, columns)(dispatch, getState);*/
+    applyFilters(grid, columns)(dispatch, getState);
+    applySort(grid, columns)(dispatch, getState);
   };
 
 export const resizeColumn = (grid, columnKey, width) =>
@@ -534,7 +533,6 @@ export const createCellHideMessage = (grid, messageType = null, rowIndex = null,
 export const itemSelectionChange = (
   grid,
   rowIndex,
-  idKeyPath,
   ctrlPressed = false,
   shiftPressed = false,
 ) =>
@@ -543,7 +541,7 @@ export const itemSelectionChange = (
       type: TYPES.PLATFORM_DATAGRID_ITEM_SELECTION_CHANGE,
       id: grid.id,
       rowIndex,
-      idKeyPath,
+      idKeyPath: grid.idKeyPath,
       ctrlPressed,
       shiftPressed,
     });
