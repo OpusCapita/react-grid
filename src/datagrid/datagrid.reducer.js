@@ -9,12 +9,9 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state.delete(action.id);
 
     case TYPES.PLATFORM_DATAGRID_SET_DATA: {
-      const data = Immutable.Iterable.isIterable(action.data) ?
-                   action.data :
-                   Immutable.fromJS(action.data);
       return state
-        .setIn([action.id, 'data'], data)
-        .setIn([action.id, 'allData'], data)
+        .setIn([action.id, 'data'], action.data)
+        .setIn([action.id, 'allData'], action.data)
         .setIn([action.id, 'config'], Immutable.fromJS(action.config))
         .setIn([action.id, 'selectedItems'], Immutable.fromJS(action.selectedItems))
         .mergeIn([action.id, 'session'], {

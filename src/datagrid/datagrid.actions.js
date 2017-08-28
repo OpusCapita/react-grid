@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import Immutable, { Map } from 'immutable';
 import Utils from './datagrid.utils';
 
 export const TYPES = {
@@ -37,34 +37,34 @@ export const TYPES = {
   PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: 'PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE',
 };
 
-export const invalidate = id =>
+export const invalidate = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_INVALIDATE,
-      id,
+      id: grid.id,
     });
 
-export const setBusy = id =>
+export const setBusy = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_BUSY,
-      id,
+      id: grid.id,
     });
 
-export const setReady = id =>
+export const setReady = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_READY,
-      id,
+      id: grid.id,
     });
 
-export const applyFilters = (id, columns) =>
+export const applyFilters = (grid, columns) =>
   (dispatch, getState) => {
     if (!columns || !columns.forEach) return false;
-    const gridData = getState().datagrid.get(id);
+    const gridData = getState().datagrid.get(grid.id);
     const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
     const allData = gridData.get('allData');
-    setBusy(id)(dispatch);
+    setBusy(grid)(dispatch);
     let data;
     if (filterData.isEmpty()) {
       data = allData;
@@ -89,18 +89,18 @@ export const applyFilters = (id, columns) =>
     }
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_APPLY_FILTERS,
-      id,
+      id: grid.id,
       data,
     });
-    setReady(id)(dispatch);
+    setReady(grid)(dispatch);
     return true;
   };
 
-export const filterCellValueChange = (id, columns, column, value) =>
+export const filterCellValueChange = (grid, columns, column, value) =>
   (dispatch, getState) => {
     const origFilterData = getState()
       .datagrid
-      .getIn([id, 'config', 'filteringData', 'filterData'], Map());
+      .getIn([grid.id, 'config', 'filteringData', 'filterData'], Map());
     const columnKey = Utils.getColumnKey(column);
     const filterFunctions = Utils.getFilterFunctions(column);
     let filterData;
@@ -109,19 +109,19 @@ export const filterCellValueChange = (id, columns, column, value) =>
     } else {
       filterData = origFilterData.set(columnKey, value);
     }
-    Utils.saveFilterData(id, filterData);
+    Utils.saveFilterData(grid, filterData);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE,
-      id,
+      id: grid.id,
       filterData,
     });
-    applyFilters(id, columns)(dispatch, getState);
+    applyFilters(grid, columns)(dispatch, getState);
   };
 
-export const applySort = (id, columns) =>
+export const applySort = (grid, columns) =>
   (dispatch, getState) => {
     if (!columns || !columns.forEach) return false;
-    const gridData = getState().datagrid.get(id);
+    const gridData = getState().datagrid.get(grid.id);
     const sortData = gridData.getIn(['config', 'sortingData']);
     if (!sortData) return false;
     const sortColumn = sortData.get('sortColumn');
@@ -135,7 +135,7 @@ export const applySort = (id, columns) =>
     });
     if (!column) return false;
 
-    setBusy(id)(dispatch);
+    setBusy(grid)(dispatch);
     const origAllData = gridData.get('allData');
     const comparator = Utils.getSortComparator(column);
     const valueGetter = Utils.getSortValueGetter(column);
@@ -159,175 +159,175 @@ export const applySort = (id, columns) =>
     }
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_APPLY_SORT,
-      id,
+      id: grid.id,
       data,
       allData,
     });
-    setReady(id)(dispatch);
+    setReady(grid)(dispatch);
     return true;
   };
 
-export const sortChange = (id, columns, column, newSort) =>
+export const sortChange = (grid, columns, column, newSort) =>
   (dispatch, getState) => {
     const sortOrder = newSort || 'asc';
     const sortColumn = Utils.getColumnKey(column);
-    Utils.saveSortData(id, { sortColumn, sortOrder });
+    Utils.saveSortData(grid, { sortColumn, sortOrder });
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SORT_CHANGE,
-      id,
+      id: grid.id,
       sortColumn,
       sortOrder,
     });
-    applySort(id, columns)(dispatch, getState);
+    applySort(grid, columns)(dispatch, getState);
   };
 
-export const setData = (id, data, columns) =>
+export const setData = (grid, columns, data) =>
   (dispatch, getState) => {
-    const config = Utils.loadGridConfig(id);
-    if (!columns) {
-      delete config.sortingData;
-      delete config.filteringData;
-    }
-    const selectedItems = Utils.loadSelectedItems(id);
+    const configData = Utils.loadGridConfig(grid);
+    const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
+    const selectedItems = Utils.loadSelectedItems(grid).filter(item => (
+      !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
+    ));
+    console.log('isIterable', Immutable.Iterable.isIterable(data));
+    console.log('DATA', immutableData);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SET_DATA,
-      id,
-      data,
-      config,
+      id: grid.id,
+      data: immutableData,
+      config: configData,
       selectedItems,
     });
-    applyFilters(id, columns)(dispatch, getState);
-    applySort(id, columns)(dispatch, getState);
+/*    applyFilters(grid, columns)(dispatch, getState);
+    applySort(grid, columns)(dispatch, getState);*/
   };
 
-export const resizeColumn = (id, columnKey, width) =>
+export const resizeColumn = (grid, columnKey, width) =>
   (dispatch, getState) => {
     const columnWidths = getState()
       .datagrid
-      .getIn([id, 'config', 'columnWidths'], Map())
+      .getIn([grid.id, 'config', 'columnWidths'], Map())
       .set(columnKey, width);
-    Utils.saveColumnWidths(id, columnWidths);
+    Utils.saveColumnWidths(grid, columnWidths);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN,
-      id,
+      id: grid.id,
       columnWidths,
     });
   };
 
-export const edit = id =>
+export const edit = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_EDIT,
-      id,
+      id: grid.id,
     });
 
-export const cancel = id =>
+export const cancel = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CANCEL,
-      id,
+      id: grid.id,
     });
 
-export const save = (id, cb = () => {}) =>
+export const save = (grid, cb = () => {}) =>
   (dispatch) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SAVE,
-      id,
+      id: grid.id,
     });
     cb();
   };
 
-export const saveSuccess = (id, idKeyPath, savedItems) =>
+export const saveSuccess = (grid, savedItems) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SAVE_SUCCESS,
-      id,
-      idKeyPath,
+      id: grid.id,
+      idKeyPath: grid.idKeyPath,
       savedItems,
     });
 
-export const savePartialSuccess = (id, idKeyPath, savedItems) =>
+export const savePartialSuccess = (grid, savedItems) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SAVE_PARTIAL_SUCCESS,
-      id,
-      idKeyPath,
+      id: grid.id,
+      idKeyPath: grid.idKeyPath,
       savedItems,
     });
 
-export const saveFail = id =>
+export const saveFail = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SAVE_FAIL,
-      id,
+      id: grid.id,
     });
 
-export const create = (id, columnDefaultValues) =>
+export const create = (grid, columnDefaultValues) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE,
-      id,
+      id: grid.id,
       columnDefaultValues,
     });
 
-export const addNewItem = (id, columnDefaultValues) =>
+export const addNewItem = (grid, columnDefaultValues) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_ADD_NEW_ITEM,
-      id,
+      id: grid.id,
       columnDefaultValues,
     });
 
-export const removeNewItem = (id, index) =>
+export const removeNewItem = (grid, index) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM,
-      id,
+      id: grid.id,
       index,
     });
 
-export const remove = (id, cb = () => {}) =>
+export const remove = (grid, cb = () => {}) =>
   (dispatch) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE,
-      id,
+      id: grid.id,
     });
     cb();
   };
 
-export const removeSuccess = (id, idKeyPath, removedIds) =>
+export const removeSuccess = (grid, removedIds) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE_SUCCESS,
-      id,
-      idKeyPath,
+      id: grid.id,
+      idKeyPath: grid.idKeyPath,
       removedIds,
     });
 
-export const removeFail = id =>
+export const removeFail = grid =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE_FAIL,
-      id,
+      id: grid.id,
     });
 
-export const editCellValueChange = (id, dataId, keyPath, value) =>
+export const editCellValueChange = (grid, dataId, keyPath, value) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_EDIT_CELL_VALUE_CHANGE,
-      id,
+      id: grid.id,
       dataId,
       keyPath,
       value,
     });
 
 export const editCellValueValidate = (
-  id,
+  grid,
   dataId,
   keyPath,
   value,
   validators = [],
-  idKeyPath = [],
 ) =>
   (dispatch, getState) => {
     let validationState = { valid: true };
@@ -336,13 +336,13 @@ export const editCellValueValidate = (
         if (validator.unique) {
           if (value !== '' || value !== null || value !== undefined) {
             // combine real data with current unsaved edited data
-            const gridData = getState().datagrid.get(id);
+            const gridData = getState().datagrid.get(grid.id);
             const editData = gridData.get('editData');
             let allData = gridData.get('allData');
             if (editData) {
               editData.forEach((editDataItem, editDataItemId) => {
                 const foundIndex = allData.findIndex(d =>
-                  d.getIn(idKeyPath) === editDataItemId,
+                  d.getIn(grid.idKeyPath) === editDataItemId,
                 );
                 if (foundIndex !== -1) {
                   allData = allData.mergeDeepIn([foundIndex], editDataItem);
@@ -351,9 +351,9 @@ export const editCellValueValidate = (
             }
             // determine uniqueness
             const finding = allData.find((item) => {
-              if (idKeyPath.length) {
+              if (grid.idKeyPath.length) {
                 // don't self compare
-                if (item.getIn(idKeyPath) === dataId) {
+                if (item.getIn(grid.idKeyPath) === dataId) {
                   return false;
                 }
               }
@@ -367,9 +367,9 @@ export const editCellValueValidate = (
             }
           }
         } else if (validator.validateWithRowData) {
-          const gridData = getState().datagrid.get(id);
+          const gridData = getState().datagrid.get(grid.id);
           const editData = gridData.getIn(['editData', dataId], Map());
-          let rowData = gridData.get('allData').find(item => item.getIn(idKeyPath) === dataId);
+          let rowData = gridData.get('allData').find(item => item.getIn(grid.idKeyPath) === dataId);
           if (rowData) {
             rowData = rowData.mergeDeep(editData);
             validationState = validator.validateWithRowData(value, rowData);
@@ -386,7 +386,7 @@ export const editCellValueValidate = (
     if (validationState.valid) {
       dispatch({
         type: TYPES.PLATFORM_DATAGRID_CELL_HIDE_MESSAGE,
-        id,
+        id: grid.id,
         messageType: 'error',
         dataId,
         keyPath,
@@ -394,7 +394,7 @@ export const editCellValueValidate = (
     } else {
       dispatch({
         type: TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGE,
-        id,
+        id: grid.id,
         messageType: 'error',
         dataId,
         keyPath,
@@ -405,17 +405,17 @@ export const editCellValueValidate = (
     return validationState.valid;
   };
 
-export const createCellValueChange = (id, rowIndex, keyPath, value) =>
+export const createCellValueChange = (grid, rowIndex, keyPath, value) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_VALUE_CHANGE,
-      id,
+      id: grid.id,
       rowIndex,
       keyPath,
       value,
     });
 
-export const createCellValueValidate = (id, rowIndex, keyPath, value, validators = []) =>
+export const createCellValueValidate = (grid, rowIndex, keyPath, value, validators = []) =>
   (dispatch, getState) => {
     let validationState = { valid: true };
     validators.forEach((validator) => {
@@ -424,7 +424,7 @@ export const createCellValueValidate = (id, rowIndex, keyPath, value, validators
           if (value !== '' || value !== null || value !== undefined) {
             const finding = getState()
               .datagrid
-              .getIn([id, 'allData'])
+              .getIn([grid.id, 'allData'])
               .find(item => item.getIn(keyPath) === value);
             if (finding) {
               validationState = {
@@ -434,7 +434,7 @@ export const createCellValueValidate = (id, rowIndex, keyPath, value, validators
             } else {
               const find2 = getState()
                               .datagrid
-                              .getIn([id, 'createData'])
+                              .getIn([grid.id, 'createData'])
                               .find((item, i) =>
                                 i !== rowIndex && item.getIn(keyPath) === value,
                               );
@@ -447,7 +447,7 @@ export const createCellValueValidate = (id, rowIndex, keyPath, value, validators
             }
           }
         } else if (validator.validateWithRowData) {
-          const rowData = getState().datagrid.getIn([id, 'createData', rowIndex]);
+          const rowData = getState().datagrid.getIn([grid.id, 'createData', rowIndex]);
           validationState = validator.validateWithRowData(value, rowData);
         } else {
           const params = validator.params ? Object.values(validator.params) : [];
@@ -461,7 +461,7 @@ export const createCellValueValidate = (id, rowIndex, keyPath, value, validators
     if (validationState.valid) {
       dispatch({
         type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE,
-        id,
+        id: grid.id,
         messageType: 'error',
         rowIndex,
         keyPath,
@@ -469,7 +469,7 @@ export const createCellValueValidate = (id, rowIndex, keyPath, value, validators
     } else {
       dispatch({
         type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_SHOW_MESSAGE,
-        id,
+        id: grid.id,
         messageType: 'error',
         rowIndex,
         keyPath,
@@ -480,11 +480,11 @@ export const createCellValueValidate = (id, rowIndex, keyPath, value, validators
     return validationState.valid;
   };
 
-export const cellShowMessage = (id, messageType, dataId, keyPath, messageId, messageValues) =>
+export const cellShowMessage = (grid, messageType, dataId, keyPath, messageId, messageValues) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGE,
-      id,
+      id: grid.id,
       messageType,
       dataId,
       keyPath,
@@ -492,18 +492,18 @@ export const cellShowMessage = (id, messageType, dataId, keyPath, messageId, mes
       messageValues,
     });
 
-export const cellHideMessage = (id, messageType = null, dataId = null, keyPath = null) =>
+export const cellHideMessage = (grid, messageType = null, dataId = null, keyPath = null) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CELL_HIDE_MESSAGE,
-      id,
+      id: grid.id,
       messageType,
       dataId,
       keyPath,
     });
 
 export const createCellShowMessage = (
-  id,
+  grid,
   messageType,
   rowIndex,
   keyPath,
@@ -513,7 +513,7 @@ export const createCellShowMessage = (
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_SHOW_MESSAGE,
-      id,
+      id: grid.id,
       messageType,
       rowIndex,
       keyPath,
@@ -521,18 +521,18 @@ export const createCellShowMessage = (
       messageValues,
     });
 
-export const createCellHideMessage = (id, messageType = null, rowIndex = null, keyPath = null) =>
+export const createCellHideMessage = (grid, messageType = null, rowIndex = null, keyPath = null) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE,
-      id,
+      id: grid.id,
       messageType,
       rowIndex,
       keyPath,
     });
 
 export const itemSelectionChange = (
-  id,
+  grid,
   rowIndex,
   idKeyPath,
   ctrlPressed = false,
@@ -541,50 +541,50 @@ export const itemSelectionChange = (
   (dispatch, getState) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_ITEM_SELECTION_CHANGE,
-      id,
+      id: grid.id,
       rowIndex,
       idKeyPath,
       ctrlPressed,
       shiftPressed,
     });
-    Utils.saveSelectedItems(id, getState().datagrid.getIn([id, 'selectedItems']));
-  }
+    Utils.saveSelectedItems(grid, getState().datagrid.getIn([grid.id, 'selectedItems']));
+  };
 
-export const selectAllItemsChange = (id, idKeyPath) =>
+export const selectAllItemsChange = grid =>
   (dispatch, getState) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SELECT_ALL_ITEMS_CHANGE,
-      id,
-      idKeyPath,
+      id: grid.id,
+      idKeyPath: grid.idKeyPath,
     });
-    Utils.saveSelectedItems(id, getState().datagrid.getIn([id, 'selectedItems']));
-  }
+    Utils.saveSelectedItems(grid, getState().datagrid.getIn([grid.id, 'selectedItems']));
+  };
 
-export const clearSelectedItems = id =>
+export const clearSelectedItems = grid =>
   (dispatch, getState) => {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CLEAR_SELECTED_ITEMS,
-      id,
+      id: grid.id,
     });
-    Utils.saveSelectedItems(id, getState().datagrid.getIn([id, 'selectedItems']));
-  }
+    Utils.saveSelectedItems(grid, getState().datagrid.getIn([grid.id, 'selectedItems']));
+  };
 
-export const toggleFiltering = id =>
+export const toggleFiltering = grid =>
   (dispatch, getState) => {
     const isFiltering = !getState()
       .datagrid
-      .getIn([id, 'config', 'filteringData', 'isFiltering'], false);
-    Utils.saveIsFiltering(id, isFiltering);
+      .getIn([grid.id, 'config', 'filteringData', 'isFiltering'], false);
+    Utils.saveIsFiltering(grid, isFiltering);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_TOGGLE_FILTERING,
-      id,
+      id: grid.id,
       isFiltering,
     });
   };
 
-export const validateEditedRows = (id, idKeyPath, columns) =>
+export const validateEditedRows = (grid, columns) =>
   (dispatch, getState) => {
-    const gridData = getState().datagrid.get(id);
+    const gridData = getState().datagrid.get(grid.id);
     const editData = gridData.get('editData', Map());
     let allGood = true;
     editData.forEach((editDataRow, dataId) => {
@@ -593,16 +593,15 @@ export const validateEditedRows = (id, idKeyPath, columns) =>
         if (value === undefined) {
           value = gridData
             .get('allData')
-            .find(data => data.getIn(idKeyPath) === dataId)
+            .find(data => data.getIn(grid.idKeyPath) === dataId)
             .getIn(col.valueKeyPath);
         }
         const isValid = editCellValueValidate(
-          id,
+          grid,
           dataId,
           col.valueKeyPath,
           value,
           col.validators,
-          idKeyPath,
         )(dispatch, getState);
         if (allGood && !isValid) {
           allGood = false;
@@ -612,15 +611,15 @@ export const validateEditedRows = (id, idKeyPath, columns) =>
     return allGood;
   };
 
-export const validateCreatedRows = (id, columns) =>
+export const validateCreatedRows = (grid, columns) =>
   (dispatch, getState) => {
-    const createData = getState().datagrid.getIn([id, 'createData'], Map());
+    const createData = getState().datagrid.getIn([grid.id, 'createData'], Map());
     let allGood = true;
     createData.forEach((createDataRow, rowIndex) => {
       columns.forEach((col) => {
         const value = createDataRow.getIn(col.valueKeyPath);
         const isValid = createCellValueValidate(
-          id,
+          grid,
           rowIndex,
           col.valueKeyPath,
           value,
@@ -634,11 +633,11 @@ export const validateCreatedRows = (id, columns) =>
     return allGood;
   };
 
-export const updateExistingCellValue = (id, dataId, keyPath, value) =>
+export const updateExistingCellValue = (grid, dataId, keyPath, value) =>
   dispatch =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE,
-      id,
+      id: grid.id,
       dataId,
       keyPath,
       value,

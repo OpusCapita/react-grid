@@ -89,47 +89,76 @@ export default {
     }
     return filterFunctions;
   },
-  loadSelectedItems: (id) => {
-    const sessionItem = sessionStorage.getItem(`oc_grid_selectedItems_${id}`);
-    if (sessionItem) {
-      return JSON.parse(sessionItem);
+  loadSelectedItems: (grid) => {
+    const sessionItem = sessionStorage.getItem(`oc_grid_selectedItems_${grid.id}`);
+    if (sessionItem && !grid.disableRememberSelectedItems) {
+      try { return JSON.parse(sessionItem); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing selectedItems from sessionStorage', e);
+      }
     }
     return [];
   },
-  loadGridConfig: (id) => {
-    const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${id}`);
-    const sortingData = sessionStorage.getItem(`oc_grid_sorting_${id}`);
-    const filterData = sessionStorage.getItem(`oc_grid_filtering_${id}`);
-    const isFiltering = localStorage.getItem(`oc_grid_isFiltering_${id}`);
+  loadGridConfig: (grid) => {
+    const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
+    const sortingData = sessionStorage.getItem(`oc_grid_sorting_${grid.id}`);
+    const filterData = sessionStorage.getItem(`oc_grid_filtering_${grid.id}`);
+    const isFilteringData = localStorage.getItem(`oc_grid_isFiltering_${grid.id}`);
+    let isFiltering = false;
+    if (isFilteringData && !grid.disableRememberIsFiltering) {
+      try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing isFilteringData from localStorage', e);
+      }
+    }
     const config = {
       filteringData: {
-        isFiltering: isFiltering ? JSON.parse(isFiltering) : false,
+        isFiltering,
       },
     };
-    if (columnWidths) {
-      config.columnWidths = JSON.parse(columnWidths);
+    if (columnWidths && !grid.disableRememberColumnWidths) {
+      try { config.columnWidths = JSON.parse(columnWidths); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing columnWidths from localStorage', e);
+      }
     }
-    if (sortingData) {
-      config.sortingData = JSON.parse(sortingData);
+    if (sortingData && !grid.disableRememberSortData) {
+      try { config.sortingData = JSON.parse(sortingData); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing sortingData from sessionStorage', e);
+      }
     }
-    if (filterData) {
-      config.filteringData.filterData = JSON.parse(filterData);
+    if (filterData && !grid.disableRememberFilteData) {
+      try { config.filteringData.filterData = JSON.parse(filterData); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing filterData from sessionStorage', e);
+      }
     }
     return config;
   },
-  saveSelectedItems: (id, selectedItems) => {
-    sessionStorage.setItem(`oc_grid_selectedItems_${id}`, JSON.stringify(selectedItems));
+  saveSelectedItems: (grid, selectedItems) => {
+    if (grid.disableRememberSelectedItems) return false;
+    sessionStorage.setItem(`oc_grid_selectedItems_${grid.id}`, JSON.stringify(selectedItems));
+    return true;
   },
-  saveColumnWidths: (id, columnWidths) => {
-    localStorage.setItem(`oc_grid_columnWidths_${id}`, JSON.stringify(columnWidths));
+  saveColumnWidths: (grid, columnWidths) => {
+    if (grid.disableRememberColumnWidths) return false;
+    localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnWidths));
+    return true;
   },
-  saveSortData: (id, sortingData) => {
-    sessionStorage.setItem(`oc_grid_sorting_${id}`, JSON.stringify(sortingData));
+  saveSortData: (grid, sortingData) => {
+    if (grid.disableRememberSortData) return false;
+    sessionStorage.setItem(`oc_grid_sorting_${grid.id}`, JSON.stringify(sortingData));
+    return true;
   },
-  saveFilterData: (id, filterData) => {
-    sessionStorage.setItem(`oc_grid_filtering_${id}`, JSON.stringify(filterData));
+  saveFilterData: (grid, filterData) => {
+    if (grid.disableRememberFilteData) return false;
+    sessionStorage.setItem(`oc_grid_filtering_${grid.id}`, JSON.stringify(filterData));
+    return true;
   },
-  saveIsFiltering: (id, isFiltering) => {
-    localStorage.setItem(`oc_grid_isFiltering_${id}`, JSON.stringify(isFiltering));
+  saveIsFiltering: (grid, isFiltering) => {
+    if (grid.disableRememberIsFiltering) return false;
+    localStorage.setItem(`oc_grid_isFiltering_${grid.id}`, JSON.stringify(isFiltering));
+    return true;
   },
 };

@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'react-bootstrap';
 import { FormattedMessage as M } from 'react-intl';
+import { gridShape } from './datagrid.props';
 import './filtering-controls.component.scss';
 
 export default class FilteringControls extends React.PureComponent {
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    grid: gridShape.isRequired,
     isBusy: PropTypes.bool.isRequired,
     isCreating: PropTypes.bool.isRequired,
     isEditing: PropTypes.bool.isRequired,
@@ -20,7 +21,7 @@ export default class FilteringControls extends React.PureComponent {
   };
 
   toggleFiltering = () => {
-    this.props.toggleFiltering(this.props.id);
+    this.props.toggleFiltering(this.props.grid);
   }
 
   render() {

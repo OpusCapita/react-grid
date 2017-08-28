@@ -1,41 +1,103 @@
-  /* eslint-disable prefer-template, react/no-unused-prop-types, react/forbid-prop-types, max-len */
+  /* eslint-disable react/no-unused-prop-types, react/forbid-prop-types, max-len */
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
+const { bool, number, string, func, object, node, array, shape, any, oneOfType, arrayOf }
+ = PropTypes;
+
+// Grid object holds data that also actions uses
+export const gridShape = shape({
+  id: string.isRequired,
+  idKeyPath: arrayOf(string).isRequired, // keyPath to id data
+  disableRememberColumnWidths: bool,
+  disableRememberSortData: bool,
+  disableRememberIsFiltering: bool,
+  disableRememberFilteData: bool,
+  disableRememberSelectedItems: bool,
+});
+
+export const columnShape = shape({
+  header: node,
+  columnKey: string,              // Use valueKeyPath if possible, this is calculated from there
+  valueKeyPath: array,            // key path for the cell data value, required if no columnKey is given
+  valueType: string,              // data value type [text/number/float/boolean/date]
+  componentType: string,          // edit component type [text/number/float/select/boolean/date]
+  valueRender: func,              // custom renderer for the value, data as parameter
+  editValueRender: func,          // custom renderer for the edit value, data as parameter
+  createValueRender: func,        // custom renderer for the create value, data as parameter
+  filterValueRender: func,        // custom renderer for the filter value, data as parameter
+  cell: func,                     // override cell renderer, rowIndex as parameter
+  cellEdit: func,                 // override cellEdit renderer, rowIndex as parameter
+  cellCreate: func,               // override cellCreate renderer, rowIndex as parameter
+  cellFilter: func,               // override cellFilter renderer, rowIndex as parameter
+  renderComponentProps: object,   // additional props to the render component
+  editComponentProps: object,     // additional props to the edit component
+  createComponentProps: object,   // additional props to the create component
+  filterComponentProps: object,   // additional props to the filter component
+  width: number,
+  align: string,                  // vertical cell alignment, defaults to 'left'
+  fixed: bool,                    // is column fixed
+  allowCellsRecycling: bool,      // allow cells to be recycled for better horizontal scrolling perf
+  disableResizing: bool,          // disable column resizing
+  disableEditing: bool,           // disable input component (make read-only) when editing/creating
+  disableSorting: bool,           // disable filtering on this column
+  disableEditingOnValueMatch: shape({ // disable editing/creating input when other columns value match
+    matchValueKeyPath: array,
+    matchValue: any,
+  }),
+  onValueMatchChangeValue: shape({ // Change other column value when data matches
+    matchValue: any,
+    newValueKeyPath: array,
+    newValue: any,
+  }),
+  flexGrow: number,
+  sortValueGetter: func,          // override sort value getter, defaults to getIn(valueKeyPath)
+  sortComparator: func,           // override sort comparator function, default sorts by valueType
+  defaultValue: any,              // default value for the column when creating new item
+  onEditValueChange: func,        // callback with (value, valueKeyPath, rowIndex, dataId)
+  onCreateValueChange: func,      // callbac with (value, valueKeyPath, rowIndex)
+  onCreateBlur: func,             // callback with (value, rowIndex)
+  onEditBlur: func,               // callback with (value, rowIndex, dataId)
+  selectComponentOptions: arrayOf(shape({
+    value: oneOfType([number, string, bool]).isRequired,
+    label: oneOfType([number, string]).isRequired,
+  })),
+});
+
 export const propTypes = {
-  children: PropTypes.node,
+  children: node,
   // App props
-  intl: PropTypes.object.isRequired,
+  intl: object.isRequired,
   // Action props
-  addNewItem: PropTypes.func.isRequired,
-  create: PropTypes.func.isRequired,
-  edit: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
-  save: PropTypes.func.isRequired,
-  cancel: PropTypes.func.isRequired,
-  sortChange: PropTypes.func.isRequired,
-  resizeColumn: PropTypes.func.isRequired,
-  invalidate: PropTypes.func.isRequired,
-  itemSelectionChange: PropTypes.func.isRequired,
-  toggleFiltering: PropTypes.func.isRequired,
-  editCellValueChange: PropTypes.func.isRequired,
-  createCellValueChange: PropTypes.func.isRequired,
-  filterCellValueChange: PropTypes.func.isRequired,
-  editCellValueValidate: PropTypes.func.isRequired,
-  createCellValueValidate: PropTypes.func.isRequired,
-  validateEditedRows: PropTypes.func.isRequired,
-  validateCreatedRows: PropTypes.func.isRequired,
+  addNewItem: func.isRequired,
+  create: func.isRequired,
+  edit: func.isRequired,
+  remove: func.isRequired,
+  save: func.isRequired,
+  cancel: func.isRequired,
+  sortChange: func.isRequired,
+  resizeColumn: func.isRequired,
+  invalidate: func.isRequired,
+  itemSelectionChange: func.isRequired,
+  toggleFiltering: func.isRequired,
+  editCellValueChange: func.isRequired,
+  createCellValueChange: func.isRequired,
+  filterCellValueChange: func.isRequired,
+  editCellValueValidate: func.isRequired,
+  createCellValueValidate: func.isRequired,
+  validateEditedRows: func.isRequired,
+  validateCreatedRows: func.isRequired,
   // State props
-  isBusy: PropTypes.bool.isRequired,
-  isEditing: PropTypes.bool.isRequired,
-  isCreating: PropTypes.bool.isRequired,
-  isFiltering: PropTypes.bool.isRequired,
-  sortColumn: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
+  isBusy: bool.isRequired,
+  isEditing: bool.isRequired,
+  isCreating: bool.isRequired,
+  isFiltering: bool.isRequired,
+  sortColumn: oneOfType([
+    string,
+    number,
   ]),
-  sortOrder: PropTypes.string,
-  columnWidths: ImmutablePropTypes.mapOf(PropTypes.number.isRequired),
+  sortOrder: string,
+  columnWidths: ImmutablePropTypes.mapOf(number.isRequired),
   selectedItems: ImmutablePropTypes.list.isRequired,
   data: ImmutablePropTypes.list.isRequired,
   editData: ImmutablePropTypes.map.isRequired,
@@ -43,110 +105,65 @@ export const propTypes = {
   filterData: ImmutablePropTypes.map.isRequired,
   cellMessages: ImmutablePropTypes.map.isRequired,
   createCellMessages: ImmutablePropTypes.map.isRequired,
-  userLanguage: PropTypes.string.isRequired,
-  thousandSeparator: PropTypes.string.isRequired,
-  decimalSeparator: PropTypes.string.isRequired,
-  allDataSize: PropTypes.number.isRequired,
+  userLanguage: string.isRequired,
+  thousandSeparator: string.isRequired,
+  decimalSeparator: string.isRequired,
+  allDataSize: number.isRequired,
   // Required component properties
-  id: PropTypes.string.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      header: PropTypes.node,
-      columnKey: PropTypes.string,              // Use valueKeyPath if possible, this is calculated from there
-      valueKeyPath: PropTypes.array,            // key path for the cell data value, required if no columnKey is given
-      valueType: PropTypes.string,              // data value type [text/number/float/boolean/date]
-      componentType: PropTypes.string,          // edit component type [text/number/float/select/boolean/date]
-      valueRender: PropTypes.func,              // custom renderer for the value, data as parameter
-      editValueRender: PropTypes.func,          // custom renderer for the edit value, data as parameter
-      createValueRender: PropTypes.func,        // custom renderer for the create value, data as parameter
-      filterValueRender: PropTypes.func,        // custom renderer for the filter value, data as parameter
-      cell: PropTypes.func,                     // override cell renderer, rowIndex as parameter
-      cellEdit: PropTypes.func,                 // override cellEdit renderer, rowIndex as parameter
-      cellCreate: PropTypes.func,               // override cellCreate renderer, rowIndex as parameter
-      cellFilter: PropTypes.func,               // override cellFilter renderer, rowIndex as parameter
-      renderComponentProps: PropTypes.object,   // additional props to the render component
-      editComponentProps: PropTypes.object,     // additional props to the edit component
-      createComponentProps: PropTypes.object,   // additional props to the create component
-      filterComponentProps: PropTypes.object,   // additional props to the filter component
-      width: PropTypes.number,
-      align: PropTypes.string,                  // vertical cell alignment, defaults to 'left'
-      fixed: PropTypes.bool,                    // is column fixed
-      allowCellsRecycling: PropTypes.bool,      // allow cells to be recycled for better horizontal scrolling perf
-      disableResizing: PropTypes.bool,          // disable column resizing
-      disableEditing: PropTypes.bool,           // disable input component (make read-only) when editing/creating
-      disableSorting: PropTypes.bool,           // disable filtering on this column
-      disableEditingOnValueMatch: PropTypes.shape({ // disable editing/creating input when other columns value match
-        matchValueKeyPath: PropTypes.array,
-        matchValue: PropTypes.any,
-      }),
-      onValueMatchChangeValue: PropTypes.shape({ // Change other column value when data matches
-        matchValue: PropTypes.any,
-        newValueKeyPath: PropTypes.array,
-        newValue: PropTypes.any,
-      }),
-      flexGrow: PropTypes.number,
-      sortValueGetter: PropTypes.func,          // override sort value getter, defaults to getIn(valueKeyPath)
-      sortComparator: PropTypes.func,           // override sort comparator function, default sorts by valueType
-      defaultValue: PropTypes.any,              // default value for the column when creating new item
-      onEditValueChange: PropTypes.func,        // callback with (value, valueKeyPath, rowIndex, dataId)
-      onCreateValueChange: PropTypes.func,      // callbac with (value, valueKeyPath, rowIndex)
-      onCreateBlur: PropTypes.func,             // callback with (value, rowIndex)
-      onEditBlur: PropTypes.func,               // callback with (value, rowIndex, dataId)
-    }).isRequired,
-  ).isRequired,
+  grid: gridShape.isRequired,
+  columns: arrayOf(columnShape.isRequired).isRequired,
   // Optional component properties
-  rowsCount: PropTypes.number,
-  idKeyPath: PropTypes.arrayOf(PropTypes.string), // keyPath to id data
-  gridHeader: PropTypes.node,
-  actionBar: PropTypes.node,
-  actionBarLeft: PropTypes.node,
-  disableDropdown: PropTypes.bool,              // Don't use dropdown menu in the action bar
-  disableFilteringControls: PropTypes.bool,     // Don't display the filtering controls (only valid if disableDropdown is true)
-  dropdownMenuItems: PropTypes.array,
-  inlineEdit: PropTypes.bool,
-  inlineAdd: PropTypes.bool,
-  filtering: PropTypes.bool,
-  removing: PropTypes.bool,
-  rowSelect: PropTypes.bool,
-  rowSelectCheckboxColumn: PropTypes.bool,
-  multiSelect: PropTypes.bool,
+  rowsCount: number,
+  gridHeader: node,
+  actionBar: node,
+  actionBarLeft: node,
+  disableDropdown: bool,              // Don't use dropdown menu in the action bar
+  disableFilteringControls: bool,     // Don't display the filtering controls (only valid if disableDropdown is true)
+  dropdownMenuItems: array,
+  inlineEdit: bool,
+  inlineAdd: bool,
+  filtering: bool,
+  removing: bool,
+  rowSelect: bool,
+  rowSelectCheckboxColumn: bool,
+  multiSelect: bool,
   selectComponentOptions: ImmutablePropTypes.mapOf( // Options data for the react-select components
-    PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]).isRequired,
-      label: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    arrayOf(shape({
+      value: oneOfType([number, string, bool]).isRequired,
+      label: oneOfType([number, string]).isRequired,
     })),
   ),
-  disableActions: PropTypes.bool,               // Disable actions in the action bar
-  disableActionsMessage: PropTypes.shape({
-    messageId: PropTypes.string,
-    messageValues: PropTypes.shape({}),
+  disableActions: bool,               // Disable actions in the action bar
+  disableActionsMessage: shape({
+    messageId: string,
+    messageValues: shape({}),
   }),
-  disableActionBar: PropTypes.bool,
-  disableActionSave: PropTypes.bool,
-  enableArrowNavigation: PropTypes.bool,
-  onSave: PropTypes.func,
-  onRemove: PropTypes.func,
-  onCancel: PropTypes.func,
-  onAddClick: PropTypes.func,
-  onEditClick: PropTypes.func,
-  tabIndex: PropTypes.number,                   // tabIndex value for inputs in cells
+  disableActionBar: bool,
+  disableActionSave: bool,
+  enableArrowNavigation: bool,
+  onSave: func,
+  onRemove: func,
+  onCancel: func,
+  onAddClick: func,
+  onEditClick: func,
+  tabIndex: number,                   // tabIndex value for inputs in cells
   // Fixed data table built-in features
-  headerHeight: PropTypes.number,
-  rowHeight: PropTypes.number,
-  containerStyle: PropTypes.object,
-  scrollToColumn: PropTypes.number,
-  scrollTop: PropTypes.number,
-  scrollToRow: PropTypes.number,
-  onRowClick: PropTypes.func,
-  onRowDoubleClick: PropTypes.func,
-  onRowMouseDown: PropTypes.func,
-  onRowMouseEnter: PropTypes.func,
-  onRowMouseLeave: PropTypes.func,
-  onScrollStart: PropTypes.func,
-  onScrollEnd: PropTypes.func,
-  rowClassNameGetter: PropTypes.func,
-  rowHeightGetter: PropTypes.func,
-  onContentHeightChange: PropTypes.func,
+  headerHeight: number,
+  rowHeight: number,
+  containerStyle: object,
+  scrollToColumn: number,
+  scrollTop: number,
+  scrollToRow: number,
+  onRowClick: func,
+  onRowDoubleClick: func,
+  onRowMouseDown: func,
+  onRowMouseEnter: func,
+  onRowMouseLeave: func,
+  onScrollStart: func,
+  onScrollEnd: func,
+  rowClassNameGetter: func,
+  rowHeightGetter: func,
+  onContentHeightChange: func,
 };
 
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */
