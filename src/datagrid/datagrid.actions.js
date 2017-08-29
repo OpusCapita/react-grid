@@ -169,7 +169,6 @@ export const applySort = (grid, columns) =>
 
 export const sortChange = (grid, columns, column, newSort) =>
   (dispatch, getState) => {
-    console.log(column);
     const sortOrder = newSort || 'asc';
     const sortColumn = Utils.getColumnKey(column);
     Utils.saveSortData(grid, { sortColumn, sortOrder });
@@ -190,7 +189,7 @@ export const setData = (grid, columns, data) =>
       !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
     ));
     dispatch({
-      type: TYPES.PLATFORM_DATAGRID_SET_DATA,
+      type: TYPES.PLATFORM_DATAGRID_SET_DATA, 
       id: grid.id,
       data: immutableData,
       config: configData,
