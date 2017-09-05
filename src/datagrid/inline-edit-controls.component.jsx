@@ -8,7 +8,6 @@ import { gridShape } from './datagrid.props';
 import './inline-edit-controls.component.scss';
 
 export default class InlineEditControls extends React.PureComponent {
-
   static propTypes = {
     grid: gridShape.isRequired,
     addNewItem: PropTypes.func.isRequired,

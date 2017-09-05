@@ -5,15 +5,14 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { FormattedMessage as M } from 'react-intl';
 import { Icon } from '@opuscapita/react-icons';
 
-import { propTypes as datagridPropTypes } from './datagrid.props';
+import { gridShape } from './datagrid.props';
 import { DropdownMenu } from '../dropdown-menu';
 
 import './dropdown-controls.component.scss';
 
 export default class DropdownControls extends React.PureComponent {
-
   static propTypes = {
-    grid: datagridPropTypes.grid,
+    grid: gridShape.isRequired,
     // actions
     remove: PropTypes.func.isRequired,
     toggleFiltering: PropTypes.func.isRequired,

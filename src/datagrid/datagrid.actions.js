@@ -189,7 +189,7 @@ export const setData = (grid, columns, data) =>
       !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
     ));
     dispatch({
-      type: TYPES.PLATFORM_DATAGRID_SET_DATA, 
+      type: TYPES.PLATFORM_DATAGRID_SET_DATA,
       id: grid.id,
       data: immutableData,
       config: configData,
@@ -431,11 +431,11 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
               };
             } else {
               const find2 = getState()
-                              .datagrid
-                              .getIn([grid.id, 'createData'])
-                              .find((item, i) =>
-                                i !== rowIndex && item.getIn(keyPath) === value,
-                              );
+                .datagrid
+                .getIn([grid.id, 'createData'])
+                .find((item, i) =>
+                  i !== rowIndex && item.getIn(keyPath) === value,
+                );
               if (find2) {
                 validationState = {
                   valid: false,

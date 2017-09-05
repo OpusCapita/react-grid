@@ -6,7 +6,6 @@ import { gridShape } from './datagrid.props';
 import './filtering-controls.component.scss';
 
 export default class FilteringControls extends React.PureComponent {
-
   static propTypes = {
     grid: gridShape.isRequired,
     isBusy: PropTypes.bool.isRequired,

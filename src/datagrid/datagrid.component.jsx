@@ -2,10 +2,11 @@
 import React from 'react';
 import { Map, List } from 'immutable';
 import { connect } from 'react-redux';
-import { injectIntl,
-         FormattedMessage as M,
-         FormattedDate as D,
-         FormattedNumber as N } from 'react-intl';
+import {
+  injectIntl,
+  FormattedMessage as M,
+  FormattedDate as D,
+  FormattedNumber as N } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -70,14 +71,13 @@ const mapDispatchToProps = datagridActions;
 @injectIntl
 @connect(mapStateToProps, mapDispatchToProps)
 export default class DataGrid extends React.PureComponent {
-
   static propTypes = propTypes;
   static defaultProps = defaultProps;
 
   constructor(props) {
     super(props);
     this.state = { currentRow: 0, currentColumn: 0 };
-    this.columnDefaultValues = {};        // Used when creating new items
+    this.columnDefaultValues = {}; // Used when creating new items
     this.cellRefs = {};
   }
 
@@ -264,14 +264,14 @@ export default class DataGrid extends React.PureComponent {
     if (!componentDisabled && col.disableEditingOnValueMatch) {
       if (mode === 'create') {
         componentDisabled = this.getCreateItemValue(
-            rowIndex,
-            { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
-          ) === col.disableEditingOnValueMatch.matchValue;
+          rowIndex,
+          { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
+        ) === col.disableEditingOnValueMatch.matchValue;
       } else {
         componentDisabled = this.getEditItemValue(
-            rowIndex,
-            { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
-          ) === col.disableEditingOnValueMatch.matchValue;
+          rowIndex,
+          { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
+        ) === col.disableEditingOnValueMatch.matchValue;
       }
     }
     return componentDisabled;
@@ -279,7 +279,7 @@ export default class DataGrid extends React.PureComponent {
 
   getRowClassName = (rowIndex) => {
     const {
-      config,
+      grid,
       isCreating,
       isEditing,
       isFiltering,
@@ -728,9 +728,11 @@ export default class DataGrid extends React.PureComponent {
                 column.cellEdit = rowIndex => (
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-edit-' + rowIndex}
-                    options={col.editSelectOptionsMod && selectOptions ?
-                             col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-                             selectOptions}
+                    options={
+                      col.editSelectOptionsMod && selectOptions ?
+                        col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
+                        selectOptions
+                    }
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={selectedData => this.onEditCellValueChange(
                       rowIndex,
@@ -758,9 +760,11 @@ export default class DataGrid extends React.PureComponent {
                 column.cellCreate = rowIndex => (
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-create-' + rowIndex}
-                    options={col.createSelectOptionsMod && selectOptions ?
-                             col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-                             selectOptions}
+                    options={
+                      col.createSelectOptionsMod && selectOptions ?
+                        col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
+                        selectOptions
+                    }
                     value={this.getCreateItemValue(rowIndex, col)}
                     onChange={selectedData => this.onCreateCellValueChange(
                       rowIndex,
@@ -790,9 +794,10 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-filter'}
-                    options={col.filterSelectOptionsMod && selectOptions ?
-                             col.filterSelectOptionsMod(selectOptions.slice(), col) :
-                             selectOptions}
+                    options={
+                      col.filterSelectOptionsMod && selectOptions ?
+                        col.filterSelectOptionsMod(selectOptions.slice(), col) :
+                        selectOptions}
                     value={this.getFilterItemValue(col)}
                     onChange={selectedData => this.onFilterCellValueChange(
                       col,
@@ -1144,9 +1149,10 @@ export default class DataGrid extends React.PureComponent {
         </div>
       );
     }
-    let rowsCount = (this.props.rowsCount || this.props.rowsCount === 0) ?
-                    this.props.rowsCount :
-                    this.props.data.size;
+    let rowsCount =
+      (this.props.rowsCount || this.props.rowsCount === 0) ?
+        this.props.rowsCount :
+        this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
     if (this.props.isFiltering) rowsCount += 1;
     let scrollToRow = this.props.scrollToRow || this.state.currentRow;
@@ -1225,5 +1231,4 @@ export default class DataGrid extends React.PureComponent {
       </div>
     );
   }
-
 }

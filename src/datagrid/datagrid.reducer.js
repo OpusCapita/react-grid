@@ -4,7 +4,6 @@ import { INITIAL_STATE } from './datagrid.constants';
 
 export default function datagridReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-
     case TYPES.PLATFORM_DATAGRID_INVALIDATE:
       return state.delete(action.id);
 

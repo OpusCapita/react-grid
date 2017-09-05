@@ -1,4 +1,5 @@
-  /* eslint-disable react/no-unused-prop-types, react/forbid-prop-types, max-len */
+/* eslint-disable react/no-unused-prop-types, react/forbid-prop-types, max-len */
+/* eslint-disable no-multi-spaces */
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
