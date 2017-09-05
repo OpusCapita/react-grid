@@ -1,3 +1,8 @@
+@import 'colors';
+@import 'variables';
+@import 'react_select_custom';
+@import '../../../node_modules/react-select/scss/components.scss';
+
 .tether-element {
   z-index: 10000;
 }

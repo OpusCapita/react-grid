@@ -1,0 +1,32 @@
+@import 'colors';
+
+//Currently we do not use roundings, but the variables have been added for Bootstrap compatibility
+$oc-border-radius-base:        0;
+$oc-border-radius-large:       0;
+$oc-border-radius-small:       0;
+
+$oc-height-navbar: 40px;
+//Margin or padding of a content
+$oc-space-content: 1rem;
+$oc-radius-content: 0.5rem;
+
+//Deprecated: use $oc-border-radius-base
+$oc-border-radius-navbar: 0;
+
+$oc-sidemenu-color-text: $oc-color-white;
+
+$oc-font-weight-light: 300;
+$oc-font-weight-normal: 400;
+$oc-font-weight-bold: 700;
+
+//Bootstrap 3 sets html font-size to 62.5% i.e. 10px with Browser's default size being 16px.
+//Bootstrap 4 uses different base font-size and hence these values need to be changed.
+$oc-font-size-h1: 3.6rem; //36px
+$oc-font-size-h2: 3rem; //30px
+$oc-font-size-h3: 2.4rem; //24px
+$oc-font-size-h4: 1.8rem; //18px
+
+$oc-font-size-large: 1.8rem;
+$oc-font-size-medium: 1.6rem;
+$oc-font-size-normal: 1.4rem; //default text
+$oc-font-size-small: 1.2rem;
