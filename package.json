@@ -37,7 +37,7 @@
     "chai-immutable": "^1.6.0",
     "clean-webpack-plugin": "^0.1.15",
     "cross-env": "^5.0.5",
-    "css-loader": "0.28.5",
+    "css-loader": "0.28.7",
     "enzyme": "^2.7.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
@@ -78,7 +78,7 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "dependencies": {
-    "@opuscapita/react-icons": "1.1.1",
+    "@opuscapita/react-icons": "1.1.4",
     "classnames": "^2.2.5",
     "fixed-data-table-2": "^0.8.0",
     "immutable": "^3.8.1",
