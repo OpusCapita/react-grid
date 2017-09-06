@@ -3,108 +3,114 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-
+import { Button } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
+import columns from './datagrid.columns';
 import { bankAccountData } from './data';
 import './datagrid.component.scss';
 
-const GRID_ID = 'accounts-grid-example';
-
-const mapDispatchToProps = {
-  datagridCellShowMessage: DatagridActions.cellShowMessage,
-  datagridSetData: DatagridActions.setData,
+// Grid props that are needed also by action calls
+const GRID = {
+  id: 'accounts-grid-example',
+  idKeyPath: ['accountId'],
 };
 
+// Needed grid actions are mapped here
+// There's more in /src/datagrid/datagrid.actions.js
+const mapDispatchToProps = {
+  cellShowMessage: DatagridActions.cellShowMessage,
+  setData: DatagridActions.setData,
+  saveSuccess: DatagridActions.saveSuccess,
+  removeSuccess: DatagridActions.removeSuccess,
+  saveFail: DatagridActions.saveFail,
+  removeFail: DatagridActions.removeFail,
+};
+
+// Grid state data can be mapped from redux store here
 const mapStateToProps = state => ({
-  data: state.datagrid.getIn([GRID_ID, 'data'], List()),
-  dataEdited: state.datagrid.getIn([GRID_ID, 'editData'], Map()),
-  isEditing: state.datagrid.getIn([GRID_ID, 'session', 'isEditing'], false),
+  dataEdited: state.datagrid.getIn([GRID.id, 'editData'], Map()),
+  selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
+  isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class DatagridView extends React.Component {
   static propTypes = {
-    data: ImmutablePropTypes.list.isRequired,
+    // State props
     dataEdited: ImmutablePropTypes.map.isRequired,
-    datagridCellShowMessage: PropTypes.func.isRequired,
-    datagridSetData: PropTypes.func.isRequired,
+    selectedItems: ImmutablePropTypes.list.isRequired,
     isEditing: PropTypes.bool.isRequired,
+    // Action props
+    cellShowMessage: PropTypes.func.isRequired,
+    setData: PropTypes.func.isRequired,
+    saveSuccess: PropTypes.func.isRequired,
+    removeSuccess: PropTypes.func.isRequired,
+    saveFail: PropTypes.func.isRequired,
+    removeFail: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
-    this.props.datagridSetData(GRID_ID, bankAccountData);
+    this.props.setData(GRID, columns, bankAccountData);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data.size !== this.props.data.size) {
-      this.props.datagridCellShowMessage(GRID_ID, 'warning', 1, ['name'], 'WarningExample');
+  handleWarnClick = () => {
+    this.props.cellShowMessage(GRID, 'warning', 1, ['name'], 'WarningExample');
+  }
+
+  handleOnSave = () => {
+    const errors = false;
+    if (!errors) {
+      const savedItems = []; // saved items as array from backend here
+      this.props.saveSuccess(GRID, savedItems);
+    } else {
+      this.props.saveFail(GRID);
+    }
+  }
+
+  handleOnRemove = () => {
+    const removedItems = this.props.selectedItems.toJS();
+    const errors = false;
+    if (!errors) {
+      this.props.removeSuccess(GRID, removedItems);
+    } else {
+      this.props.removeFail(GRID);
     }
   }
 
   render() {
-    const columns = [
-      {
-        header: 'Account Name',
-        valueKeyPath: ['name'],
-        valueType: 'text',
-        componentType: 'text',
-        validators: [
-          { unique: true },
-        ],
-        width: 200,
-      },
-      {
-        header: 'Account number',
-        valueKeyPath: ['accountNumber'],
-        valueType: 'text',
-        componentType: 'text',
-        width: 200,
-      },
-      {
-        header: 'Currency',
-        valueKeyPath: ['currency'],
-        valueType: 'text',
-        componentType: 'text',
-        width: 200,
-      },
-      {
-        header: 'Company Name',
-        valueKeyPath: ['companyName'],
-        valueType: 'text',
-        componentType: 'text',
-        width: 200,
-      },
-      {
-        header: 'Interest rate',
-        valueKeyPath: ['interestRate'],
-        valueType: 'float',
-        componentType: 'float',
-        width: 200,
-      },
-      {
-        header: 'Last checked',
-        valueKeyPath: ['lastChecked'],
-        valueType: 'date',
-        componentType: 'date',
-        width: 200,
-      },
-    ];
+    const disableActionSave = (this.props.isEditing && this.props.dataEdited.size === 0);
+    const actionBar = (
+      <Button
+        onClick={this.handleWarnClick}
+      >
+        Warn
+      </Button>
+    );
     return (
       <div className="oc-content oc-flex-column">
         <div>
           <h1>Datagrid</h1>
         </div>
         <Datagrid
-          id={GRID_ID}
-          idKeyPath={['accountId']}
+          grid={GRID}
           columns={columns}
-          disableActionSave={this.props.isEditing && this.props.dataEdited.size === 0}
+          disableActionSave={disableActionSave}
+          actionBar={actionBar}
           enableArrowNavigation
           filtering
           inlineEdit
+          removing
           multiSelect
           rowSelect
           rowSelectCheckboxColumn
+          onSave={this.handleOnSave}
+          onRemove={this.handleOnRemove}
+          locale={{
+            language: 'en',
+            dateFormat: 'MM/DD/YYYY',
+            decimalSeparator: '.',
+            thousandSeparator: '',
+          }}
         />
       </div>
     );

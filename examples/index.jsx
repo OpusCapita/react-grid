@@ -12,9 +12,7 @@ import { IntlProvider, intlReducer } from 'react-intl-redux';
 import thunk from 'redux-thunk';
 import { datagridReducer } from '../src/index';
 import DataGrid from './components/datagrid/datagrid.component';
-
 import './app.component.scss';
-
 
 const composeEnhancers = (process.env.NODE_ENV !== 'production' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;

@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Remember sorting, filtering, selected items and column widths
+* Refactor action parameters and component props to suit new configuration needs
 * Move styles to examples folder
 
 ## 1.0.4 - 1.0.10

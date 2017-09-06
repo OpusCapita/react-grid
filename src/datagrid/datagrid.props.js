@@ -3,8 +3,8 @@
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-const { bool, number, string, func, object, node, array, shape, any, oneOfType, arrayOf }
- = PropTypes;
+const { bool, number, string, func, object, node, array, shape, any, oneOfType, arrayOf } = PropTypes;
+const { list, map, mapOf } = ImmutablePropTypes;
 
 // Grid object holds data that also actions uses
 export const gridShape = shape({
@@ -98,14 +98,14 @@ export const propTypes = {
     number,
   ]),
   sortOrder: string,
-  columnWidths: ImmutablePropTypes.mapOf(number.isRequired),
-  selectedItems: ImmutablePropTypes.list.isRequired,
-  data: ImmutablePropTypes.list.isRequired,
-  editData: ImmutablePropTypes.map.isRequired,
-  createData: ImmutablePropTypes.list.isRequired,
-  filterData: ImmutablePropTypes.map.isRequired,
-  cellMessages: ImmutablePropTypes.map.isRequired,
-  createCellMessages: ImmutablePropTypes.map.isRequired,
+  columnWidths: mapOf(number.isRequired),
+  selectedItems: list.isRequired,
+  data: list.isRequired,
+  editData: map.isRequired,
+  createData: list.isRequired,
+  filterData: map.isRequired,
+  cellMessages: map.isRequired,
+  createCellMessages: map.isRequired,
   userLanguage: string.isRequired,
   thousandSeparator: string.isRequired,
   decimalSeparator: string.isRequired,
@@ -128,7 +128,7 @@ export const propTypes = {
   rowSelect: bool,
   rowSelectCheckboxColumn: bool,
   multiSelect: bool,
-  selectComponentOptions: ImmutablePropTypes.mapOf( // Options data for the react-select components
+  selectComponentOptions: mapOf( // Options data for the react-select components
     arrayOf(shape({
       value: oneOfType([number, string, bool]).isRequired,
       label: oneOfType([number, string]).isRequired,

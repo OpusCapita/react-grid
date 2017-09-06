@@ -5,7 +5,7 @@
 * Run `npm run test` to run tests
 * Run `npm run docs` to run generate examples
 
-### To use oc-common-ui
+### To use react-grid
 ```javascript
 import { Datagrid } from '@opuscapita/react-grid';
 ```

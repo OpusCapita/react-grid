@@ -6,7 +6,7 @@ import Utils from './datagrid.utils';
 
 export default class HeaderCell extends React.PureComponent {
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     gridId: PropTypes.string.isRequired,
     columns: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     column: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -16,6 +16,7 @@ export default class HeaderCell extends React.PureComponent {
   };
 
   static defaultProps = {
+    children: '',
     currentSortOrder: null,
     currentSortColumn: null,
   };

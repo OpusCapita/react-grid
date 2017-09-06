@@ -10,6 +10,7 @@ import {
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
+import { FloatingSelect } from '@opuscapita/react-floating-select';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
@@ -19,7 +20,6 @@ import InlineEditControls from './inline-edit-controls.component';
 import FilteringControls from './filtering-controls.component';
 import DropdownControls from './dropdown-controls.component';
 import * as datagridActions from './datagrid.actions';
-import FloatingSelect from './floating-select/floating-select.component';
 import DateInput from './date-picker/date-picker.component';
 import CellTooltip from './cell-tooltip.component';
 import { propTypes, defaultProps } from './datagrid.props';
@@ -31,38 +31,39 @@ import KEY_CODES from '../constants/key-codes.constant';
 
 const mapStateToProps = (state, ownProps) => {
   const locale = {};
+  const GRID = ownProps.grid;
   if (ownProps.locale) {
     locale.userLanguage = ownProps.locale.language || 'en';
     locale.dateFormat = ownProps.locale.dateFormat || 'L';
     locale.thousandSeparator = ownProps.locale.thousandSeparator || '';
-    locale.decimalSeparator = ownProps.locale.decimalSeparator || '';
+    locale.decimalSeparator = ownProps.locale.decimalSeparator || '.';
   } else if (state.user) {
     locale.userLanguage = state.user.getIn(['user', 'language'], 'en');
     locale.dateFormat = state.user.getIn(['localeFormat', 'dateFormat'], 'L');
     locale.thousandSeparator = state.user.getIn(['localeFormat', 'thousandSeparator'], '');
-    locale.decimalSeparator = state.user.getIn(['localeFormat', 'decimalSeparator'], '');
+    locale.decimalSeparator = state.user.getIn(['localeFormat', 'decimalSeparator'], '.');
   }
   return {
-    isBusy: state.datagrid.getIn([ownProps.id, 'session', 'isBusy'], true),
-    isEditing: state.datagrid.getIn([ownProps.id, 'session', 'isEditing'], false),
-    isCreating: state.datagrid.getIn([ownProps.id, 'session', 'isCreating'], false),
+    isBusy: state.datagrid.getIn([GRID.id, 'session', 'isBusy'], true),
+    isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
+    isCreating: state.datagrid.getIn([GRID.id, 'session', 'isCreating'], false),
     isFiltering:
-      state.datagrid.getIn([ownProps.id, 'config', 'filteringData', 'isFiltering'], false),
-    sortColumn: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortColumn'], null),
-    sortOrder: state.datagrid.getIn([ownProps.id, 'config', 'sortingData', 'sortOrder'], null),
-    columnWidths: state.datagrid.getIn([ownProps.id, 'config', 'columnWidths'], Map()),
-    selectedItems: state.datagrid.getIn([ownProps.id, 'selectedItems'], List()),
-    data: state.datagrid.getIn([ownProps.id, 'data'], List()),
-    editData: state.datagrid.getIn([ownProps.id, 'editData'], Map()),
-    createData: state.datagrid.getIn([ownProps.id, 'createData'], List()),
-    filterData: state.datagrid.getIn([ownProps.id, 'config', 'filteringData', 'filterData'], Map()),
-    cellMessages: state.datagrid.getIn([ownProps.id, 'cellMessages'], Map()),
-    createCellMessages: state.datagrid.getIn([ownProps.id, 'createCellMessages'], Map()),
-    allDataSize: state.datagrid.getIn([ownProps.id, 'allData'], List()).size,
+      state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'isFiltering'], false),
+    sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
+    sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
+    columnWidths: state.datagrid.getIn([GRID.id, 'config', 'columnWidths'], Map()),
+    selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
+    data: state.datagrid.getIn([GRID.id, 'data'], List()),
+    editData: state.datagrid.getIn([GRID.id, 'editData'], Map()),
+    createData: state.datagrid.getIn([GRID.id, 'createData'], List()),
+    filterData: state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'filterData'], Map()),
+    cellMessages: state.datagrid.getIn([GRID.id, 'cellMessages'], Map()),
+    createCellMessages: state.datagrid.getIn([GRID.id, 'createCellMessages'], Map()),
+    allDataSize: state.datagrid.getIn([GRID.id, 'allData'], List()).size,
     userLanguage: locale.userLanguage || 'en',
     dateFormat: locale.dateFormat || 'L',
     thousandSeparator: locale.thousandSeparator || '',
-    decimalSeparator: locale.decimalSeparator || '',
+    decimalSeparator: locale.decimalSeparator || '.',
   };
 };
 
