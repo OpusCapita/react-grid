@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Cell } from 'fixed-data-table-2';
 import classNames from 'classnames';
+import { gridShape } from './datagrid.props';
 import Utils from './datagrid.utils';
 
 export default class HeaderCell extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
-    gridId: PropTypes.string.isRequired,
+    grid: gridShape.isRequired,
     columns: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     column: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     currentSortColumn: PropTypes.string,
@@ -30,7 +31,7 @@ export default class HeaderCell extends React.PureComponent {
     ) ? 'desc' : 'asc';
     if (this.props.onSortChange) {
       this.props.onSortChange(
-        this.props.gridId,
+        this.props.grid,
         this.props.columns,
         this.props.column,
         order,
@@ -42,7 +43,7 @@ export default class HeaderCell extends React.PureComponent {
   render() {
     const {
       children,
-      gridId,
+      grid,
       currentSortColumn,
       currentSortOrder,
       columns,

@@ -138,27 +138,45 @@ export default {
   },
   saveSelectedItems: (grid, selectedItems) => {
     if (grid.disableRememberSelectedItems) return false;
+    if (!selectedItems) return false;
     sessionStorage.setItem(`oc_grid_selectedItems_${grid.id}`, JSON.stringify(selectedItems));
     return true;
   },
   saveColumnWidths: (grid, columnWidths) => {
     if (grid.disableRememberColumnWidths) return false;
+    if (!columnWidths) return false;
     localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnWidths));
     return true;
   },
   saveSortData: (grid, sortingData) => {
     if (grid.disableRememberSortData) return false;
+    if (!sortingData) return false;
     sessionStorage.setItem(`oc_grid_sorting_${grid.id}`, JSON.stringify(sortingData));
     return true;
   },
   saveFilterData: (grid, filterData) => {
     if (grid.disableRememberFilteData) return false;
+    if (!filterData) return false;
     sessionStorage.setItem(`oc_grid_filtering_${grid.id}`, JSON.stringify(filterData));
     return true;
   },
   saveIsFiltering: (grid, isFiltering) => {
     if (grid.disableRememberIsFiltering) return false;
+    if (isFiltering === undefined) return false;
     localStorage.setItem(`oc_grid_isFiltering_${grid.id}`, JSON.stringify(isFiltering));
     return true;
+  },
+  /* eslint-disable max-len */
+  checkGridParam: (gridParam) => {
+    if (gridParam) {
+      if (!gridParam.id) {
+        throw new Error('[Grid] Invalid `grid.id` parameter, update action parameters to new format!');
+      }
+      if (!gridParam.idKeyPath) {
+        throw new Error('[Grid] Invalid `grid.idKeyPath` parameter, update action parameters to new format!');
+      }
+    } else {
+      throw new Error('[Grid] Invalid `grid` parameter, update action parameters to new format!');
+    }
   },
 };

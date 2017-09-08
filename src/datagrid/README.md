@@ -10,7 +10,7 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 
 ### Dependencies
 
-- classnames, fixed-data-table-2, immutable, lodash, moment, react-bootstrap, react-day-picker, react-immutable-proptypes, react-intl, react-tether, redux, tether
+- classnames, fixed-data-table-2, immutable, lodash, moment, react-bootstrap, react-day-picker, react-immutable-proptypes, react-intl, react-tether, redux
 
 ### API
 
@@ -18,7 +18,7 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 
 | Prop name                | Type             | Default                                  | Description                              |
 | ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
-| id                       | string           | required                                 | ID of the datagrid                       |
+| grid                     | object           | required                                 | Grid attributes and config object        |
 | columns                  | array            | required                                 | Array of column configuration objects    |
 | rowsCount                | number           |                                          | Override rows count otherwise calculated from data |
 | idKeyPath                | array of strings |                                          | Key path to unique ID value in the grid data, used in many features like row selecting and inline editing |
@@ -64,7 +64,18 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 | rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(index) is called for each row and the returned value overrides rowHeight for particular row |
 | onContentHeightChange    | function         |                                          | Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content |
 
-#### Datagrid - column prop attributes
+#### Datagrid - `grid` prop attributes
+
+| Prop name                   | Type             | Default                                  | Description                                                |
+| --------------------------- | ---------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| id                          | string           | required                                 | ID of the datagrid                                         |
+| idKeyPath                   | array of strings |                                          | Key path to unique ID value in the grid data, used in many |
+| disableRememberIsFiltering  | boolean          | true                                     | Disable remembering is filtering ebabled                   |
+| disableRememberSortData     | boolean          | true                                     | Disable remembering the sorting                            |
+| disableRememberIsFiltering  | boolean          | true                                     | Disable remembering the filters                            |
+| disableRememberColumnWidths | boolean          | true                                     | Disable remembering the column widths                      |
+
+#### Datagrid - `column` prop attributes
 
 | Name                       | Type           | Default | Description                              |
 | -------------------------- | -------------- | ------- | ---------------------------------------- |
@@ -103,14 +114,15 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 | onCreateBlur               | function       |         | Called on create cell input blur, called with (value, rowIndex) |
 | onEditBlur                 | function       |         | Called on edit cell input blur, called with (value, rowIndex, dataId) |
 | selectComponentOptions     | array          |         | Options data fot the react-select component |
-#### Datagrid - onValueMatchChangeValue prop attributes
+
+#### Datagrid - `onValueMatchChangeValue` prop attributes
 | Name            | Type             | Default | Description                          |
 | --------------- | ---------------- | ------- | ------------------------------------ |
 | matchValue      | any              |         | When this columns data match to this |
 | newValueKeyPath | array of strings |         | Change value at this keyPath         |
 | newValue        | any              |         | The new value to be inserted         |
 
-#### Datagrid - disableEditingOnValueMatch prop attributes
+#### Datagrid - `disableEditingOnValueMatch` prop attributes
 
 | Name              | Type             | Default | Description                        |
 | ----------------- | ---------------- | ------- | ---------------------------------- |

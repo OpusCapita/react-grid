@@ -8,7 +8,6 @@ chai.use(chaiImmutable);
 
 // Configure JSDOM and set global variables
 // to simulate a browser environment for tests.
-
 const exposedProperties = ['window', 'navigator', 'document'];
 const jsdom = new JSDOM('');
 

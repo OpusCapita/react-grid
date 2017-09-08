@@ -409,7 +409,7 @@ describe('Datagrid actions', () => {
   });
 
   it('call save success', function () {
-    const action = actions.saveSuccess(GRID, [1, 2, 3]);
+    const action = actions.saveSuccess(GRID, COLUMNS, [1, 2, 3]);
     const expectedAction = {
       type: actions.TYPES.PLATFORM_DATAGRID_SAVE_SUCCESS,
       id: GRID.id,
@@ -422,7 +422,7 @@ describe('Datagrid actions', () => {
   });
 
   it('call save partial success', function () {
-    const action = actions.savePartialSuccess(GRID, [1, 2, 3]);
+    const action = actions.savePartialSuccess(GRID, COLUMNS, [1, 2, 3]);
     const expectedAction = {
       type: actions.TYPES.PLATFORM_DATAGRID_SAVE_PARTIAL_SUCCESS,
       id: GRID.id,

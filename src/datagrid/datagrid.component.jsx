@@ -1073,7 +1073,7 @@ export default class DataGrid extends React.PureComponent {
         columnKey={col.columnKey}
         header={
           <HeaderCell
-            gridId={this.props.grid.id}
+            grid={this.props.grid}
             columns={this.props.columns}
             column={col}
             currentSortColumn={this.props.sortColumn}
