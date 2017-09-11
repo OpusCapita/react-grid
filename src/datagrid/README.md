@@ -18,21 +18,13 @@ First you have to connect your component to the redux. Then you can map the data
 
 See the code [example](../../examples/components/datagrid/datagrid.component.jsx).
 
-Create a `GRID` object that contains `id` and `idKeyPath` of your grid. This object is passed to every action you call and to the Datagrid component itself as prop.
-
-Create a column array that configures your grid's columns. Some actions needs this information as well.
-
-Add Datagrid component to your render method and pass in the `grid` and `columns` props.
-
-Then to set the data to the grid, call setData action with `grid`, `columns` and `data` parameters.
-
-You should now have a grid with data loaded.
-
-Check the API section below to see what props the Datagrid supports, also GRID object and columns are documented there.
-
-To see what actions are available, check the [actions file](datagrid.actions.js).
-
-TODO: Datagrid state documentation.
+- Create a `GRID` object that contains `id` and `idKeyPath` of your grid. This object is passed to every action you call and to the Datagrid component itself as prop.
+- Create a column array that configures your grid's columns. Some actions needs this information as well.
+- Add Datagrid component to your render method and pass in the `grid` and `columns` props.
+- Then to set the data to the grid, call setData action with `grid`, `columns` and `data` parameters.
+- You should now have a grid with data loaded.
+- Check the API section below to see what props the Datagrid supports, also GRID object and columns are documented there.
+- To see what actions are available, check the [actions file](datagrid.actions.js).
 
 ### Dependencies
 
@@ -185,3 +177,6 @@ export default class DatagridView extends React.Component {
   }
 }
 ```
+
+### Todo
+- Datagrid state documentation.
