@@ -56333,6 +56333,7 @@ var spinner__temp = function () {
 ;
 // CONCATENATED MODULE: ./src/constants/key-codes.constant.js
 var KEY_CODES = {
+  TAB: 9,
   ENTER: 13,
   LEFT: 37,
   UP: 38,
@@ -56600,10 +56601,11 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
     }
   }, {
     key: '__onEditCellKeyDown__REACT_HOT_LOADER__',
-    value: function __onEditCellKeyDown__REACT_HOT_LOADER__(keyCode, columnKey, rowIndex) {
+    value: function __onEditCellKeyDown__REACT_HOT_LOADER__(e, columnKey, rowIndex) {
       if (this.props.enableArrowNavigation) {
         var columns = this.props.columns;
-        switch (keyCode) {
+        var rowsSize = this.props.data.size;
+        switch (e.keyCode) {
           case key_codes_constant.DOWN:
             {
               var nextElement = this.cellRefs[this.props.grid.id + '_' + columnKey + '_' + (rowIndex + 1)];
@@ -56616,27 +56618,43 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
               this.moveCellFocus(_nextElement, rowIndex - 1, -1);
               break;
             }
+          case key_codes_constant.TAB:
           case key_codes_constant.RIGHT:
-            {
-              var columnIndex = columns.findIndex(function (c) {
-                return datagrid_utils.getColumnKey(c) === columnKey;
-              });
-              if (columnIndex !== -1 && columnIndex + 1 < columns.length) {
-                var nextColumnKey = datagrid_utils.getColumnKey(columns[columnIndex + 1]);
-                var _nextElement2 = this.cellRefs[this.props.grid.id + '_' + nextColumnKey + '_' + rowIndex];
-                this.moveCellFocus(_nextElement2, -1, columnIndex + 1);
-              }
-              break;
-            }
           case key_codes_constant.LEFT:
             {
-              var _columnIndex = columns.findIndex(function (c) {
-                return datagrid_utils.getColumnKey(c) === columnKey;
-              });
-              if (_columnIndex - 1 >= 0) {
-                var _nextColumnKey = datagrid_utils.getColumnKey(columns[_columnIndex - 1]);
-                var _nextElement3 = this.cellRefs[this.props.grid.id + '_' + _nextColumnKey + '_' + rowIndex];
-                this.moveCellFocus(_nextElement3, -1, _columnIndex - 1);
+              e.preventDefault();
+              var columnInd = this.state.currentColumn;
+              if (columnInd !== -1) {
+                var disabled = true;
+                var _nextElement2 = null;
+                var rowInd = rowIndex;
+                while (disabled) {
+                  if (e.keyCode === key_codes_constant.LEFT || e.keyCode === key_codes_constant.TAB && e.shiftKey) {
+                    if (columnInd - 1 >= 0) {
+                      columnInd -= 1;
+                    } else if (rowInd - 1 >= 0) {
+                      columnInd = columns.length - 1;
+                      rowInd -= 1;
+                    } else {
+                      break;
+                    }
+                  } else {
+                    if (columnInd + 1 < columns.length) {
+                      columnInd += 1;
+                    } else if (rowInd + 1 < rowsSize) {
+                      columnInd = 0;
+                      rowInd += 1;
+                    } else {
+                      break;
+                    }
+                  }
+                  var nextColumnKey = datagrid_utils.getColumnKey(columns[columnInd]);
+                  _nextElement2 = this.cellRefs[this.props.grid.id + '_' + nextColumnKey + '_' + rowInd];
+                  disabled = _nextElement2 ? _nextElement2.disabled : false;
+                }
+                if (!disabled && _nextElement2) {
+                  this.moveCellFocus(_nextElement2, rowInd, columnInd);
+                }
               }
               break;
             }
@@ -57067,12 +57085,12 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
   }, {
     key: '__moveCellFocus__REACT_HOT_LOADER__',
     value: function __moveCellFocus__REACT_HOT_LOADER__(nextElement, rowIndex, columnIndex) {
-      if (nextElement && nextElement.type === 'text') {
+      if (nextElement && (nextElement.type === 'text' || nextElement.type === 'number')) {
         if (rowIndex !== -1) {
           this.setState({ currentRow: rowIndex });
         }
         if (columnIndex !== -1) {
-          this.setState({ currentColumn: columnIndex + 1 });
+          this.setState({ currentColumn: columnIndex });
         }
         setTimeout(function () {
           return nextElement.select();
@@ -57145,8 +57163,10 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
         if (col.defaultValue !== undefined) {
           _this3.columnDefaultValues[column.columnKey] = col.defaultValue;
         }
+        var inputStyle = {};
         if (col.align) {
           column.align = col.align;
+          inputStyle.textAlign = col.align;
         }
         if (col.valueKeyPath) {
           column.valueKeyPath = col.valueKeyPath;
@@ -57256,7 +57276,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                         return _this3.onEditCellBlur(rowIndex, col, e.target.value);
                       },
                       onKeyDown: function onKeyDown(e) {
-                        return _this3.onEditCellKeyDown(e.keyCode, column.columnKey, rowIndex);
+                        return _this3.onEditCellKeyDown(e, column.columnKey, rowIndex);
                       },
                       inputRef: function inputRef(input) {
                         if (_this3.props.enableArrowNavigation) {
@@ -57266,6 +57286,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       id: 'ocDatagridEditInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex
                     }, col.editComponentProps, {
                       disabled: _this3.getComponentDisabledState(rowIndex, col, 'edit'),
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57285,6 +57306,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       id: 'ocDatagridCreateInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex
                     }, col.createComponentProps, {
                       disabled: _this3.getComponentDisabledState(rowIndex, col, 'create'),
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57301,6 +57323,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       },
                       id: 'ocDatagridFilterInput-' + _this3.props.grid.id + '-' + column.columnKey
                     }, col.filterComponentProps, {
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57322,7 +57345,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       },
                       onFocus: _this3.onCellFocus,
                       onKeyDown: function onKeyDown(e) {
-                        return _this3.onEditCellKeyDown(e.keyCode, column.columnKey, rowIndex);
+                        return _this3.onEditCellKeyDown(e, column.columnKey, rowIndex);
                       },
                       inputRef: function inputRef(input) {
                         if (_this3.props.enableArrowNavigation) {
@@ -57332,6 +57355,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       id: 'ocDatagridEditInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex
                     }, col.editComponentProps, {
                       disabled: _this3.getComponentDisabledState(rowIndex, col, 'edit'),
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57352,6 +57376,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       id: 'ocDatagridCreateInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex
                     }, col.createComponentProps, {
                       disabled: _this3.getComponentDisabledState(rowIndex, col, 'create'),
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57368,6 +57393,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       },
                       id: 'ocDatagridFilterInput-' + _this3.props.grid.id + '-' + column.columnKey
                     }, col.filterComponentProps, {
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57391,7 +57417,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                         return _this3.onEditCellBlur(rowIndex, col, editValueParser(e.target.value));
                       },
                       onKeyDown: function onKeyDown(e) {
-                        return _this3.onEditCellKeyDown(e.keyCode, column.columnKey, rowIndex);
+                        return _this3.onEditCellKeyDown(e, column.columnKey, rowIndex);
                       },
                       inputRef: function inputRef(input) {
                         if (_this3.props.enableArrowNavigation) {
@@ -57401,6 +57427,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       id: 'ocDatagridEditInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex
                     }, col.editComponentProps, {
                       disabled: _this3.getComponentDisabledState(rowIndex, col, 'edit'),
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57420,6 +57447,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       id: 'ocDatagridCreateInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex
                     }, col.createComponentProps, {
                       disabled: _this3.getComponentDisabledState(rowIndex, col, 'create'),
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57436,6 +57464,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                       },
                       id: 'ocDatagridFilterInput-' + _this3.props.grid.id + '-' + column.columnKey
                     }, col.filterComponentProps, {
+                      style: inputStyle,
                       tabIndex: tabIndex
                     }));
                   };
@@ -57533,7 +57562,7 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
                           tabIndex: tabIndex,
                           id: 'ocDatagridEditInput-' + _this3.props.grid.id + '-' + column.columnKey + '-' + rowIndex,
                           onKeyDown: function onKeyDown(e) {
-                            return _this3.onEditCellKeyDown(e.keyCode, column.columnKey, rowIndex);
+                            return _this3.onEditCellKeyDown(e, column.columnKey, rowIndex);
                           },
                           inputRef: function inputRef(input) {
                             if (_this3.props.enableArrowNavigation) {
@@ -58401,6 +58430,13 @@ var datagrid_constants_columns = [{
   width: 200,
   validators: [{ unique: true }, { validate: isRequired }]
 }, {
+  header: 'Text2',
+  valueKeyPath: ['text2'],
+  valueType: 'text',
+  componentType: 'text',
+  width: 200,
+  validators: [{ unique: true }, { validate: isRequired }]
+}, {
   header: 'Number',
   valueKeyPath: ['number'],
   valueType: 'number',
@@ -58439,6 +58475,7 @@ var datagrid_constants_columns = [{
 var datagrid_constants_data = [{
   id: 1,
   text: 'Text 1',
+  text2: 'Text 1',
   number: 1,
   float: 5.5,
   boolean: true,
@@ -58447,6 +58484,7 @@ var datagrid_constants_data = [{
 }, {
   id: 2,
   text: 'Text 2',
+  text2: 'Text 1',
   number: 2,
   float: 4.4,
   boolean: false,
@@ -58455,6 +58493,7 @@ var datagrid_constants_data = [{
 }, {
   id: 3,
   text: 'Text 3',
+  text2: 'Text 1',
   number: 3,
   float: 3.3,
   boolean: false,
@@ -58463,6 +58502,7 @@ var datagrid_constants_data = [{
 }, {
   id: 4,
   text: 'Text 4',
+  text2: 'Text 1',
   number: 4,
   float: 2.2,
   boolean: false,
@@ -58471,6 +58511,7 @@ var datagrid_constants_data = [{
 }, {
   id: 5,
   text: 'Text 5',
+  text2: 'Text 1',
   number: 5,
   float: 1.1,
   boolean: false,
