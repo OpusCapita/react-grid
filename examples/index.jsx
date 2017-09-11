@@ -12,7 +12,9 @@ import { IntlProvider, intlReducer } from 'react-intl-redux';
 import thunk from 'redux-thunk';
 import { datagridReducer } from '../src/index';
 import DataGrid from './components/datagrid/datagrid.component';
+import translations from './translations.json';
 import './app.component.scss';
+
 
 const composeEnhancers = (process.env.NODE_ENV !== 'production' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -22,12 +24,18 @@ const store = createStore(
     intl: intlReducer,
     datagrid: datagridReducer,
   }),
+  {
+    intl: {
+      locale: 'en',
+      messages: translations,
+    },
+  },
   composeEnhancers(applyMiddleware(thunk)),
 );
 
 render((
   <Provider store={store}>
-    <IntlProvider>
+    <IntlProvider locale="en">
       <Router history={hashHistory}>
         <Route path="/" component={DataGrid} />
       </Router>

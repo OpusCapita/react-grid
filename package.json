@@ -22,11 +22,7 @@
   },
   "peerDependencies": {
     "react": "15.4.x",
-    "react-bootstrap": "^0.31.2",
-    "react-dom": "15.4.x",
-    "react-intl": "^2.2.2",
-    "react-spinjs": "^3.0.0",
-    "react-redux": "^5.0.6"
+    "react-dom": "15.4.x"
   },
   "devDependencies": {
     "autoprefixer": "^6.6.1",
@@ -67,14 +63,10 @@
     "progress-bar-webpack-plugin": "^1.9.3",
     "react": "15.4.x",
     "react-addons-test-utils": "15.4.x",
-    "react-bootstrap": "^0.31.2",
     "react-dom": "15.4.x",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-intl": "^2.2.2",
     "react-intl-redux": "^0.6.0",
-    "react-redux": "^5.0.6",
     "react-router": "^3.0.0",
-    "react-spinjs": "^3.0.0",
     "react-svg-loader": "^1.1.1",
     "redux": "^3.6.0",
     "redux-mock-store": "^1.2.1",
@@ -97,8 +89,12 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
+    "react-bootstrap": "^0.31.2",
     "react-day-picker": "^3.1.1",
     "react-immutable-proptypes": "^2.1.0",
+    "react-intl": "^2.2.2",
+    "react-redux": "^5.0.6",
+    "react-spinjs": "^3.0.0",
     "react-tether": "^0.5.7"
   },
   "repository": {

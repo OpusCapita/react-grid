@@ -5,15 +5,8 @@ import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Button } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
-import columns from './datagrid.columns';
-import { bankAccountData } from './data';
+import { GRID, columns, data } from './datagrid.constants';
 import './datagrid.component.scss';
-
-// Grid props that are needed also by action calls
-const GRID = {
-  id: 'accounts-grid-example',
-  idKeyPath: ['accountId'],
-};
 
 // Needed grid actions are mapped here
 // There's more in /src/datagrid/datagrid.actions.js
@@ -28,7 +21,9 @@ const mapDispatchToProps = {
 
 // Grid state data can be mapped from redux store here
 const mapStateToProps = state => ({
-  dataEdited: state.datagrid.getIn([GRID.id, 'editData'], Map()),
+  allData: state.datagrid.getIn([GRID.id, 'allData'], List()),
+  createData: state.datagrid.getIn([GRID.id, 'createData'], List()),
+  editData: state.datagrid.getIn([GRID.id, 'editData'], Map()),
   selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
   isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
 });
@@ -37,7 +32,9 @@ const mapStateToProps = state => ({
 export default class DatagridView extends React.Component {
   static propTypes = {
     // State props
-    dataEdited: ImmutablePropTypes.map.isRequired,
+    allData: ImmutablePropTypes.list.isRequired,
+    createData: ImmutablePropTypes.list.isRequired,
+    editData: ImmutablePropTypes.map.isRequired,
     selectedItems: ImmutablePropTypes.list.isRequired,
     isEditing: PropTypes.bool.isRequired,
     // Action props
@@ -50,18 +47,34 @@ export default class DatagridView extends React.Component {
   };
 
   componentWillMount() {
-    this.props.setData(GRID, columns, bankAccountData);
+    this.props.setData(GRID, columns, data);
   }
 
   handleWarnClick = () => {
-    this.props.cellShowMessage(GRID, 'warning', 1, ['name'], 'WarningExample');
+    this.props.cellShowMessage(GRID, 'warning', 3, ['float'], 'Warning');
   }
 
   handleOnSave = () => {
+    const { createData, editData, allData } = this.props;
+    let newData = [];
+    if (createData.size) {
+      // Creating mode
+      newData = createData.toJS();
+    } else if (editData.size) {
+      // Editing mode
+      editData.forEach((editItem, editId) => {
+        const foundItem = allData.find(i => i.getIn(GRID.idKeyPath) === editId);
+        if (foundItem) {
+          newData.push(foundItem.merge(editItem));
+        }
+      });
+    }
+    // Make an api call here with newData
     const errors = false;
     if (!errors) {
-      const savedItems = []; // saved items as array from backend here
-      this.props.saveSuccess(GRID, savedItems);
+      // Take new items from backend
+      const savedItems = newData;
+      this.props.saveSuccess(GRID, columns, savedItems);
     } else {
       this.props.saveFail(GRID);
     }
@@ -78,7 +91,7 @@ export default class DatagridView extends React.Component {
   }
 
   render() {
-    const disableActionSave = (this.props.isEditing && this.props.dataEdited.size === 0);
+    const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
     const actionBar = (
       <Button
         onClick={this.handleWarnClick}
@@ -95,7 +108,7 @@ export default class DatagridView extends React.Component {
           grid={GRID}
           columns={columns}
           disableActionSave={disableActionSave}
-          actionBar={actionBar}
+          actionBarLeft={actionBar}
           enableArrowNavigation
           filtering
           inlineEdit

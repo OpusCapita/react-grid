@@ -1038,7 +1038,6 @@ export default class DataGrid extends React.PureComponent {
         cell = col.cell(rowIndex - extraRowCount);
       }
     }
-
     if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isCheckbox) {
       const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
@@ -1084,7 +1083,7 @@ export default class DataGrid extends React.PureComponent {
           </HeaderCell>
         }
         cell={cellProps => (this.renderCell(col, cellProps))}
-        width={this.props.columnWidths.get(col.columnKey, col.width)}
+        width={this.props.columnWidths.get(col.columnKey, (col.width || 200))}
         isResizable={col.isResizable}
         flexGrow={col.flexGrow ? col.flexGrow : 0}
         fixed={col.fixed}
