@@ -370,7 +370,7 @@ export default class DataGrid extends React.PureComponent {
   }
 
   moveCellFocus = (nextElement, rowIndex, columnIndex) => {
-    if (nextElement && nextElement.type === 'text') {
+    if (nextElement && (nextElement.type === 'text' || nextElement.type === 'number')) {
       if (rowIndex !== -1) {
         this.setState({ currentRow: rowIndex });
       }

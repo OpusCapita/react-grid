@@ -3,7 +3,6 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
-
 * Fix Tab and arrow keys navigation of `Datagrid` after dependencies update
 
 ## 2.0.0
