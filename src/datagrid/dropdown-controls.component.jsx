@@ -3,17 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { FormattedMessage as M } from 'react-intl';
-
 import { Icon } from '@opuscapita/react-icons';
 
+import { gridShape } from './datagrid.props';
 import { DropdownMenu } from '../dropdown-menu';
 
 import './dropdown-controls.component.scss';
 
 export default class DropdownControls extends React.PureComponent {
-
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    grid: gridShape.isRequired,
     // actions
     remove: PropTypes.func.isRequired,
     toggleFiltering: PropTypes.func.isRequired,
@@ -40,12 +39,12 @@ export default class DropdownControls extends React.PureComponent {
 
   onRemove = () => {
     if (this.props.selectedItems.has(0)) {
-      this.props.remove(this.props.id, this.props.onRemove);
+      this.props.remove(this.props.grid, this.props.onRemove);
     }
   }
 
   toggleFiltering = () => {
-    this.props.toggleFiltering(this.props.id);
+    this.props.toggleFiltering(this.props.grid);
   }
 
   render() {
@@ -79,7 +78,7 @@ export default class DropdownControls extends React.PureComponent {
     }
     return (
       <DropdownMenu
-        id={this.props.id}
+        id={this.props.grid.id}
         disabled={disabled}
         menuItems={menuItems}
       />

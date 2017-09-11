@@ -23,10 +23,6 @@
     "expect": true,
     "sinon": true
   },
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
   "env": {
     "es6": true,
     "browser": true,
@@ -38,6 +34,7 @@
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": true,
       "optionalDependencies": true,
-      "peerDependencies": true}]
+      "peerDependencies": true}],
+    "jsx-a11y/href-no-hash": "off"
   }
 }

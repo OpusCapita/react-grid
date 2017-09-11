@@ -8,9 +8,27 @@ Contains **Datagrid** component that can be used to present data in table. Datag
 
 Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fixed-data-table) react component, which is designed to handle large amounts amounts of data without sacraficing performance.
 
+### Redux dependency
+
+Datagrid uses redux as data store, so you must have redux set up in your project. It also depends on redux-thunk and react-intl-redux to be present. These dependencies comes from the fact that this component is separated from another project and it is known that these dependencies should be removed at some point.
+
+### Usage
+
+First you have to connect your component to the redux. Then you can map the datagrid's state and actions to your component's props. The mappings are needed only for those parts that you need in your component. For example if you only load data to the grid, you can only map the `setData` action. If you need to know currently selected items, you need to map `selectedItems` from the grid state.
+
+See the code [example](../../examples/components/datagrid/datagrid.component.jsx).
+
+- Create a `GRID` object that contains `id` and `idKeyPath` of your grid. This object is passed to every action you call and to the Datagrid component itself as prop.
+- Create a column array that configures your grid's columns. Some actions needs this information as well.
+- Add Datagrid component to your render method and pass in the `grid` and `columns` props.
+- Then to set the data to the grid, call setData action with `grid`, `columns` and `data` parameters.
+- You should now have a grid with data loaded.
+- Check the API section below to see what props the Datagrid supports, also GRID object and columns are documented there.
+- To see what actions are available, check the [actions file](datagrid.actions.js).
+
 ### Dependencies
 
-- classnames, fixed-data-table-2, immutable, lodash, moment, react-bootstrap, react-day-picker, react-immutable-proptypes, react-intl, react-tether, redux, tether
+- classnames, fixed-data-table-2, immutable, lodash, moment, react-bootstrap, react-day-picker, react-immutable-proptypes, react-intl, react-tether, redux
 
 ### API
 
@@ -18,7 +36,7 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 
 | Prop name                | Type             | Default                                  | Description                              |
 | ------------------------ | ---------------- | ---------------------------------------- | ---------------------------------------- |
-| id                       | string           | required                                 | ID of the datagrid                       |
+| grid                     | object           | required                                 | Grid attributes and config object        |
 | columns                  | array            | required                                 | Array of column configuration objects    |
 | rowsCount                | number           |                                          | Override rows count otherwise calculated from data |
 | idKeyPath                | array of strings |                                          | Key path to unique ID value in the grid data, used in many features like row selecting and inline editing |
@@ -64,7 +82,18 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 | rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(index) is called for each row and the returned value overrides rowHeight for particular row |
 | onContentHeightChange    | function         |                                          | Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content |
 
-#### Datagrid - column prop attributes
+#### Datagrid - `grid` prop attributes
+
+| Prop name                   | Type             | Default                                  | Description                                                |
+| --------------------------- | ---------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| id                          | string           | required                                 | ID of the datagrid                                         |
+| idKeyPath                   | array of strings |                                          | Key path to unique ID value in the grid data, used in many |
+| disableRememberIsFiltering  | boolean          | true                                     | Disable remembering is filtering ebabled                   |
+| disableRememberSortData     | boolean          | true                                     | Disable remembering the sorting                            |
+| disableRememberIsFiltering  | boolean          | true                                     | Disable remembering the filters                            |
+| disableRememberColumnWidths | boolean          | true                                     | Disable remembering the column widths                      |
+
+#### Datagrid - `column` prop attributes
 
 | Name                       | Type           | Default | Description                              |
 | -------------------------- | -------------- | ------- | ---------------------------------------- |
@@ -102,15 +131,16 @@ Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fix
 | onCreateValueChange        | function       |         | Called on create value change, called with (value, valueKeyPath, rowIndex) |
 | onCreateBlur               | function       |         | Called on create cell input blur, called with (value, rowIndex) |
 | onEditBlur                 | function       |         | Called on edit cell input blur, called with (value, rowIndex, dataId) |
+| selectComponentOptions     | array          |         | Options data fot the react-select component |
 
-#### Datagrid - onValueMatchChangeValue prop attributes
+#### Datagrid - `onValueMatchChangeValue` prop attributes
 | Name            | Type             | Default | Description                          |
 | --------------- | ---------------- | ------- | ------------------------------------ |
 | matchValue      | any              |         | When this columns data match to this |
 | newValueKeyPath | array of strings |         | Change value at this keyPath         |
 | newValue        | any              |         | The new value to be inserted         |
 
-#### Datagrid - disableEditingOnValueMatch prop attributes
+#### Datagrid - `disableEditingOnValueMatch` prop attributes
 
 | Name              | Type             | Default | Description                        |
 | ----------------- | ---------------- | ------- | ---------------------------------- |
@@ -147,3 +177,6 @@ export default class DatagridView extends React.Component {
   }
 }
 ```
+
+### Todo
+- Datagrid state documentation.

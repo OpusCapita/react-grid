@@ -1,4 +1,4 @@
-/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/forbid-prop-types, react/no-find-dom-node */
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { Table } from 'fixed-data-table-2';

@@ -10,7 +10,6 @@ import 'react-day-picker/lib/style.css';
 
 @injectIntl
 export default class DatePicker extends React.Component {
-
   static propTypes = {
     intl: intlShape.isRequired,
     value: React.PropTypes.string,
@@ -168,6 +167,7 @@ export default class DatePicker extends React.Component {
           <div
             style={overlayStyle}
             onMouseDown={this.handleContainerMouseDown}
+            role="presentation"
           >
             <DayPicker
               ref={(el) => {

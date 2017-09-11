@@ -2,16 +2,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
-import { createStore,
-         applyMiddleware,
-         compose,
-         combineReducers } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { IntlProvider, intlReducer } from 'react-intl-redux';
 import thunk from 'redux-thunk';
 import { datagridReducer } from '../src/index';
 import DataGrid from './components/datagrid/datagrid.component';
-
+import translations from './translations.json';
 import './app.component.scss';
 
 
@@ -23,12 +24,18 @@ const store = createStore(
     intl: intlReducer,
     datagrid: datagridReducer,
   }),
+  {
+    intl: {
+      locale: 'en',
+      messages: translations,
+    },
+  },
   composeEnhancers(applyMiddleware(thunk)),
 );
 
 render((
   <Provider store={store}>
-    <IntlProvider>
+    <IntlProvider locale="en">
       <Router history={hashHistory}>
         <Route path="/" component={DataGrid} />
       </Router>

@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import './action-bar.component.scss';
 
 export default class ActionBar extends React.PureComponent {
-
   static propTypes = {
     children: PropTypes.node,
     position: PropTypes.oneOf(['left', 'right']),

@@ -6,7 +6,6 @@ import { FormattedMessage as M } from 'react-intl';
 import classNames from 'classnames';
 
 export default class DatagridTooltip extends React.Component {
-
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,

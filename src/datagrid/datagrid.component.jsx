@@ -1,30 +1,29 @@
-/* eslint-disable no-lonely-if, no-nested-ternary, prefer-template, react/require-default-props */
+/* eslint-disable no-lonely-if, prefer-template, react/require-default-props */
 import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map, List } from 'immutable';
 import { connect } from 'react-redux';
-import { injectIntl,
-         FormattedMessage as M,
-         FormattedDate as D,
-         FormattedNumber as N } from 'react-intl';
+import {
+  injectIntl,
+  FormattedMessage as M,
+  FormattedDate as D,
+  FormattedNumber as N } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
-import isNaN from 'lodash/isNaN';
-import moment from 'moment';
+import { FloatingSelect } from '@opuscapita/react-floating-select';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
-import SortHeaderCell from './sort-header-cell.component';
+import HeaderCell from './header-cell.component';
 import ActionBar from './action-bar.component';
 import InlineEditControls from './inline-edit-controls.component';
 import FilteringControls from './filtering-controls.component';
 import DropdownControls from './dropdown-controls.component';
 import * as datagridActions from './datagrid.actions';
-import FloatingSelect from './floating-select/floating-select.component';
 import DateInput from './date-picker/date-picker.component';
 import CellTooltip from './cell-tooltip.component';
+import { propTypes, defaultProps } from './datagrid.props';
+import Utils from './datagrid.utils';
 import './datagrid.component.scss';
 
 import { Spinner } from '../spinner';
@@ -32,334 +31,68 @@ import KEY_CODES from '../constants/key-codes.constant';
 
 const mapStateToProps = (state, ownProps) => {
   const locale = {};
+  const GRID = ownProps.grid;
   if (ownProps.locale) {
     locale.userLanguage = ownProps.locale.language || 'en';
     locale.dateFormat = ownProps.locale.dateFormat || 'L';
     locale.thousandSeparator = ownProps.locale.thousandSeparator || '';
-    locale.decimalSeparator = ownProps.locale.decimalSeparator || '';
+    locale.decimalSeparator = ownProps.locale.decimalSeparator || '.';
   } else if (state.user) {
     locale.userLanguage = state.user.getIn(['user', 'language'], 'en');
     locale.dateFormat = state.user.getIn(['localeFormat', 'dateFormat'], 'L');
     locale.thousandSeparator = state.user.getIn(['localeFormat', 'thousandSeparator'], '');
-    locale.decimalSeparator = state.user.getIn(['localeFormat', 'decimalSeparator'], '');
+    locale.decimalSeparator = state.user.getIn(['localeFormat', 'decimalSeparator'], '.');
   }
   return {
-    isBusy: state.datagrid.getIn([ownProps.id, 'session', 'isBusy'], true),
-    isEditing: state.datagrid.getIn([ownProps.id, 'session', 'isEditing'], false),
-    isCreating: state.datagrid.getIn([ownProps.id, 'session', 'isCreating'], false),
-    isFiltering: state.datagrid.getIn([ownProps.id, 'session', 'isFiltering'], false),
-    sortColumn: state.datagrid.getIn([ownProps.id, 'user', 'sortColumn'], null),
-    sortOrder: state.datagrid.getIn([ownProps.id, 'user', 'sortOrder'], 'asc'),
-    columnWidths: state.datagrid.getIn([ownProps.id, 'user', 'columnWidths'], Map()),
-    selectedItems: state.datagrid.getIn([ownProps.id, 'selectedItems'], List()),
-    data: state.datagrid.getIn([ownProps.id, 'data'], List()),
-    editData: state.datagrid.getIn([ownProps.id, 'editData'], Map()),
-    createData: state.datagrid.getIn([ownProps.id, 'createData'], List()),
-    filterData: state.datagrid.getIn([ownProps.id, 'filterData'], Map()),
-    cellMessages: state.datagrid.getIn([ownProps.id, 'cellMessages'], Map()),
-    createCellMessages: state.datagrid.getIn([ownProps.id, 'createCellMessages'], Map()),
-    allDataSize: state.datagrid.getIn([ownProps.id, 'allData'], List()).size,
+    isBusy: state.datagrid.getIn([GRID.id, 'session', 'isBusy'], true),
+    isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
+    isCreating: state.datagrid.getIn([GRID.id, 'session', 'isCreating'], false),
+    isFiltering:
+      state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'isFiltering'], false),
+    sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
+    sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
+    columnWidths: state.datagrid.getIn([GRID.id, 'config', 'columnWidths'], Map()),
+    selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
+    data: state.datagrid.getIn([GRID.id, 'data'], List()),
+    editData: state.datagrid.getIn([GRID.id, 'editData'], Map()),
+    createData: state.datagrid.getIn([GRID.id, 'createData'], List()),
+    filterData: state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'filterData'], Map()),
+    cellMessages: state.datagrid.getIn([GRID.id, 'cellMessages'], Map()),
+    createCellMessages: state.datagrid.getIn([GRID.id, 'createCellMessages'], Map()),
+    allDataSize: state.datagrid.getIn([GRID.id, 'allData'], List()).size,
     userLanguage: locale.userLanguage || 'en',
     dateFormat: locale.dateFormat || 'L',
     thousandSeparator: locale.thousandSeparator || '',
-    decimalSeparator: locale.decimalSeparator || '',
+    decimalSeparator: locale.decimalSeparator || '.',
   };
 };
 
 const mapDispatchToProps = datagridActions;
 
-/**
- * DataGrid component.
- * @class DataGrid
- * @extends React.PureComponent
- * @memberof Platform.Components
- */
-
-/* eslint-disable max-len */
-
-/**
- * @memberof Platform.Components.DataGrid
- * @prop {Object} propTypes - The props passed to this component
- * @prop {string} propTypes.id - Unique identifier for the data grid
-
- * @prop {array} propTypes.columns - Column object array
- * @prop {element} propTypes.columns.header - Column header content
- * @prop {string|number} propTypes.columns.columnKey - Column identifier key (Use if no valueKeyPath)
- * @prop {string} propTypes.columns.valueKeyPath - Column content value key path
- * @prop {string} propTypes.columns.valueType - Value type [text/number/float/boolean/date]
- * @prop {string} propTypes.columns.componentType - Input component type [text/number/float/select/boolean/date]
- * @prop {string} propTypes.columns.valueRender - Override value render, rowData as parameter
- * @prop {string} propTypes.columns.editValueRender - Override value render in editing mode
- * @prop {string} propTypes.columns.createValueRender - Override value render in creating mode
- * @prop {string} propTypes.columns.filterValueRender - Override value render in filtering mode
- * @prop {function} propTypes.columns.cell - Override cell content renderer, rowIndex as parameter
- * @prop {function} propTypes.columns.cellEdit - Override content renderer in editing mode
- * @prop {function} propTypes.columns.cellCreate - Override cell content renderer in creating mode
- * @prop {function} propTypes.columns.cellFilter - Override cell content renderer in filtering mode
- * @prop {object} propTypes.columns.renderComponentProps - Additional props for the render component
- * @prop {object} propTypes.columns.editComponentProps - Additional props for the edit component
- * @prop {object} propTypes.columns.createComponentProps - Additional props for the create component
- * @prop {object} propTypes.columns.filterComponentProps - Additional props for the filter component
- * @prop {number} propTypes.columns.width - The pixel width of the column
- * @prop {number} propTypes.columns.align - The horizontal alignment of the column
- * @prop {boolean} propTypes.columns.fixed - Column is fixed
- * @prop {boolean} propTypes.columns.allowCellsRecycling - Recycle cells that are outside viewport horizontally, better horizontal scrolling performance.
- * @prop {boolean} propTypes.columns.disableResizing - Disable column resizing this column
- * @prop {boolean} propTypes.columns.disableSorting - Disable column sorting this column
- * @prop {boolean} propTypes.columns.disableEditing - Disable inline editing this column
- * @prop {number} propTypes.columns.flexGrow - The grow factor relative to other columns
- * @prop {function} propTypes.columns.sortValueGetter - Getter function for the sort data
- * @prop {function} propTypes.columns.sortComparator - Comparator function for the sort data
- * @prop {string|number} propTypes.columns.defaultValue - Default value for the item when creating new item
- * @prop {object} propTypes.columns.onValueMatchChangeValue - Change other column value if own value matches
- * @prop {object} propTypes.columns.onValueMatchChangeValue.matchValue - When this columns data match to this
- * @prop {object} propTypes.columns.onValueMatchChangeValue.newValueKeyPath - Change value at this keyPath
- * @prop {object} propTypes.columns.onValueMatchChangeValue.newValue - The new value to be inserted
- * @prop {object} propTypes.columns.disableEditingOnValueMatch - Disable input element of this column when value at keyPath matches
- * @prop {object} propTypes.columns.disableEditingOnValueMatch.matchValueKeyPath - Keypath of the value to be matched
- * @prop {object} propTypes.columns.disableEditingOnValueMatch.matchValue - The value to be matched
- * @prop {function} propTypes.columns.onEditValueChange - Called on edit value change, called with (value, valueKeyPath, rowIndex, dataId)
- * @prop {function} propTypes.columns.onCreateValueChange - Called on create value change, called with (value, valueKeyPath, rowIndex)
- * @prop {function} propTypes.columns.onCreateBlur - Called on create cell input blur, called with (value, rowIndex)
- * @prop {function} propTypes.columns.onEditBlur - Called on edit cell input blur, called with (value, rowIndex, dataId)
-
- * @prop {number} propTypes.rowsCount - Override rows count otherwise calculated from data
- * @prop {array} propTypes.idKeyPath - Key path to ID data
- * @prop {element} propTypes.gridHeader - Grid header displayed on top of grid
- * @prop {element} propTypes.actionBar - Action bar element displayed at top right
- * @prop {element} propTypes.actionBarLeft - Action bar element displayed at top left
- * @prop {boolean} propTypes.disableDropdown - Don't use dropdown menu in the action bar
- * @prop {boolean} propTypes.disableFilteringControls - Don't display the filtering controls (only used if disableDropdown is true). Default is false.
- * @prop {array} propTypes.dropdownMenuItems - Additional dropdown menu items
- * @prop {boolean} propTypes.inlineEdit - Enable inline editing
- * @prop {boolean} propTypes.inlineAdd - Enable inline adding (defaults to true if inlineEdit is enabled)
- * @prop {boolean} propTypes.filtering - Enable column filtering
- * @prop {boolean} propTypes.removing - Enable item removing
- * @prop {boolean} propTypes.rowSelect - Enable row selecting
- * @prop {boolean} propTypes.rowSelectCheckboxColumn - Enable additional checkbox column for row selecting
- * @prop {boolean} propTypes.multiSelect - Enable multi selecting on row selecting
- * @prop {Immutable.Map} propTypes.selectComponentOptions - Options data for the react-select components
- * @prop {boolean} propTypes.disableActions - Disable action bar actions, eg. when other grid busy
- * @prop {object} propTypes.disableActionsMessage - Message about the reason of disabled action bar actions
- * @prop {boolean} propTypes.disableActionBar - Disable action bar rendering
- * @prop {boolean} propTypes.disableActionSave - Disable Save action of action bar
- * @prop {boolean} propTypes.enableArrowNavigation - Enable navigation by arrow keys in the editing mode (only for text and number inputs)
- * @prop {function} propTypes.onSave - Callback that is called when save button is clicked
- * @prop {function} propTypes.onRemove - Callback that is called when delete is clicked
- * @prop {function} propTypes.onCancel - Callback that is called when cancel is clicked
- * @prop {function} propTypes.onAddClick - Callback that is called when add is clicked
- * @prop {function} propTypes.onEditClick - Callback that is called when edit is clicked
- * @prop {number} propTypes.tabIndex - tabIndex start value, needed when multiple grids on same page
-
- * @prop {number} propTypes.headerHeight - Pixel height of the header row
- * @prop {number} propTypes.rowHeight - Pixel height of rows
- * @prop {Object} propTypes.containerStyle - Additional styles to be set on the container div
- * @prop {number} propTypes.scrollToColumn - Index of column to scroll to
- * @prop {number} propTypes.scrollTop - Value of vertical scroll
- * @prop {number} propTypes.scrollToRow - Index of row to scroll to
- * @prop {function} propTypes.onRowClick - Callback that is called when a row is clicked
- * @prop {function} propTypes.onRowDoubleClick - Callback that is called when a row is double clicked
- * @prop {function} propTypes.onRowMouseDown - Callback that is called when a mouse-down event happens on a row
- * @prop {function} propTypes.onRowMouseEnter - Callback that is called when a mouse-enter event happens on a row
- * @prop {function} propTypes.onRowMouseLeave - Callback that is called when a mouse-leave event happens on a row
- * @prop {function} propTypes.onScrollStart - Callback that is called when scrolling starts with current horizontal and vertical scroll values
- * @prop {function} propTypes.onScrollEnd - Callback that is called when scrolling ends or stops with new horizontal and vertical scroll values
- * @prop {function} propTypes.rowClassNameGetter - To get any additional CSS classes that should be added to a row, rowClassNameGetter(index) is called
- * @prop {function} propTypes.rowHeightGetter - If specified, rowHeightGetter(index) is called for each row and the returned value overrides rowHeight for particular row
- * @prop {function} propTypes.onContentHeightChange - Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content
- */
-
 @injectIntl
 @connect(mapStateToProps, mapDispatchToProps)
 export default class DataGrid extends React.PureComponent {
-
-  /* eslint-disable prefer-template, react/no-unused-prop-types, react/forbid-prop-types */
-
-  static propTypes = {
-    children: PropTypes.node,
-    // App props
-    intl: PropTypes.object.isRequired,
-    // Action props
-    addNewItem: PropTypes.func.isRequired,
-    create: PropTypes.func.isRequired,
-    edit: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
-    save: PropTypes.func.isRequired,
-    cancel: PropTypes.func.isRequired,
-    sort: PropTypes.func.isRequired,
-    resizeColumn: PropTypes.func.isRequired,
-    invalidate: PropTypes.func.isRequired,
-    itemSelectionChange: PropTypes.func.isRequired,
-    toggleFiltering: PropTypes.func.isRequired,
-    editCellValueChange: PropTypes.func.isRequired,
-    createCellValueChange: PropTypes.func.isRequired,
-    filterCellValueChange: PropTypes.func.isRequired,
-    editCellValueValidate: PropTypes.func.isRequired,
-    createCellValueValidate: PropTypes.func.isRequired,
-    validateEditedRows: PropTypes.func.isRequired,
-    validateCreatedRows: PropTypes.func.isRequired,
-    // State props
-    isBusy: PropTypes.bool.isRequired,
-    isEditing: PropTypes.bool.isRequired,
-    isCreating: PropTypes.bool.isRequired,
-    isFiltering: PropTypes.bool.isRequired,
-    sortColumn: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    sortOrder: PropTypes.string,
-    columnWidths: ImmutablePropTypes.mapOf(PropTypes.number.isRequired),
-    selectedItems: ImmutablePropTypes.list.isRequired,
-    data: ImmutablePropTypes.list.isRequired,
-    editData: ImmutablePropTypes.map.isRequired,
-    createData: ImmutablePropTypes.list.isRequired,
-    filterData: ImmutablePropTypes.map.isRequired,
-    cellMessages: ImmutablePropTypes.map.isRequired,
-    createCellMessages: ImmutablePropTypes.map.isRequired,
-    userLanguage: PropTypes.string.isRequired,
-    thousandSeparator: PropTypes.string.isRequired,
-    decimalSeparator: PropTypes.string.isRequired,
-    allDataSize: PropTypes.number.isRequired,
-    // Required component properties
-    id: PropTypes.string.isRequired,
-    columns: PropTypes.arrayOf(
-      PropTypes.shape({
-        header: PropTypes.node,
-        columnKey: PropTypes.string,              // Use valueKeyPath if possible, this is calculated from there
-        valueKeyPath: PropTypes.array,            // key path for the cell data value, required if no columnKey is given
-        valueType: PropTypes.string,              // data value type [text/number/float/boolean/date]
-        componentType: PropTypes.string,          // edit component type [text/number/float/select/boolean/date]
-        valueRender: PropTypes.func,              // custom renderer for the value, data as parameter
-        editValueRender: PropTypes.func,          // custom renderer for the edit value, data as parameter
-        createValueRender: PropTypes.func,        // custom renderer for the create value, data as parameter
-        filterValueRender: PropTypes.func,        // custom renderer for the filter value, data as parameter
-        cell: PropTypes.func,                     // override cell renderer, rowIndex as parameter
-        cellEdit: PropTypes.func,                 // override cellEdit renderer, rowIndex as parameter
-        cellCreate: PropTypes.func,               // override cellCreate renderer, rowIndex as parameter
-        cellFilter: PropTypes.func,               // override cellFilter renderer, rowIndex as parameter
-        renderComponentProps: PropTypes.object,   // additional props to the render component
-        editComponentProps: PropTypes.object,     // additional props to the edit component
-        createComponentProps: PropTypes.object,   // additional props to the create component
-        filterComponentProps: PropTypes.object,   // additional props to the filter component
-        width: PropTypes.number,
-        align: PropTypes.string,                  // vertical cell alignment, defaults to 'left'
-        fixed: PropTypes.bool,                    // is column fixed
-        allowCellsRecycling: PropTypes.bool,      // allow cells to be recycled for better horizontal scrolling perf
-        disableResizing: PropTypes.bool,          // disable column resizing
-        disableEditing: PropTypes.bool,           // disable input component (make read-only) when editing/creating
-        disableSorting: PropTypes.bool,           // disable filtering on this column
-        disableEditingOnValueMatch: PropTypes.shape({ // disable editing/creating input when other columns value match
-          matchValueKeyPath: PropTypes.array,
-          matchValue: PropTypes.any,
-        }),
-        onValueMatchChangeValue: PropTypes.shape({ // Change other column value when data matches
-          matchValue: PropTypes.any,
-          newValueKeyPath: PropTypes.array,
-          newValue: PropTypes.any,
-        }),
-        flexGrow: PropTypes.number,
-        sortValueGetter: PropTypes.func,          // override sort value getter, defaults to getIn(valueKeyPath)
-        sortComparator: PropTypes.func,           // override sort comparator function, default sorts by valueType
-        defaultValue: PropTypes.any,              // default value for the column when creating new item
-        onEditValueChange: PropTypes.func,        // callback with (value, valueKeyPath, rowIndex, dataId)
-        onCreateValueChange: PropTypes.func,      // callbac with (value, valueKeyPath, rowIndex)
-        onCreateBlur: PropTypes.func,             // callback with (value, rowIndex)
-        onEditBlur: PropTypes.func,               // callback with (value, rowIndex, dataId)
-      }).isRequired,
-    ).isRequired,
-    // Optional component properties
-    rowsCount: PropTypes.number,
-    idKeyPath: PropTypes.arrayOf(PropTypes.string), // keyPath to id data
-    gridHeader: PropTypes.node,
-    actionBar: PropTypes.node,
-    actionBarLeft: PropTypes.node,
-    disableDropdown: PropTypes.bool,              // Don't use dropdown menu in the action bar
-    disableFilteringControls: PropTypes.bool,     // Don't display the filtering controls (only valid if disableDropdown is true)
-    dropdownMenuItems: PropTypes.array,
-    inlineEdit: PropTypes.bool,
-    inlineAdd: PropTypes.bool,
-    filtering: PropTypes.bool,
-    removing: PropTypes.bool,
-    rowSelect: PropTypes.bool,
-    rowSelectCheckboxColumn: PropTypes.bool,
-    multiSelect: PropTypes.bool,
-    selectComponentOptions: ImmutablePropTypes.mapOf( // Options data for the react-select components
-      PropTypes.arrayOf(PropTypes.shape({
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]).isRequired,
-        label: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-      })),
-    ),
-    disableActions: PropTypes.bool,               // Disable actions in the action bar
-    disableActionsMessage: PropTypes.shape({
-      messageId: PropTypes.string,
-      messageValues: PropTypes.shape({}),
-    }),
-    disableActionBar: PropTypes.bool,
-    disableActionSave: PropTypes.bool,
-    enableArrowNavigation: PropTypes.bool,
-    onSave: PropTypes.func,
-    onRemove: PropTypes.func,
-    onCancel: PropTypes.func,
-    onAddClick: PropTypes.func,
-    onEditClick: PropTypes.func,
-    tabIndex: PropTypes.number,                   // tabIndex value for inputs in cells
-    // Fixed data table built-in features
-    headerHeight: PropTypes.number,
-    rowHeight: PropTypes.number,
-    containerStyle: PropTypes.object,
-    scrollToColumn: PropTypes.number,
-    scrollTop: PropTypes.number,
-    scrollToRow: PropTypes.number,
-    onRowClick: PropTypes.func,
-    onRowDoubleClick: PropTypes.func,
-    onRowMouseDown: PropTypes.func,
-    onRowMouseEnter: PropTypes.func,
-    onRowMouseLeave: PropTypes.func,
-    onScrollStart: PropTypes.func,
-    onScrollEnd: PropTypes.func,
-    rowClassNameGetter: PropTypes.func,
-    rowHeightGetter: PropTypes.func,
-    onContentHeightChange: PropTypes.func,
-  };
-
-  /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */
-
-  static defaultProps = {
-    children: undefined,
-    containerStyle: {},
-    disableActionSave: false,
-    enableArrowNavigation: false,
-    headerHeight: 40,
-    rowHeight: 40,
-    onSave: () => {},
-    onRemove: () => {},
-    onCancel: () => {},
-    tabIndex: 1,
-    disableFilteringControls: false,
-  }
+  static propTypes = propTypes;
+  static defaultProps = defaultProps;
 
   constructor(props) {
     super(props);
     this.state = { currentRow: 0, currentColumn: 0 };
-  }
-
-  componentWillMount() {
-    this.columnFilterFunctions = {};
-    this.columnDefaultValues = {};        // Used when creating new items
+    this.columnDefaultValues = {}; // Used when creating new items
     this.cellRefs = {};
   }
 
   componentWillUnmount() {
-    this.props.invalidate(this.props.id);
+    this.props.invalidate(this.props.grid);
   }
 
   onColumnResizeEndCallback = (newColumnWidth, columnKey) => {
-    this.props.resizeColumn(this.props.id, columnKey, newColumnWidth);
+    this.props.resizeColumn(this.props.grid, columnKey, newColumnWidth);
   }
 
   onCreateCellKeyDown = (e) => {
     if (e.keyCode === KEY_CODES.ENTER) {
-      this.props.addNewItem(this.props.id, this.columnDefaultValues);
+      this.props.addNewItem(this.props.grid, this.columnDefaultValues);
     }
   }
 
@@ -368,29 +101,29 @@ export default class DataGrid extends React.PureComponent {
       const columns = this.props.columns;
       switch (keyCode) {
         case KEY_CODES.DOWN: {
-          const nextElement = this.cellRefs[`${this.props.id}_${columnKey}_${rowIndex + 1}`];
+          const nextElement = this.cellRefs[`${this.props.grid.id}_${columnKey}_${rowIndex + 1}`];
           this.moveCellFocus(nextElement, rowIndex + 1, -1);
           break;
         }
         case KEY_CODES.UP: {
-          const nextElement = this.cellRefs[`${this.props.id}_${columnKey}_${rowIndex - 1}`];
+          const nextElement = this.cellRefs[`${this.props.grid.id}_${columnKey}_${rowIndex - 1}`];
           this.moveCellFocus(nextElement, rowIndex - 1, -1);
           break;
         }
         case KEY_CODES.RIGHT: {
-          const columnIndex = columns.findIndex(c => c.valueKeyPath.join('_') === columnKey);
+          const columnIndex = columns.findIndex(c => Utils.getColumnKey(c) === columnKey);
           if (columnIndex !== -1 && columnIndex + 1 < columns.length) {
-            const nextColumnKey = columns[columnIndex + 1].valueKeyPath.join('_');
-            const nextElement = this.cellRefs[`${this.props.id}_${nextColumnKey}_${rowIndex}`];
+            const nextColumnKey = Utils.getColumnKey(columns[columnIndex + 1]);
+            const nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowIndex}`];
             this.moveCellFocus(nextElement, -1, columnIndex + 1);
           }
           break;
         }
         case KEY_CODES.LEFT: {
-          const columnIndex = columns.findIndex(c => c.valueKeyPath.join('_') === columnKey);
+          const columnIndex = columns.findIndex(c => Utils.getColumnKey(c) === columnKey);
           if (columnIndex - 1 >= 0) {
-            const nextColumnKey = columns[columnIndex - 1].valueKeyPath.join('_');
-            const nextElement = this.cellRefs[`${this.props.id}_${nextColumnKey}_${rowIndex}`];
+            const nextColumnKey = Utils.getColumnKey(columns[columnIndex - 1]);
+            const nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowIndex}`];
             this.moveCellFocus(nextElement, -1, columnIndex - 1);
           }
           break;
@@ -401,17 +134,17 @@ export default class DataGrid extends React.PureComponent {
     }
   }
 
-  onFilterCellValueChange = (valueKeyPath, value) => {
+  onFilterCellValueChange = (col, value) => {
     this.props.filterCellValueChange(
-      this.props.id,
-      valueKeyPath,
+      this.props.grid,
+      this.props.columns,
+      col,
       value,
-      this.columnFilterFunctions,
     );
   }
 
   onCreateCellValueChange = (rowIndex, col, value) => {
-    this.props.createCellValueChange(this.props.id, rowIndex, col.valueKeyPath, value);
+    this.props.createCellValueChange(this.props.grid, rowIndex, col.valueKeyPath, value);
     if (col.onCreateValueChange) {
       col.onCreateValueChange(value, col.valueKeyPath, rowIndex);
     }
@@ -424,7 +157,7 @@ export default class DataGrid extends React.PureComponent {
     }
     if (col.validators) {
       this.props.createCellValueValidate(
-        this.props.id,
+        this.props.grid,
         rowIndex,
         col.valueKeyPath,
         value,
@@ -435,7 +168,7 @@ export default class DataGrid extends React.PureComponent {
 
   onEditCellValueChange = (rowIndex, col, value) => {
     const dataId = this.getDataIdByRowIndex(rowIndex);
-    this.props.editCellValueChange(this.props.id, dataId, col.valueKeyPath, value);
+    this.props.editCellValueChange(this.props.grid, dataId, col.valueKeyPath, value);
     if (col.onEditValueChange) {
       col.onEditValueChange(value, col.valueKeyPath, rowIndex, dataId);
     }
@@ -448,12 +181,11 @@ export default class DataGrid extends React.PureComponent {
     }
     if (col.validators) {
       this.props.editCellValueValidate(
-        this.props.id,
+        this.props.grid,
         dataId,
         col.valueKeyPath,
         value,
         col.validators,
-        this.props.idKeyPath,
       );
     }
   }
@@ -476,11 +208,11 @@ export default class DataGrid extends React.PureComponent {
   }
 
   getDataIdByRowIndex = rowIndex =>
-    this.props.data.getIn([rowIndex, ...this.props.idKeyPath]);
+    this.props.data.getIn([rowIndex, ...this.props.grid.idKeyPath]);
 
   getSelectedItemIndex = (id) => {
     if (!id) return undefined;
-    const index = this.props.data.findIndex(v => v.getIn(this.props.idKeyPath) === id);
+    const index = this.props.data.findIndex(v => v.getIn(this.props.grid.idKeyPath) === id);
     return index === -1 ? undefined : index;
   }
 
@@ -519,8 +251,8 @@ export default class DataGrid extends React.PureComponent {
     return val;
   }
 
-  getFilterItemValue = (valueKeyPath) => {
-    const val = this.props.filterData.get(valueKeyPath.join('/'), '');
+  getFilterItemValue = (col) => {
+    const val = this.props.filterData.get(Utils.getColumnKey(col), '');
     if (val === null) {
       return '';
     }
@@ -533,14 +265,14 @@ export default class DataGrid extends React.PureComponent {
     if (!componentDisabled && col.disableEditingOnValueMatch) {
       if (mode === 'create') {
         componentDisabled = this.getCreateItemValue(
-            rowIndex,
-            { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
-          ) === col.disableEditingOnValueMatch.matchValue;
+          rowIndex,
+          { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
+        ) === col.disableEditingOnValueMatch.matchValue;
       } else {
         componentDisabled = this.getEditItemValue(
-            rowIndex,
-            { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
-          ) === col.disableEditingOnValueMatch.matchValue;
+          rowIndex,
+          { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
+        ) === col.disableEditingOnValueMatch.matchValue;
       }
     }
     return componentDisabled;
@@ -548,12 +280,12 @@ export default class DataGrid extends React.PureComponent {
 
   getRowClassName = (rowIndex) => {
     const {
+      grid,
       isCreating,
       isEditing,
       isFiltering,
       createData,
       selectedItems,
-      idKeyPath,
       data,
     } = this.props;
     const rowClassNames = ['oc-datagrid-row'];
@@ -574,9 +306,11 @@ export default class DataGrid extends React.PureComponent {
 
     // check if row is selected
     if ((!isCreating && !isEditing) &&
-        (selectedItems && idKeyPath) &&
+        (selectedItems && grid.idKeyPath) &&
         (!isFiltering || rowIndex > 0)) {
-      if (selectedItems.indexOf(data.getIn([rowIndex - extraRowCount, ...idKeyPath])) !== -1) {
+      if (
+        selectedItems.indexOf(data.getIn([rowIndex - extraRowCount, ...grid.idKeyPath])) !== -1
+      ) {
         rowClassNames.push('is-selected');
       }
     }
@@ -589,7 +323,7 @@ export default class DataGrid extends React.PureComponent {
 
   getCellMessages = (rowIndex, col, cellType) => {
     const returnData = {};
-    if (!this.props.idKeyPath || !col.valueKeyPath) {
+    if (!this.props.grid.idKeyPath || !col.valueKeyPath) {
       return returnData;
     }
     let errorMessage;
@@ -636,7 +370,7 @@ export default class DataGrid extends React.PureComponent {
         columnKey: 'selectionCheckbox',
         cell: (rowIndex) => {
           const rowItem = this.props.data.get(rowIndex);
-          const itemId = rowItem.getIn(this.props.idKeyPath);
+          const itemId = rowItem.getIn(this.props.grid.idKeyPath);
           const selected = this.props.selectedItems.includes(itemId);
           return (
             <Checkbox
@@ -644,7 +378,7 @@ export default class DataGrid extends React.PureComponent {
               checked={selected}
               onClick={() => {
                 this.props.itemSelectionChange(
-                  this.props.id, rowIndex, this.props.idKeyPath, true, false);
+                  this.props.grid, true, false);
               }}
               tabIndex={tabIndex}
             />
@@ -660,19 +394,13 @@ export default class DataGrid extends React.PureComponent {
     this.props.columns.forEach((col) => {
       const column = {
         header: col.header,
-        columnKey: col.columnKey || col.valueKeyPath.join('_'),
+        columnKey: Utils.getColumnKey(col),
         width: col.width,
         isResizable: !col.disableResizing,
         fixed: !!col.fixed,
         allowCellsRecycling: !!col.allowCellsRecycling,
+        disableSorting: !!col.disableSorting,
       };
-      const columnFilterFunction = {
-        valueEmptyChecker: val => val === '' || val === null || val === undefined,
-        filterMatcher: (val, filterVal) => (new RegExp(filterVal, 'i')).test(val),
-      };
-      if (col.componentType === 'select') {
-        columnFilterFunction.filterMatcher = (val, filterVal) => val === filterVal;
-      }
       if (col.defaultValue !== undefined) {
         this.columnDefaultValues[column.columnKey] = col.defaultValue;
       }
@@ -684,6 +412,15 @@ export default class DataGrid extends React.PureComponent {
       }
       if (col.flexGrow) {
         column.flexGrow = col.flexGrow;
+      }
+      if (col.valueType) {
+        column.valueType = col.valueType;
+      }
+      if (col.sortComparator) {
+        column.sortComparator = col.sortComparator;
+      }
+      if (col.sortValueGetter) {
+        column.sortValueGetter = col.sortValueGetter;
       }
       // Cell value rendering
       if (col.cell) {
@@ -776,10 +513,10 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     inputRef={(input) => {
                       if (this.props.enableArrowNavigation) {
-                        this.cellRefs[`${this.props.id}_${column.columnKey}_${rowIndex}`] = input;
+                        this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
                       }
                     }}
-                    id={`ocDatagridEditInput-${this.props.id}-${column.columnKey}-${rowIndex}`}
+                    id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
                     tabIndex={tabIndex}
@@ -802,7 +539,7 @@ export default class DataGrid extends React.PureComponent {
                       e.target.value,
                     )}
                     onKeyDown={this.onCreateCellKeyDown}
-                    id={`ocDatagridCreateInput-${this.props.id}-${column.columnKey}-${rowIndex}`}
+                    id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
                     tabIndex={tabIndex}
@@ -815,12 +552,12 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FormControl
                     type="text"
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={e => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       editValueParser(e.target.value),
                     )}
-                    id={`ocDatagridFilterInput-${this.props.id}-${column.columnKey}`}
+                    id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
                   />
@@ -829,14 +566,6 @@ export default class DataGrid extends React.PureComponent {
             }
             break;
           case 'number':
-            columnFilterFunction.valueEmptyChecker = (
-              val => val === '' ||
-              isNaN(val) ||
-              val === null ||
-              val === undefined
-            );
-            columnFilterFunction.filterMatcher = (val, filterVal) =>
-                parseInt(val, 10) === parseInt(filterVal, 10);
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -861,10 +590,10 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     inputRef={(input) => {
                       if (this.props.enableArrowNavigation) {
-                        this.cellRefs[`${this.props.id}_${column.columnKey}_${rowIndex}`] = input;
+                        this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
                       }
                     }}
-                    id={`ocDatagridEditInput-${this.props.id}-${column.columnKey}-${rowIndex}`}
+                    id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
                     tabIndex={tabIndex}
@@ -888,7 +617,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     onFocus={this.onCellFocus}
                     onKeyDown={this.onCreateCellKeyDown}
-                    id={`ocDatagridCreateInput-${this.props.id}-${column.columnKey}-${rowIndex}`}
+                    id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
                     tabIndex={tabIndex}
@@ -901,12 +630,12 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FormControl
                     type="number"
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={e => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       e.target.value,
                     )}
-                    id={`ocDatagridFilterInput-${this.props.id}-${column.columnKey}`}
+                    id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
                   />
@@ -917,19 +646,6 @@ export default class DataGrid extends React.PureComponent {
           case 'float':
             editValueParser = val =>
               val.replace(new RegExp(`[^\\d${this.props.decimalSeparator}+-]`, 'g'), '');
-            columnFilterFunction.valueEmptyChecker = val => (
-              val === '' ||
-              isNaN(val) ||
-              val === null ||
-              val === undefined
-            );
-            columnFilterFunction.filterMatcher = (val, filterVal) => {
-              let parsedFilterVal = filterVal;
-              if (this.props.decimalSeparator && this.props.decimalSeparator !== '.') {
-                parsedFilterVal = parsedFilterVal.replace(this.props.decimalSeparator, '.');
-              }
-              return parseFloat(parsedFilterVal) === val;
-            };
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -953,10 +669,10 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     inputRef={(input) => {
                       if (this.props.enableArrowNavigation) {
-                        this.cellRefs[`${this.props.id}_${column.columnKey}_${rowIndex}`] = input;
+                        this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
                       }
                     }}
-                    id={`ocDatagridEditInput-${this.props.id}-${column.columnKey}-${rowIndex}`}
+                    id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
                     tabIndex={tabIndex}
@@ -979,7 +695,7 @@ export default class DataGrid extends React.PureComponent {
                       editValueParser(e.target.value),
                     )}
                     onKeyDown={this.onCreateCellKeyDown}
-                    id={`ocDatagridCreateInput-${this.props.id}-${column.columnKey}-${rowIndex}`}
+                    id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
                     tabIndex={tabIndex}
@@ -992,12 +708,12 @@ export default class DataGrid extends React.PureComponent {
                 column.cellFilter = () => (
                   <FormControl
                     type="text"
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={e => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       editValueParser(e.target.value),
                     )}
-                    id={`ocDatagridFilterInput-${this.props.id}-${column.columnKey}`}
+                    id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
                   />
@@ -1006,15 +722,18 @@ export default class DataGrid extends React.PureComponent {
             }
             break;
           case 'select': {
+            const selectOptions = col.selectComponentOptions ||
+              this.props.selectComponentOptions.get(column.columnKey);
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
-                const selectOptions = this.props.selectComponentOptions.get(column.columnKey);
                 column.cellEdit = rowIndex => (
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-edit-' + rowIndex}
-                    options={col.editSelectOptionsMod && selectOptions ?
-                             col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-                             selectOptions}
+                    options={
+                      col.editSelectOptionsMod && selectOptions ?
+                        col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
+                        selectOptions
+                    }
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={selectedData => this.onEditCellValueChange(
                       rowIndex,
@@ -1030,7 +749,7 @@ export default class DataGrid extends React.PureComponent {
                     clearable={false}
                     backspaceRemoves={false}
                     inputProps={{
-                      id: `ocDatagridEditInput-${this.props.id}-${column.columnKey}-${rowIndex}`,
+                      id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -1039,13 +758,14 @@ export default class DataGrid extends React.PureComponent {
                 );
               }
               if (!column.cellCreate) {
-                const selectOptions = this.props.selectComponentOptions.get(column.columnKey);
                 column.cellCreate = rowIndex => (
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-create-' + rowIndex}
-                    options={col.createSelectOptionsMod && selectOptions ?
-                             col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-                             selectOptions}
+                    options={
+                      col.createSelectOptionsMod && selectOptions ?
+                        col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
+                        selectOptions
+                    }
                     value={this.getCreateItemValue(rowIndex, col)}
                     onChange={selectedData => this.onCreateCellValueChange(
                       rowIndex,
@@ -1061,7 +781,7 @@ export default class DataGrid extends React.PureComponent {
                     clearable={false}
                     backspaceRemoves={false}
                     inputProps={{
-                      id: `ocDatagridCreateInput-${this.props.id}-${column.columnKey}-${rowIndex}`,
+                      id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -1072,22 +792,22 @@ export default class DataGrid extends React.PureComponent {
             }
             if (this.props.filtering) {
               if (!column.cellFilter) {
-                const selectOptions = this.props.selectComponentOptions.get(column.columnKey);
                 column.cellFilter = () => (
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-filter'}
-                    options={col.filterSelectOptionsMod && selectOptions ?
-                             col.filterSelectOptionsMod(selectOptions.slice(), col) :
-                             selectOptions}
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    options={
+                      col.filterSelectOptionsMod && selectOptions ?
+                        col.filterSelectOptionsMod(selectOptions.slice(), col) :
+                        selectOptions}
+                    value={this.getFilterItemValue(col)}
                     onChange={selectedData => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       selectedData && editValueParser(selectedData.value),
                     )}
                     searchable={selectOptions && (selectOptions.length > 9)}
                     clearable
                     inputProps={{
-                      id: `ocDatagridFilterInput-${this.props.id}-${column.columnKey}`,
+                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
                     }}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
@@ -1098,8 +818,6 @@ export default class DataGrid extends React.PureComponent {
             break;
           }
           case 'date': {
-            columnFilterFunction.filterMatcher = (val, filterVal) =>
-              moment(filterVal, 'L').isSame(val, 'day');
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -1113,7 +831,7 @@ export default class DataGrid extends React.PureComponent {
                     language={this.props.userLanguage}
                     inputProps={{
                       tabIndex,
-                      id: `ocDatagridEditInput-${this.props.id}-${column.columnKey}-${rowIndex}`,
+                      id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                       onKeyDown: e => this.onEditCellKeyDown(
                         e.keyCode,
                         column.columnKey,
@@ -1121,7 +839,7 @@ export default class DataGrid extends React.PureComponent {
                       ),
                       inputRef: (input) => {
                         if (this.props.enableArrowNavigation) {
-                          this.cellRefs[`${this.props.id}_${column.columnKey}_${rowIndex}`] = input;
+                          this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
                         }
                       },
                     }}
@@ -1143,7 +861,7 @@ export default class DataGrid extends React.PureComponent {
                     language={this.props.userLanguage}
                     inputProps={{
                       tabIndex,
-                      id: `ocDatagridCreateInput-${this.props.id}-${column.columnKey}-${rowIndex}`,
+                      id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -1155,15 +873,15 @@ export default class DataGrid extends React.PureComponent {
               if (!column.cellFilter) {
                 column.cellFilter = () => (
                   <DateInput
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={data => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       editValueParser(data),
                     )}
                     language={this.props.userLanguage}
                     inputProps={{
                       tabIndex,
-                      id: `ocDatagridFilterInput-${this.props.id}-${column.columnKey}`,
+                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
                     }}
                     {...col.filterComponentProps}
                   />
@@ -1177,7 +895,6 @@ export default class DataGrid extends React.PureComponent {
               { value: true, label: this.props.intl.formatMessage({ id: 'Yes' }) },
               { value: false, label: this.props.intl.formatMessage({ id: 'No' }) },
             ];
-            columnFilterFunction.filterMatcher = (val, filterVal) => val === filterVal;
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -1199,7 +916,7 @@ export default class DataGrid extends React.PureComponent {
                     clearable={false}
                     backspaceRemoves={false}
                     inputProps={{
-                      id: `ocDatagridEditInput-${this.props.id}-${column.columnKey}-${rowIndex}`,
+                      id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -1227,7 +944,7 @@ export default class DataGrid extends React.PureComponent {
                     clearable={false}
                     backspaceRemoves={false}
                     inputProps={{
-                      id: `ocDatagridCreateInput-${this.props.id}-${column.columnKey}-${rowIndex}`,
+                      id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -1242,15 +959,15 @@ export default class DataGrid extends React.PureComponent {
                   <FloatingSelect
                     name={col.valueKeyPath.join() + '-filter'}
                     options={selectOptions}
-                    value={this.getFilterItemValue(col.valueKeyPath)}
+                    value={this.getFilterItemValue(col)}
                     onChange={selectedData => this.onFilterCellValueChange(
-                      col.valueKeyPath,
+                      col,
                       selectedData && editValueParser(selectedData.value),
                     )}
                     searchable={false}
                     clearable
                     inputProps={{
-                      id: `ocDatagridFilterInput-${this.props.id}-${column.columnKey}`,
+                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
                     }}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
@@ -1263,42 +980,7 @@ export default class DataGrid extends React.PureComponent {
           default:
         }
       }
-      // Column sorting functions
-      if (col.valueType && (col.sortValueGetter || col.valueKeyPath) && !col.disableSorting) {
-        column.isSortable = true;
-        if (col.sortComparator) {
-          column.sortComparator = col.sortComparator;
-        } else {
-          switch (col.valueType) {
-            case 'text':
-              column.sortComparator = (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
-              break;
-            case 'number':
-              column.sortComparator = (a, b) => (a === b ? 0 : (a < b ? -1 : 1));
-              break;
-            case 'float':
-              column.sortComparator = (a, b) => (a === b ? 0 : (a < b ? -1 : 1));
-              break;
-            case 'boolean':
-              column.sortComparator = (a, b) => (a === b ? 0 : (a ? -1 : 1));
-              break;
-            case 'date':
-              column.sortComparator = (a, b) => new Date(b) - new Date(a);
-              break;
-            default:
-              column.sortComparator = (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
-          }
-        }
-        if (col.sortValueGetter) {
-          column.sortValueGetter = col.sortValueGetter;
-        } else {
-          column.sortValueGetter = data => data.getIn(col.valueKeyPath);
-        }
-      }
       columns.push(column);
-      if (col.valueKeyPath) {
-        this.columnFilterFunctions[col.valueKeyPath.join('/')] = columnFilterFunction;
-      }
     });
     return columns;
   }
@@ -1356,7 +1038,6 @@ export default class DataGrid extends React.PureComponent {
         cell = col.cell(rowIndex - extraRowCount);
       }
     }
-
     if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isCheckbox) {
       const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
@@ -1389,21 +1070,20 @@ export default class DataGrid extends React.PureComponent {
       <Column
         key={col.columnKey}
         columnKey={col.columnKey}
-        header={col.isSortable ?
-          <SortHeaderCell
-            gridId={this.props.id}
-            columnKey={col.columnKey}
-            sortOrder={col.columnKey === this.props.sortColumn ? this.props.sortOrder : ''}
-            onSortChange={this.props.sort}
-            sortValueGetter={col.sortValueGetter}
-            sortComparator={col.sortComparator}
+        header={
+          <HeaderCell
+            grid={this.props.grid}
+            columns={this.props.columns}
+            column={col}
+            currentSortColumn={this.props.sortColumn}
+            currentSortOrder={this.props.sortOrder}
+            onSortChange={this.props.sortChange}
           >
             {col.header}
-          </SortHeaderCell> :
-          <Cell className="oc-datagrid-cell-header">{col.header}</Cell>
+          </HeaderCell>
         }
         cell={cellProps => (this.renderCell(col, cellProps))}
-        width={this.props.columnWidths.get(col.columnKey, col.width)}
+        width={this.props.columnWidths.get(col.columnKey, (col.width || 200))}
         isResizable={col.isResizable}
         flexGrow={col.flexGrow ? col.flexGrow : 0}
         fixed={col.fixed}
@@ -1469,9 +1149,10 @@ export default class DataGrid extends React.PureComponent {
         </div>
       );
     }
-    let rowsCount = (this.props.rowsCount || this.props.rowsCount === 0) ?
-                    this.props.rowsCount :
-                    this.props.data.size;
+    let rowsCount =
+      (this.props.rowsCount || this.props.rowsCount === 0) ?
+        this.props.rowsCount :
+        this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
     if (this.props.isFiltering) rowsCount += 1;
     let scrollToRow = this.props.scrollToRow || this.state.currentRow;
@@ -1480,14 +1161,14 @@ export default class DataGrid extends React.PureComponent {
     }
     return (
       <div
-        id={`oc-datagrid-${this.props.id}`}
+        id={`oc-datagrid-${this.props.grid.id}`}
         className={gridClassName}
         style={this.props.containerStyle}
       >
         { this.props.isBusy && <Spinner /> }
         { actionBar }
         <ResponsiveFixedDataTable
-          id={this.props.id}
+          id={this.props.grid.id}
           rowsCount={rowsCount}
           headerHeight={this.props.headerHeight}
           rowHeight={this.props.rowHeight}
@@ -1509,9 +1190,8 @@ export default class DataGrid extends React.PureComponent {
               // don't trigger selection change if it's checkbox column that is clicked.
               if (e.target.type !== 'checkbox') {
                 this.props.itemSelectionChange(
-                  this.props.id,
+                  this.props.grid,
                   realRowIndex,
-                  this.props.idKeyPath,
                   this.props.multiSelect && e.ctrlKey,
                   this.props.multiSelect && e.shiftKey,
                 );
@@ -1551,5 +1231,4 @@ export default class DataGrid extends React.PureComponent {
       </div>
     );
   }
-
 }
