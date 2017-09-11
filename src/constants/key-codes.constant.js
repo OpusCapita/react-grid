@@ -1,4 +1,5 @@
 const KEY_CODES = {
+  TAB: 9,
   ENTER: 13,
   LEFT: 37,
   UP: 38,

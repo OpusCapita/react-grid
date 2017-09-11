@@ -96,10 +96,11 @@ export default class DataGrid extends React.PureComponent {
     }
   }
 
-  onEditCellKeyDown = (keyCode, columnKey, rowIndex) => {
+  onEditCellKeyDown = (e, columnKey, rowIndex) => {
     if (this.props.enableArrowNavigation) {
       const columns = this.props.columns;
-      switch (keyCode) {
+      const rowsSize = this.props.data.size;
+      switch (e.keyCode) {
         case KEY_CODES.DOWN: {
           const nextElement = this.cellRefs[`${this.props.grid.id}_${columnKey}_${rowIndex + 1}`];
           this.moveCellFocus(nextElement, rowIndex + 1, -1);
@@ -110,21 +111,42 @@ export default class DataGrid extends React.PureComponent {
           this.moveCellFocus(nextElement, rowIndex - 1, -1);
           break;
         }
-        case KEY_CODES.RIGHT: {
-          const columnIndex = columns.findIndex(c => Utils.getColumnKey(c) === columnKey);
-          if (columnIndex !== -1 && columnIndex + 1 < columns.length) {
-            const nextColumnKey = Utils.getColumnKey(columns[columnIndex + 1]);
-            const nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowIndex}`];
-            this.moveCellFocus(nextElement, -1, columnIndex + 1);
-          }
-          break;
-        }
+        case KEY_CODES.TAB:
+        case KEY_CODES.RIGHT:
         case KEY_CODES.LEFT: {
-          const columnIndex = columns.findIndex(c => Utils.getColumnKey(c) === columnKey);
-          if (columnIndex - 1 >= 0) {
-            const nextColumnKey = Utils.getColumnKey(columns[columnIndex - 1]);
-            const nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowIndex}`];
-            this.moveCellFocus(nextElement, -1, columnIndex - 1);
+          e.preventDefault();
+          let columnInd = this.state.currentColumn;
+          if (columnInd !== -1) {
+            let disabled = true;
+            let nextElement = null;
+            let rowInd = rowIndex;
+            while (disabled) {
+              if (e.keyCode === KEY_CODES.LEFT || (e.keyCode === KEY_CODES.TAB && e.shiftKey)) {
+                if (columnInd - 1 >= 0) {
+                  columnInd -= 1;
+                } else if (rowInd - 1 >= 0) {
+                  columnInd = columns.length - 1;
+                  rowInd -= 1;
+                } else {
+                  break;
+                }
+              } else {
+                if (columnInd + 1 < columns.length) {
+                  columnInd += 1;
+                } else if (rowInd + 1 < rowsSize) {
+                  columnInd = 0;
+                  rowInd += 1;
+                } else {
+                  break;
+                }
+              }
+              const nextColumnKey = Utils.getColumnKey(columns[columnInd]);
+              nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowInd}`];
+              disabled = nextElement ? nextElement.disabled : false;
+            }
+            if (!disabled && nextElement) {
+              this.moveCellFocus(nextElement, rowInd, columnInd);
+            }
           }
           break;
         }
@@ -348,12 +370,12 @@ export default class DataGrid extends React.PureComponent {
   }
 
   moveCellFocus = (nextElement, rowIndex, columnIndex) => {
-    if (nextElement && nextElement.type === 'text') {
+    if (nextElement && (nextElement.type === 'text' || nextElement.type === 'number')) {
       if (rowIndex !== -1) {
         this.setState({ currentRow: rowIndex });
       }
       if (columnIndex !== -1) {
-        this.setState({ currentColumn: columnIndex + 1 });
+        this.setState({ currentColumn: columnIndex });
       }
       setTimeout(() => nextElement.select(), 50);
     }
@@ -404,8 +426,10 @@ export default class DataGrid extends React.PureComponent {
       if (col.defaultValue !== undefined) {
         this.columnDefaultValues[column.columnKey] = col.defaultValue;
       }
+      const inputStyle = {};
       if (col.align) {
         column.align = col.align;
+        inputStyle.textAlign = col.align;
       }
       if (col.valueKeyPath) {
         column.valueKeyPath = col.valueKeyPath;
@@ -507,7 +531,7 @@ export default class DataGrid extends React.PureComponent {
                       e.target.value,
                     )}
                     onKeyDown={e => this.onEditCellKeyDown(
-                      e.keyCode,
+                      e,
                       column.columnKey,
                       rowIndex,
                     )}
@@ -519,6 +543,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -542,6 +567,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -559,6 +585,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -584,7 +611,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     onFocus={this.onCellFocus}
                     onKeyDown={e => this.onEditCellKeyDown(
-                      e.keyCode,
+                      e,
                       column.columnKey,
                       rowIndex,
                     )}
@@ -596,6 +623,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -620,6 +648,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -637,6 +666,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -663,7 +693,7 @@ export default class DataGrid extends React.PureComponent {
                       editValueParser(e.target.value),
                     )}
                     onKeyDown={e => this.onEditCellKeyDown(
-                      e.keyCode,
+                      e,
                       column.columnKey,
                       rowIndex,
                     )}
@@ -675,6 +705,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -698,6 +729,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -715,6 +747,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
+                    style={inputStyle}
                     tabIndex={tabIndex}
                   />
                 );
@@ -833,7 +866,7 @@ export default class DataGrid extends React.PureComponent {
                       tabIndex,
                       id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                       onKeyDown: e => this.onEditCellKeyDown(
-                        e.keyCode,
+                        e,
                         column.columnKey,
                         rowIndex,
                       ),
