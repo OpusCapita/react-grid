@@ -26,6 +26,17 @@ export const columns = [
     ],
   },
   {
+    header: 'Text2',
+    valueKeyPath: ['text2'],
+    valueType: 'text',
+    componentType: 'text',
+    width: 200,
+    validators: [
+      { unique: true },
+      { validate: VALIDATE.isRequired },
+    ],
+  },
+  {
     header: 'Number',
     valueKeyPath: ['number'],
     valueType: 'number',
@@ -76,6 +87,7 @@ export const data = [
   {
     id: 1,
     text: 'Text 1',
+    text2: 'Text 1',
     number: 1,
     float: 5.5,
     boolean: true,
@@ -85,6 +97,7 @@ export const data = [
   {
     id: 2,
     text: 'Text 2',
+    text2: 'Text 1',
     number: 2,
     float: 4.4,
     boolean: false,
@@ -94,6 +107,7 @@ export const data = [
   {
     id: 3,
     text: 'Text 3',
+    text2: 'Text 1',
     number: 3,
     float: 3.3,
     boolean: false,
@@ -103,6 +117,7 @@ export const data = [
   {
     id: 4,
     text: 'Text 4',
+    text2: 'Text 1',
     number: 4,
     float: 2.2,
     boolean: false,
@@ -112,6 +127,7 @@ export const data = [
   {
     id: 5,
     text: 'Text 5',
+    text2: 'Text 1',
     number: 5,
     float: 1.1,
     boolean: false,
