@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 2.0.2
+* Leave selectedItems and config to state when grid is invalidated
+
 ## 2.0.1
 * Fix Tab and arrow keys navigation of `Datagrid` after dependencies update
 
