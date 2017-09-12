@@ -5,9 +5,16 @@ import { INITIAL_STATE } from './datagrid.constants';
 export default function datagridReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case TYPES.PLATFORM_DATAGRID_INVALIDATE:
-      return state.delete(action.id);
+      return state
+        .deleteIn([action.id, 'data'])
+        .deleteIn([action.id, 'allData'])
+        .deleteIn([action.id, 'session'])
+        .deleteIn([action.id, 'editData'])
+        .deleteIn([action.id, 'createData'])
+        .deleteIn([action.id, 'createValidation'])
+        .deleteIn([action.id, 'cellMessages']);
 
-    case TYPES.PLATFORM_DATAGRID_SET_DATA: {
+    case TYPES.PLATFORM_DATAGRID_SET_DATA:
       return state
         .setIn([action.id, 'data'], action.data)
         .setIn([action.id, 'allData'], action.data)
@@ -22,7 +29,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'createData'])
         .deleteIn([action.id, 'createValidation'])
         .deleteIn([action.id, 'cellMessages']);
-    }
+
     case TYPES.PLATFORM_DATAGRID_BUSY:
       return state.setIn([action.id, 'session', 'isBusy'], true);
 
