@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fix Tab and arrow keys navigation of `Datagrid` after mouse down event
 
 ## 2.0.2
 * Leave selectedItems and config to state when grid is invalidated

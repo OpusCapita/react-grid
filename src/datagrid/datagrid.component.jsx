@@ -115,7 +115,7 @@ export default class DataGrid extends React.PureComponent {
         case KEY_CODES.RIGHT:
         case KEY_CODES.LEFT: {
           e.preventDefault();
-          let columnInd = this.state.currentColumn;
+          let columnInd = columns.findIndex(c => c.valueKeyPath.join() === columnKey);
           if (columnInd !== -1) {
             let disabled = true;
             let nextElement = null;
