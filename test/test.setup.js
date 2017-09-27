@@ -1,8 +1,12 @@
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
 import { JSDOM } from 'jsdom';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15.4';
 
 import mockStorage from './storage.mock';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 chai.use(chaiImmutable);
 

@@ -400,7 +400,7 @@ export default class DataGrid extends React.PureComponent {
               checked={selected}
               onClick={() => {
                 this.props.itemSelectionChange(
-                  this.props.grid, true, false);
+                  this.props.grid, rowIndex, true, false);
               }}
               tabIndex={tabIndex}
             />
@@ -1220,7 +1220,7 @@ export default class DataGrid extends React.PureComponent {
                 document.getSelection().removeAllRanges();
               }
 
-              // don't trigger selection change if it's checkbox column that is clicked.
+              // don't trigger selection change on checkbox click
               if (e.target.type !== 'checkbox') {
                 this.props.itemSelectionChange(
                   this.props.grid,
