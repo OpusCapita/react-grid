@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 2.0.4
 * Fix select row checkbox that was not working
 * Update npm packages
 * Upgrade to enzyme 3.0
