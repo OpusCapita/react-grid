@@ -450,7 +450,7 @@ export default class DataGrid extends React.PureComponent {
       const valueRender = (rowIndex, format) => {
         const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
         if (val === undefined || val === null) {
-          return col.isRequired ? <M id={'ValueIsMissing'} /> : '';
+          return col.isRequired ? <M id="ValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
       }
