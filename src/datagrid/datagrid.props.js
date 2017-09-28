@@ -55,6 +55,7 @@ export const columnShape = shape({
   sortValueGetter: func,          // override sort value getter, defaults to getIn(valueKeyPath)
   sortComparator: func,           // override sort comparator function, default sorts by valueType
   defaultValue: any,              // default value for the column when creating new item
+  isRequired: bool,               // is column value required
   onEditValueChange: func,        // callback with (value, valueKeyPath, rowIndex, dataId)
   onCreateValueChange: func,      // callbac with (value, valueKeyPath, rowIndex)
   onCreateBlur: func,             // callback with (value, rowIndex)

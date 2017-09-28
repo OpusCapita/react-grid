@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed null/undefined value handling in columns. Added 'isRequired' property to column.
 
 ## 2.0.4
 * Fix select row checkbox that was not working

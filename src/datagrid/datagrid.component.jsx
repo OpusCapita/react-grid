@@ -447,6 +447,14 @@ export default class DataGrid extends React.PureComponent {
         column.sortValueGetter = col.sortValueGetter;
       }
       // Cell value rendering
+      const valueRender = (rowIndex, format) => {
+        const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
+        if (val === undefined || val === null) {
+          return col.isRequired ? <M id={'ValueIsMissing'} /> : '';
+        }
+        return format ? format(val) : val;
+      }
+
       if (col.cell) {
         column.cell = col.cell;
       } else if (col.valueRender) {
@@ -454,43 +462,20 @@ export default class DataGrid extends React.PureComponent {
       } else {
         switch (col.valueType) {
           case 'number':
-            column.cell = (rowIndex) => {
-              const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
-              if (val === null) {
-                return '';
-              }
-              return <N value={val} {...col.renderComponentProps} />;
-            };
-            break;
           case 'float':
-            column.cell = (rowIndex) => {
-              const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
-              if (val === null) {
-                return '';
-              }
-              return <N value={val} {...col.renderComponentProps} />;
-            };
+            column.cell = rowIndex =>
+              valueRender(rowIndex, v => <N value={v} {...col.renderComponentProps} />);
             break;
           case 'date':
-            column.cell = (rowIndex) => {
-              const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
-              if (val === null) {
-                return '';
-              }
-              return <D value={val} {...col.renderComponentProps} />;
-            };
+            column.cell = rowIndex =>
+              valueRender(rowIndex, v => <D value={v} {...col.renderComponentProps} />);
             break;
           case 'boolean':
-            column.cell = (rowIndex) => {
-              const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
-              if (val === null) {
-                return '';
-              }
-              return <M id={val ? 'Yes' : 'No'} {...col.renderComponentProps} />;
-            };
+            column.cell = rowIndex =>
+              valueRender(rowIndex, v => <M id={v ? 'Yes' : 'No'} {...col.renderComponentProps} />);
             break;
           default:
-            column.cell = rowIndex => this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
+            column.cell = rowIndex => valueRender(rowIndex);
         }
       }
       // Cell edit/create/filter component rendering
