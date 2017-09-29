@@ -7,5 +7,6 @@
   "Save": "Save",
   "Cancel": "Cancel",
   "ValidateIsRequired": "Value is required",
-  "Warning": "Warning"
+  "Warning": "Warning",
+  "ValueIsMissing": "value is missing"
 }
