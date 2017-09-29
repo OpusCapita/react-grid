@@ -58,6 +58,7 @@ export default class HeaderCell extends React.PureComponent {
     return (
       <Cell className={cellClassNames} onClick={this.onSortChange} {...props}>
         {children}
+        { column.isRequired && ' *' }
         {
           currentSortColumn === Utils.getColumnKey(column) &&
           currentSortOrder &&

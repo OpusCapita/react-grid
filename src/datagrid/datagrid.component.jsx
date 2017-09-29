@@ -422,6 +422,7 @@ export default class DataGrid extends React.PureComponent {
         fixed: !!col.fixed,
         allowCellsRecycling: !!col.allowCellsRecycling,
         disableSorting: !!col.disableSorting,
+        isRequired: !!col.isRequired,
       };
       if (col.defaultValue !== undefined) {
         this.columnDefaultValues[column.columnKey] = col.defaultValue;
