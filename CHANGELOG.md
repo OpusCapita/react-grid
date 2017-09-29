@@ -4,6 +4,7 @@
 
 ## <next>
 * Fix bug: Sometimes filter is applied although the filter string is hidden
+* Fixed null/undefined value handling in columns. Added 'isRequired' property to column.
 
 ## 2.0.4
 * Fix select row checkbox that was not working

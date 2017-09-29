@@ -19,6 +19,7 @@ export const columns = [
     valueKeyPath: ['text'],
     valueType: 'text',
     componentType: 'text',
+    isRequired: true,
     width: 200,
     validators: [
       { unique: true },
@@ -51,6 +52,7 @@ export const columns = [
     valueKeyPath: ['float'],
     valueType: 'float',
     componentType: 'float',
+    isRequired: true,
     width: 100,
     validators: [
       { validate: VALIDATE.isRequired },
@@ -133,5 +135,15 @@ export const data = [
     boolean: false,
     date: '2015-04-20T00:00:00Z',
     select: 'Option 5',
+  },
+  {
+    id: 6,
+    text: undefined,
+    text2: undefined,
+    number: undefined,
+    float: undefined,
+    boolean: undefined,
+    date: undefined,
+    select: undefined,
   },
 ];

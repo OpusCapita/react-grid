@@ -125,6 +125,7 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | sortValueGetter            | function       |         | Getter function for the sort data        |
 | sortComparator             | function       |         | Comparator function for the sort data    |
 | defaultValue               | string, number |         | Default value for the item when creating new item |
+| isRequired                 | bool           |         | Indicating if column value is required   |
 | onValueMatchChangeValue    | object         |         | Change other column value if own value matches |
 | disableEditingOnValueMatch | object         |         | Disable input element of this column when value at keyPath matches |
 | onEditValueChange          | function       |         | Called on edit value change, called with (value, valueKeyPath, rowIndex, dataId) |
