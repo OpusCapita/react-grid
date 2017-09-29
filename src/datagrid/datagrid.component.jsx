@@ -453,7 +453,7 @@ export default class DataGrid extends React.PureComponent {
           return col.isRequired ? <M id="ValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
-      }
+      };
 
       if (col.cell) {
         column.cell = col.cell;
