@@ -128,7 +128,7 @@ export default {
         console.error('Datagrid: error parsing sortingData from sessionStorage', e);
       }
     }
-    if (filterData && !grid.disableRememberFilteData) {
+    if (filterData && isFiltering && !grid.disableRememberFilteData) {
       try { config.filteringData.filterData = JSON.parse(filterData); } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
@@ -164,6 +164,9 @@ export default {
     if (grid.disableRememberIsFiltering) return false;
     if (isFiltering === undefined) return false;
     localStorage.setItem(`oc_grid_isFiltering_${grid.id}`, JSON.stringify(isFiltering));
+    if (!isFiltering) {
+      sessionStorage.removeItem(`oc_grid_filtering_${grid.id}`);
+    }
     return true;
   },
   /* eslint-disable max-len */
