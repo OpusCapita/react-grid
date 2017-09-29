@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Display asterisk at the header of required column
 
 ## 2.0.5
 * Fix bug: Sometimes filter is applied although the filter string is hidden
