@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fix bug: Sometimes filter is applied although the filter string is hidden
 * Fixed null/undefined value handling in columns. Added 'isRequired' property to column.
 
 ## 2.0.4
