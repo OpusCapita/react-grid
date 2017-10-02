@@ -55,7 +55,7 @@ export default class DropdownControls extends React.PureComponent {
     let menuItems = [];
     if (this.props.filtering) {
       menuItems.push({
-        title: 'Show filtering row',
+        title: <M id="ShowFilteringRow" />,
         icon: this.props.isFiltering ?
           <Icon
             type="indicator"
