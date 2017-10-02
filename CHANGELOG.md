@@ -4,6 +4,8 @@
 
 ## <next>
 * Display asterisk at the header of required column
+* Add possibility to remove new rows with trash icon
+* Auto-remove new rows that are empty
 
 ## 2.0.5
 * Fix bug: Sometimes filter is applied although the filter string is hidden

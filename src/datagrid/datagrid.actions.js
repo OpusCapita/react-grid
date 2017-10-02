@@ -18,6 +18,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_CREATE: 'PLATFORM_DATAGRID_CREATE',
   PLATFORM_DATAGRID_ADD_NEW_ITEM: 'PLATFORM_DATAGRID_ADD_NEW_ITEM',
   PLATFORM_DATAGRID_REMOVE_NEW_ITEM: 'PLATFORM_DATAGRID_REMOVE_NEW_ITEM',
+  PLATFORM_DATAGRID_REMOVE_NEW_ITEMS: 'PLATFORM_DATAGRID_REMOVE_NEW_ITEMS',
   PLATFORM_DATAGRID_REMOVE: 'PLATFORM_DATAGRID_REMOVE',
   PLATFORM_DATAGRID_REMOVE_SUCCESS: 'PLATFORM_DATAGRID_REMOVE_SUCCESS',
   PLATFORM_DATAGRID_REMOVE_FAIL: 'PLATFORM_DATAGRID_REMOVE_FAIL',
@@ -321,6 +322,16 @@ export const removeNewItem = (grid, index) =>
       type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM,
       id: grid.id,
       index,
+    });
+  };
+
+export const removeNewItems = (grid, indexes) =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS,
+      id: grid.id,
+      indexes,
     });
   };
 
@@ -671,9 +682,32 @@ export const validateEditedRows = (grid, columns) =>
     return allGood;
   };
 
+export const removeEmptyCreatedRows = (grid, columns) =>
+  (dispatch, getState) => {
+    Utils.checkGridParam(grid);
+    const createData = getState().datagrid.getIn([grid.id, 'createData'], Map());
+    const indexes = [];
+    createData.forEach((createDataRow, rowIndex) => {
+      let isEmpty = true;
+      columns.forEach((col) => {
+        const value = createDataRow.getIn(col.valueKeyPath);
+        if (value !== undefined && value !== '' && value !== null) {
+          isEmpty = false;
+        }
+      });
+      if (isEmpty) {
+        indexes.push(rowIndex);
+      }
+    });
+    if (indexes.length > 0) {
+      removeNewItems(grid, indexes)(dispatch);
+    }
+  };
+
 export const validateCreatedRows = (grid, columns) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
+    removeEmptyCreatedRows(grid, columns)(dispatch, getState);
     const createData = getState().datagrid.getIn([grid.id, 'createData'], Map());
     let allGood = true;
     createData.forEach((createDataRow, rowIndex) => {

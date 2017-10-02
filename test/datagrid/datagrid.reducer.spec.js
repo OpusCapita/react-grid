@@ -97,7 +97,7 @@ describe('Datagrid reducers', () => {
   });
 
   it('sets grid in create mode and creates first item with default values', () => {
-    const columnDefaultValues = {      
+    const columnDefaultValues = {
       age: 50,
     };
     const action = {
@@ -111,7 +111,7 @@ describe('Datagrid reducers', () => {
   });
 
   it('creates new item with default values', () => {
-    const columnDefaultValues = {      
+    const columnDefaultValues = {
       age: 50,
     };
     const action = {
@@ -121,6 +121,34 @@ describe('Datagrid reducers', () => {
     };
     const newState = datagridReducer(undefined, action);
     expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([columnDefaultValues]));
+  });
+
+  it('removes new item', () => {
+    const state = INITIAL_STATE.updateIn([
+      id,
+      'createData',
+    ], List(), items => items.push(Map()));
+    const action = {
+      type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM,
+      id,
+      index: 0,
+    };
+    const newState = datagridReducer(state, action);
+    expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([]));
+  });
+
+  it('removes new items', () => {
+    const state = INITIAL_STATE.updateIn([
+      id,
+      'createData',
+    ], List(), items => items.push(Map()).push(Map()).push(Map()));
+    const action = {
+      type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS,
+      id,
+      indexes: [0, 1, 2],
+    };
+    const newState = datagridReducer(state, action);
+    expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([]));
   });
 
   it('cancels edit/create operations', () => {
