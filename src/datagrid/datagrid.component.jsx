@@ -11,6 +11,7 @@ import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
+import { Icon } from '@opuscapita/react-icons';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
@@ -1001,6 +1002,27 @@ export default class DataGrid extends React.PureComponent {
       }
       columns.push(column);
     });
+
+    if (this.props.isCreating) {
+      columns.push({
+        width: 37,
+        isResizable: false,
+        columnKey: 'removeNewItem',
+        cell: () => null,
+        cellEdit: () => null,
+        cellCreate: rowIndex => (
+          <Icon
+            id={`oc-datagrid-new-item-remove-${this.props.grid.id}-${rowIndex}`}
+            type="indicator"
+            name="delete"
+            width={30}
+            height={30}
+            onClick={() => this.props.removeNewItem(this.props.grid, rowIndex)}
+          />
+        ),
+        cellFilter: () => null,
+      });
+    }
     return columns;
   }
 
@@ -1107,8 +1129,7 @@ export default class DataGrid extends React.PureComponent {
         flexGrow={col.flexGrow ? col.flexGrow : 0}
         fixed={col.fixed}
         allowCellsRecycling={col.allowCellsRecycling}
-      />
-    ));
+      />));
   }
 
   render() {

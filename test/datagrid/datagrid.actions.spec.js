@@ -469,12 +469,24 @@ describe('Datagrid actions', () => {
     expect(this.store.getActions()[0]).to.eql(expectedAction);
   });
 
-  it('call remove new item ', function () {
+  it('call remove new item', function () {
     const action = actions.removeNewItem(GRID, 1);
     const expectedAction = {
       type: actions.TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM,
       id: GRID.id,
       index: 1,
+    };
+
+    this.store.dispatch(action);
+    expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
+
+  it('call remove new items', function () {
+    const action = actions.removeNewItems(GRID, [0, 1, 2]);
+    const expectedAction = {
+      type: actions.TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS,
+      id: GRID.id,
+      indexes: [0, 1, 2],
     };
 
     this.store.dispatch(action);
@@ -685,7 +697,7 @@ describe('Datagrid actions', () => {
     const state = getState(GRID.id, GRID_DATA, {
       config: {
         filteringData: {
-          filterData: {name: 'm'},
+          filterData: { name: 'm' },
         },
       },
     });

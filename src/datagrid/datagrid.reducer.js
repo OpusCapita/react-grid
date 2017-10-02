@@ -11,7 +11,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'session'])
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
-        .deleteIn([action.id, 'createValidation'])
+        .deleteIn([action.id, 'createCellMessages'])
         .deleteIn([action.id, 'cellMessages']);
 
     case TYPES.PLATFORM_DATAGRID_SET_DATA:
@@ -27,7 +27,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         })
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
-        .deleteIn([action.id, 'createValidation'])
+        .deleteIn([action.id, 'createCellMessages'])
         .deleteIn([action.id, 'cellMessages']);
 
     case TYPES.PLATFORM_DATAGRID_BUSY:
@@ -68,6 +68,17 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
           'createData',
         ], List(), items => items.push(Immutable.fromJS(action.columnDefaultValues)));
 
+    case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM:
+      return state.deleteIn([action.id, 'createData', action.index]);
+
+    case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS:
+      return state
+        .setIn([action.id, 'createData'],
+          state
+            .getIn([action.id, 'createData'], List())
+            .filter((val, idx) => action.indexes.indexOf(idx) === -1),
+        );
+
     case TYPES.PLATFORM_DATAGRID_CANCEL:
       return state
         .mergeIn([action.id, 'session'], Map({
@@ -76,7 +87,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         }))
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
-        .deleteIn([action.id, 'createValidation'])
+        .deleteIn([action.id, 'createCellMessages', 'error'])
         .deleteIn([action.id, 'cellMessages', 'error']);
 
     case TYPES.PLATFORM_DATAGRID_SAVE:
@@ -105,7 +116,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         })
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
-        .deleteIn([action.id, 'createValidation'])
+        .deleteIn([action.id, 'createCellMessages', 'error'])
         .deleteIn([action.id, 'cellMessages', 'error']);
     }
 

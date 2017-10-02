@@ -72,6 +72,7 @@ export const propTypes = {
   intl: object.isRequired,
   // Action props
   addNewItem: func.isRequired,
+  removeNewItem: func.isRequired,
   create: func.isRequired,
   edit: func.isRequired,
   remove: func.isRequired,
