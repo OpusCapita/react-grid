@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 2.1.0
 * Display asterisk at the header of required column
 * Add possibility to remove new rows with trash icon
 * Auto-remove new rows that are empty

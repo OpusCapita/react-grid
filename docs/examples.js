@@ -4598,7 +4598,7 @@ exports.default = function (subClass, superClass) {
 
 exports.__esModule = true;
 
-var _assign = __webpack_require__(196);
+var _assign = __webpack_require__(197);
 
 var _assign2 = _interopRequireDefault(_assign);
 
@@ -5090,7 +5090,7 @@ module.exports = warning;
 var _prodInvariant = __webpack_require__(11);
 
 var DOMProperty = __webpack_require__(47);
-var ReactDOMComponentFlags = __webpack_require__(155);
+var ReactDOMComponentFlags = __webpack_require__(156);
 
 var invariant = __webpack_require__(9);
 
@@ -5523,9 +5523,9 @@ module.exports = { debugTool: debugTool };
 var _prodInvariant = __webpack_require__(11),
     _assign = __webpack_require__(13);
 
-var CallbackQueue = __webpack_require__(159);
+var CallbackQueue = __webpack_require__(160);
 var PooledClass = __webpack_require__(37);
-var ReactFeatureFlags = __webpack_require__(160);
+var ReactFeatureFlags = __webpack_require__(161);
 var ReactReconciler = __webpack_require__(48);
 var Transaction = __webpack_require__(76);
 
@@ -6229,7 +6229,7 @@ function updateLink (link, options, obj) {
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var freeGlobal = __webpack_require__(221);
+var freeGlobal = __webpack_require__(222);
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -6969,7 +6969,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormattedHTMLMessage", function() { return FormattedHTMLMessage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__locale_data_index_js__ = __webpack_require__(453);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__locale_data_index_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__locale_data_index_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_intl_messageformat__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_intl_messageformat__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_intl_messageformat___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_intl_messageformat__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_intl_relativeformat__ = __webpack_require__(462);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_intl_relativeformat___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_intl_relativeformat__);
@@ -8675,7 +8675,7 @@ module.exports = emptyFunction;
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(53);
-var IE8_DOM_DEFINE = __webpack_require__(197);
+var IE8_DOM_DEFINE = __webpack_require__(198);
 var toPrimitive = __webpack_require__(128);
 var dP = Object.defineProperty;
 
@@ -8707,7 +8707,7 @@ module.exports = function (it, key) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(200);
+var IObject = __webpack_require__(201);
 var defined = __webpack_require__(130);
 module.exports = function (it) {
   return IObject(defined(it));
@@ -8874,10 +8874,10 @@ var _assign = __webpack_require__(13);
 var ReactCurrentOwner = __webpack_require__(29);
 
 var warning = __webpack_require__(10);
-var canDefineProperty = __webpack_require__(151);
+var canDefineProperty = __webpack_require__(152);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-var REACT_ELEMENT_TYPE = __webpack_require__(152);
+var REACT_ELEMENT_TYPE = __webpack_require__(153);
 
 var RESERVED_PROPS = {
   key: true,
@@ -9630,7 +9630,7 @@ var DOMNamespaces = __webpack_require__(108);
 var setInnerHTML = __webpack_require__(78);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(109);
-var setTextContent = __webpack_require__(163);
+var setTextContent = __webpack_require__(164);
 
 var ELEMENT_NODE_TYPE = 1;
 var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
@@ -14915,7 +14915,7 @@ module.exports = exports['default'];
 /* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(147),
+var Symbol = __webpack_require__(148),
     getRawTag = __webpack_require__(583),
     objectToString = __webpack_require__(584);
 
@@ -15023,8 +15023,8 @@ module.exports = getNative;
 var EventPluginHub = __webpack_require__(62);
 var EventPluginUtils = __webpack_require__(102);
 
-var accumulateInto = __webpack_require__(156);
-var forEachAccumulated = __webpack_require__(157);
+var accumulateInto = __webpack_require__(157);
+var forEachAccumulated = __webpack_require__(158);
 var warning = __webpack_require__(10);
 
 var getListener = EventPluginHub.getListener;
@@ -15165,8 +15165,8 @@ var EventPluginRegistry = __webpack_require__(101);
 var EventPluginUtils = __webpack_require__(102);
 var ReactErrorUtils = __webpack_require__(103);
 
-var accumulateInto = __webpack_require__(156);
-var forEachAccumulated = __webpack_require__(157);
+var accumulateInto = __webpack_require__(157);
+var forEachAccumulated = __webpack_require__(158);
 var invariant = __webpack_require__(9);
 
 /**
@@ -16090,7 +16090,7 @@ function shallowEqual(objA, objB) {
   return true;
 }
 // EXTERNAL MODULE: ./node_modules/redux/es/index.js + 6 modules
-var es = __webpack_require__(183);
+var es = __webpack_require__(184);
 
 // EXTERNAL MODULE: ./node_modules/lodash-es/isPlainObject.js + 8 modules
 var isPlainObject = __webpack_require__(122);
@@ -16631,7 +16631,7 @@ module.exports = function (bitmap, value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(199);
+var $keys = __webpack_require__(200);
 var enumBugKeys = __webpack_require__(134);
 
 module.exports = Object.keys || function keys(O) {
@@ -16963,7 +16963,7 @@ module.exports = TransactionImpl;
 
 
 var SyntheticUIEvent = __webpack_require__(63);
-var ViewportMetrics = __webpack_require__(162);
+var ViewportMetrics = __webpack_require__(163);
 
 var getEventModifierState = __webpack_require__(106);
 
@@ -17274,7 +17274,7 @@ var _assign = __webpack_require__(13);
 
 var EventPluginRegistry = __webpack_require__(101);
 var ReactEventEmitterMixin = __webpack_require__(388);
-var ViewportMetrics = __webpack_require__(162);
+var ViewportMetrics = __webpack_require__(163);
 
 var getVendorPrefixedEventName = __webpack_require__(389);
 var isEventSupported = __webpack_require__(105);
@@ -17969,7 +17969,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = style;
 
-var _camelizeStyle = __webpack_require__(209);
+var _camelizeStyle = __webpack_require__(210);
 
 var _camelizeStyle2 = _interopRequireDefault(_camelizeStyle);
 
@@ -17985,7 +17985,7 @@ var _removeStyle = __webpack_require__(544);
 
 var _removeStyle2 = _interopRequireDefault(_removeStyle);
 
-var _properties = __webpack_require__(210);
+var _properties = __webpack_require__(211);
 
 var _isTransform = __webpack_require__(545);
 
@@ -18186,7 +18186,7 @@ module.exports = ListCache;
 /* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var eq = __webpack_require__(222);
+var eq = __webpack_require__(223);
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -18266,7 +18266,7 @@ var _prodInvariant = __webpack_require__(44);
 
 var ReactNoopUpdateQueue = __webpack_require__(100);
 
-var canDefineProperty = __webpack_require__(151);
+var canDefineProperty = __webpack_require__(152);
 var emptyObject = __webpack_require__(46);
 var invariant = __webpack_require__(9);
 var warning = __webpack_require__(10);
@@ -19219,7 +19219,7 @@ var ReactInstrumentation = __webpack_require__(22);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(109);
 var setInnerHTML = __webpack_require__(78);
-var setTextContent = __webpack_require__(163);
+var setTextContent = __webpack_require__(164);
 
 function getNodeAfter(parentNode, node) {
   // Special case for text components, which return [open, close] comments
@@ -20768,7 +20768,7 @@ var _LocationUtils = __webpack_require__(50);
 
 var _DOMUtils = __webpack_require__(82);
 
-var _DOMStateStorage = __webpack_require__(182);
+var _DOMStateStorage = __webpack_require__(183);
 
 var _PathUtils = __webpack_require__(32);
 
@@ -21570,7 +21570,7 @@ var PROTOTYPE = 'prototype';
 // Create object with fake `null` prototype: use iframe Object with cleared prototype
 var createDict = function () {
   // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(198)('iframe');
+  var iframe = __webpack_require__(199)('iframe');
   var i = enumBugKeys.length;
   var lt = '<';
   var gt = '>';
@@ -21887,6 +21887,13 @@ module.exports = exports['default'];
 /* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
+!function(e,t){ true?module.exports=t(__webpack_require__(0),__webpack_require__(2)):"function"==typeof define&&define.amd?define("react-icons",["react","prop-types"],t):"object"==typeof exports?exports["react-icons"]=t(require("react"),require("prop-types")):e["react-icons"]=t(e.react,e["prop-types"])}(this,function(e,t){return function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=55)}([function(e,t){e.exports=__webpack_require__(0)},function(e,t,n){"use strict";var r=n(54);n.d(t,"a",function(){return r.a})},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-attention",d:"M20.9 18.6l-.1-2.1c0-2.5-1.6-4.7-4-5.5.2-1-.6-2-1.6-2.2-1-.2-2 .6-2.2 1.6v.6c-2.4.8-4 3-4 5.5v2.1c-.7 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3h4.4c-.2.8.2 1.7 1.1 1.9.8.2 1.7-.2 1.9-1.1.1-.3.1-.6 0-.9h4.4c.7 0 1.3-.5 1.3-1.2.1-.7-.5-1.3-1.2-1.3zM6.1 15.6c-.4 0-.8-.3-.8-.7-.9-3.5 1.2-7 4.7-7.9.5-.1.9.2 1.1.6s-.2.9-.6 1.1c-2.6.6-4.1 3.2-3.5 5.8 0 .5-.3.9-.7 1l-.2.1zM24 15.6c.4 0 .8-.3.9-.7.9-3.5-1.2-7-4.7-7.9-.5-.1-.9.2-1.1.6-.1.5.2.9.6 1.1 2.6.6 4.1 3.2 3.5 5.8-.1.5.2.9.6 1.1h.2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Alert.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M20.92 13.5h-8.46L15 11a1.4 1.4 0 1 0-2-2l-5 5a1.4 1.4 0 0 0 0 2l5 5a1.4 1.4 0 0 0 2-2l-2.54-2.5h8.46a1.5 1.5 0 0 0 0-3z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/ArrowLeft.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M17.9 12.11l-1-1-5.07 5.07a2.15 2.15 0 0 0 3 3l6.09-6.09a3.59 3.59 0 0 0-5.07-5.07l-6.37 6.42a5 5 0 0 0 7.08 7.08l4.36-4.36-1-1-4.36 4.36a3.57 3.57 0 0 1-5-5l6.4-6.39a2.15 2.15 0 0 1 3 3l-6.12 6.07a.72.72 0 0 1-1-1l5.07-5.07z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Attachment.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40.53 40.53"},this.props),i.a.createElement("title",null,"close"),i.a.createElement("path",{className:"oc-icon-burger-close",d:"M24.34 20l8.84-8.84a2.88 2.88 0 1 0-4.08-4.03L20.26 16l-8.83-8.87a2.88 2.88 0 1 0-4.08 4.07l8.84 8.8-8.84 8.88A2.88 2.88 0 1 0 11.43 33l8.84-8.84L29.1 33a2.88 2.88 0 0 0 4.07-4.07z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Burger-close.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40.53 40.53"},this.props),i.a.createElement("rect",{className:"oc-icon-burger",x:"5.06",y:"7.29",width:"30.42",height:"5.05",rx:".98",ry:".98"}),i.a.createElement("rect",{className:"oc-icon-burger",x:"5.06",y:"17.61",width:"30.42",height:"5.05",rx:".98",ry:".98"}),i.a.createElement("rect",{className:"oc-icon-burger",x:"5.06",y:"27.93",width:"30.42",height:"5.05",rx:".98",ry:".98"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Burger.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M11.1 15a1.39 1.39 0 0 0 .41 1l5 5a1.4 1.4 0 0 0 2-2l-4-4 4-4a1.4 1.4 0 0 0-2-2l-5 5a1.39 1.39 0 0 0-.41 1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/CaretLeft.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M18.9 15a1.39 1.39 0 0 0-.41-1l-5-5a1.4 1.4 0 0 0-2 2l4 4-4 4a1.4 1.4 0 0 0 2 2l5-5a1.39 1.39 0 0 0 .41-1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/CaretRight.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M16.33 15l2.89-2.89a.94.94 0 1 0-1.33-1.33L15 13.67l-2.89-2.89a.94.94 0 1 0-1.33 1.33L13.67 15l-2.89 2.89a.94.94 0 1 0 1.33 1.33L15 16.33l2.89 2.89a.94.94 0 0 0 1.33-1.33z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Close.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M22.33 10.34A1.33 1.33 0 0 0 21 9H9a1.33 1.33 0 0 0-1.33 1.33v13.35s1.93-4 2.67-4H21a1.33 1.33 0 0 0 1.33-1.33v-8z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Comment.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M21.45 8.88h-12a2.22 2.22 0 0 0-1.95 1.59V23.8s2.55-3.92 3.28-3.92h10.67a1.19 1.19 0 0 0 1.05-1.41v-8c0-.74-.32-1.59-1.05-1.59zm-5.95 7h-5v-2h5v2zm4-3h-9v-2h9v2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Commented.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M18.45 8.68L17.4 6.86h-4.8l-1.05 1.82H9.08v2h11.84v-2h-2.47zm-5.69-.09l.42-.73h3.64l.42.73h-4.48zM9.1 23.14h11.8v-11H9.1v11zm9.4-8.39h1v6h-1v-6zm-2 0h1v6h-1v-6zm-2 0h1v6h-1v-6zm-2 0h1v6h-1v-6zm-2 0h1v6h-1v-6z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Delete.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M21.83 9.14H8.17L15 14.25l6.83-5.11z"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15.6 16.3l-.11.06-.1.05a1 1 0 0 1-.39.09 1 1 0 0 1-.39-.09l-.1-.05-.11-.06-7.9-5.91v10.47h17V10.39z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Email.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-error",d:"M22.4 19.2l-6-9.8c-.3-.8-1.2-1.2-2-.9-.4.2-.7.5-.8.9l-6 9.8c-.8 1.3-.2 2.3 1.3 2.3h12.2c1.5 0 2-1 1.3-2.3zM14 12.5c.1-.5.7-.9 1.2-.7.4.1.6.4.7.7v3c-.1.5-.7.9-1.2.7-.4-.1-.6-.4-.7-.7v-3zm1 7.3c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Error.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"15",cy:"21.61",r:"2.39"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 17.17a2 2 0 0 1-2-2V8a2 2 0 0 1 4 0v7.25a2 2 0 0 1-2 1.92z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Exclamation.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M7.62 8.51h2.44v14.85H7.62zM11.87 17.18a5.52 5.52 0 0 1 4-.52c1.13.3 2.26 2.52 3.53 2.52 3.77 0 3.94-1 3.94-1V9.51s-.17 1-3.94 1c-1.17 0-2.47-2.19-3.53-2.46a5.54 5.54 0 0 0-4 .46v8.67z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Flagged.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"help"),i.a.createElement("path",{className:"cls-1",d:"M15 5a10 10 0 1 0 10 10A10 10 0 0 0 15 5zm.84 14.79h-1.63v-1.47h1.62zm2.22-5.47a7.32 7.32 0 0 1-1.43 1.44 2.86 2.86 0 0 0-.7.92 3 3 0 0 0-.12 1.18h-1.62v-.59a3.21 3.21 0 0 1 .26-1.38 4 4 0 0 1 1-1.18 7.27 7.27 0 0 0 .93-.85 1.14 1.14 0 0 0 .24-.7 1.17 1.17 0 0 0-.42-.9 1.62 1.62 0 0 0-1.12-.37 1.7 1.7 0 0 0-1.14.39 2.06 2.06 0 0 0-.63 1.18l-1.64-.2a2.72 2.72 0 0 1 1-1.93 3.44 3.44 0 0 1 2.33-.8 3.56 3.56 0 0 1 2.45.8 2.43 2.43 0 0 1 .91 1.87 2.06 2.06 0 0 1-.3 1.12z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Help.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30",className:"oc-icon-indicator"},this.props),i.a.createElement("path",{d:"M15 21c-4.43 0-7.82-5.19-8-5.41a1 1 0 0 1 0-1.08C7.18 14.24 10.57 9 15 9s7.82 5.19 8 5.41a1 1 0 0 1 0 1.08c-.18.27-3.57 5.51-8 5.51zm-5.89-6c.9 1.2 3.27 4 5.89 4 2.43 0 4.8-2.49 5.9-3.95-.9-1.19-3.27-4-5.9-4S10 13.8 9.11 15z"}),i.a.createElement("circle",{cx:"14.93",cy:"14.76",r:"2.75"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Inspected.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"11.92",cy:"14.76",r:"2.75"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M14.09 20.11a2.48 2.48 0 0 1-.7-1.4A4.27 4.27 0 0 1 12 19c-2.63 0-5-2.77-5.9-4 1.1-1.46 3.47-4 5.9-4 2.62 0 5 2.76 5.89 4-.22.3-.54.69-.92 1.11a2.49 2.49 0 0 1 .65.46l.85.86A15.77 15.77 0 0 0 20 15.54a1 1 0 0 0 0-1.08C19.82 14.24 16.43 9 12 9s-7.82 5.19-8 5.41a1 1 0 0 0 0 1.08c.18.27 3.57 5.51 8 5.51a6.36 6.36 0 0 0 2.43-.51z"}),i.a.createElement("path",{className:"cls-1",d:"M19.72 23.75a1.5 1.5 0 0 1-1.06-.44l-3.78-3.78A1.5 1.5 0 0 1 17 17.41l2.72 2.72 5-5a1.5 1.5 0 0 1 2.12 2.12l-6.07 6.07a1.5 1.5 0 0 1-1.05.43z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/InspectedAndApproved.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 24.4c-2.5 0-4.8-1-6.5-2.7-1.7-1.7-2.7-4.1-2.7-6.5 0-2.5 1-4.8 2.7-6.5C9 8 10 8 10.6 8.6s.6 1.5 0 2.1c-1.2 1.2-1.8 2.8-1.8 4.4 0 1.7.7 3.2 1.8 4.4 1.2 1.2 2.8 1.8 4.4 1.8s3.2-.7 4.4-1.8c1.2-1.2 1.8-2.8 1.8-4.4 0-1.7-.7-3.2-1.8-4.4-.6-.6-.6-1.5 0-2.1s1.5-.6 2.1 0c1.7 1.7 2.7 4.1 2.7 6.5 0 2.5-1 4.8-2.7 6.5-1.7 1.8-4 2.8-6.5 2.8z"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 16.6c-.8 0-1.5-.7-1.5-1.5v-8c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v8c0 .9-.7 1.5-1.5 1.5z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Logout.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("rect",{className:"oc-icon-indicator",x:"8.66",y:"13.46",width:"12.68",height:"3.08",rx:".73",ry:".73"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Minus.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"8",cy:"16",r:"2.25"}),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"15",cy:"16",r:"2.25"}),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"22",cy:"16",r:"2.25"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/More.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-success",d:"M13.7 21c-.3 0-.7-.1-.9-.3l-5.3-4.3c-.7-.5-.8-1.4-.4-2.1s1.4-.8 2.1-.4c.1 0 .1.1.2.1l4.2 3.4 7-7.9c.6-.6 1.5-.7 2.1-.1s.7 1.5.1 2.1l-8 9c-.3.3-.7.5-1.1.5z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Ok.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"Pinned"),i.a.createElement("path",{className:"cls-1",d:"M19.12 16.34h-.79v-5.69a1.35 1.35 0 0 0 0-2.69h-6.82a1.34 1.34 0 0 0-.06 2.68v5.7h-.71c-1.36 0-2.48 1.41-2.48 3.12h5.59l.71 6h.71l.79-6h5.54c0-1.71-1.12-3.12-2.48-3.12zm-5.29 0h-.52v-5.69h.52z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Pinned.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M20.6 13.46h-4.06V9.4a.73.73 0 0 0-.73-.73h-1.62a.73.73 0 0 0-.73.73v4.06H9.4a.73.73 0 0 0-.73.73v1.61a.73.73 0 0 0 .73.73h4.06v4.07a.73.73 0 0 0 .73.73h1.61a.73.73 0 0 0 .73-.73v-4.06h4.07a.73.73 0 0 0 .73-.73v-1.62a.73.73 0 0 0-.73-.73z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Plus.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 7.49A7.51 7.51 0 1 0 22.51 15 7.51 7.51 0 0 0 15 7.49zm4.36 9h-8.72v-2.95h8.71v2.92z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Rejected.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-remove",d:"M17.31 15l5-5A1.63 1.63 0 1 0 20 7.68l-5 5-5-5A1.63 1.63 0 0 0 7.68 10l5 5-5 5A1.63 1.63 0 1 0 10 22.32l5-5 5 5A1.63 1.63 0 1 0 22.32 20z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Remove.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M22.65 21.24l-4.34-4.34a6.23 6.23 0 1 0-1.41 1.41l4.34 4.34a1 1 0 0 0 1.41-1.41zm-12.36-5a4.21 4.21 0 1 1 3 1.24 4.19 4.19 0 0 1-3-1.23z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Search.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M23.21 16.94a3.8 3.8 0 0 1 1.4-5.18l-2-3.39a3.74 3.74 0 0 1-1.9.49A3.54 3.54 0 0 1 17 5h-4a3.34 3.34 0 0 1-.51 1.94 3.81 3.81 0 0 1-5.14 1.4l-2 3.4a3.75 3.75 0 0 1 1.4 1.39 3.8 3.8 0 0 1-1.39 5.18l2 3.39a3.75 3.75 0 0 1 1.89-.51A4.06 4.06 0 0 1 13 25h3.92a3.23 3.23 0 0 1 .51-1.9 3.8 3.8 0 0 1 5.18-1.38l2-3.39a3.75 3.75 0 0 1-1.4-1.39zM15 19.06a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Settings.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"Card_status_inclarification copy"),i.a.createElement("path",{className:"cls-1",d:"M9.91 7.57a8.81 8.81 0 0 1 1-.73 7.9 7.9 0 0 1 1.17-.59 7.35 7.35 0 0 1 1.34-.4A7.94 7.94 0 0 1 15 5.71a6.71 6.71 0 0 1 2.11.29 4.59 4.59 0 0 1 1.61.89 3.93 3.93 0 0 1 1 1.4 4.52 4.52 0 0 1 .36 1.82 4.63 4.63 0 0 1-.26 1.65 4.5 4.5 0 0 1-.67 1.2 5.05 5.05 0 0 1-.89.88l-.91.69a7.57 7.57 0 0 0-.75.64 1.32 1.32 0 0 0-.39.7l-.35 1.75h-2.65l-.28-2v-.15-.15a1.76 1.76 0 0 1 .26-1 3.37 3.37 0 0 1 .66-.76 10.18 10.18 0 0 1 .86-.66 7.76 7.76 0 0 0 .86-.69 3.45 3.45 0 0 0 .66-.83 2.12 2.12 0 0 0 .26-1.08A1.52 1.52 0 0 0 16 9.16a2 2 0 0 0-1.36-.44 3.79 3.79 0 0 0-1.11.14 4.5 4.5 0 0 0-.76.31l-.56.31a.94.94 0 0 1-.48.14.86.86 0 0 1-.8-.46zm2.3 14.59a2.07 2.07 0 0 1 .17-.84 2.11 2.11 0 0 1 .46-.67 2.2 2.2 0 0 1 .69-.46 2.23 2.23 0 0 1 .88-.17 2.21 2.21 0 0 1 .86.17 2.28 2.28 0 0 1 .7.46 2.07 2.07 0 0 1 .64 1.51 2.1 2.1 0 0 1-.17.84 2 2 0 0 1-.47.68 2.19 2.19 0 0 1-.7.45 2.27 2.27 0 0 1-.86.16 2.3 2.3 0 0 1-.87-.16 2.11 2.11 0 0 1-1.32-2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/StatusInclarification.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-attention",d:"M21.12 12.19c0-4.78 0-7.41-6.12-7.41s-6.12 2.63-6.12 7.41H7.19v13h15.62v-13h-1.69zM15 7.36c3.54 0 3.54.09 3.54 4.83h-7.08c0-4.83 0-4.83 3.54-4.83zm.75 11.54v2.27a.76.76 0 1 1-1.51 0v-2.26a1.78 1.78 0 1 1 1.51-.01z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/StatusLocked.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/generic.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14"})),i.a.createElement("text",{transform:"translate(9.01 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"PDF"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/pdf.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})),i.a.createElement("text",{transform:"translate(8.67 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"PNG"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/png.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("path",{fill:"#67707c",d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z",fill:"#67707c"}),i.a.createElement("text",{transform:"translate(9.36 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"PPT"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/ppt.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})),i.a.createElement("text",{transform:"translate(8.39 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"DOC"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/word.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})),i.a.createElement("text",{transform:"translate(9.67 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"XLS"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/xls.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 50 30"},this.props),i.a.createElement("path",{className:"oc-icon-logo",d:"M35.5 24.7h2.1c.6 0 1.3-.2 1.9-.3.4-.1.7-.4.8-.8l.3-1.5c.1-.3-.1-.4-.3-.4-.4 0-.8.1-1.3.1-1.7.2-3.3.3-5 0-1.2-.2-2.1-.7-2.5-2-.1-.4-.2-.8-.2-1.2-.1-1.9.3-3.7.7-5.6.3-1.3.7-2.5 1.3-3.7.6-1.1 1.6-1.8 2.8-2 1.5-.3 2.9-.3 4.4-.2.8 0 1.5.1 2.3.2.3 0 .5-.1.6-.4l.3-1.5c.1-.7 0-.8-.7-.9-2.6-.4-5.2-.4-7.8 0-2.8.4-5 1.9-6.1 4.6-1.4 3.5-2.1 7.1-2 10.8.1 2.2 1.3 3.7 3.4 4.3 1.7.5 3.4.5 5 .5zM22 4.8c-.4-.2-.9-.3-1.4-.4-2-.4-4-.3-6.1-.1-3 .4-5.2 1.9-6.4 4.7-.7 1.6-1.1 3.3-1.4 5-.4 2-.8 4.1-.6 6.2.2 1.9 1.1 3.2 2.9 3.9 1.4.5 2.9.5 4.7.6.6-.1 1.6-.1 2.5-.2 2.8-.4 4.9-1.8 6.1-4.4.7-1.5 1.1-3.1 1.4-4.8.4-2.1.8-4.3.7-6.5.2-1.8-.6-3.2-2.4-4zm-1.9 8.8c-.3 1.7-.6 3.4-1.2 5.1-.1.3-.2.6-.4.9-.7 1.4-1.8 2.1-3.3 2.1-1 0-2 0-3-.1-1.2-.1-1.8-.9-1.9-2-.2-1.4.1-2.8.3-4.2.3-1.7.7-3.3 1.1-5 .1-.5.4-1 .7-1.5.6-1.1 1.5-1.6 2.7-1.7.5-.1 1-.1 1.6-.1.5 0 1 .1 1.5.1 1.4.2 2.2 1 2.1 2.5.1 1.3 0 2.6-.2 3.9z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/logo/oc-logo-short.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 150 30"},this.props),i.a.createElement("path",{className:"oc-icon-logo",d:"M75.2 22.5h2c.6 0 1.2-.2 1.8-.3.4-.1.7-.4.7-.8.1-.5.2-1 .3-1.4.1-.3-.1-.4-.3-.4-.4 0-.8.1-1.2.1-1.6.2-3.1.3-4.7 0-1.1-.2-2-.7-2.3-1.8-.1-.4-.2-.8-.2-1.2-.1-1.8.3-3.5.7-5.3.3-1.2.6-2.4 1.3-3.5.6-1 1.5-1.7 2.6-1.9 1.3-.2 2.7-.1 4.1 0 .7 0 1.4.1 2.1.2.3 0 .5-.1.5-.4.1-.5.2-.9.3-1.4.1-.6 0-.8-.6-.9-2.4-.4-4.9-.4-7.3 0-2.7.4-4.7 1.8-5.8 4.3-1.3 3.3-2 6.7-1.9 10.2.1 2.1 1.2 3.5 3.2 4.1 1.5.4 3.1.5 4.7.4zM40.5 8.7c-.5 0-.6.1-.7.6-.4 2.2-.9 4.4-1.3 6.7-.2 1.1-.5 2.3-.5 3.4.1 1 .5 1.8 1.3 2.2.3.2.7.3 1.1.4 2.4.5 4.9.5 7.3-.1 1.6-.4 2.7-1.4 3.2-3l.3-1.2c.6-2.9 1.1-5.7 1.6-8.6.1-.4 0-.5-.4-.5h-2.7c-.4 0-.6.1-.6.5l-1.2 6.6c-.2.9-.4 1.8-.6 2.6-.1.6-.5 1-1.1 1.1-1.1.3-2.3.3-3.5 0-.5-.1-.7-.4-.8-1v-.6c.1-.8.3-1.6.4-2.5.4-2.1.8-4.1 1.2-6.1.1-.5 0-.5-.5-.5-.4.1-2.1 0-2.5 0zM58.3 8.7c-1.7.3-3 1.2-3.4 3-.1.2-.1.5-.2.7-.3 1.5.2 2.4 1.5 3.1.4.2.9.4 1.4.6.8.3 1.6.7 2.4 1 .3.1.6.3.6.7.1.9-.3 1.6-1.2 1.7-.7.1-1.5.2-2.2.2-1.1 0-2.1-.2-3.1-.3-.4 0-.6 0-.7.5-.1.5-.2 1-.3 1.6-.1.3.1.6.4.7.1 0 .2.1.3.1 1.5.3 3.1.3 4.6.2 1.1-.1 2.2-.2 3.3-.7 1.8-.8 3.1-3.1 2.7-5.1-.1-.7-.6-1.3-1.2-1.6-1-.5-2-.9-3.1-1.3-.4-.2-.8-.3-1.2-.5-.5-.3-.6-.6-.5-1.1.2-.6.5-1 1.2-1 1-.1 2-.1 3 0 .6 0 1.2.1 1.8.2.3 0 .6-.1.6-.5.1-.4.2-.8.2-1.2.1-.3-.1-.6-.4-.7-.2-.1-.4-.1-.6-.1-.6-.4-4.8-.4-5.9-.2zM128.2 11.5h1.8c.3 0 .4-.1.5-.4.1-.6.2-1.2.3-1.7.1-.4 0-.5-.4-.5H127c-.5 0-.6-.1-.6-.6 0-.7.1-1.3.1-2 0-.4-.1-.5-.5-.5h-2.2c-.4 0-.5.2-.6.5-.8 4-1.5 8-2.3 12-.1.7-.3 1.4-.1 2.1.2 1 1 1.5 1.9 1.7 1.4.4 2.9.3 4.3.3.4 0 .8-.1 1.2-.2.3-.1.6-.3.6-.5.2-.6.3-1.2.3-1.8 0-.1-.2-.3-.3-.3-.1-.1-.3 0-.4 0-.9 0-1.9.1-2.8 0-.8-.1-1.2-.6-1-1.4.4-2.1.8-4.2 1.2-6.2.1-.4.2-.5.6-.5h1.8zM115.1 22.3h1.3c.5 0 .6-.1.7-.6.3-1.7.6-3.4 1-5.1.5-2.5.9-4.9 1.4-7.4.1-.5 0-.6-.5-.6h-2.6c-.5 0-.6.1-.7.6l-1.5 7.8c-.3 1.6-.6 3.1-.9 4.7-.1.4 0 .6.5.6h1.3zM118.1 6.5h1.4c.3 0 .5-.1.6-.5.1-.7.3-1.5.4-2.2.1-.5 0-.6-.5-.6h-2.5c-.5 0-.6.1-.7.6-.1.7-.3 1.5-.4 2.2-.1.4 0 .5.4.5h1.3zM18.4 3.8c-.4-.2-.9-.3-1.3-.4-1.9-.4-3.8-.3-5.7-.1-2.8.4-4.9 1.8-6 4.5-.6 1.5-1 3.1-1.3 4.7-.4 1.9-.7 3.9-.5 5.8.2 1.8 1 3.1 2.8 3.7 1.3.5 2.7.5 4.4.6.6 0 1.5-.1 2.4-.2 2.7-.4 4.6-1.7 5.8-4.2.6-1.4 1-3 1.3-4.5.4-2 .8-4 .7-6.1-.2-1.7-.9-3.1-2.6-3.8zm-1.8 8.3c-.2 1.6-.6 3.3-1.1 4.8-.1.3-.2.6-.4.8-.6 1.3-1.7 1.9-3.1 2-.9 0-1.9 0-2.8-.1-1.1-.1-1.7-.8-1.8-1.9-.2-1.3.1-2.6.3-3.9.3-1.6.7-3.1 1.1-4.7.1-.5.4-1 .6-1.4.6-1 1.5-1.5 2.6-1.6.5-.1 1-.1 1.5-.1s1 .1 1.4.1c1.3.2 2.1.9 2 2.4 0 1.2-.1 2.4-.3 3.6zM109.2 8.8c2 .4 2.8 1.4 2.8 3.4 0 2.4-.4 4.7-1.6 6.9-1.1 2-2.8 3.1-5.1 3.3-1.4.1-2.8.1-4.2-.3-.4-.1-.5 0-.6.4-.3 1.7-.6 3.7-1 5.4-.1.6-.2 1-.8 1h-2.4c-.5 0-.6-.3-.5-.9.9-4.6 1.7-9.2 2.6-13.8.2-.8.4-1.7.7-2.5.6-1.5 1.9-2.4 3.4-2.7 1.2-.4 5.7-.5 6.7-.2zm-3.5 2.3c-.4 0-.8.1-1.2.1-1 .2-1.7.6-2 1.7-.2.6-.4 1.2-.5 1.9-.2 1.2-.4 2.4-.5 3.6-.1.7.3 1 .9 1.1.5.1 1.1.1 1.6.2 1.6 0 2.5-.5 3-2 .4-1 .6-2.1.8-3.2.1-.6.1-1.2.1-1.9 0-.8-.5-1.3-1.3-1.4-.3 0-.6 0-.9-.1zM30.5 8.5c1.1 0 2.3 0 3.4.3 1.6.5 2.4 1.3 2.5 3 .1 2.6-.4 5.2-1.7 7.5-1.1 1.9-2.8 2.8-4.9 3-1.4.1-2.9.1-4.3-.3-.3-.1-.5 0-.5.4-.3 1.8-.7 3.6-1 5.3-.1.4-.2.5-.6.5h-2.6c-.6 0-.7-.1-.6-.7.4-2.2.8-4.3 1.2-6.5.4-2.4.9-4.7 1.4-7.1.1-.6.3-1.2.5-1.8.6-2 2-3.2 4-3.5 1 0 3.2-.2 3.2-.1zm-2.3 11.2c1.3 0 2.4-.3 3-1.6.8-1.6 1.1-3.4 1.1-5.2 0-1.1-.5-1.6-1.5-1.7-.7-.1-1.5 0-2.2.1-1 .1-1.6.7-1.8 1.7-.2.6-.4 1.3-.5 1.9-.2 1.1-.4 2.2-.5 3.3-.1.8.2 1.1 1 1.3.5.2 1 .2 1.4.2zM138.4 13.7h2.2c.3 0 .5-.1.5-.4 0-.4.1-.7 0-1.1-.1-.6-.6-1-1.3-1.1-1.4-.2-2.8-.1-4.2.1-.6.1-1.1.2-1.7.3-.4 0-.5 0-.4-.5.1-.4.1-.9.2-1.3s.4-.6.7-.7c.7-.2 1.4-.4 2.2-.4 1.2-.1 2.4-.1 3.6-.1.9.1 1.9.2 2.7.5 1.3.4 2 1.4 2 2.8 0 1.2-.2 2.5-.5 3.7l-1.2 6.3c-.1.4-.2.5-.6.5h-.8c-.5.1-.9-.2-1.1-.6-.1-.2-.3-.6-.5-.6-.1-.1-.4.3-.6.4-.9.6-1.9.9-2.9 1-1.1 0-2.2 0-3.3-.1-1.7-.3-2.4-1.2-2.3-3 .1-.9.3-1.7.5-2.5.5-1.7 1.8-2.5 3.5-2.7 1.1-.4 3.2-.5 3.3-.5zm-2 6.3c.4 0 .7-.1 1.1-.1 1.3-.3 2.4-.9 2.7-2.3l.3-1.2c0-.2 0-.4-.3-.4-1.2 0-2.4 0-3.6.1-.6 0-1 .3-1.3.9-.3.7-.4 1.4-.4 2.1 0 .4.3.7.7.8.3.1.6.1.8.1zM91.1 20.9c-.1 0-.1.1-.2.1-1 .9-2.3 1.3-3.7 1.4-1.2.1-2.3.1-3.5-.3-1.3-.4-1.8-1.1-1.9-2.4 0-1.2.2-2.4.7-3.5.6-1.3 1.7-2 3-2.2 1-.2 2-.2 3-.2h2.4c.6 0 .7-.1.8-.7 0-.2.1-.4.1-.5 0-.7-.3-1.3-1-1.4-.8-.1-1.7-.2-2.6-.2-1.1.1-2.2.3-3.3.4h-.4c-.2 0-.3-.1-.3-.3.1-.5.1-1.1.3-1.5.1-.3.5-.5.8-.6.7-.2 1.5-.4 2.3-.4 1.3-.1 2.7-.1 4 0 .8.1 1.6.3 2.4.5 1.2.4 1.7 1.5 1.7 2.7 0 1.2-.2 2.4-.4 3.6l-1.2 6.3c-.1.3-.3.5-.6.5h-.1c-1.6 0-1.4.1-2.1-1.1-.1-.1-.2-.1-.2-.2zm-3.9-.8c.4 0 .8-.1 1.2-.1 1.2-.2 2.1-.8 2.6-2.1.2-.5.2-1 .3-1.5.1-.3-.1-.4-.3-.4h-3.2c-.8 0-1.5.2-1.8 1.1-.2.6-.3 1.1-.3 1.7-.1.7.3 1.1.8 1.2.2 0 .4 0 .7.1z"}),i.a.createElement("path",{className:"oc-icon-logo",d:"M64.5 8.6c.2 0 .4.1.6.1.3.1.4.4.4.7-.1.4-.2.8-.2 1.2-.1.4-.3.5-.6.5-.6 0-1.2-.1-1.8-.2h-3c-.7 0-1.1.4-1.2 1-.1.5 0 .9.5 1.1.4.2.8.4 1.2.5 1 .4 2.1.9 3.1 1.3.7.3 1.1.8 1.2 1.6.3 2-.9 4.3-2.7 5.1-1 .5-2.2.6-3.3.7-1.5.1-3.1.1-4.6-.2-.1 0-.2-.1-.3-.1-.3-.1-.5-.3-.4-.7.1-.5.2-1 .3-1.6.1-.4.2-.5.7-.5 1 .1 2.1.2 3.1.3.7 0 1.5 0 2.2-.2.8-.2 1.3-.9 1.2-1.7-.1-.4-.3-.6-.6-.7-.8-.3-1.6-.7-2.4-1-.5-.2-.9-.4-1.4-.6-1.3-.7-1.8-1.6-1.5-3.1 0-.2.1-.5.2-.7.4-1.8 1.7-2.7 3.4-3 .8.1 5 .1 5.9.2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/logo/oc-logo.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M8.2 29.5h24.2v2.1H8.2z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M6.8 31.5h27v2.1h-27zM10.8 17.9h3.7v9.4h-3.7zM18.4 17.9h3.7v9.4h-3.7zM26.1 17.9h3.7v9.4h-3.7zM20.3 6.2L8 16.2h24.6l-12.3-10zm0 7.4c-1.1 0-2.1-.9-2.1-2.1 0-1.1.9-2.1 2.1-2.1 1.1 0 2.1.9 2.1 2.1-.1 1.2-1 2.1-2.1 2.1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Accounts.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M27.1 9.6v21.3h7V9.6h-7zm3.5 18.2c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zM17.6 9.6v21.3h7V9.6h-7zm3.5 18.2c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M11.4 9L5.2 29.5l6.7 2 6.2-20.4L11.4 9zm-2 18.4c-.8-.2-1.3-1.1-1-1.9.2-.8 1.1-1.3 1.9-1 .8.2 1.3 1.1 1 1.9-.2.8-1.1 1.3-1.9 1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Archive.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M34.5 23.4c0-2-.4-4.4-1.1-6.2-.8-1.8-1.8-3.7-3-5S27.5 9.7 25.7 9c-1.8-.8-3.6-1.2-5.5-1.2s-3.8.4-5.5 1.2c-1.8.8-3.3 1.8-4.5 3.1s-2.3 2.9-3 4.7c-.7 1.8-1.1 3.7-1.1 5.7 0 2.9.8 5.5 2.3 7.9.2.3.5.5.9.5l22.2-.1c.4 0 .6.1.8-.2 1.4-2.5 2.2-4.2 2.2-7.2zm-14.4 4.3c-1.2 0-2.1-.8-2.1-1.7 0-.9 1.7-11.4 2.2-11.4.5 0 2 10.5 2 11.4 0 1-1 1.7-2.1 1.7zm11.4-4.3c-.6 0-1-.7-1-1.3 0-1.4-.3-2.9-.8-4.1-.6-1.3-1.3-2.5-2.2-3.4-.9-.9-2-1.7-3.3-2.2-1.3-.5-2.6-.8-4-.8s-2.7.3-4 .8c-1.2.6-2.3 1.3-3.2 2.2-.9.9-1.6 2-2.2 3.3-.5 1.3-.8 2.8-.8 4.2 0 .6-.4 1.3-1 1.3-.5 0-1-.7-1-1.2 0-1.7.3-3.4 1-4.9.6-1.5 1.5-2.9 2.6-4s2.4-2 3.9-2.7c1.5-.7 3.1-1 4.7-1 1.7 0 3.3.3 4.8.9 1.5.6 2.8 1.5 3.9 2.6s2 2.4 2.6 3.9c.7 1.5 1 3.4 1 5 0 .7-.4 1.4-1 1.4z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Dashboard.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 7.4c-7.1 0-12.9 5.8-12.9 12.9s5.8 12.9 12.9 12.9 12.9-5.8 12.9-12.9S27.4 7.4 20.3 7.4zm1.5 20.4h-3.1V17.4h3.1v10.4zm.2-12.5c-.1.2-.2.4-.4.6-.2.2-.4.3-.6.4s-.5.1-.7.1c-.3 0-.5 0-.7-.1-.2-.1-.4-.2-.6-.4-.2-.2-.3-.4-.4-.6s-.1-.4-.1-.7c0-.3 0-.5.1-.7s.2-.4.4-.6.4-.3.6-.4c.2-.1.5-.1.7-.1.3 0 .5 0 .7.1.2.1.4.2.6.4.2.2.3.4.4.6s.1.5.1.7c0 .2 0 .4-.1.7z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Info.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40.53 40.53"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M37.1 20.36h-3.32a.71.71 0 0 0-.47.12 6.55 6.55 0 0 0-4.26-1.66A6.23 6.23 0 0 0 24.2 21a5.68 5.68 0 0 0-3.79-1.3 5 5 0 0 0-3.66 1.3 6.07 6.07 0 0 0-4.73-2 6.49 6.49 0 0 0-4.38 1.6.71.71 0 0 0-.47-.12H3.86a1.19 1.19 0 0 0-1.18 1.18 1.12 1.12 0 0 0 1.18 1.18h2.36A3 3 0 0 0 6 24c0 2.84 2.72 5.2 5.91 5.2s5.91-2.37 5.91-5.2a2.31 2.31 0 0 0-.12-.95A2.86 2.86 0 0 1 20.3 22a4.14 4.14 0 0 1 2.84.95A3.27 3.27 0 0 0 23 24c0 2.84 2.72 5.2 5.91 5.2s5.91-2.37 5.91-5.2a4.25 4.25 0 0 0-.24-1.3H37a1.19 1.19 0 0 0 1.18-1.18 1.09 1.09 0 0 0-1.08-1.16zM12 26.87c-2 0-3.67-1.3-3.67-2.84S10 21.19 12 21.19s3.67 1.3 3.67 2.84S14 26.87 12 26.87zm17 0c-2 0-3.67-1.3-3.67-2.84s1.66-2.84 3.67-2.84 3.67 1.3 3.67 2.84-1.61 2.84-3.62 2.84z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Inspector.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M23.9 6.9v6.3h6.5z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M31.3 15v.1h-9.4V6.5H10.3v27h21V15zm-4.4 5.1L21 26.7c-.2.2-.5.4-.8.4-.2 0-.5-.1-.7-.2l-3.9-3.2c-.5-.4-.5-1.1-.2-1.6.4-.5 1.1-.6 1.6-.2l3.1 2.5 5.2-5.8c.4-.5 1.1-.5 1.6-.1.4.4.4 1.1 0 1.6z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Invoices.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M22.9 26.1c-.3 0-.5-.1-.7-.3l-4.1-4.1-4 4c-.4.4-1 .4-1.4 0s-.4-1 0-1.4l4.7-4.7c.2-.2.4-.3.7-.3.3 0 .5.1.7.3l4.1 4.1 4.4-4.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-5.1 5.1c-.2.2-.4.3-.7.3z"}),i.a.createElement("circle",{className:"oc-icon-product",cx:"28",cy:"20.1",r:"2"}),i.a.createElement("circle",{className:"oc-icon-product",cx:"18.1",cy:"20.4",r:"2"}),i.a.createElement("circle",{className:"oc-icon-product",cx:"22.9",cy:"25.1",r:"2"}),i.a.createElement("path",{className:"oc-icon-product",d:"M29.7 33.7H9.2c-.8 0-1.5-.7-1.5-1.5v-22c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v20.6h19c.8 0 1.5.7 1.5 1.5 0 .7-.7 1.4-1.5 1.4z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Liquidity.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 42 42"},this.props),i.a.createElement("title",null,"matching"),i.a.createElement("g",{fill:"#ccc"},i.a.createElement("path",{d:"M37.5 12.55v4h-8.36v2.06l-8.48-4.1 8.48-4.1v2.14h8.36zM4.71 18.19v5.11h9.87v2.63l10.01-5.24-10.01-5.24v2.74H4.71zM37.5 25.11v4h-8.36v2.06l-8.48-4.1 8.48-4.1v2.14h8.36z"})))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Matching.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("ellipse",{transform:"rotate(-14.76 16.216 13.85)",className:"oc-icon-product",cx:"16.2",cy:"13.9",rx:"5.3",ry:"5.3"}),i.a.createElement("ellipse",{transform:"rotate(-14.76 29.87 25.67)",className:"oc-icon-product",cx:"29.9",cy:"25.7",rx:"3.7",ry:"3.7"}),i.a.createElement("ellipse",{transform:"rotate(-14.76 9.849 30.945)",className:"oc-icon-product",cx:"9.8",cy:"30.9",rx:"3",ry:"3"}),i.a.createElement("path",{className:"oc-icon-product",d:"M13.9 32.6c-2.2 0-3.5-.3-3.6-.3l-.3-.1c-1-.5-1.7-2.6.4-9 2.3-7.3 5-9.4 5.1-9.5l.4-.3.5.2c.2.1 4.8 1.5 9.3 5.6 4.5 4.1 5.2 6.6 5.3 6.9l.2.6-.5.3c-.2.1-3.8 3.2-9.7 4.7-2.8.7-5.3.9-7.1.9zm-2.8-2.2c1.2.2 4.8.5 9.3-.7 4.2-1.1 7.2-3 8.4-3.9-.5-.9-1.6-2.8-4.5-5.3-3.3-3-6.7-4.5-8-5-.7.8-2.5 3.1-4.1 8.2-1.3 4.5-1.2 6.2-1.1 6.7z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Netting.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 7.4c-7.1 0-12.8 5.7-12.8 12.8 0 .7.1 1.4.2 2 2.9 0 5.1 1.5 5.1 3.4v.9c.1.1.3.2.4.3.1.1.1.1.1.2.9-.8 2.4-1.2 4-1.2 1.8 0 3.4.6 4.3 1.5 0-.3.3-.6.3-.9 0-.3-.1-1.1-.2-1.4-.1-.2-.2-.2-.4-.4-.2-.3-.2-.4-.2-.8-.1-.7.1-.9-.6-.8-.2 0-.3.1-.5 0-.2-.2 0-.3-.3-.4-.3-.1-1.2.5-1.6.6-.4 0-.5-.2-.9-.4-.9-.7-1.5-1.5-1.4-2.6 0-.6.1-1.1.5-1.5.3-.3.8-.4 1-.8.2-.3.3-.8.7-1 .3-.2.8-.1 1.2-.2.4-.2.7-.3 1.1-.2.4 0 .7-.1.9.2.3.4 0 .7.5 1 .4.2 1.2.2 1.6-.1.1-.1 1.4.4 1.5.4.7.3 1.1.8 1.4 1.5.3.7.5 1.3 1 2 .1.2.5.8.6.9.1.1.6-.1.8-.1-.2 1.2-1.7 1.8-1.9 3-.1.4.2.8.1 1.2-.1.4-.5.6-.7.9-.2.2-.5.5-.5.8 0 .2.1.4 0 .5-.1.2-.5.3-.6.5-.4.4-.7.8-1.3 1-.4.1-.8.2-1.2.2v1.2c0 .5-.2 1-.4 1.4 6.3-.8 11.1-6.2 11.1-12.7-.1-7.1-5.8-12.9-12.9-12.9zM11 15.7c-.2.2-1.3.7-1.2 1.1 0 0 .4-.2.4-.1 0 .3-.5.8-.7 1.1-.1.2-.3.5-.5.8-.3.7-.1 1.5-.4 2.1 0-1.2.3-2.5.7-3.7.3-.8.9-2.6 1.6-2.9 0 .1-.1.2-.1.3 0 .2.2.4.2.6.1.3.1.5 0 .7zm3.9-4.6c-.3.3-.5.6-.7.9-.2.3-.7.8-1.1.8-.3 0-.8-.1-.7-.3.8-.7.4-.4.2-.1 1-.9 2.2-1.7 3.5-2.2-.3.4-.8.5-1.2.9zM27.8 28c-.4.5-.9.6-.7-.2.1-.4.3-.8.6-1.1.3-.3.4-.4.6-.8v.3c.1.6-.1 1.4-.5 1.8zM17.6 13c.1-.2.2-.1.5 0 0-.3-.1-1.1.4-1 .2 0 .7.9.8 1-.4.3-.8.3-1.3.4v-.5c-.1.2-.3.3-.4.5-.1-.1-.2-.3 0-.4zm13.2 6.8c-.4-.4-.7-.5-1.3-.7-.4-.1-.8-.6-1.2-.6.1.2.2.6.4.8.2.2.5 0 .7.2.1.1.1.3.2.3.4.5 0 .6-.4.9-.3.2-.5.4-.9.6-1 .4-1-.5-1.4-1.2-.1-.2-1.4-2.1-1.4-2.1.3-.2.2.1.3-.2.1-.2-.1-.6 0-.9-.6.4-.7.4-1.2-.3-.3-.5-.2-.8.4-1 .4-.1 1.1.2 1.5 0 .7-.3-.7-.8-.7-.8 0-.1.3-.3.4-.4-.7-.1-1.3.2-1.7.8-.2.3.2.2-.3.5-.2.1-.4 0-.6.1-.4.1-.5.1-.2.5-.3-.3-.4-.7-.6-1-.3-.3-.9-.6-1.3-.8 0 .6.5.9.9 1.3h-.6c.1-.3-.7-.9-1-.9-.9-.1-1.3.8-1.9 1.3-.4.3-1.3.4-1.5-.1-.1-.2 0-.5 0-.7 0-.5 0-.4.4-.5.5-.2.9-.1 1.1-.7 0-.1-.2-.3 0-.5.1-.2.5-.2.7-.3.3-.2.5-.3.8-.6.4-.3.5-.5.9-.3.2.1.4.5.7.5.9.1.7-1 .4-1.4-.1.2-.4.7-.6.8-.6.2-.5-.5-.8-.7-.4-.3-.8.3-.6-.3.1-.3.4-.4.7-.5.4-.2.9-.4 1.3-.5.4-.1.8.1 1.2.1.5 0 1.1-.2 1.5.1.3.2.1.3.5.5.3.2.2 0 .5 0 .1 0 .2-.1.2-.1.1.1.3.2.4.3 1 .7 1.9 1.5 2.6 2.5 1.6 2 2.4 4.5 2.4 7.1v.7c-.1-.7-.3-1.3-.9-1.8z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M16.8 27.7c2 0 3.7.6 3.7 1.4 0 .8-1.7 1.4-3.7 1.4s-3.7-.6-3.7-1.4c0-.8 1.7-1.4 3.7-1.4zM6.9 23.9c2 0 3.7.6 3.7 1.4 0 .8-1.7 1.4-3.7 1.4s-3.7-.6-3.7-1.4c.1-.8 1.7-1.4 3.7-1.4zM10.6 28s-.6 1.2-3.7 1.2S3.3 28 3.3 28v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2V28zM10.6 30.5s-.6 1.2-3.7 1.2-3.7-1.2-3.7-1.2v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2v1.3zM10.6 33s-.6 1.2-3.7 1.2S3.3 33 3.3 33v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2V33zM20.5 32s-.6 1.2-3.7 1.2-3.7-1.2-3.7-1.2v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2V32z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Payments.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M31 22.7c-1.4-2.4-.5-5.4 1.8-6.8l-2.6-4.4c-.7.4-1.6.7-2.5.7-2.7 0-5-.9-5-4.9h-5.1c0 1-.2 1.6-.7 2.4-1.4 2.4-4.4 3.1-6.8 1.8l-2.6 4.4c.7.4 1.4 1 1.8 1.8 1.4 2.4.5 5.4-1.8 6.8l2.6 4.4c.7-.4 1.6-.6 2.5-.6 2.7 0 4.9 3 5 5h5.1c0-1 .2-1.7.7-2.5 1.4-2.4 4.4-3.2 6.8-1.8l2.6-4.4c-.7-.5-1.3-1.1-1.8-1.9zm-10.7 2.7c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3-2.4 5.3-5.3 5.3z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Settings.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M13.3 32.7h.1c-1.8 0-3.1-.8-3.1-2.6V16.7h6v13.4c0 1.8-1.3 2.6-3 2.6zM13.4 8.3l-3.2 6.4h6.4zM28.6 8.7v6h-4.5v-6c-2.4.9-4 3.2-4 5.9 0 2.6 1.6 4.8 3.8 5.8v9.9c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5v-9.9c2.2-1 3.8-3.2 3.8-5.8-.1-2.7-1.8-5-4.1-5.9z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Tools.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 6.1c-7.8 0-14.2 6.3-14.2 14.2 0 7.8 6.3 14.2 14.2 14.2 7.8 0 14.2-6.3 14.2-14.2-.1-7.9-6.4-14.2-14.2-14.2zm0 8.4c1.9 0 3.5 1.2 3.5 3.6 0 2.4-2 5.1-3.5 5.1s-3.5-2.7-3.5-5.1c-.1-2.4 1.5-3.6 3.5-3.6zm-5.4 12.2c0-3 1.3-2.9 3.2-3.3.6.7 1.4 1 2.1 1 .7 0 1.5-.3 2.1-1 1.9.4 3.2.2 3.2 3.2.1 2.1-10.6 2.1-10.6.1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/User.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 6.3c-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14c0-7.8-6.3-14-14-14zm2 10.3c1.9 0 3.5 1.2 3.5 3.6 0 2.4-2 5-3.5 5s-3.5-2.7-3.5-5c0-2.5 1.5-3.6 3.5-3.6zm-8.1-1.7c1.2 0 2.2.8 2.2 2.2 0 1.5-1.2 3.2-2.2 3.2-.9 0-2.2-1.7-2.2-3.2 0-1.5 1-2.2 2.2-2.2zM10.9 22c0-.9.8-1.6 2-1.8.4.4.9.8 1.3.8s.9-.3 1.3-.8c1.2.2 2 .9 2 1.8 0 1.3-6.6 1.3-6.6 0zm6.1 5.8c0-2 1.3-2.4 3.2-2.8.6.7 1.4 1.2 2.1 1.2.7 0 1.4-.6 2.1-1.3 1.9.4 3.2.9 3.2 2.9s-10.6 2-10.6 0z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Users.svg")}()},function(e,t,n){"use strict";function r(e,t){var n={};for(var r in e)t.indexOf(r)>=0||Object.prototype.hasOwnProperty.call(e,r)&&(n[r]=e[r]);return n}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function c(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var i=n(0),u=n.n(i),f=n(56),s=n.n(f),l=n(27),p=n(5),y=n(6),_=n(20),h=n(8),b=n(7),v=n(16),O=n(10),m=n(11),d=n(13),w=n(4),g=n(30),E=n(26),j=n(31),T=n(23),P=n(18),R=n(19),A=n(9),C=n(12),k=n(2),x=n(14),z=n(15),L=n(25),H=n(21),S=n(3),D=n(17),M=n(22),V=n(29),N=n(28),F=n(24),B=n(45),G=n(52),I=n(40),q=n(41),W=n(42),U=n(43),X=n(46),J=n(48),K=n(49),Q=n(50),Y=n(51),Z=n(53),$=n(47),ee=n(44),te=n(32),ne=n(33),re=n(34),oe=n(35),ae=n(36),ce=n(37),ie=n(39),ue=n(38);n.d(t,"a",function(){return pe});var fe=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},se=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),le={indicator:{burgerClose:u.a.createFactory(p.a),remove:u.a.createFactory(l.a),burger:u.a.createFactory(y.a),logout:u.a.createFactory(_.a),CaretRight:u.a.createFactory(h.a),CaretLeft:u.a.createFactory(b.a),flagged:u.a.createFactory(v.a),comment:u.a.createFactory(O.a),commented:u.a.createFactory(m.a),email:u.a.createFactory(d.a),attachment:u.a.createFactory(w.a),inClarification:u.a.createFactory(g.a),rejected:u.a.createFactory(E.a),locked:u.a.createFactory(j.a),ok:u.a.createFactory(T.a),inspected:u.a.createFactory(P.a),inspectedAndApproved:u.a.createFactory(R.a),close:u.a.createFactory(A.a),delete:u.a.createFactory(C.a),alert:u.a.createFactory(k.a),error:u.a.createFactory(x.a),exclamation:u.a.createFactory(z.a),plus:u.a.createFactory(L.a),minus:u.a.createFactory(H.a),arrowLeft:u.a.createFactory(S.a),help:u.a.createFactory(D.a),more:u.a.createFactory(M.a),settings:u.a.createFactory(V.a),search:u.a.createFactory(N.a),pinned:u.a.createFactory(F.a)},product:{Invoices:u.a.createFactory(B.a),user:u.a.createFactory(G.a),Accounts:u.a.createFactory(I.a),Archive:u.a.createFactory(q.a),Dashboard:u.a.createFactory(W.a),Info:u.a.createFactory(U.a),Liquidity:u.a.createFactory(X.a),Netting:u.a.createFactory(J.a),Payments:u.a.createFactory(K.a),Settings:u.a.createFactory(Q.a),Tools:u.a.createFactory(Y.a),Users:u.a.createFactory(Z.a),Examples:u.a.createFactory(U.a),Matching:u.a.createFactory($.a),Inspector:u.a.createFactory(ee.a)},invoices:{generic:u.a.createFactory(te.a),pdf:u.a.createFactory(ne.a),png:u.a.createFactory(re.a),ppt:u.a.createFactory(oe.a),word:u.a.createFactory(ae.a),xls:u.a.createFactory(ce.a)},logo:{OCShort:u.a.createFactory(ue.a),OCLong:u.a.createFactory(ie.a)}},pe=function(e){function t(e){o(this,t);var n=a(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));switch(e.type){case"product":n.defaultWidth=40,n.defaultHeight=40;break;case"indicator":n.defaultWidth=30,n.defaultHeight=30;break;default:n.defaultWidth=40,n.defaultHeight=40}return n}return c(t,e),se(t,[{key:"render",value:function(){var e=this.props,t=e.type,n=e.name,o=e.width,a=e.height,c=r(e,["type","name","width","height"]),i=le[t]&&le[t][n],f=fe({width:o||this.defaultWidth,height:a||this.defaultHeight,focusable:!1},c);return"function"==typeof _.a?i(f):u.a.createElement("span",fe({className:"icon"},this.props))}}]),t}(u.a.Component);pe.defaultProps={width:40,height:40},pe.propTypes={type:s.a.string.isRequired,name:s.a.string.isRequired,width:s.a.number,height:s.a.number};!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&(__REACT_HOT_LOADER__.register(le,"components","/home/ilkka/data/react-icons/src/icons/icon.component.jsx"),__REACT_HOT_LOADER__.register(pe,"Icon","/home/ilkka/data/react-icons/src/icons/icon.component.jsx"))}()},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(1);n.d(t,"Icon",function(){return r.a})},function(e,t){e.exports=__webpack_require__(2)}])});
+//# sourceMappingURL=react-icons.js.map
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var root = __webpack_require__(28);
 
 /** Built-in value references. */
@@ -21896,7 +21903,7 @@ module.exports = Symbol;
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(60),
@@ -21909,7 +21916,7 @@ module.exports = Map;
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports) {
 
 /**
@@ -21941,7 +21948,7 @@ module.exports = isArray;
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22197,7 +22204,7 @@ function createMapContainsChecker(shapeTypes) {
 module.exports = ImmutablePropTypes;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22228,7 +22235,7 @@ if (false) {
 module.exports = canDefineProperty;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22253,7 +22260,7 @@ var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol
 module.exports = REACT_ELEMENT_TYPE;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22299,7 +22306,7 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22329,7 +22336,7 @@ if (false) {
 module.exports = ReactPropTypeLocationNames;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22352,7 +22359,7 @@ var ReactDOMComponentFlags = {
 module.exports = ReactDOMComponentFlags;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22415,7 +22422,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22451,7 +22458,7 @@ function forEachAccumulated(arr, cb, scope) {
 module.exports = forEachAccumulated;
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22489,7 +22496,7 @@ function getTextContentAccessor() {
 module.exports = getTextContentAccessor;
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22613,7 +22620,7 @@ var CallbackQueue = function () {
 module.exports = PooledClass.addPoolingTo(CallbackQueue);
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22640,7 +22647,7 @@ var ReactFeatureFlags = {
 module.exports = ReactFeatureFlags;
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22696,7 +22703,7 @@ function isTextInputElement(elem) {
 module.exports = isTextInputElement;
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22728,7 +22735,7 @@ var ViewportMetrics = {
 module.exports = ViewportMetrics;
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22785,7 +22792,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setTextContent;
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22815,7 +22822,7 @@ function focusNode(node) {
 module.exports = focusNode;
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22968,7 +22975,7 @@ var CSSProperty = {
 module.exports = CSSProperty;
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23210,7 +23217,7 @@ var DOMPropertyOperations = {
 module.exports = DOMPropertyOperations;
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23415,7 +23422,7 @@ function _handleChange(event) {
 module.exports = ReactDOMSelect;
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -23605,7 +23612,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23625,8 +23632,8 @@ var _prodInvariant = __webpack_require__(11),
     _assign = __webpack_require__(13);
 
 var ReactCompositeComponent = __webpack_require__(396);
-var ReactEmptyComponent = __webpack_require__(171);
-var ReactHostComponent = __webpack_require__(172);
+var ReactEmptyComponent = __webpack_require__(172);
+var ReactHostComponent = __webpack_require__(173);
 
 var getNextDebugID = __webpack_require__(397);
 var invariant = __webpack_require__(9);
@@ -23738,7 +23745,7 @@ function instantiateReactComponent(node, shouldHaveDebugID) {
 module.exports = instantiateReactComponent;
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23783,7 +23790,7 @@ var ReactNodeTypes = {
 module.exports = ReactNodeTypes;
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23818,7 +23825,7 @@ ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 module.exports = ReactEmptyComponent;
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23891,7 +23898,7 @@ var ReactHostComponent = {
 module.exports = ReactHostComponent;
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24072,7 +24079,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24411,7 +24418,7 @@ var ReactComponentTreeHook = {
 module.exports = ReactComponentTreeHook;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24491,7 +24498,7 @@ var EventListener = {
 module.exports = EventListener;
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24510,8 +24517,8 @@ module.exports = EventListener;
 var ReactDOMSelection = __webpack_require__(411);
 
 var containsNode = __webpack_require__(413);
-var focusNode = __webpack_require__(164);
-var getActiveElement = __webpack_require__(177);
+var focusNode = __webpack_require__(165);
+var getActiveElement = __webpack_require__(178);
 
 function isInDocument(node) {
   return containsNode(document.documentElement, node);
@@ -24620,7 +24627,7 @@ var ReactInputSelection = {
 module.exports = ReactInputSelection;
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24662,7 +24669,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24688,7 +24695,7 @@ var ReactCurrentOwner = __webpack_require__(29);
 var ReactDOMComponentTree = __webpack_require__(15);
 var ReactDOMContainerInfo = __webpack_require__(428);
 var ReactDOMFeatureFlags = __webpack_require__(429);
-var ReactFeatureFlags = __webpack_require__(160);
+var ReactFeatureFlags = __webpack_require__(161);
 var ReactInstanceMap = __webpack_require__(64);
 var ReactInstrumentation = __webpack_require__(22);
 var ReactMarkupChecksum = __webpack_require__(430);
@@ -24697,7 +24704,7 @@ var ReactUpdateQueue = __webpack_require__(115);
 var ReactUpdates = __webpack_require__(23);
 
 var emptyObject = __webpack_require__(46);
-var instantiateReactComponent = __webpack_require__(169);
+var instantiateReactComponent = __webpack_require__(170);
 var invariant = __webpack_require__(9);
 var setInnerHTML = __webpack_require__(78);
 var shouldUpdateReactComponent = __webpack_require__(113);
@@ -25205,7 +25212,7 @@ var ReactMount = {
 module.exports = ReactMount;
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25221,7 +25228,7 @@ module.exports = ReactMount;
 
 
 
-var ReactNodeTypes = __webpack_require__(170);
+var ReactNodeTypes = __webpack_require__(171);
 
 function getHostComponentFromComposite(inst) {
   var type;
@@ -25240,7 +25247,7 @@ function getHostComponentFromComposite(inst) {
 module.exports = getHostComponentFromComposite;
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25367,7 +25374,7 @@ var useQueries = function useQueries(createHistory) {
 exports.default = useQueries;
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25482,7 +25489,7 @@ var useBasename = function useBasename(createHistory) {
 exports.default = useBasename;
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25573,7 +25580,7 @@ var readState = exports.readState = function readState(key) {
 };
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26143,7 +26150,7 @@ if (false) {
 
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26176,7 +26183,7 @@ var mapStateToProps = function mapStateToProps(state, _ref) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(_reactIntl.IntlProvider);
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26198,7 +26205,7 @@ exports['default'] = exports;
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26236,7 +26243,7 @@ exports.hop = hop;
 //# sourceMappingURL=utils.js.map
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26356,7 +26363,7 @@ var ReactWheelHandler = function () {
 module.exports = ReactWheelHandler;
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26400,13 +26407,13 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ExecutionEnvironment = __webpack_require__(188);
+var _ExecutionEnvironment = __webpack_require__(189);
 
 var _ExecutionEnvironment2 = _interopRequireDefault(_ExecutionEnvironment);
 
@@ -26466,7 +26473,7 @@ function getVendorPrefixedName(property) {
 module.exports = getVendorPrefixedName;
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26855,7 +26862,7 @@ FixedDataTableRow.propTypes = {
 module.exports = FixedDataTableRow;
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26881,11 +26888,11 @@ var _React = __webpack_require__(20);
 
 var _React2 = _interopRequireDefault(_React);
 
-var _FixedDataTableColumnGroup = __webpack_require__(192);
+var _FixedDataTableColumnGroup = __webpack_require__(193);
 
 var _FixedDataTableColumnGroup2 = _interopRequireDefault(_FixedDataTableColumnGroup);
 
-var _FixedDataTableColumn = __webpack_require__(193);
+var _FixedDataTableColumn = __webpack_require__(194);
 
 var _FixedDataTableColumn2 = _interopRequireDefault(_FixedDataTableColumn);
 
@@ -26978,7 +26985,7 @@ var FixedDataTableHelper = {
 module.exports = FixedDataTableHelper;
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27079,7 +27086,7 @@ FixedDataTableColumnGroup.defaultProps = {
 module.exports = FixedDataTableColumnGroup;
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27293,7 +27300,7 @@ FixedDataTableColumn.defaultProps = {
 module.exports = FixedDataTableColumn;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27450,7 +27457,7 @@ FixedDataTableCellDefault.propTypes = {
 module.exports = FixedDataTableCellDefault;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27507,22 +27514,22 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(502), __esModule: true };
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(54) && !__webpack_require__(69)(function () {
-  return Object.defineProperty(__webpack_require__(198)('div'), 'a', { get: function () { return 7; } }).a != 7;
+  return Object.defineProperty(__webpack_require__(199)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(68);
@@ -27535,7 +27542,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(41);
@@ -27558,7 +27565,7 @@ module.exports = function (object, names) {
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
@@ -27570,7 +27577,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
@@ -27582,7 +27589,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27590,7 +27597,7 @@ module.exports = function (it) {
 var $at = __webpack_require__(510)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(203)(String, 'String', function (iterated) {
+__webpack_require__(204)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -27606,14 +27613,14 @@ __webpack_require__(203)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var LIBRARY = __webpack_require__(138);
 var $export = __webpack_require__(34);
-var redefine = __webpack_require__(204);
+var redefine = __webpack_require__(205);
 var hide = __webpack_require__(52);
 var has = __webpack_require__(41);
 var Iterators = __webpack_require__(73);
@@ -27683,18 +27690,18 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(52);
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys = __webpack_require__(199);
+var $keys = __webpack_require__(200);
 var hiddenKeys = __webpack_require__(134).concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
@@ -27703,7 +27710,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pIE = __webpack_require__(72);
@@ -27711,7 +27718,7 @@ var createDesc = __webpack_require__(70);
 var toIObject = __webpack_require__(42);
 var toPrimitive = __webpack_require__(128);
 var has = __webpack_require__(41);
-var IE8_DOM_DEFINE = __webpack_require__(197);
+var IE8_DOM_DEFINE = __webpack_require__(198);
 var gOPD = Object.getOwnPropertyDescriptor;
 
 exports.f = __webpack_require__(54) ? gOPD : function getOwnPropertyDescriptor(O, P) {
@@ -27725,13 +27732,13 @@ exports.f = __webpack_require__(54) ? gOPD : function getOwnPropertyDescriptor(O
 
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(536), __esModule: true };
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getKeys = __webpack_require__(71);
@@ -27753,7 +27760,7 @@ module.exports = function (isEntries) {
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27781,7 +27788,7 @@ function camelizeStyleName(string) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27897,7 +27904,7 @@ function getTransitionProperties() {
 }
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27916,7 +27923,7 @@ var _on = __webpack_require__(91);
 
 var _on2 = _interopRequireDefault(_on);
 
-var _properties = __webpack_require__(210);
+var _properties = __webpack_require__(211);
 
 var _properties2 = _interopRequireDefault(_properties);
 
@@ -28238,7 +28245,7 @@ Transition.defaultProps = {
 exports.default = Transition;
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28265,7 +28272,7 @@ function activeElement() {
 module.exports = exports['default'];
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28289,7 +28296,7 @@ var _reactDom = __webpack_require__(17);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _addEventListener = __webpack_require__(214);
+var _addEventListener = __webpack_require__(215);
 
 var _addEventListener2 = _interopRequireDefault(_addEventListener);
 
@@ -28435,7 +28442,7 @@ exports.default = RootCloseWrapper;
 module.exports = exports['default'];
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28466,7 +28473,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28507,7 +28514,7 @@ var size = void 0;
 module.exports = exports['default'];
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28651,7 +28658,7 @@ exports.default = Portal;
 module.exports = exports['default'];
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28667,7 +28674,7 @@ function hasClass(element, className) {
 module.exports = exports["default"];
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28712,7 +28719,7 @@ function isOverflowing(container) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28763,7 +28770,7 @@ function offset(node) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28790,7 +28797,7 @@ function scrollTop(node, val) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -28801,7 +28808,7 @@ module.exports = freeGlobal;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports) {
 
 /**
@@ -28844,7 +28851,7 @@ module.exports = eq;
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(58),
@@ -28887,7 +28894,7 @@ module.exports = isFunction;
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -28919,7 +28926,7 @@ module.exports = toSource;
 
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var mapCacheClear = __webpack_require__(603),
@@ -28957,7 +28964,7 @@ module.exports = MapCache;
 
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var SetCache = __webpack_require__(615),
@@ -29046,7 +29053,7 @@ module.exports = equalArrays;
 
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(28),
@@ -29091,7 +29098,7 @@ module.exports = isBuffer;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(83)(module)))
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsTypedArray = __webpack_require__(638),
@@ -29124,7 +29131,7 @@ module.exports = isTypedArray;
 
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports) {
 
 /** Used as references for various `Number` constants. */
@@ -29165,7 +29172,7 @@ module.exports = isLength;
 
 
 /***/ }),
-/* 230 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29243,7 +29250,7 @@ return af;
 
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29390,7 +29397,7 @@ return ar;
 
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29454,7 +29461,7 @@ return arDz;
 
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29518,7 +29525,7 @@ return arKw;
 
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29649,7 +29656,7 @@ return arLy;
 
 
 /***/ }),
-/* 235 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29714,7 +29721,7 @@ return arMa;
 
 
 /***/ }),
-/* 236 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29824,7 +29831,7 @@ return arSa;
 
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29888,7 +29895,7 @@ return arTn;
 
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29998,7 +30005,7 @@ return az;
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30137,7 +30144,7 @@ return be;
 
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30232,7 +30239,7 @@ return bg;
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30356,7 +30363,7 @@ return bn;
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30480,7 +30487,7 @@ return bo;
 
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30593,7 +30600,7 @@ return br;
 
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30741,7 +30748,7 @@ return bs;
 
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30834,7 +30841,7 @@ return ca;
 
 
 /***/ }),
-/* 246 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31011,7 +31018,7 @@ return cs;
 
 
 /***/ }),
-/* 247 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31079,7 +31086,7 @@ return cv;
 
 
 /***/ }),
-/* 248 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31165,7 +31172,7 @@ return cy;
 
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31230,7 +31237,7 @@ return da;
 
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31313,7 +31320,7 @@ return de;
 
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31397,7 +31404,7 @@ return deAt;
 
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31480,7 +31487,7 @@ return deCh;
 
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31585,7 +31592,7 @@ return dv;
 
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31690,7 +31697,7 @@ return el;
 
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31762,7 +31769,7 @@ return enAu;
 
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31830,7 +31837,7 @@ return enCa;
 
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31902,7 +31909,7 @@ return enGb;
 
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31974,7 +31981,7 @@ return enIe;
 
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32046,7 +32053,7 @@ return enNz;
 
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32124,7 +32131,7 @@ return eo;
 
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32212,7 +32219,7 @@ return es;
 
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32299,7 +32306,7 @@ return esDo;
 
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32384,7 +32391,7 @@ return et;
 
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32455,7 +32462,7 @@ return eu;
 
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32567,7 +32574,7 @@ return fa;
 
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32679,7 +32686,7 @@ return fi;
 
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32744,7 +32751,7 @@ return fo;
 
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32832,7 +32839,7 @@ return fr;
 
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32911,7 +32918,7 @@ return frCa;
 
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32994,7 +33001,7 @@ return frCh;
 
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33074,7 +33081,7 @@ return fy;
 
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33155,7 +33162,7 @@ return gd;
 
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33237,7 +33244,7 @@ return gl;
 
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33364,7 +33371,7 @@ return gomLatn;
 
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33468,7 +33475,7 @@ return he;
 
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33597,7 +33604,7 @@ return hi;
 
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33747,7 +33754,7 @@ return hr;
 
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33861,7 +33868,7 @@ return hu;
 
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33961,7 +33968,7 @@ return hyAm;
 
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34049,7 +34056,7 @@ return id;
 
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34181,7 +34188,7 @@ return is;
 
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34256,7 +34263,7 @@ return it;
 
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34341,7 +34348,7 @@ return ja;
 
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34429,7 +34436,7 @@ return jv;
 
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34523,7 +34530,7 @@ return ka;
 
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34615,7 +34622,7 @@ return kk;
 
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34678,7 +34685,7 @@ return km;
 
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34809,7 +34816,7 @@ return kn;
 
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34883,7 +34890,7 @@ return ko;
 
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34976,7 +34983,7 @@ return ky;
 
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35118,7 +35125,7 @@ return lb;
 
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35193,7 +35200,7 @@ return lo;
 
 
 /***/ }),
-/* 293 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35315,7 +35322,7 @@ return lt;
 
 
 /***/ }),
-/* 294 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35417,7 +35424,7 @@ return lv;
 
 
 /***/ }),
-/* 295 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35533,7 +35540,7 @@ return me;
 
 
 /***/ }),
-/* 296 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35602,7 +35609,7 @@ return mi;
 
 
 /***/ }),
-/* 297 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35697,7 +35704,7 @@ return mk;
 
 
 /***/ }),
-/* 298 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35783,7 +35790,7 @@ return ml;
 
 
 /***/ }),
-/* 299 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35947,7 +35954,7 @@ return mr;
 
 
 /***/ }),
-/* 300 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36034,7 +36041,7 @@ return ms;
 
 
 /***/ }),
-/* 301 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36122,7 +36129,7 @@ return msMy;
 
 
 /***/ }),
-/* 302 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36223,7 +36230,7 @@ return my;
 
 
 /***/ }),
-/* 303 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36291,7 +36298,7 @@ return nb;
 
 
 /***/ }),
-/* 304 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36419,7 +36426,7 @@ return ne;
 
 
 /***/ }),
-/* 305 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36512,7 +36519,7 @@ return nl;
 
 
 /***/ }),
-/* 306 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36605,7 +36612,7 @@ return nlBe;
 
 
 /***/ }),
-/* 307 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36670,7 +36677,7 @@ return nn;
 
 
 /***/ }),
-/* 308 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36799,7 +36806,7 @@ return paIn;
 
 
 /***/ }),
-/* 309 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36911,7 +36918,7 @@ return pl;
 
 
 /***/ }),
-/* 310 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36981,7 +36988,7 @@ return pt;
 
 
 /***/ }),
-/* 311 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37047,7 +37054,7 @@ return ptBr;
 
 
 /***/ }),
-/* 312 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37127,7 +37134,7 @@ return ro;
 
 
 /***/ }),
-/* 313 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37315,7 +37322,7 @@ return ru;
 
 
 /***/ }),
-/* 314 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37418,7 +37425,7 @@ return sd;
 
 
 /***/ }),
-/* 315 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37484,7 +37491,7 @@ return se;
 
 
 /***/ }),
-/* 316 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37560,7 +37567,7 @@ return si;
 
 
 /***/ }),
-/* 317 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37715,7 +37722,7 @@ return sk;
 
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37882,7 +37889,7 @@ return sl;
 
 
 /***/ }),
-/* 319 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37957,7 +37964,7 @@ return sq;
 
 
 /***/ }),
-/* 320 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38072,7 +38079,7 @@ return sr;
 
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38187,7 +38194,7 @@ return srCyrl;
 
 
 /***/ }),
-/* 322 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38281,7 +38288,7 @@ return ss;
 
 
 /***/ }),
-/* 323 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38355,7 +38362,7 @@ return sv;
 
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38419,7 +38426,7 @@ return sw;
 
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38554,7 +38561,7 @@ return ta;
 
 
 /***/ }),
-/* 326 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38648,7 +38655,7 @@ return te;
 
 
 /***/ }),
-/* 327 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38721,7 +38728,7 @@ return tet;
 
 
 /***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38793,7 +38800,7 @@ return th;
 
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38860,7 +38867,7 @@ return tlPh;
 
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38985,7 +38992,7 @@ return tlh;
 
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39080,7 +39087,7 @@ return tr;
 
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39176,7 +39183,7 @@ return tzl;
 
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39239,7 +39246,7 @@ return tzm;
 
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39302,7 +39309,7 @@ return tzmLatn;
 
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39458,7 +39465,7 @@ return uk;
 
 
 /***/ }),
-/* 336 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39562,7 +39569,7 @@ return ur;
 
 
 /***/ }),
-/* 337 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39625,7 +39632,7 @@ return uz;
 
 
 /***/ }),
-/* 338 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39688,7 +39695,7 @@ return uzLatn;
 
 
 /***/ }),
-/* 339 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39772,7 +39779,7 @@ return vi;
 
 
 /***/ }),
-/* 340 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39845,7 +39852,7 @@ return xPseudo;
 
 
 /***/ }),
-/* 341 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39910,7 +39917,7 @@ return yo;
 
 
 /***/ }),
-/* 342 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40026,7 +40033,7 @@ return zhCn;
 
 
 /***/ }),
-/* 343 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40136,7 +40143,7 @@ return zhHk;
 
 
 /***/ }),
-/* 344 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40245,13 +40252,6 @@ return zhTw;
 
 
 /***/ }),
-/* 345 */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(e,t){ true?module.exports=t(__webpack_require__(0),__webpack_require__(2)):"function"==typeof define&&define.amd?define("react-icons",["react","prop-types"],t):"object"==typeof exports?exports["react-icons"]=t(require("react"),require("prop-types")):e["react-icons"]=t(e.react,e["prop-types"])}(this,function(e,t){return function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=55)}([function(e,t){e.exports=__webpack_require__(0)},function(e,t,n){"use strict";var r=n(54);n.d(t,"a",function(){return r.a})},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-attention",d:"M20.9 18.6l-.1-2.1c0-2.5-1.6-4.7-4-5.5.2-1-.6-2-1.6-2.2-1-.2-2 .6-2.2 1.6v.6c-2.4.8-4 3-4 5.5v2.1c-.7 0-1.3.6-1.3 1.3 0 .7.6 1.3 1.3 1.3h4.4c-.2.8.2 1.7 1.1 1.9.8.2 1.7-.2 1.9-1.1.1-.3.1-.6 0-.9h4.4c.7 0 1.3-.5 1.3-1.2.1-.7-.5-1.3-1.2-1.3zM6.1 15.6c-.4 0-.8-.3-.8-.7-.9-3.5 1.2-7 4.7-7.9.5-.1.9.2 1.1.6s-.2.9-.6 1.1c-2.6.6-4.1 3.2-3.5 5.8 0 .5-.3.9-.7 1l-.2.1zM24 15.6c.4 0 .8-.3.9-.7.9-3.5-1.2-7-4.7-7.9-.5-.1-.9.2-1.1.6-.1.5.2.9.6 1.1 2.6.6 4.1 3.2 3.5 5.8-.1.5.2.9.6 1.1h.2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Alert.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M20.92 13.5h-8.46L15 11a1.4 1.4 0 1 0-2-2l-5 5a1.4 1.4 0 0 0 0 2l5 5a1.4 1.4 0 0 0 2-2l-2.54-2.5h8.46a1.5 1.5 0 0 0 0-3z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/ArrowLeft.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M17.9 12.11l-1-1-5.07 5.07a2.15 2.15 0 0 0 3 3l6.09-6.09a3.59 3.59 0 0 0-5.07-5.07l-6.37 6.42a5 5 0 0 0 7.08 7.08l4.36-4.36-1-1-4.36 4.36a3.57 3.57 0 0 1-5-5l6.4-6.39a2.15 2.15 0 0 1 3 3l-6.12 6.07a.72.72 0 0 1-1-1l5.07-5.07z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Attachment.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40.53 40.53"},this.props),i.a.createElement("title",null,"close"),i.a.createElement("path",{className:"oc-icon-burger-close",d:"M24.34 20l8.84-8.84a2.88 2.88 0 1 0-4.08-4.03L20.26 16l-8.83-8.87a2.88 2.88 0 1 0-4.08 4.07l8.84 8.8-8.84 8.88A2.88 2.88 0 1 0 11.43 33l8.84-8.84L29.1 33a2.88 2.88 0 0 0 4.07-4.07z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Burger-close.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40.53 40.53"},this.props),i.a.createElement("rect",{className:"oc-icon-burger",x:"5.06",y:"7.29",width:"30.42",height:"5.05",rx:".98",ry:".98"}),i.a.createElement("rect",{className:"oc-icon-burger",x:"5.06",y:"17.61",width:"30.42",height:"5.05",rx:".98",ry:".98"}),i.a.createElement("rect",{className:"oc-icon-burger",x:"5.06",y:"27.93",width:"30.42",height:"5.05",rx:".98",ry:".98"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Burger.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M11.1 15a1.39 1.39 0 0 0 .41 1l5 5a1.4 1.4 0 0 0 2-2l-4-4 4-4a1.4 1.4 0 0 0-2-2l-5 5a1.39 1.39 0 0 0-.41 1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/CaretLeft.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M18.9 15a1.39 1.39 0 0 0-.41-1l-5-5a1.4 1.4 0 0 0-2 2l4 4-4 4a1.4 1.4 0 0 0 2 2l5-5a1.39 1.39 0 0 0 .41-1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/CaretRight.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M16.33 15l2.89-2.89a.94.94 0 1 0-1.33-1.33L15 13.67l-2.89-2.89a.94.94 0 1 0-1.33 1.33L13.67 15l-2.89 2.89a.94.94 0 1 0 1.33 1.33L15 16.33l2.89 2.89a.94.94 0 0 0 1.33-1.33z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Close.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M22.33 10.34A1.33 1.33 0 0 0 21 9H9a1.33 1.33 0 0 0-1.33 1.33v13.35s1.93-4 2.67-4H21a1.33 1.33 0 0 0 1.33-1.33v-8z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Comment.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M21.45 8.88h-12a2.22 2.22 0 0 0-1.95 1.59V23.8s2.55-3.92 3.28-3.92h10.67a1.19 1.19 0 0 0 1.05-1.41v-8c0-.74-.32-1.59-1.05-1.59zm-5.95 7h-5v-2h5v2zm4-3h-9v-2h9v2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Commented.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M18.45 8.68L17.4 6.86h-4.8l-1.05 1.82H9.08v2h11.84v-2h-2.47zm-5.69-.09l.42-.73h3.64l.42.73h-4.48zM9.1 23.14h11.8v-11H9.1v11zm9.4-8.39h1v6h-1v-6zm-2 0h1v6h-1v-6zm-2 0h1v6h-1v-6zm-2 0h1v6h-1v-6zm-2 0h1v6h-1v-6z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Delete.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M21.83 9.14H8.17L15 14.25l6.83-5.11z"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15.6 16.3l-.11.06-.1.05a1 1 0 0 1-.39.09 1 1 0 0 1-.39-.09l-.1-.05-.11-.06-7.9-5.91v10.47h17V10.39z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Email.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-error",d:"M22.4 19.2l-6-9.8c-.3-.8-1.2-1.2-2-.9-.4.2-.7.5-.8.9l-6 9.8c-.8 1.3-.2 2.3 1.3 2.3h12.2c1.5 0 2-1 1.3-2.3zM14 12.5c.1-.5.7-.9 1.2-.7.4.1.6.4.7.7v3c-.1.5-.7.9-1.2.7-.4-.1-.6-.4-.7-.7v-3zm1 7.3c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Error.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"15",cy:"21.61",r:"2.39"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 17.17a2 2 0 0 1-2-2V8a2 2 0 0 1 4 0v7.25a2 2 0 0 1-2 1.92z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Exclamation.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M7.62 8.51h2.44v14.85H7.62zM11.87 17.18a5.52 5.52 0 0 1 4-.52c1.13.3 2.26 2.52 3.53 2.52 3.77 0 3.94-1 3.94-1V9.51s-.17 1-3.94 1c-1.17 0-2.47-2.19-3.53-2.46a5.54 5.54 0 0 0-4 .46v8.67z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Flagged.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"help"),i.a.createElement("path",{className:"cls-1",d:"M15 5a10 10 0 1 0 10 10A10 10 0 0 0 15 5zm.84 14.79h-1.63v-1.47h1.62zm2.22-5.47a7.32 7.32 0 0 1-1.43 1.44 2.86 2.86 0 0 0-.7.92 3 3 0 0 0-.12 1.18h-1.62v-.59a3.21 3.21 0 0 1 .26-1.38 4 4 0 0 1 1-1.18 7.27 7.27 0 0 0 .93-.85 1.14 1.14 0 0 0 .24-.7 1.17 1.17 0 0 0-.42-.9 1.62 1.62 0 0 0-1.12-.37 1.7 1.7 0 0 0-1.14.39 2.06 2.06 0 0 0-.63 1.18l-1.64-.2a2.72 2.72 0 0 1 1-1.93 3.44 3.44 0 0 1 2.33-.8 3.56 3.56 0 0 1 2.45.8 2.43 2.43 0 0 1 .91 1.87 2.06 2.06 0 0 1-.3 1.12z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Help.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30",className:"oc-icon-indicator"},this.props),i.a.createElement("path",{d:"M15 21c-4.43 0-7.82-5.19-8-5.41a1 1 0 0 1 0-1.08C7.18 14.24 10.57 9 15 9s7.82 5.19 8 5.41a1 1 0 0 1 0 1.08c-.18.27-3.57 5.51-8 5.51zm-5.89-6c.9 1.2 3.27 4 5.89 4 2.43 0 4.8-2.49 5.9-3.95-.9-1.19-3.27-4-5.9-4S10 13.8 9.11 15z"}),i.a.createElement("circle",{cx:"14.93",cy:"14.76",r:"2.75"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Inspected.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"11.92",cy:"14.76",r:"2.75"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M14.09 20.11a2.48 2.48 0 0 1-.7-1.4A4.27 4.27 0 0 1 12 19c-2.63 0-5-2.77-5.9-4 1.1-1.46 3.47-4 5.9-4 2.62 0 5 2.76 5.89 4-.22.3-.54.69-.92 1.11a2.49 2.49 0 0 1 .65.46l.85.86A15.77 15.77 0 0 0 20 15.54a1 1 0 0 0 0-1.08C19.82 14.24 16.43 9 12 9s-7.82 5.19-8 5.41a1 1 0 0 0 0 1.08c.18.27 3.57 5.51 8 5.51a6.36 6.36 0 0 0 2.43-.51z"}),i.a.createElement("path",{className:"cls-1",d:"M19.72 23.75a1.5 1.5 0 0 1-1.06-.44l-3.78-3.78A1.5 1.5 0 0 1 17 17.41l2.72 2.72 5-5a1.5 1.5 0 0 1 2.12 2.12l-6.07 6.07a1.5 1.5 0 0 1-1.05.43z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/InspectedAndApproved.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 24.4c-2.5 0-4.8-1-6.5-2.7-1.7-1.7-2.7-4.1-2.7-6.5 0-2.5 1-4.8 2.7-6.5C9 8 10 8 10.6 8.6s.6 1.5 0 2.1c-1.2 1.2-1.8 2.8-1.8 4.4 0 1.7.7 3.2 1.8 4.4 1.2 1.2 2.8 1.8 4.4 1.8s3.2-.7 4.4-1.8c1.2-1.2 1.8-2.8 1.8-4.4 0-1.7-.7-3.2-1.8-4.4-.6-.6-.6-1.5 0-2.1s1.5-.6 2.1 0c1.7 1.7 2.7 4.1 2.7 6.5 0 2.5-1 4.8-2.7 6.5-1.7 1.8-4 2.8-6.5 2.8z"}),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 16.6c-.8 0-1.5-.7-1.5-1.5v-8c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v8c0 .9-.7 1.5-1.5 1.5z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Logout.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("rect",{className:"oc-icon-indicator",x:"8.66",y:"13.46",width:"12.68",height:"3.08",rx:".73",ry:".73"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Minus.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"8",cy:"16",r:"2.25"}),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"15",cy:"16",r:"2.25"}),i.a.createElement("circle",{className:"oc-icon-indicator",cx:"22",cy:"16",r:"2.25"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/More.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-success",d:"M13.7 21c-.3 0-.7-.1-.9-.3l-5.3-4.3c-.7-.5-.8-1.4-.4-2.1s1.4-.8 2.1-.4c.1 0 .1.1.2.1l4.2 3.4 7-7.9c.6-.6 1.5-.7 2.1-.1s.7 1.5.1 2.1l-8 9c-.3.3-.7.5-1.1.5z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Ok.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"Pinned"),i.a.createElement("path",{className:"cls-1",d:"M19.12 16.34h-.79v-5.69a1.35 1.35 0 0 0 0-2.69h-6.82a1.34 1.34 0 0 0-.06 2.68v5.7h-.71c-1.36 0-2.48 1.41-2.48 3.12h5.59l.71 6h.71l.79-6h5.54c0-1.71-1.12-3.12-2.48-3.12zm-5.29 0h-.52v-5.69h.52z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Pinned.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M20.6 13.46h-4.06V9.4a.73.73 0 0 0-.73-.73h-1.62a.73.73 0 0 0-.73.73v4.06H9.4a.73.73 0 0 0-.73.73v1.61a.73.73 0 0 0 .73.73h4.06v4.07a.73.73 0 0 0 .73.73h1.61a.73.73 0 0 0 .73-.73v-4.06h4.07a.73.73 0 0 0 .73-.73v-1.62a.73.73 0 0 0-.73-.73z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Plus.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M15 7.49A7.51 7.51 0 1 0 22.51 15 7.51 7.51 0 0 0 15 7.49zm4.36 9h-8.72v-2.95h8.71v2.92z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Rejected.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-remove",d:"M17.31 15l5-5A1.63 1.63 0 1 0 20 7.68l-5 5-5-5A1.63 1.63 0 0 0 7.68 10l5 5-5 5A1.63 1.63 0 1 0 10 22.32l5-5 5 5A1.63 1.63 0 1 0 22.32 20z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Remove.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M22.65 21.24l-4.34-4.34a6.23 6.23 0 1 0-1.41 1.41l4.34 4.34a1 1 0 0 0 1.41-1.41zm-12.36-5a4.21 4.21 0 1 1 3 1.24 4.19 4.19 0 0 1-3-1.23z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Search.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator",d:"M23.21 16.94a3.8 3.8 0 0 1 1.4-5.18l-2-3.39a3.74 3.74 0 0 1-1.9.49A3.54 3.54 0 0 1 17 5h-4a3.34 3.34 0 0 1-.51 1.94 3.81 3.81 0 0 1-5.14 1.4l-2 3.4a3.75 3.75 0 0 1 1.4 1.39 3.8 3.8 0 0 1-1.39 5.18l2 3.39a3.75 3.75 0 0 1 1.89-.51A4.06 4.06 0 0 1 13 25h3.92a3.23 3.23 0 0 1 .51-1.9 3.8 3.8 0 0 1 5.18-1.38l2-3.39a3.75 3.75 0 0 1-1.4-1.39zM15 19.06a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/Settings.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"Card_status_inclarification copy"),i.a.createElement("path",{className:"cls-1",d:"M9.91 7.57a8.81 8.81 0 0 1 1-.73 7.9 7.9 0 0 1 1.17-.59 7.35 7.35 0 0 1 1.34-.4A7.94 7.94 0 0 1 15 5.71a6.71 6.71 0 0 1 2.11.29 4.59 4.59 0 0 1 1.61.89 3.93 3.93 0 0 1 1 1.4 4.52 4.52 0 0 1 .36 1.82 4.63 4.63 0 0 1-.26 1.65 4.5 4.5 0 0 1-.67 1.2 5.05 5.05 0 0 1-.89.88l-.91.69a7.57 7.57 0 0 0-.75.64 1.32 1.32 0 0 0-.39.7l-.35 1.75h-2.65l-.28-2v-.15-.15a1.76 1.76 0 0 1 .26-1 3.37 3.37 0 0 1 .66-.76 10.18 10.18 0 0 1 .86-.66 7.76 7.76 0 0 0 .86-.69 3.45 3.45 0 0 0 .66-.83 2.12 2.12 0 0 0 .26-1.08A1.52 1.52 0 0 0 16 9.16a2 2 0 0 0-1.36-.44 3.79 3.79 0 0 0-1.11.14 4.5 4.5 0 0 0-.76.31l-.56.31a.94.94 0 0 1-.48.14.86.86 0 0 1-.8-.46zm2.3 14.59a2.07 2.07 0 0 1 .17-.84 2.11 2.11 0 0 1 .46-.67 2.2 2.2 0 0 1 .69-.46 2.23 2.23 0 0 1 .88-.17 2.21 2.21 0 0 1 .86.17 2.28 2.28 0 0 1 .7.46 2.07 2.07 0 0 1 .64 1.51 2.1 2.1 0 0 1-.17.84 2 2 0 0 1-.47.68 2.19 2.19 0 0 1-.7.45 2.27 2.27 0 0 1-.86.16 2.3 2.3 0 0 1-.87-.16 2.11 2.11 0 0 1-1.32-2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/StatusInclarification.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("path",{className:"oc-icon-indicator oc-icon-status-attention",d:"M21.12 12.19c0-4.78 0-7.41-6.12-7.41s-6.12 2.63-6.12 7.41H7.19v13h15.62v-13h-1.69zM15 7.36c3.54 0 3.54.09 3.54 4.83h-7.08c0-4.83 0-4.83 3.54-4.83zm.75 11.54v2.27a.76.76 0 1 1-1.51 0v-2.26a1.78 1.78 0 1 1 1.51-.01z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/indicators/StatusLocked.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/generic.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14"})),i.a.createElement("text",{transform:"translate(9.01 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"PDF"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/pdf.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})),i.a.createElement("text",{transform:"translate(8.67 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"PNG"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/png.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("path",{fill:"#67707c",d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z",fill:"#67707c"}),i.a.createElement("text",{transform:"translate(9.36 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"PPT"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/ppt.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})),i.a.createElement("text",{transform:"translate(8.39 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"DOC"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/word.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 30 30"},this.props),i.a.createElement("title",null,"document_icons"),i.a.createElement("g",{fill:"#67707c"},i.a.createElement("path",{d:"M16.57 7.39v5.28h4.52l-4.52-5.28z"}),i.a.createElement("path",{d:"M22 14.67h-7.43V7H8v16h14v-8.33z"})),i.a.createElement("text",{transform:"translate(9.67 21.13)",fontSize:"6",fill:"#fff",fontFamily:"Lato"},"XLS"))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/invoices/document/xls.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 50 30"},this.props),i.a.createElement("path",{className:"oc-icon-logo",d:"M35.5 24.7h2.1c.6 0 1.3-.2 1.9-.3.4-.1.7-.4.8-.8l.3-1.5c.1-.3-.1-.4-.3-.4-.4 0-.8.1-1.3.1-1.7.2-3.3.3-5 0-1.2-.2-2.1-.7-2.5-2-.1-.4-.2-.8-.2-1.2-.1-1.9.3-3.7.7-5.6.3-1.3.7-2.5 1.3-3.7.6-1.1 1.6-1.8 2.8-2 1.5-.3 2.9-.3 4.4-.2.8 0 1.5.1 2.3.2.3 0 .5-.1.6-.4l.3-1.5c.1-.7 0-.8-.7-.9-2.6-.4-5.2-.4-7.8 0-2.8.4-5 1.9-6.1 4.6-1.4 3.5-2.1 7.1-2 10.8.1 2.2 1.3 3.7 3.4 4.3 1.7.5 3.4.5 5 .5zM22 4.8c-.4-.2-.9-.3-1.4-.4-2-.4-4-.3-6.1-.1-3 .4-5.2 1.9-6.4 4.7-.7 1.6-1.1 3.3-1.4 5-.4 2-.8 4.1-.6 6.2.2 1.9 1.1 3.2 2.9 3.9 1.4.5 2.9.5 4.7.6.6-.1 1.6-.1 2.5-.2 2.8-.4 4.9-1.8 6.1-4.4.7-1.5 1.1-3.1 1.4-4.8.4-2.1.8-4.3.7-6.5.2-1.8-.6-3.2-2.4-4zm-1.9 8.8c-.3 1.7-.6 3.4-1.2 5.1-.1.3-.2.6-.4.9-.7 1.4-1.8 2.1-3.3 2.1-1 0-2 0-3-.1-1.2-.1-1.8-.9-1.9-2-.2-1.4.1-2.8.3-4.2.3-1.7.7-3.3 1.1-5 .1-.5.4-1 .7-1.5.6-1.1 1.5-1.6 2.7-1.7.5-.1 1-.1 1.6-.1.5 0 1 .1 1.5.1 1.4.2 2.2 1 2.1 2.5.1 1.3 0 2.6-.2 3.9z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/logo/oc-logo-short.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 150 30"},this.props),i.a.createElement("path",{className:"oc-icon-logo",d:"M75.2 22.5h2c.6 0 1.2-.2 1.8-.3.4-.1.7-.4.7-.8.1-.5.2-1 .3-1.4.1-.3-.1-.4-.3-.4-.4 0-.8.1-1.2.1-1.6.2-3.1.3-4.7 0-1.1-.2-2-.7-2.3-1.8-.1-.4-.2-.8-.2-1.2-.1-1.8.3-3.5.7-5.3.3-1.2.6-2.4 1.3-3.5.6-1 1.5-1.7 2.6-1.9 1.3-.2 2.7-.1 4.1 0 .7 0 1.4.1 2.1.2.3 0 .5-.1.5-.4.1-.5.2-.9.3-1.4.1-.6 0-.8-.6-.9-2.4-.4-4.9-.4-7.3 0-2.7.4-4.7 1.8-5.8 4.3-1.3 3.3-2 6.7-1.9 10.2.1 2.1 1.2 3.5 3.2 4.1 1.5.4 3.1.5 4.7.4zM40.5 8.7c-.5 0-.6.1-.7.6-.4 2.2-.9 4.4-1.3 6.7-.2 1.1-.5 2.3-.5 3.4.1 1 .5 1.8 1.3 2.2.3.2.7.3 1.1.4 2.4.5 4.9.5 7.3-.1 1.6-.4 2.7-1.4 3.2-3l.3-1.2c.6-2.9 1.1-5.7 1.6-8.6.1-.4 0-.5-.4-.5h-2.7c-.4 0-.6.1-.6.5l-1.2 6.6c-.2.9-.4 1.8-.6 2.6-.1.6-.5 1-1.1 1.1-1.1.3-2.3.3-3.5 0-.5-.1-.7-.4-.8-1v-.6c.1-.8.3-1.6.4-2.5.4-2.1.8-4.1 1.2-6.1.1-.5 0-.5-.5-.5-.4.1-2.1 0-2.5 0zM58.3 8.7c-1.7.3-3 1.2-3.4 3-.1.2-.1.5-.2.7-.3 1.5.2 2.4 1.5 3.1.4.2.9.4 1.4.6.8.3 1.6.7 2.4 1 .3.1.6.3.6.7.1.9-.3 1.6-1.2 1.7-.7.1-1.5.2-2.2.2-1.1 0-2.1-.2-3.1-.3-.4 0-.6 0-.7.5-.1.5-.2 1-.3 1.6-.1.3.1.6.4.7.1 0 .2.1.3.1 1.5.3 3.1.3 4.6.2 1.1-.1 2.2-.2 3.3-.7 1.8-.8 3.1-3.1 2.7-5.1-.1-.7-.6-1.3-1.2-1.6-1-.5-2-.9-3.1-1.3-.4-.2-.8-.3-1.2-.5-.5-.3-.6-.6-.5-1.1.2-.6.5-1 1.2-1 1-.1 2-.1 3 0 .6 0 1.2.1 1.8.2.3 0 .6-.1.6-.5.1-.4.2-.8.2-1.2.1-.3-.1-.6-.4-.7-.2-.1-.4-.1-.6-.1-.6-.4-4.8-.4-5.9-.2zM128.2 11.5h1.8c.3 0 .4-.1.5-.4.1-.6.2-1.2.3-1.7.1-.4 0-.5-.4-.5H127c-.5 0-.6-.1-.6-.6 0-.7.1-1.3.1-2 0-.4-.1-.5-.5-.5h-2.2c-.4 0-.5.2-.6.5-.8 4-1.5 8-2.3 12-.1.7-.3 1.4-.1 2.1.2 1 1 1.5 1.9 1.7 1.4.4 2.9.3 4.3.3.4 0 .8-.1 1.2-.2.3-.1.6-.3.6-.5.2-.6.3-1.2.3-1.8 0-.1-.2-.3-.3-.3-.1-.1-.3 0-.4 0-.9 0-1.9.1-2.8 0-.8-.1-1.2-.6-1-1.4.4-2.1.8-4.2 1.2-6.2.1-.4.2-.5.6-.5h1.8zM115.1 22.3h1.3c.5 0 .6-.1.7-.6.3-1.7.6-3.4 1-5.1.5-2.5.9-4.9 1.4-7.4.1-.5 0-.6-.5-.6h-2.6c-.5 0-.6.1-.7.6l-1.5 7.8c-.3 1.6-.6 3.1-.9 4.7-.1.4 0 .6.5.6h1.3zM118.1 6.5h1.4c.3 0 .5-.1.6-.5.1-.7.3-1.5.4-2.2.1-.5 0-.6-.5-.6h-2.5c-.5 0-.6.1-.7.6-.1.7-.3 1.5-.4 2.2-.1.4 0 .5.4.5h1.3zM18.4 3.8c-.4-.2-.9-.3-1.3-.4-1.9-.4-3.8-.3-5.7-.1-2.8.4-4.9 1.8-6 4.5-.6 1.5-1 3.1-1.3 4.7-.4 1.9-.7 3.9-.5 5.8.2 1.8 1 3.1 2.8 3.7 1.3.5 2.7.5 4.4.6.6 0 1.5-.1 2.4-.2 2.7-.4 4.6-1.7 5.8-4.2.6-1.4 1-3 1.3-4.5.4-2 .8-4 .7-6.1-.2-1.7-.9-3.1-2.6-3.8zm-1.8 8.3c-.2 1.6-.6 3.3-1.1 4.8-.1.3-.2.6-.4.8-.6 1.3-1.7 1.9-3.1 2-.9 0-1.9 0-2.8-.1-1.1-.1-1.7-.8-1.8-1.9-.2-1.3.1-2.6.3-3.9.3-1.6.7-3.1 1.1-4.7.1-.5.4-1 .6-1.4.6-1 1.5-1.5 2.6-1.6.5-.1 1-.1 1.5-.1s1 .1 1.4.1c1.3.2 2.1.9 2 2.4 0 1.2-.1 2.4-.3 3.6zM109.2 8.8c2 .4 2.8 1.4 2.8 3.4 0 2.4-.4 4.7-1.6 6.9-1.1 2-2.8 3.1-5.1 3.3-1.4.1-2.8.1-4.2-.3-.4-.1-.5 0-.6.4-.3 1.7-.6 3.7-1 5.4-.1.6-.2 1-.8 1h-2.4c-.5 0-.6-.3-.5-.9.9-4.6 1.7-9.2 2.6-13.8.2-.8.4-1.7.7-2.5.6-1.5 1.9-2.4 3.4-2.7 1.2-.4 5.7-.5 6.7-.2zm-3.5 2.3c-.4 0-.8.1-1.2.1-1 .2-1.7.6-2 1.7-.2.6-.4 1.2-.5 1.9-.2 1.2-.4 2.4-.5 3.6-.1.7.3 1 .9 1.1.5.1 1.1.1 1.6.2 1.6 0 2.5-.5 3-2 .4-1 .6-2.1.8-3.2.1-.6.1-1.2.1-1.9 0-.8-.5-1.3-1.3-1.4-.3 0-.6 0-.9-.1zM30.5 8.5c1.1 0 2.3 0 3.4.3 1.6.5 2.4 1.3 2.5 3 .1 2.6-.4 5.2-1.7 7.5-1.1 1.9-2.8 2.8-4.9 3-1.4.1-2.9.1-4.3-.3-.3-.1-.5 0-.5.4-.3 1.8-.7 3.6-1 5.3-.1.4-.2.5-.6.5h-2.6c-.6 0-.7-.1-.6-.7.4-2.2.8-4.3 1.2-6.5.4-2.4.9-4.7 1.4-7.1.1-.6.3-1.2.5-1.8.6-2 2-3.2 4-3.5 1 0 3.2-.2 3.2-.1zm-2.3 11.2c1.3 0 2.4-.3 3-1.6.8-1.6 1.1-3.4 1.1-5.2 0-1.1-.5-1.6-1.5-1.7-.7-.1-1.5 0-2.2.1-1 .1-1.6.7-1.8 1.7-.2.6-.4 1.3-.5 1.9-.2 1.1-.4 2.2-.5 3.3-.1.8.2 1.1 1 1.3.5.2 1 .2 1.4.2zM138.4 13.7h2.2c.3 0 .5-.1.5-.4 0-.4.1-.7 0-1.1-.1-.6-.6-1-1.3-1.1-1.4-.2-2.8-.1-4.2.1-.6.1-1.1.2-1.7.3-.4 0-.5 0-.4-.5.1-.4.1-.9.2-1.3s.4-.6.7-.7c.7-.2 1.4-.4 2.2-.4 1.2-.1 2.4-.1 3.6-.1.9.1 1.9.2 2.7.5 1.3.4 2 1.4 2 2.8 0 1.2-.2 2.5-.5 3.7l-1.2 6.3c-.1.4-.2.5-.6.5h-.8c-.5.1-.9-.2-1.1-.6-.1-.2-.3-.6-.5-.6-.1-.1-.4.3-.6.4-.9.6-1.9.9-2.9 1-1.1 0-2.2 0-3.3-.1-1.7-.3-2.4-1.2-2.3-3 .1-.9.3-1.7.5-2.5.5-1.7 1.8-2.5 3.5-2.7 1.1-.4 3.2-.5 3.3-.5zm-2 6.3c.4 0 .7-.1 1.1-.1 1.3-.3 2.4-.9 2.7-2.3l.3-1.2c0-.2 0-.4-.3-.4-1.2 0-2.4 0-3.6.1-.6 0-1 .3-1.3.9-.3.7-.4 1.4-.4 2.1 0 .4.3.7.7.8.3.1.6.1.8.1zM91.1 20.9c-.1 0-.1.1-.2.1-1 .9-2.3 1.3-3.7 1.4-1.2.1-2.3.1-3.5-.3-1.3-.4-1.8-1.1-1.9-2.4 0-1.2.2-2.4.7-3.5.6-1.3 1.7-2 3-2.2 1-.2 2-.2 3-.2h2.4c.6 0 .7-.1.8-.7 0-.2.1-.4.1-.5 0-.7-.3-1.3-1-1.4-.8-.1-1.7-.2-2.6-.2-1.1.1-2.2.3-3.3.4h-.4c-.2 0-.3-.1-.3-.3.1-.5.1-1.1.3-1.5.1-.3.5-.5.8-.6.7-.2 1.5-.4 2.3-.4 1.3-.1 2.7-.1 4 0 .8.1 1.6.3 2.4.5 1.2.4 1.7 1.5 1.7 2.7 0 1.2-.2 2.4-.4 3.6l-1.2 6.3c-.1.3-.3.5-.6.5h-.1c-1.6 0-1.4.1-2.1-1.1-.1-.1-.2-.1-.2-.2zm-3.9-.8c.4 0 .8-.1 1.2-.1 1.2-.2 2.1-.8 2.6-2.1.2-.5.2-1 .3-1.5.1-.3-.1-.4-.3-.4h-3.2c-.8 0-1.5.2-1.8 1.1-.2.6-.3 1.1-.3 1.7-.1.7.3 1.1.8 1.2.2 0 .4 0 .7.1z"}),i.a.createElement("path",{className:"oc-icon-logo",d:"M64.5 8.6c.2 0 .4.1.6.1.3.1.4.4.4.7-.1.4-.2.8-.2 1.2-.1.4-.3.5-.6.5-.6 0-1.2-.1-1.8-.2h-3c-.7 0-1.1.4-1.2 1-.1.5 0 .9.5 1.1.4.2.8.4 1.2.5 1 .4 2.1.9 3.1 1.3.7.3 1.1.8 1.2 1.6.3 2-.9 4.3-2.7 5.1-1 .5-2.2.6-3.3.7-1.5.1-3.1.1-4.6-.2-.1 0-.2-.1-.3-.1-.3-.1-.5-.3-.4-.7.1-.5.2-1 .3-1.6.1-.4.2-.5.7-.5 1 .1 2.1.2 3.1.3.7 0 1.5 0 2.2-.2.8-.2 1.3-.9 1.2-1.7-.1-.4-.3-.6-.6-.7-.8-.3-1.6-.7-2.4-1-.5-.2-.9-.4-1.4-.6-1.3-.7-1.8-1.6-1.5-3.1 0-.2.1-.5.2-.7.4-1.8 1.7-2.7 3.4-3 .8.1 5 .1 5.9.2z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/logo/oc-logo.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M8.2 29.5h24.2v2.1H8.2z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M6.8 31.5h27v2.1h-27zM10.8 17.9h3.7v9.4h-3.7zM18.4 17.9h3.7v9.4h-3.7zM26.1 17.9h3.7v9.4h-3.7zM20.3 6.2L8 16.2h24.6l-12.3-10zm0 7.4c-1.1 0-2.1-.9-2.1-2.1 0-1.1.9-2.1 2.1-2.1 1.1 0 2.1.9 2.1 2.1-.1 1.2-1 2.1-2.1 2.1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Accounts.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M27.1 9.6v21.3h7V9.6h-7zm3.5 18.2c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zM17.6 9.6v21.3h7V9.6h-7zm3.5 18.2c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M11.4 9L5.2 29.5l6.7 2 6.2-20.4L11.4 9zm-2 18.4c-.8-.2-1.3-1.1-1-1.9.2-.8 1.1-1.3 1.9-1 .8.2 1.3 1.1 1 1.9-.2.8-1.1 1.3-1.9 1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Archive.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M34.5 23.4c0-2-.4-4.4-1.1-6.2-.8-1.8-1.8-3.7-3-5S27.5 9.7 25.7 9c-1.8-.8-3.6-1.2-5.5-1.2s-3.8.4-5.5 1.2c-1.8.8-3.3 1.8-4.5 3.1s-2.3 2.9-3 4.7c-.7 1.8-1.1 3.7-1.1 5.7 0 2.9.8 5.5 2.3 7.9.2.3.5.5.9.5l22.2-.1c.4 0 .6.1.8-.2 1.4-2.5 2.2-4.2 2.2-7.2zm-14.4 4.3c-1.2 0-2.1-.8-2.1-1.7 0-.9 1.7-11.4 2.2-11.4.5 0 2 10.5 2 11.4 0 1-1 1.7-2.1 1.7zm11.4-4.3c-.6 0-1-.7-1-1.3 0-1.4-.3-2.9-.8-4.1-.6-1.3-1.3-2.5-2.2-3.4-.9-.9-2-1.7-3.3-2.2-1.3-.5-2.6-.8-4-.8s-2.7.3-4 .8c-1.2.6-2.3 1.3-3.2 2.2-.9.9-1.6 2-2.2 3.3-.5 1.3-.8 2.8-.8 4.2 0 .6-.4 1.3-1 1.3-.5 0-1-.7-1-1.2 0-1.7.3-3.4 1-4.9.6-1.5 1.5-2.9 2.6-4s2.4-2 3.9-2.7c1.5-.7 3.1-1 4.7-1 1.7 0 3.3.3 4.8.9 1.5.6 2.8 1.5 3.9 2.6s2 2.4 2.6 3.9c.7 1.5 1 3.4 1 5 0 .7-.4 1.4-1 1.4z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Dashboard.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 7.4c-7.1 0-12.9 5.8-12.9 12.9s5.8 12.9 12.9 12.9 12.9-5.8 12.9-12.9S27.4 7.4 20.3 7.4zm1.5 20.4h-3.1V17.4h3.1v10.4zm.2-12.5c-.1.2-.2.4-.4.6-.2.2-.4.3-.6.4s-.5.1-.7.1c-.3 0-.5 0-.7-.1-.2-.1-.4-.2-.6-.4-.2-.2-.3-.4-.4-.6s-.1-.4-.1-.7c0-.3 0-.5.1-.7s.2-.4.4-.6.4-.3.6-.4c.2-.1.5-.1.7-.1.3 0 .5 0 .7.1.2.1.4.2.6.4.2.2.3.4.4.6s.1.5.1.7c0 .2 0 .4-.1.7z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Info.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40.53 40.53"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M37.1 20.36h-3.32a.71.71 0 0 0-.47.12 6.55 6.55 0 0 0-4.26-1.66A6.23 6.23 0 0 0 24.2 21a5.68 5.68 0 0 0-3.79-1.3 5 5 0 0 0-3.66 1.3 6.07 6.07 0 0 0-4.73-2 6.49 6.49 0 0 0-4.38 1.6.71.71 0 0 0-.47-.12H3.86a1.19 1.19 0 0 0-1.18 1.18 1.12 1.12 0 0 0 1.18 1.18h2.36A3 3 0 0 0 6 24c0 2.84 2.72 5.2 5.91 5.2s5.91-2.37 5.91-5.2a2.31 2.31 0 0 0-.12-.95A2.86 2.86 0 0 1 20.3 22a4.14 4.14 0 0 1 2.84.95A3.27 3.27 0 0 0 23 24c0 2.84 2.72 5.2 5.91 5.2s5.91-2.37 5.91-5.2a4.25 4.25 0 0 0-.24-1.3H37a1.19 1.19 0 0 0 1.18-1.18 1.09 1.09 0 0 0-1.08-1.16zM12 26.87c-2 0-3.67-1.3-3.67-2.84S10 21.19 12 21.19s3.67 1.3 3.67 2.84S14 26.87 12 26.87zm17 0c-2 0-3.67-1.3-3.67-2.84s1.66-2.84 3.67-2.84 3.67 1.3 3.67 2.84-1.61 2.84-3.62 2.84z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Inspector.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M23.9 6.9v6.3h6.5z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M31.3 15v.1h-9.4V6.5H10.3v27h21V15zm-4.4 5.1L21 26.7c-.2.2-.5.4-.8.4-.2 0-.5-.1-.7-.2l-3.9-3.2c-.5-.4-.5-1.1-.2-1.6.4-.5 1.1-.6 1.6-.2l3.1 2.5 5.2-5.8c.4-.5 1.1-.5 1.6-.1.4.4.4 1.1 0 1.6z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Invoices.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M22.9 26.1c-.3 0-.5-.1-.7-.3l-4.1-4.1-4 4c-.4.4-1 .4-1.4 0s-.4-1 0-1.4l4.7-4.7c.2-.2.4-.3.7-.3.3 0 .5.1.7.3l4.1 4.1 4.4-4.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-5.1 5.1c-.2.2-.4.3-.7.3z"}),i.a.createElement("circle",{className:"oc-icon-product",cx:"28",cy:"20.1",r:"2"}),i.a.createElement("circle",{className:"oc-icon-product",cx:"18.1",cy:"20.4",r:"2"}),i.a.createElement("circle",{className:"oc-icon-product",cx:"22.9",cy:"25.1",r:"2"}),i.a.createElement("path",{className:"oc-icon-product",d:"M29.7 33.7H9.2c-.8 0-1.5-.7-1.5-1.5v-22c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v20.6h19c.8 0 1.5.7 1.5 1.5 0 .7-.7 1.4-1.5 1.4z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Liquidity.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 42 42"},this.props),i.a.createElement("title",null,"matching"),i.a.createElement("g",{fill:"#ccc"},i.a.createElement("path",{d:"M37.5 12.55v4h-8.36v2.06l-8.48-4.1 8.48-4.1v2.14h8.36zM4.71 18.19v5.11h9.87v2.63l10.01-5.24-10.01-5.24v2.74H4.71zM37.5 25.11v4h-8.36v2.06l-8.48-4.1 8.48-4.1v2.14h8.36z"})))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Matching.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("ellipse",{transform:"rotate(-14.76 16.216 13.85)",className:"oc-icon-product",cx:"16.2",cy:"13.9",rx:"5.3",ry:"5.3"}),i.a.createElement("ellipse",{transform:"rotate(-14.76 29.87 25.67)",className:"oc-icon-product",cx:"29.9",cy:"25.7",rx:"3.7",ry:"3.7"}),i.a.createElement("ellipse",{transform:"rotate(-14.76 9.849 30.945)",className:"oc-icon-product",cx:"9.8",cy:"30.9",rx:"3",ry:"3"}),i.a.createElement("path",{className:"oc-icon-product",d:"M13.9 32.6c-2.2 0-3.5-.3-3.6-.3l-.3-.1c-1-.5-1.7-2.6.4-9 2.3-7.3 5-9.4 5.1-9.5l.4-.3.5.2c.2.1 4.8 1.5 9.3 5.6 4.5 4.1 5.2 6.6 5.3 6.9l.2.6-.5.3c-.2.1-3.8 3.2-9.7 4.7-2.8.7-5.3.9-7.1.9zm-2.8-2.2c1.2.2 4.8.5 9.3-.7 4.2-1.1 7.2-3 8.4-3.9-.5-.9-1.6-2.8-4.5-5.3-3.3-3-6.7-4.5-8-5-.7.8-2.5 3.1-4.1 8.2-1.3 4.5-1.2 6.2-1.1 6.7z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Netting.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 7.4c-7.1 0-12.8 5.7-12.8 12.8 0 .7.1 1.4.2 2 2.9 0 5.1 1.5 5.1 3.4v.9c.1.1.3.2.4.3.1.1.1.1.1.2.9-.8 2.4-1.2 4-1.2 1.8 0 3.4.6 4.3 1.5 0-.3.3-.6.3-.9 0-.3-.1-1.1-.2-1.4-.1-.2-.2-.2-.4-.4-.2-.3-.2-.4-.2-.8-.1-.7.1-.9-.6-.8-.2 0-.3.1-.5 0-.2-.2 0-.3-.3-.4-.3-.1-1.2.5-1.6.6-.4 0-.5-.2-.9-.4-.9-.7-1.5-1.5-1.4-2.6 0-.6.1-1.1.5-1.5.3-.3.8-.4 1-.8.2-.3.3-.8.7-1 .3-.2.8-.1 1.2-.2.4-.2.7-.3 1.1-.2.4 0 .7-.1.9.2.3.4 0 .7.5 1 .4.2 1.2.2 1.6-.1.1-.1 1.4.4 1.5.4.7.3 1.1.8 1.4 1.5.3.7.5 1.3 1 2 .1.2.5.8.6.9.1.1.6-.1.8-.1-.2 1.2-1.7 1.8-1.9 3-.1.4.2.8.1 1.2-.1.4-.5.6-.7.9-.2.2-.5.5-.5.8 0 .2.1.4 0 .5-.1.2-.5.3-.6.5-.4.4-.7.8-1.3 1-.4.1-.8.2-1.2.2v1.2c0 .5-.2 1-.4 1.4 6.3-.8 11.1-6.2 11.1-12.7-.1-7.1-5.8-12.9-12.9-12.9zM11 15.7c-.2.2-1.3.7-1.2 1.1 0 0 .4-.2.4-.1 0 .3-.5.8-.7 1.1-.1.2-.3.5-.5.8-.3.7-.1 1.5-.4 2.1 0-1.2.3-2.5.7-3.7.3-.8.9-2.6 1.6-2.9 0 .1-.1.2-.1.3 0 .2.2.4.2.6.1.3.1.5 0 .7zm3.9-4.6c-.3.3-.5.6-.7.9-.2.3-.7.8-1.1.8-.3 0-.8-.1-.7-.3.8-.7.4-.4.2-.1 1-.9 2.2-1.7 3.5-2.2-.3.4-.8.5-1.2.9zM27.8 28c-.4.5-.9.6-.7-.2.1-.4.3-.8.6-1.1.3-.3.4-.4.6-.8v.3c.1.6-.1 1.4-.5 1.8zM17.6 13c.1-.2.2-.1.5 0 0-.3-.1-1.1.4-1 .2 0 .7.9.8 1-.4.3-.8.3-1.3.4v-.5c-.1.2-.3.3-.4.5-.1-.1-.2-.3 0-.4zm13.2 6.8c-.4-.4-.7-.5-1.3-.7-.4-.1-.8-.6-1.2-.6.1.2.2.6.4.8.2.2.5 0 .7.2.1.1.1.3.2.3.4.5 0 .6-.4.9-.3.2-.5.4-.9.6-1 .4-1-.5-1.4-1.2-.1-.2-1.4-2.1-1.4-2.1.3-.2.2.1.3-.2.1-.2-.1-.6 0-.9-.6.4-.7.4-1.2-.3-.3-.5-.2-.8.4-1 .4-.1 1.1.2 1.5 0 .7-.3-.7-.8-.7-.8 0-.1.3-.3.4-.4-.7-.1-1.3.2-1.7.8-.2.3.2.2-.3.5-.2.1-.4 0-.6.1-.4.1-.5.1-.2.5-.3-.3-.4-.7-.6-1-.3-.3-.9-.6-1.3-.8 0 .6.5.9.9 1.3h-.6c.1-.3-.7-.9-1-.9-.9-.1-1.3.8-1.9 1.3-.4.3-1.3.4-1.5-.1-.1-.2 0-.5 0-.7 0-.5 0-.4.4-.5.5-.2.9-.1 1.1-.7 0-.1-.2-.3 0-.5.1-.2.5-.2.7-.3.3-.2.5-.3.8-.6.4-.3.5-.5.9-.3.2.1.4.5.7.5.9.1.7-1 .4-1.4-.1.2-.4.7-.6.8-.6.2-.5-.5-.8-.7-.4-.3-.8.3-.6-.3.1-.3.4-.4.7-.5.4-.2.9-.4 1.3-.5.4-.1.8.1 1.2.1.5 0 1.1-.2 1.5.1.3.2.1.3.5.5.3.2.2 0 .5 0 .1 0 .2-.1.2-.1.1.1.3.2.4.3 1 .7 1.9 1.5 2.6 2.5 1.6 2 2.4 4.5 2.4 7.1v.7c-.1-.7-.3-1.3-.9-1.8z"}),i.a.createElement("path",{className:"oc-icon-product",d:"M16.8 27.7c2 0 3.7.6 3.7 1.4 0 .8-1.7 1.4-3.7 1.4s-3.7-.6-3.7-1.4c0-.8 1.7-1.4 3.7-1.4zM6.9 23.9c2 0 3.7.6 3.7 1.4 0 .8-1.7 1.4-3.7 1.4s-3.7-.6-3.7-1.4c.1-.8 1.7-1.4 3.7-1.4zM10.6 28s-.6 1.2-3.7 1.2S3.3 28 3.3 28v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2V28zM10.6 30.5s-.6 1.2-3.7 1.2-3.7-1.2-3.7-1.2v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2v1.3zM10.6 33s-.6 1.2-3.7 1.2S3.3 33 3.3 33v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2V33zM20.5 32s-.6 1.2-3.7 1.2-3.7-1.2-3.7-1.2v-1.3s1.1 1.2 3.7 1.2 3.7-1.2 3.7-1.2V32z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Payments.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M31 22.7c-1.4-2.4-.5-5.4 1.8-6.8l-2.6-4.4c-.7.4-1.6.7-2.5.7-2.7 0-5-.9-5-4.9h-5.1c0 1-.2 1.6-.7 2.4-1.4 2.4-4.4 3.1-6.8 1.8l-2.6 4.4c.7.4 1.4 1 1.8 1.8 1.4 2.4.5 5.4-1.8 6.8l2.6 4.4c.7-.4 1.6-.6 2.5-.6 2.7 0 4.9 3 5 5h5.1c0-1 .2-1.7.7-2.5 1.4-2.4 4.4-3.2 6.8-1.8l2.6-4.4c-.7-.5-1.3-1.1-1.8-1.9zm-10.7 2.7c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3-2.4 5.3-5.3 5.3z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Settings.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M13.3 32.7h.1c-1.8 0-3.1-.8-3.1-2.6V16.7h6v13.4c0 1.8-1.3 2.6-3 2.6zM13.4 8.3l-3.2 6.4h6.4zM28.6 8.7v6h-4.5v-6c-2.4.9-4 3.2-4 5.9 0 2.6 1.6 4.8 3.8 5.8v9.9c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5v-9.9c2.2-1 3.8-3.2 3.8-5.8-.1-2.7-1.8-5-4.1-5.9z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Tools.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 6.1c-7.8 0-14.2 6.3-14.2 14.2 0 7.8 6.3 14.2 14.2 14.2 7.8 0 14.2-6.3 14.2-14.2-.1-7.9-6.4-14.2-14.2-14.2zm0 8.4c1.9 0 3.5 1.2 3.5 3.6 0 2.4-2 5.1-3.5 5.1s-3.5-2.7-3.5-5.1c-.1-2.4 1.5-3.6 3.5-3.6zm-5.4 12.2c0-3 1.3-2.9 3.2-3.3.6.7 1.4 1 2.1 1 .7 0 1.5-.3 2.1-1 1.9.4 3.2.2 3.2 3.2.1 2.1-10.6 2.1-10.6.1z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/User.svg")}()},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c=n(0),i=n.n(c);n.d(t,"a",function(){return s});var u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=function(e){function t(){return r(this,t),o(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return a(t,e),f(t,[{key:"render",value:function(){return i.a.createElement("svg",u({viewBox:"0 0 40 40"},this.props),i.a.createElement("path",{className:"oc-icon-product",d:"M20.3 6.3c-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14c0-7.8-6.3-14-14-14zm2 10.3c1.9 0 3.5 1.2 3.5 3.6 0 2.4-2 5-3.5 5s-3.5-2.7-3.5-5c0-2.5 1.5-3.6 3.5-3.6zm-8.1-1.7c1.2 0 2.2.8 2.2 2.2 0 1.5-1.2 3.2-2.2 3.2-.9 0-2.2-1.7-2.2-3.2 0-1.5 1-2.2 2.2-2.2zM10.9 22c0-.9.8-1.6 2-1.8.4.4.9.8 1.3.8s.9-.3 1.3-.8c1.2.2 2 .9 2 1.8 0 1.3-6.6 1.3-6.6 0zm6.1 5.8c0-2 1.3-2.4 3.2-2.8.6.7 1.4 1.2 2.1 1.2.7 0 1.4-.6 2.1-1.3 1.9.4 3.2.9 3.2 2.9s-10.6 2-10.6 0z"}))}}]),t}(i.a.Component);!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&__REACT_HOT_LOADER__.register(s,"SVG","/home/ilkka/data/react-icons/images/products/Users.svg")}()},function(e,t,n){"use strict";function r(e,t){var n={};for(var r in e)t.indexOf(r)>=0||Object.prototype.hasOwnProperty.call(e,r)&&(n[r]=e[r]);return n}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function c(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var i=n(0),u=n.n(i),f=n(56),s=n.n(f),l=n(27),p=n(5),y=n(6),_=n(20),h=n(8),b=n(7),v=n(16),O=n(10),m=n(11),d=n(13),w=n(4),g=n(30),E=n(26),j=n(31),T=n(23),P=n(18),R=n(19),A=n(9),C=n(12),k=n(2),x=n(14),z=n(15),L=n(25),H=n(21),S=n(3),D=n(17),M=n(22),V=n(29),N=n(28),F=n(24),B=n(45),G=n(52),I=n(40),q=n(41),W=n(42),U=n(43),X=n(46),J=n(48),K=n(49),Q=n(50),Y=n(51),Z=n(53),$=n(47),ee=n(44),te=n(32),ne=n(33),re=n(34),oe=n(35),ae=n(36),ce=n(37),ie=n(39),ue=n(38);n.d(t,"a",function(){return pe});var fe=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},se=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),le={indicator:{burgerClose:u.a.createFactory(p.a),remove:u.a.createFactory(l.a),burger:u.a.createFactory(y.a),logout:u.a.createFactory(_.a),CaretRight:u.a.createFactory(h.a),CaretLeft:u.a.createFactory(b.a),flagged:u.a.createFactory(v.a),comment:u.a.createFactory(O.a),commented:u.a.createFactory(m.a),email:u.a.createFactory(d.a),attachment:u.a.createFactory(w.a),inClarification:u.a.createFactory(g.a),rejected:u.a.createFactory(E.a),locked:u.a.createFactory(j.a),ok:u.a.createFactory(T.a),inspected:u.a.createFactory(P.a),inspectedAndApproved:u.a.createFactory(R.a),close:u.a.createFactory(A.a),delete:u.a.createFactory(C.a),alert:u.a.createFactory(k.a),error:u.a.createFactory(x.a),exclamation:u.a.createFactory(z.a),plus:u.a.createFactory(L.a),minus:u.a.createFactory(H.a),arrowLeft:u.a.createFactory(S.a),help:u.a.createFactory(D.a),more:u.a.createFactory(M.a),settings:u.a.createFactory(V.a),search:u.a.createFactory(N.a),pinned:u.a.createFactory(F.a)},product:{Invoices:u.a.createFactory(B.a),user:u.a.createFactory(G.a),Accounts:u.a.createFactory(I.a),Archive:u.a.createFactory(q.a),Dashboard:u.a.createFactory(W.a),Info:u.a.createFactory(U.a),Liquidity:u.a.createFactory(X.a),Netting:u.a.createFactory(J.a),Payments:u.a.createFactory(K.a),Settings:u.a.createFactory(Q.a),Tools:u.a.createFactory(Y.a),Users:u.a.createFactory(Z.a),Examples:u.a.createFactory(U.a),Matching:u.a.createFactory($.a),Inspector:u.a.createFactory(ee.a)},invoices:{generic:u.a.createFactory(te.a),pdf:u.a.createFactory(ne.a),png:u.a.createFactory(re.a),ppt:u.a.createFactory(oe.a),word:u.a.createFactory(ae.a),xls:u.a.createFactory(ce.a)},logo:{OCShort:u.a.createFactory(ue.a),OCLong:u.a.createFactory(ie.a)}},pe=function(e){function t(e){o(this,t);var n=a(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));switch(e.type){case"product":n.defaultWidth=40,n.defaultHeight=40;break;case"indicator":n.defaultWidth=30,n.defaultHeight=30;break;default:n.defaultWidth=40,n.defaultHeight=40}return n}return c(t,e),se(t,[{key:"render",value:function(){var e=this.props,t=e.type,n=e.name,o=e.width,a=e.height,c=r(e,["type","name","width","height"]),i=le[t]&&le[t][n],f=fe({width:o||this.defaultWidth,height:a||this.defaultHeight,focusable:!1},c);return"function"==typeof _.a?i(f):u.a.createElement("span",fe({className:"icon"},this.props))}}]),t}(u.a.Component);pe.defaultProps={width:40,height:40},pe.propTypes={type:s.a.string.isRequired,name:s.a.string.isRequired,width:s.a.number,height:s.a.number};!function(){"undefined"!=typeof __REACT_HOT_LOADER__&&(__REACT_HOT_LOADER__.register(le,"components","/home/ilkka/data/react-icons/src/icons/icon.component.jsx"),__REACT_HOT_LOADER__.register(pe,"Icon","/home/ilkka/data/react-icons/src/icons/icon.component.jsx"))}()},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(1);n.d(t,"Icon",function(){return r.a})},function(e,t){e.exports=__webpack_require__(2)}])});
-//# sourceMappingURL=react-icons.js.map
-
-/***/ }),
 /* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40353,6 +40353,7 @@ __webpack_require__.d(datagrid_actions_namespaceObject, "saveFail", function() {
 __webpack_require__.d(datagrid_actions_namespaceObject, "create", function() { return datagrid_actions_create; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "addNewItem", function() { return datagrid_actions_addNewItem; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "removeNewItem", function() { return datagrid_actions_removeNewItem; });
+__webpack_require__.d(datagrid_actions_namespaceObject, "removeNewItems", function() { return datagrid_actions_removeNewItems; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "remove", function() { return datagrid_actions_remove; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "removeSuccess", function() { return datagrid_actions_removeSuccess; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "removeFail", function() { return datagrid_actions_removeFail; });
@@ -40369,6 +40370,7 @@ __webpack_require__.d(datagrid_actions_namespaceObject, "selectAllItemsChange", 
 __webpack_require__.d(datagrid_actions_namespaceObject, "clearSelectedItems", function() { return datagrid_actions_clearSelectedItems; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "toggleFiltering", function() { return datagrid_actions_toggleFiltering; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "validateEditedRows", function() { return datagrid_actions_validateEditedRows; });
+__webpack_require__.d(datagrid_actions_namespaceObject, "removeEmptyCreatedRows", function() { return datagrid_actions_removeEmptyCreatedRows; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "validateCreatedRows", function() { return datagrid_actions_validateCreatedRows; });
 __webpack_require__.d(datagrid_actions_namespaceObject, "updateExistingCellValue", function() { return datagrid_actions_updateExistingCellValue; });
 
@@ -42621,11 +42623,11 @@ var Actions = __webpack_require__(81);
 var Actions_default = /*#__PURE__*/__webpack_require__.n(Actions);
 
 // EXTERNAL MODULE: ./node_modules/history/lib/useQueries.js
-var useQueries = __webpack_require__(180);
+var useQueries = __webpack_require__(181);
 var useQueries_default = /*#__PURE__*/__webpack_require__.n(useQueries);
 
 // EXTERNAL MODULE: ./node_modules/history/lib/useBasename.js
-var useBasename = __webpack_require__(181);
+var useBasename = __webpack_require__(182);
 var useBasename_default = /*#__PURE__*/__webpack_require__.n(useBasename);
 
 // EXTERNAL MODULE: ./node_modules/history/lib/createMemoryHistory.js
@@ -42829,7 +42831,7 @@ var createHashHistory_default = /*#__PURE__*/__webpack_require__.n(createHashHis
 
 
 // EXTERNAL MODULE: ./node_modules/redux/es/index.js + 6 modules
-var es = __webpack_require__(183);
+var es = __webpack_require__(184);
 
 // EXTERNAL MODULE: ./node_modules/react-redux/es/index.js + 14 modules
 var react_redux_es = __webpack_require__(65);
@@ -42870,7 +42872,7 @@ var inherits = __webpack_require__(5);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/assign.js
-var object_assign = __webpack_require__(196);
+var object_assign = __webpack_require__(197);
 var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
 // EXTERNAL MODULE: ./node_modules/babel-runtime/helpers/objectWithoutProperties.js
@@ -42882,7 +42884,7 @@ var classnames = __webpack_require__(8);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 
 // EXTERNAL MODULE: ./node_modules/babel-runtime/core-js/object/entries.js
-var entries = __webpack_require__(207);
+var entries = __webpack_require__(208);
 var entries_default = /*#__PURE__*/__webpack_require__.n(entries);
 
 // CONCATENATED MODULE: ./node_modules/react-bootstrap/es/utils/StyleConfig.js
@@ -45443,7 +45445,7 @@ var dom_helpers_style = __webpack_require__(90);
 var style_default = /*#__PURE__*/__webpack_require__.n(dom_helpers_style);
 
 // EXTERNAL MODULE: ./node_modules/react-overlays/lib/Transition.js
-var lib_Transition = __webpack_require__(211);
+var lib_Transition = __webpack_require__(212);
 var Transition_default = /*#__PURE__*/__webpack_require__.n(lib_Transition);
 
 // CONCATENATED MODULE: ./node_modules/react-bootstrap/es/Collapse.js
@@ -45673,7 +45675,7 @@ Collapse_Collapse.defaultProps = Collapse_defaultProps;
 
 /* harmony default export */ var es_Collapse = (Collapse_Collapse);
 // EXTERNAL MODULE: ./node_modules/dom-helpers/activeElement.js
-var activeElement = __webpack_require__(212);
+var activeElement = __webpack_require__(213);
 var activeElement_default = /*#__PURE__*/__webpack_require__.n(activeElement);
 
 // EXTERNAL MODULE: ./node_modules/dom-helpers/query/contains.js
@@ -45697,7 +45699,7 @@ var from = __webpack_require__(548);
 var from_default = /*#__PURE__*/__webpack_require__.n(from);
 
 // EXTERNAL MODULE: ./node_modules/react-overlays/lib/RootCloseWrapper.js
-var RootCloseWrapper = __webpack_require__(213);
+var RootCloseWrapper = __webpack_require__(214);
 var RootCloseWrapper_default = /*#__PURE__*/__webpack_require__.n(RootCloseWrapper);
 
 // CONCATENATED MODULE: ./node_modules/react-bootstrap/es/DropdownMenu.js
@@ -48111,7 +48113,7 @@ var inDOM = __webpack_require__(36);
 var inDOM_default = /*#__PURE__*/__webpack_require__.n(inDOM);
 
 // EXTERNAL MODULE: ./node_modules/dom-helpers/util/scrollbarSize.js
-var scrollbarSize = __webpack_require__(215);
+var scrollbarSize = __webpack_require__(216);
 var scrollbarSize_default = /*#__PURE__*/__webpack_require__.n(scrollbarSize);
 
 // EXTERNAL MODULE: ./node_modules/react-overlays/lib/Modal.js
@@ -48119,7 +48121,7 @@ var lib_Modal = __webpack_require__(561);
 var Modal_default = /*#__PURE__*/__webpack_require__.n(lib_Modal);
 
 // EXTERNAL MODULE: ./node_modules/react-overlays/lib/utils/isOverflowing.js
-var isOverflowing = __webpack_require__(218);
+var isOverflowing = __webpack_require__(219);
 var isOverflowing_default = /*#__PURE__*/__webpack_require__.n(isOverflowing);
 
 // CONCATENATED MODULE: ./node_modules/react-bootstrap/es/ModalBody.js
@@ -53285,6 +53287,10 @@ var Well_Well = function (_React$Component) {
 var react_floating_select = __webpack_require__(575);
 var react_floating_select_default = /*#__PURE__*/__webpack_require__.n(react_floating_select);
 
+// EXTERNAL MODULE: ./node_modules/@opuscapita/react-icons/lib/react-icons.js
+var react_icons = __webpack_require__(147);
+var react_icons_default = /*#__PURE__*/__webpack_require__.n(react_icons);
+
 // EXTERNAL MODULE: ./node_modules/fixed-data-table-2/dist/fixed-data-table.css
 var fixed_data_table = __webpack_require__(576);
 var fixed_data_table_default = /*#__PURE__*/__webpack_require__.n(fixed_data_table);
@@ -53451,7 +53457,7 @@ var _temp3 = function () {
 
 ;
 // EXTERNAL MODULE: ./node_modules/react-immutable-proptypes/dist/ImmutablePropTypes.js
-var ImmutablePropTypes = __webpack_require__(150);
+var ImmutablePropTypes = __webpack_require__(151);
 var ImmutablePropTypes_default = /*#__PURE__*/__webpack_require__.n(ImmutablePropTypes);
 
 // CONCATENATED MODULE: ./src/datagrid/datagrid.props.js
@@ -53542,6 +53548,7 @@ var datagrid_props_propTypes = {
   intl: datagrid_props_object.isRequired,
   // Action props
   addNewItem: datagrid_props_func.isRequired,
+  removeNewItem: datagrid_props_func.isRequired,
   create: datagrid_props_func.isRequired,
   edit: datagrid_props_func.isRequired,
   remove: datagrid_props_func.isRequired,
@@ -54008,6 +54015,7 @@ var header_cell_component_HeaderCell = (header_cell_component__temp2 = header_ce
         main["Cell"],
         header_cell_component__extends({ className: cellClassNames, onClick: this.onSortChange }, props),
         children,
+        column.isRequired && ' *',
         currentSortColumn === datagrid_utils.getColumnKey(column) && currentSortOrder && (currentSortOrder === 'desc' ? ' ↓' : ' ↑')
       );
     }
@@ -54595,10 +54603,6 @@ var filtering_controls_component__temp3 = function () {
 }();
 
 ;
-// EXTERNAL MODULE: ./node_modules/@opuscapita/react-icons/lib/react-icons.js
-var react_icons = __webpack_require__(345);
-var react_icons_default = /*#__PURE__*/__webpack_require__.n(react_icons);
-
 // CONCATENATED MODULE: ./src/dropdown-container/dropdown-container.component.jsx
 var dropdown_container_component__extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -54989,7 +54993,7 @@ var dropdown_controls_component_DropdownControls = (dropdown_controls_component_
       var menuItems = [];
       if (this.props.filtering) {
         menuItems.push({
-          title: 'Show filtering row',
+          title: react_default.a.createElement(index_es["FormattedMessage"], { id: 'ShowFilteringRow' }),
           icon: this.props.isFiltering ? react_default.a.createElement(react_icons["Icon"], {
             type: 'indicator',
             name: 'ok',
@@ -55076,6 +55080,7 @@ var TYPES = {
   PLATFORM_DATAGRID_CREATE: 'PLATFORM_DATAGRID_CREATE',
   PLATFORM_DATAGRID_ADD_NEW_ITEM: 'PLATFORM_DATAGRID_ADD_NEW_ITEM',
   PLATFORM_DATAGRID_REMOVE_NEW_ITEM: 'PLATFORM_DATAGRID_REMOVE_NEW_ITEM',
+  PLATFORM_DATAGRID_REMOVE_NEW_ITEMS: 'PLATFORM_DATAGRID_REMOVE_NEW_ITEMS',
   PLATFORM_DATAGRID_REMOVE: 'PLATFORM_DATAGRID_REMOVE',
   PLATFORM_DATAGRID_REMOVE_SUCCESS: 'PLATFORM_DATAGRID_REMOVE_SUCCESS',
   PLATFORM_DATAGRID_REMOVE_FAIL: 'PLATFORM_DATAGRID_REMOVE_FAIL',
@@ -55395,6 +55400,17 @@ var datagrid_actions_removeNewItem = function removeNewItem(grid, index) {
       type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM,
       id: grid.id,
       index: index
+    });
+  };
+};
+
+var datagrid_actions_removeNewItems = function removeNewItems(grid, indexes) {
+  return function (dispatch) {
+    datagrid_utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS,
+      id: grid.id,
+      indexes: indexes
     });
   };
 };
@@ -55744,9 +55760,33 @@ var datagrid_actions_validateEditedRows = function validateEditedRows(grid, colu
   };
 };
 
+var datagrid_actions_removeEmptyCreatedRows = function removeEmptyCreatedRows(grid, columns) {
+  return function (dispatch, getState) {
+    datagrid_utils.checkGridParam(grid);
+    var createData = getState().datagrid.getIn([grid.id, 'createData'], Object(immutable["Map"])());
+    var indexes = [];
+    createData.forEach(function (createDataRow, rowIndex) {
+      var isEmpty = true;
+      columns.forEach(function (col) {
+        var value = createDataRow.getIn(col.valueKeyPath);
+        if (value !== undefined && value !== '' && value !== null) {
+          isEmpty = false;
+        }
+      });
+      if (isEmpty) {
+        indexes.push(rowIndex);
+      }
+    });
+    if (indexes.length > 0) {
+      datagrid_actions_removeNewItems(grid, indexes)(dispatch);
+    }
+  };
+};
+
 var datagrid_actions_validateCreatedRows = function validateCreatedRows(grid, columns) {
   return function (dispatch, getState) {
     datagrid_utils.checkGridParam(grid);
+    datagrid_actions_removeEmptyCreatedRows(grid, columns)(dispatch, getState);
     var createData = getState().datagrid.getIn([grid.id, 'createData'], Object(immutable["Map"])());
     var allGood = true;
     createData.forEach(function (createDataRow, rowIndex) {
@@ -55819,6 +55859,8 @@ var datagrid_actions__temp = function () {
 
   __REACT_HOT_LOADER__.register(datagrid_actions_removeNewItem, 'removeNewItem', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
 
+  __REACT_HOT_LOADER__.register(datagrid_actions_removeNewItems, 'removeNewItems', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
+
   __REACT_HOT_LOADER__.register(datagrid_actions_remove, 'remove', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
 
   __REACT_HOT_LOADER__.register(datagrid_actions_removeSuccess, 'removeSuccess', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
@@ -55850,6 +55892,8 @@ var datagrid_actions__temp = function () {
   __REACT_HOT_LOADER__.register(datagrid_actions_toggleFiltering, 'toggleFiltering', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
 
   __REACT_HOT_LOADER__.register(datagrid_actions_validateEditedRows, 'validateEditedRows', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
+
+  __REACT_HOT_LOADER__.register(datagrid_actions_removeEmptyCreatedRows, 'removeEmptyCreatedRows', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
 
   __REACT_HOT_LOADER__.register(datagrid_actions_validateCreatedRows, 'validateCreatedRows', 'C:/src/react-grid/src/datagrid/datagrid.actions.js');
 
@@ -56259,6 +56303,7 @@ function datagrid_component__possibleConstructorReturn(self, call) { if (!self) 
 function datagrid_component__inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /* eslint-disable no-lonely-if, prefer-template, react/require-default-props */
+
 
 
 
@@ -57045,7 +57090,8 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
           isResizable: !col.disableResizing,
           fixed: !!col.fixed,
           allowCellsRecycling: !!col.allowCellsRecycling,
-          disableSorting: !!col.disableSorting
+          disableSorting: !!col.disableSorting,
+          isRequired: !!col.isRequired
         };
         if (col.defaultValue !== undefined) {
           _this3.columnDefaultValues[column.columnKey] = col.defaultValue;
@@ -57575,6 +57621,35 @@ var datagrid_component_DataGrid = (_dec = Object(react_redux_es["connect"])(data
         }
         columns.push(column);
       });
+
+      if (this.props.isCreating) {
+        columns.push({
+          width: 37,
+          isResizable: false,
+          columnKey: 'removeNewItem',
+          cell: function cell() {
+            return null;
+          },
+          cellEdit: function cellEdit() {
+            return null;
+          },
+          cellCreate: function cellCreate(rowIndex) {
+            return react_default.a.createElement(react_icons["Icon"], {
+              id: 'oc-datagrid-new-item-remove-' + _this3.props.grid.id + '-' + rowIndex,
+              type: 'indicator',
+              name: 'delete',
+              width: 30,
+              height: 30,
+              onClick: function onClick() {
+                return _this3.props.removeNewItem(_this3.props.grid, rowIndex);
+              }
+            });
+          },
+          cellFilter: function cellFilter() {
+            return null;
+          }
+        });
+      }
       return columns;
     }
   }, {
@@ -57917,14 +57992,14 @@ function datagridReducer() {
 
   switch (action.type) {
     case TYPES.PLATFORM_DATAGRID_INVALIDATE:
-      return state.deleteIn([action.id, 'data']).deleteIn([action.id, 'allData']).deleteIn([action.id, 'session']).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createValidation']).deleteIn([action.id, 'cellMessages']);
+      return state.deleteIn([action.id, 'data']).deleteIn([action.id, 'allData']).deleteIn([action.id, 'session']).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createCellMessages']).deleteIn([action.id, 'cellMessages']);
 
     case TYPES.PLATFORM_DATAGRID_SET_DATA:
       return state.setIn([action.id, 'data'], action.data).setIn([action.id, 'allData'], action.data).setIn([action.id, 'config'], immutable_default.a.fromJS(action.config)).setIn([action.id, 'selectedItems'], immutable_default.a.fromJS(action.selectedItems)).mergeIn([action.id, 'session'], {
         isEditing: false,
         isCreating: false,
         isBusy: false
-      }).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createValidation']).deleteIn([action.id, 'cellMessages']);
+      }).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createCellMessages']).deleteIn([action.id, 'cellMessages']);
 
     case TYPES.PLATFORM_DATAGRID_BUSY:
       return state.setIn([action.id, 'session', 'isBusy'], true);
@@ -57957,11 +58032,19 @@ function datagridReducer() {
         return items.push(immutable_default.a.fromJS(action.columnDefaultValues));
       });
 
+    case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM:
+      return state.deleteIn([action.id, 'createData', action.index]);
+
+    case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS:
+      return state.setIn([action.id, 'createData'], state.getIn([action.id, 'createData'], Object(immutable["List"])()).filter(function (val, idx) {
+        return action.indexes.indexOf(idx) === -1;
+      }));
+
     case TYPES.PLATFORM_DATAGRID_CANCEL:
       return state.mergeIn([action.id, 'session'], Object(immutable["Map"])({
         isEditing: false,
         isCreating: false
-      })).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createValidation']).deleteIn([action.id, 'cellMessages', 'error']);
+      })).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createCellMessages', 'error']).deleteIn([action.id, 'cellMessages', 'error']);
 
     case TYPES.PLATFORM_DATAGRID_SAVE:
       return state.setIn([action.id, 'session', 'isBusy'], true);
@@ -57984,7 +58067,7 @@ function datagridReducer() {
           isBusy: false,
           isEditing: false,
           isCreating: false
-        }).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createValidation']).deleteIn([action.id, 'cellMessages', 'error']);
+        }).deleteIn([action.id, 'editData']).deleteIn([action.id, 'createData']).deleteIn([action.id, 'createCellMessages', 'error']).deleteIn([action.id, 'cellMessages', 'error']);
       }
 
     case TYPES.PLATFORM_DATAGRID_SAVE_PARTIAL_SUCCESS:
@@ -59075,9 +59158,9 @@ module.exports = PooledClass;
 var _prodInvariant = __webpack_require__(44);
 
 var ReactCurrentOwner = __webpack_require__(29);
-var REACT_ELEMENT_TYPE = __webpack_require__(152);
+var REACT_ELEMENT_TYPE = __webpack_require__(153);
 
-var getIteratorFn = __webpack_require__(153);
+var getIteratorFn = __webpack_require__(154);
 var invariant = __webpack_require__(9);
 var KeyEscapeUtils = __webpack_require__(351);
 var warning = __webpack_require__(10);
@@ -59369,7 +59452,7 @@ var _prodInvariant = __webpack_require__(44),
 
 var ReactComponent = __webpack_require__(99);
 var ReactElement = __webpack_require__(45);
-var ReactPropTypeLocationNames = __webpack_require__(154);
+var ReactPropTypeLocationNames = __webpack_require__(155);
 var ReactNoopUpdateQueue = __webpack_require__(100);
 
 var emptyObject = __webpack_require__(46);
@@ -60262,11 +60345,11 @@ module.exports = ReactDOMFactories;
 
 
 var ReactElement = __webpack_require__(45);
-var ReactPropTypeLocationNames = __webpack_require__(154);
+var ReactPropTypeLocationNames = __webpack_require__(155);
 var ReactPropTypesSecret = __webpack_require__(356);
 
 var emptyFunction = __webpack_require__(21);
-var getIteratorFn = __webpack_require__(153);
+var getIteratorFn = __webpack_require__(154);
 var warning = __webpack_require__(10);
 
 /**
@@ -60788,13 +60871,13 @@ module.exports = onlyChild;
 
 var ReactDOMComponentTree = __webpack_require__(15);
 var ReactDefaultInjection = __webpack_require__(360);
-var ReactMount = __webpack_require__(178);
+var ReactMount = __webpack_require__(179);
 var ReactReconciler = __webpack_require__(48);
 var ReactUpdates = __webpack_require__(23);
 var ReactVersion = __webpack_require__(432);
 
 var findDOMNode = __webpack_require__(433);
-var getHostComponentFromComposite = __webpack_require__(179);
+var getHostComponentFromComposite = __webpack_require__(180);
 var renderSubtreeIntoContainer = __webpack_require__(434);
 var warning = __webpack_require__(10);
 
@@ -61464,7 +61547,7 @@ var _assign = __webpack_require__(13);
 
 var PooledClass = __webpack_require__(37);
 
-var getTextContentAccessor = __webpack_require__(158);
+var getTextContentAccessor = __webpack_require__(159);
 
 /**
  * This helper class stores information about text content of a target node,
@@ -61652,7 +61735,7 @@ var SyntheticEvent = __webpack_require__(30);
 
 var getEventTarget = __webpack_require__(104);
 var isEventSupported = __webpack_require__(105);
-var isTextInputElement = __webpack_require__(161);
+var isTextInputElement = __webpack_require__(162);
 
 var eventTypes = {
   change: {
@@ -62967,15 +63050,15 @@ var CSSPropertyOperations = __webpack_require__(380);
 var DOMLazyTree = __webpack_require__(49);
 var DOMNamespaces = __webpack_require__(108);
 var DOMProperty = __webpack_require__(47);
-var DOMPropertyOperations = __webpack_require__(166);
+var DOMPropertyOperations = __webpack_require__(167);
 var EventPluginHub = __webpack_require__(62);
 var EventPluginRegistry = __webpack_require__(101);
 var ReactBrowserEventEmitter = __webpack_require__(80);
-var ReactDOMComponentFlags = __webpack_require__(155);
+var ReactDOMComponentFlags = __webpack_require__(156);
 var ReactDOMComponentTree = __webpack_require__(15);
 var ReactDOMInput = __webpack_require__(390);
 var ReactDOMOption = __webpack_require__(392);
-var ReactDOMSelect = __webpack_require__(167);
+var ReactDOMSelect = __webpack_require__(168);
 var ReactDOMTextarea = __webpack_require__(393);
 var ReactInstrumentation = __webpack_require__(22);
 var ReactMultiChild = __webpack_require__(394);
@@ -63965,7 +64048,7 @@ module.exports = ReactDOMComponent;
 
 var ReactDOMComponentTree = __webpack_require__(15);
 
-var focusNode = __webpack_require__(164);
+var focusNode = __webpack_require__(165);
 
 var AutoFocusUtils = {
   focusDOMComponent: function () {
@@ -63992,7 +64075,7 @@ module.exports = AutoFocusUtils;
 
 
 
-var CSSProperty = __webpack_require__(165);
+var CSSProperty = __webpack_require__(166);
 var ExecutionEnvironment = __webpack_require__(19);
 var ReactInstrumentation = __webpack_require__(22);
 
@@ -64284,7 +64367,7 @@ module.exports = camelize;
 
 
 
-var CSSProperty = __webpack_require__(165);
+var CSSProperty = __webpack_require__(166);
 var warning = __webpack_require__(10);
 
 var isUnitlessNumber = CSSProperty.isUnitlessNumber;
@@ -64657,7 +64740,7 @@ module.exports = getVendorPrefixedEventName;
 var _prodInvariant = __webpack_require__(11),
     _assign = __webpack_require__(13);
 
-var DOMPropertyOperations = __webpack_require__(166);
+var DOMPropertyOperations = __webpack_require__(167);
 var LinkedValueUtils = __webpack_require__(110);
 var ReactDOMComponentTree = __webpack_require__(15);
 var ReactUpdates = __webpack_require__(23);
@@ -64963,7 +65046,7 @@ var _assign = __webpack_require__(13);
 
 var React = __webpack_require__(43);
 var ReactDOMComponentTree = __webpack_require__(15);
-var ReactDOMSelect = __webpack_require__(167);
+var ReactDOMSelect = __webpack_require__(168);
 
 var warning = __webpack_require__(10);
 var didWarnInvalidOptionChildren = false;
@@ -65709,10 +65792,10 @@ module.exports = ReactMultiChild;
 
 var ReactReconciler = __webpack_require__(48);
 
-var instantiateReactComponent = __webpack_require__(169);
+var instantiateReactComponent = __webpack_require__(170);
 var KeyEscapeUtils = __webpack_require__(114);
 var shouldUpdateReactComponent = __webpack_require__(113);
-var traverseAllChildren = __webpack_require__(173);
+var traverseAllChildren = __webpack_require__(174);
 var warning = __webpack_require__(10);
 
 var ReactComponentTreeHook;
@@ -65723,7 +65806,7 @@ if (typeof process !== 'undefined' && Object({"NODE_ENV":"production"}) && "prod
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(174);
+  ReactComponentTreeHook = __webpack_require__(175);
 }
 
 function instantiateChild(childInstances, child, name, selfDebugID) {
@@ -65848,7 +65931,7 @@ var ReactChildReconciler = {
 };
 
 module.exports = ReactChildReconciler;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(168)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(169)))
 
 /***/ }),
 /* 396 */
@@ -65876,7 +65959,7 @@ var ReactCurrentOwner = __webpack_require__(29);
 var ReactErrorUtils = __webpack_require__(103);
 var ReactInstanceMap = __webpack_require__(64);
 var ReactInstrumentation = __webpack_require__(22);
-var ReactNodeTypes = __webpack_require__(170);
+var ReactNodeTypes = __webpack_require__(171);
 var ReactReconciler = __webpack_require__(48);
 
 if (false) {
@@ -66873,7 +66956,7 @@ module.exports = getIteratorFn;
 
 
 var KeyEscapeUtils = __webpack_require__(114);
-var traverseAllChildren = __webpack_require__(173);
+var traverseAllChildren = __webpack_require__(174);
 var warning = __webpack_require__(10);
 
 var ReactComponentTreeHook;
@@ -66884,7 +66967,7 @@ if (typeof process !== 'undefined' && Object({"NODE_ENV":"production"}) && "prod
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(174);
+  ReactComponentTreeHook = __webpack_require__(175);
 }
 
 /**
@@ -66934,7 +67017,7 @@ function flattenChildren(children, selfDebugID) {
 }
 
 module.exports = flattenChildren;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(168)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(169)))
 
 /***/ }),
 /* 401 */
@@ -67642,7 +67725,7 @@ module.exports = ReactDefaultBatchingStrategy;
 
 var _assign = __webpack_require__(13);
 
-var EventListener = __webpack_require__(175);
+var EventListener = __webpack_require__(176);
 var ExecutionEnvironment = __webpack_require__(19);
 var PooledClass = __webpack_require__(37);
 var ReactDOMComponentTree = __webpack_require__(15);
@@ -67846,9 +67929,9 @@ var DOMProperty = __webpack_require__(47);
 var EventPluginHub = __webpack_require__(62);
 var EventPluginUtils = __webpack_require__(102);
 var ReactComponentEnvironment = __webpack_require__(111);
-var ReactEmptyComponent = __webpack_require__(171);
+var ReactEmptyComponent = __webpack_require__(172);
 var ReactBrowserEventEmitter = __webpack_require__(80);
-var ReactHostComponent = __webpack_require__(172);
+var ReactHostComponent = __webpack_require__(173);
 var ReactUpdates = __webpack_require__(23);
 
 var ReactInjection = {
@@ -67883,10 +67966,10 @@ module.exports = ReactInjection;
 
 var _assign = __webpack_require__(13);
 
-var CallbackQueue = __webpack_require__(159);
+var CallbackQueue = __webpack_require__(160);
 var PooledClass = __webpack_require__(37);
 var ReactBrowserEventEmitter = __webpack_require__(80);
-var ReactInputSelection = __webpack_require__(176);
+var ReactInputSelection = __webpack_require__(177);
 var ReactInstrumentation = __webpack_require__(22);
 var Transaction = __webpack_require__(76);
 var ReactUpdateQueue = __webpack_require__(115);
@@ -68067,7 +68150,7 @@ module.exports = ReactReconcileTransaction;
 var ExecutionEnvironment = __webpack_require__(19);
 
 var getNodeForCharacterOffset = __webpack_require__(412);
-var getTextContentAccessor = __webpack_require__(158);
+var getTextContentAccessor = __webpack_require__(159);
 
 /**
  * While `isCollapsed` is available on the Selection object and `collapsed`
@@ -68769,11 +68852,11 @@ module.exports = SVGDOMPropertyConfig;
 var EventPropagators = __webpack_require__(61);
 var ExecutionEnvironment = __webpack_require__(19);
 var ReactDOMComponentTree = __webpack_require__(15);
-var ReactInputSelection = __webpack_require__(176);
+var ReactInputSelection = __webpack_require__(177);
 var SyntheticEvent = __webpack_require__(30);
 
-var getActiveElement = __webpack_require__(177);
-var isTextInputElement = __webpack_require__(161);
+var getActiveElement = __webpack_require__(178);
+var isTextInputElement = __webpack_require__(162);
 var shallowEqual = __webpack_require__(112);
 
 var skipSelectionChangeEvent = ExecutionEnvironment.canUseDOM && 'documentMode' in document && document.documentMode <= 11;
@@ -68965,7 +69048,7 @@ module.exports = SelectEventPlugin;
 
 var _prodInvariant = __webpack_require__(11);
 
-var EventListener = __webpack_require__(175);
+var EventListener = __webpack_require__(176);
 var EventPropagators = __webpack_require__(61);
 var ReactDOMComponentTree = __webpack_require__(15);
 var SyntheticAnimationEvent = __webpack_require__(419);
@@ -69904,7 +69987,7 @@ var ReactCurrentOwner = __webpack_require__(29);
 var ReactDOMComponentTree = __webpack_require__(15);
 var ReactInstanceMap = __webpack_require__(64);
 
-var getHostComponentFromComposite = __webpack_require__(179);
+var getHostComponentFromComposite = __webpack_require__(180);
 var invariant = __webpack_require__(9);
 var warning = __webpack_require__(10);
 
@@ -69963,7 +70046,7 @@ module.exports = findDOMNode;
 
 
 
-var ReactMount = __webpack_require__(178);
+var ReactMount = __webpack_require__(179);
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
 
@@ -71746,7 +71829,7 @@ var _LocationUtils = __webpack_require__(50);
 
 var _DOMUtils = __webpack_require__(82);
 
-var _DOMStateStorage = __webpack_require__(182);
+var _DOMStateStorage = __webpack_require__(183);
 
 var _PathUtils = __webpack_require__(32);
 
@@ -72031,7 +72114,7 @@ var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _IntlProvider2 = __webpack_require__(184);
+var _IntlProvider2 = __webpack_require__(185);
 
 var _IntlProvider3 = _interopRequireDefault(_IntlProvider2);
 
@@ -72113,7 +72196,7 @@ See the accompanying LICENSE file for terms.
 /* jslint esnext: true */
 
 
-var src$utils$$ = __webpack_require__(186), src$es5$$ = __webpack_require__(456), src$compiler$$ = __webpack_require__(457), intl$messageformat$parser$$ = __webpack_require__(458);
+var src$utils$$ = __webpack_require__(187), src$es5$$ = __webpack_require__(456), src$compiler$$ = __webpack_require__(457), intl$messageformat$parser$$ = __webpack_require__(458);
 exports["default"] = MessageFormat;
 
 // -- MessageFormat --------------------------------------------------------
@@ -72396,7 +72479,7 @@ See the accompanying LICENSE file for terms.
 /* jslint esnext: true */
 
 
-var src$utils$$ = __webpack_require__(186);
+var src$utils$$ = __webpack_require__(187);
 
 // Purposely using the same implementation as the Intl.js `Intl` polyfill.
 // Copyright 2013 Andy Earnshaw, MIT License
@@ -74099,7 +74182,7 @@ See the accompanying LICENSE file for terms.
 /* jslint esnext: true */
 
 
-var intl$messageformat$$ = __webpack_require__(185), src$diff$$ = __webpack_require__(465), src$es5$$ = __webpack_require__(466);
+var intl$messageformat$$ = __webpack_require__(186), src$diff$$ = __webpack_require__(465), src$es5$$ = __webpack_require__(466);
 exports["default"] = RelativeFormat;
 
 // -----------------------------------------------------------------------------
@@ -74736,7 +74819,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _IntlProvider = __webpack_require__(184);
+var _IntlProvider = __webpack_require__(185);
 
 var _IntlProvider2 = _interopRequireDefault(_IntlProvider);
 
@@ -74814,15 +74897,15 @@ var _FixedDataTable = __webpack_require__(475);
 
 var _FixedDataTable2 = _interopRequireDefault(_FixedDataTable);
 
-var _FixedDataTableCellDefault = __webpack_require__(194);
+var _FixedDataTableCellDefault = __webpack_require__(195);
 
 var _FixedDataTableCellDefault2 = _interopRequireDefault(_FixedDataTableCellDefault);
 
-var _FixedDataTableColumn = __webpack_require__(193);
+var _FixedDataTableColumn = __webpack_require__(194);
 
 var _FixedDataTableColumn2 = _interopRequireDefault(_FixedDataTableColumn);
 
-var _FixedDataTableColumnGroup = __webpack_require__(192);
+var _FixedDataTableColumnGroup = __webpack_require__(193);
 
 var _FixedDataTableColumnGroup2 = _interopRequireDefault(_FixedDataTableColumnGroup);
 
@@ -74876,7 +74959,7 @@ var _ReactComponentWithPureRenderMixin = __webpack_require__(84);
 
 var _ReactComponentWithPureRenderMixin2 = _interopRequireDefault(_ReactComponentWithPureRenderMixin);
 
-var _ReactWheelHandler = __webpack_require__(187);
+var _ReactWheelHandler = __webpack_require__(188);
 
 var _ReactWheelHandler2 = _interopRequireDefault(_ReactWheelHandler);
 
@@ -74896,7 +74979,7 @@ var _FixedDataTableColumnResizeHandle = __webpack_require__(497);
 
 var _FixedDataTableColumnResizeHandle2 = _interopRequireDefault(_FixedDataTableColumnResizeHandle);
 
-var _FixedDataTableRow = __webpack_require__(190);
+var _FixedDataTableRow = __webpack_require__(191);
 
 var _FixedDataTableRow2 = _interopRequireDefault(_FixedDataTableRow);
 
@@ -74928,7 +75011,7 @@ var _joinClasses = __webpack_require__(67);
 
 var _joinClasses2 = _interopRequireDefault(_joinClasses);
 
-var _shallowEqual = __webpack_require__(195);
+var _shallowEqual = __webpack_require__(196);
 
 var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
@@ -76631,7 +76714,7 @@ module.exports = UserAgent_DEPRECATED;
 
 
 
-var _ExecutionEnvironment = __webpack_require__(188);
+var _ExecutionEnvironment = __webpack_require__(189);
 
 var _ExecutionEnvironment2 = _interopRequireDefault(_ExecutionEnvironment);
 
@@ -77054,7 +77137,7 @@ var _ReactComponentWithPureRenderMixin = __webpack_require__(84);
 
 var _ReactComponentWithPureRenderMixin2 = _interopRequireDefault(_ReactComponentWithPureRenderMixin);
 
-var _ReactWheelHandler = __webpack_require__(187);
+var _ReactWheelHandler = __webpack_require__(188);
 
 var _ReactWheelHandler2 = _interopRequireDefault(_ReactWheelHandler);
 
@@ -77737,7 +77820,7 @@ var _BrowserSupportCore = __webpack_require__(488);
 
 var _BrowserSupportCore2 = _interopRequireDefault(_BrowserSupportCore);
 
-var _getVendorPrefixedName = __webpack_require__(189);
+var _getVendorPrefixedName = __webpack_require__(190);
 
 var _getVendorPrefixedName2 = _interopRequireDefault(_getVendorPrefixedName);
 
@@ -77782,7 +77865,7 @@ module.exports = translateDOMPositionXY;
 "use strict";
 
 
-var _getVendorPrefixedName = __webpack_require__(189);
+var _getVendorPrefixedName = __webpack_require__(190);
 
 var _getVendorPrefixedName2 = _interopRequireDefault(_getVendorPrefixedName);
 
@@ -77890,7 +77973,7 @@ var _FixedDataTableRowBuffer = __webpack_require__(491);
 
 var _FixedDataTableRowBuffer2 = _interopRequireDefault(_FixedDataTableRowBuffer);
 
-var _FixedDataTableRow = __webpack_require__(190);
+var _FixedDataTableRow = __webpack_require__(191);
 
 var _FixedDataTableRow2 = _interopRequireDefault(_FixedDataTableRow);
 
@@ -78607,7 +78690,7 @@ module.exports = Heap;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _FixedDataTableHelper = __webpack_require__(191);
+var _FixedDataTableHelper = __webpack_require__(192);
 
 var _FixedDataTableHelper2 = _interopRequireDefault(_FixedDataTableHelper);
 
@@ -78851,7 +78934,7 @@ module.exports = FixedDataTableCellGroup;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _FixedDataTableCellDefault = __webpack_require__(194);
+var _FixedDataTableCellDefault = __webpack_require__(195);
 
 var _FixedDataTableCellDefault2 = _interopRequireDefault(_FixedDataTableCellDefault);
 
@@ -78859,7 +78942,7 @@ var _FixedDataTableColumnReorderHandle = __webpack_require__(496);
 
 var _FixedDataTableColumnReorderHandle2 = _interopRequireDefault(_FixedDataTableColumnReorderHandle);
 
-var _FixedDataTableHelper = __webpack_require__(191);
+var _FixedDataTableHelper = __webpack_require__(192);
 
 var _FixedDataTableHelper2 = _interopRequireDefault(_FixedDataTableHelper);
 
@@ -78883,7 +78966,7 @@ var _joinClasses = __webpack_require__(67);
 
 var _joinClasses2 = _interopRequireDefault(_joinClasses);
 
-var _shallowEqual = __webpack_require__(195);
+var _shallowEqual = __webpack_require__(196);
 
 var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
@@ -80380,7 +80463,7 @@ var getKeys = __webpack_require__(71);
 var gOPS = __webpack_require__(135);
 var pIE = __webpack_require__(72);
 var toObject = __webpack_require__(136);
-var IObject = __webpack_require__(200);
+var IObject = __webpack_require__(201);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
@@ -80417,7 +80500,7 @@ module.exports = !$assign || __webpack_require__(69)(function () {
 // false -> Array#indexOf
 // true  -> Array#includes
 var toIObject = __webpack_require__(42);
-var toLength = __webpack_require__(201);
+var toLength = __webpack_require__(202);
 var toAbsoluteIndex = __webpack_require__(507);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
@@ -80462,7 +80545,7 @@ module.exports = { "default": __webpack_require__(509), __esModule: true };
 /* 509 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(202);
+__webpack_require__(203);
 __webpack_require__(515);
 module.exports = __webpack_require__(141).f('iterator');
 
@@ -80596,7 +80679,7 @@ var toIObject = __webpack_require__(42);
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(203)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(204)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -80666,7 +80749,7 @@ var global = __webpack_require__(35);
 var has = __webpack_require__(41);
 var DESCRIPTORS = __webpack_require__(54);
 var $export = __webpack_require__(34);
-var redefine = __webpack_require__(204);
+var redefine = __webpack_require__(205);
 var META = __webpack_require__(522).KEY;
 var $fails = __webpack_require__(69);
 var shared = __webpack_require__(133);
@@ -80683,7 +80766,7 @@ var toPrimitive = __webpack_require__(128);
 var createDesc = __webpack_require__(70);
 var _create = __webpack_require__(139);
 var gOPNExt = __webpack_require__(525);
-var $GOPD = __webpack_require__(206);
+var $GOPD = __webpack_require__(207);
 var $DP = __webpack_require__(40);
 var $keys = __webpack_require__(71);
 var gOPD = $GOPD.f;
@@ -80808,7 +80891,7 @@ if (!USE_NATIVE) {
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
-  __webpack_require__(205).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(206).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(72).f = $propertyIsEnumerable;
   __webpack_require__(135).f = $getOwnPropertySymbols;
 
@@ -80993,7 +81076,7 @@ module.exports = Array.isArray || function isArray(arg) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var toIObject = __webpack_require__(42);
-var gOPN = __webpack_require__(205).f;
+var gOPN = __webpack_require__(206).f;
 var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -81071,7 +81154,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function (test, buggy, set) {
       try {
-        set = __webpack_require__(127)(Function.call, __webpack_require__(206).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(127)(Function.call, __webpack_require__(207).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) { buggy = true; }
@@ -81126,7 +81209,7 @@ module.exports = __webpack_require__(24).Object.entries;
 
 // https://github.com/tc39/proposal-object-values-entries
 var $export = __webpack_require__(34);
-var $entries = __webpack_require__(208)(true);
+var $entries = __webpack_require__(209)(true);
 
 $export($export.S, 'Object', {
   entries: function entries(it) {
@@ -81149,7 +81232,7 @@ module.exports = __webpack_require__(24).Object.values;
 
 // https://github.com/tc39/proposal-object-values-entries
 var $export = __webpack_require__(34);
-var $values = __webpack_require__(208)(false);
+var $values = __webpack_require__(209)(false);
 
 $export($export.S, 'Object', {
   values: function values(it) {
@@ -81238,7 +81321,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _getComputedStyle;
 
-var _camelizeStyle = __webpack_require__(209);
+var _camelizeStyle = __webpack_require__(210);
 
 var _camelizeStyle2 = _interopRequireDefault(_camelizeStyle);
 
@@ -81654,7 +81737,7 @@ module.exports = { "default": __webpack_require__(549), __esModule: true };
 /* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(202);
+__webpack_require__(203);
 __webpack_require__(550);
 module.exports = __webpack_require__(24).Array.from;
 
@@ -81670,7 +81753,7 @@ var $export = __webpack_require__(34);
 var toObject = __webpack_require__(136);
 var call = __webpack_require__(551);
 var isArrayIter = __webpack_require__(552);
-var toLength = __webpack_require__(201);
+var toLength = __webpack_require__(202);
 var createProperty = __webpack_require__(553);
 var getIterFn = __webpack_require__(554);
 
@@ -81981,7 +82064,7 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _activeElement = __webpack_require__(212);
+var _activeElement = __webpack_require__(213);
 
 var _activeElement2 = _interopRequireDefault(_activeElement);
 
@@ -82017,7 +82100,7 @@ var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _Portal = __webpack_require__(216);
+var _Portal = __webpack_require__(217);
 
 var _Portal2 = _interopRequireDefault(_Portal);
 
@@ -82025,7 +82108,7 @@ var _ModalManager = __webpack_require__(563);
 
 var _ModalManager2 = _interopRequireDefault(_ModalManager);
 
-var _addEventListener = __webpack_require__(214);
+var _addEventListener = __webpack_require__(215);
 
 var _addEventListener2 = _interopRequireDefault(_addEventListener);
 
@@ -82660,11 +82743,11 @@ var _style = __webpack_require__(90);
 
 var _style2 = _interopRequireDefault(_style);
 
-var _scrollbarSize = __webpack_require__(215);
+var _scrollbarSize = __webpack_require__(216);
 
 var _scrollbarSize2 = _interopRequireDefault(_scrollbarSize);
 
-var _isOverflowing = __webpack_require__(218);
+var _isOverflowing = __webpack_require__(219);
 
 var _isOverflowing2 = _interopRequireDefault(_isOverflowing);
 
@@ -82844,7 +82927,7 @@ var _removeClass = __webpack_require__(566);
 
 var _removeClass2 = _interopRequireDefault(_removeClass);
 
-var _hasClass = __webpack_require__(217);
+var _hasClass = __webpack_require__(218);
 
 var _hasClass2 = _interopRequireDefault(_hasClass);
 
@@ -82867,7 +82950,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = addClass;
 
-var _hasClass = __webpack_require__(217);
+var _hasClass = __webpack_require__(218);
 
 var _hasClass2 = _interopRequireDefault(_hasClass);
 
@@ -83000,7 +83083,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Portal = __webpack_require__(216);
+var _Portal = __webpack_require__(217);
 
 var _Portal2 = _interopRequireDefault(_Portal);
 
@@ -83008,7 +83091,7 @@ var _Position = __webpack_require__(570);
 
 var _Position2 = _interopRequireDefault(_Position);
 
-var _RootCloseWrapper = __webpack_require__(213);
+var _RootCloseWrapper = __webpack_require__(214);
 
 var _RootCloseWrapper2 = _interopRequireDefault(_RootCloseWrapper);
 
@@ -83421,7 +83504,7 @@ module.exports = exports['default'];
 exports.__esModule = true;
 exports.default = calculatePosition;
 
-var _offset = __webpack_require__(219);
+var _offset = __webpack_require__(220);
 
 var _offset2 = _interopRequireDefault(_offset);
 
@@ -83429,7 +83512,7 @@ var _position = __webpack_require__(572);
 
 var _position2 = _interopRequireDefault(_position);
 
-var _scrollTop = __webpack_require__(220);
+var _scrollTop = __webpack_require__(221);
 
 var _scrollTop2 = _interopRequireDefault(_scrollTop);
 
@@ -83557,7 +83640,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = position;
 
-var _offset = __webpack_require__(219);
+var _offset = __webpack_require__(220);
 
 var _offset2 = _interopRequireDefault(_offset);
 
@@ -83565,7 +83648,7 @@ var _offsetParent = __webpack_require__(573);
 
 var _offsetParent2 = _interopRequireDefault(_offsetParent);
 
-var _scrollTop = __webpack_require__(220);
+var _scrollTop = __webpack_require__(221);
 
 var _scrollTop2 = _interopRequireDefault(_scrollTop);
 
@@ -91691,7 +91774,7 @@ module.exports = isSymbol;
 /* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(147);
+var Symbol = __webpack_require__(148);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -91847,13 +91930,13 @@ module.exports = baseIsEqual;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(588),
-    equalArrays = __webpack_require__(226),
+    equalArrays = __webpack_require__(227),
     equalByTag = __webpack_require__(620),
     equalObjects = __webpack_require__(624),
     getTag = __webpack_require__(646),
-    isArray = __webpack_require__(149),
-    isBuffer = __webpack_require__(227),
-    isTypedArray = __webpack_require__(228);
+    isArray = __webpack_require__(150),
+    isBuffer = __webpack_require__(228),
+    isTypedArray = __webpack_require__(229);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -92193,8 +92276,8 @@ module.exports = stackHas;
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(95),
-    Map = __webpack_require__(148),
-    MapCache = __webpack_require__(225);
+    Map = __webpack_require__(149),
+    MapCache = __webpack_require__(226);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -92232,10 +92315,10 @@ module.exports = stackSet;
 /* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(223),
+var isFunction = __webpack_require__(224),
     isMasked = __webpack_require__(600),
     isObject = __webpack_require__(94),
-    toSource = __webpack_require__(224);
+    toSource = __webpack_require__(225);
 
 /**
  * Used to match `RegExp`
@@ -92344,7 +92427,7 @@ module.exports = getValue;
 
 var Hash = __webpack_require__(604),
     ListCache = __webpack_require__(95),
-    Map = __webpack_require__(148);
+    Map = __webpack_require__(149);
 
 /**
  * Removes all key-value entries from the map.
@@ -92662,7 +92745,7 @@ module.exports = mapCacheSet;
 /* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MapCache = __webpack_require__(225),
+var MapCache = __webpack_require__(226),
     setCacheAdd = __webpack_require__(616),
     setCacheHas = __webpack_require__(617);
 
@@ -92788,10 +92871,10 @@ module.exports = cacheHas;
 /* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(147),
+var Symbol = __webpack_require__(148),
     Uint8Array = __webpack_require__(621),
-    eq = __webpack_require__(222),
-    equalArrays = __webpack_require__(226),
+    eq = __webpack_require__(223),
+    equalArrays = __webpack_require__(227),
     mapToArray = __webpack_require__(622),
     setToArray = __webpack_require__(623);
 
@@ -93084,7 +93167,7 @@ module.exports = getAllKeys;
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayPush = __webpack_require__(627),
-    isArray = __webpack_require__(149);
+    isArray = __webpack_require__(150);
 
 /**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -93276,10 +93359,10 @@ module.exports = keys;
 
 var baseTimes = __webpack_require__(633),
     isArguments = __webpack_require__(634),
-    isArray = __webpack_require__(149),
-    isBuffer = __webpack_require__(227),
+    isArray = __webpack_require__(150),
+    isBuffer = __webpack_require__(228),
     isIndex = __webpack_require__(637),
-    isTypedArray = __webpack_require__(228);
+    isTypedArray = __webpack_require__(229);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -93474,7 +93557,7 @@ module.exports = isIndex;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(58),
-    isLength = __webpack_require__(229),
+    isLength = __webpack_require__(230),
     isObjectLike = __webpack_require__(59);
 
 /** `Object#toString` result references. */
@@ -93559,7 +93642,7 @@ module.exports = baseUnary;
 /* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(221);
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(222);
 
 /** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -93681,8 +93764,8 @@ module.exports = overArg;
 /* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(223),
-    isLength = __webpack_require__(229);
+var isFunction = __webpack_require__(224),
+    isLength = __webpack_require__(230);
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -93721,12 +93804,12 @@ module.exports = isArrayLike;
 /***/ (function(module, exports, __webpack_require__) {
 
 var DataView = __webpack_require__(647),
-    Map = __webpack_require__(148),
+    Map = __webpack_require__(149),
     Promise = __webpack_require__(648),
     Set = __webpack_require__(649),
     WeakMap = __webpack_require__(650),
     baseGetTag = __webpack_require__(58),
-    toSource = __webpack_require__(224);
+    toSource = __webpack_require__(225);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -93837,236 +93920,236 @@ module.exports = WeakMap;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 230,
-	"./af.js": 230,
-	"./ar": 231,
-	"./ar-dz": 232,
-	"./ar-dz.js": 232,
-	"./ar-kw": 233,
-	"./ar-kw.js": 233,
-	"./ar-ly": 234,
-	"./ar-ly.js": 234,
-	"./ar-ma": 235,
-	"./ar-ma.js": 235,
-	"./ar-sa": 236,
-	"./ar-sa.js": 236,
-	"./ar-tn": 237,
-	"./ar-tn.js": 237,
-	"./ar.js": 231,
-	"./az": 238,
-	"./az.js": 238,
-	"./be": 239,
-	"./be.js": 239,
-	"./bg": 240,
-	"./bg.js": 240,
-	"./bn": 241,
-	"./bn.js": 241,
-	"./bo": 242,
-	"./bo.js": 242,
-	"./br": 243,
-	"./br.js": 243,
-	"./bs": 244,
-	"./bs.js": 244,
-	"./ca": 245,
-	"./ca.js": 245,
-	"./cs": 246,
-	"./cs.js": 246,
-	"./cv": 247,
-	"./cv.js": 247,
-	"./cy": 248,
-	"./cy.js": 248,
-	"./da": 249,
-	"./da.js": 249,
-	"./de": 250,
-	"./de-at": 251,
-	"./de-at.js": 251,
-	"./de-ch": 252,
-	"./de-ch.js": 252,
-	"./de.js": 250,
-	"./dv": 253,
-	"./dv.js": 253,
-	"./el": 254,
-	"./el.js": 254,
-	"./en-au": 255,
-	"./en-au.js": 255,
-	"./en-ca": 256,
-	"./en-ca.js": 256,
-	"./en-gb": 257,
-	"./en-gb.js": 257,
-	"./en-ie": 258,
-	"./en-ie.js": 258,
-	"./en-nz": 259,
-	"./en-nz.js": 259,
-	"./eo": 260,
-	"./eo.js": 260,
-	"./es": 261,
-	"./es-do": 262,
-	"./es-do.js": 262,
-	"./es.js": 261,
-	"./et": 263,
-	"./et.js": 263,
-	"./eu": 264,
-	"./eu.js": 264,
-	"./fa": 265,
-	"./fa.js": 265,
-	"./fi": 266,
-	"./fi.js": 266,
-	"./fo": 267,
-	"./fo.js": 267,
-	"./fr": 268,
-	"./fr-ca": 269,
-	"./fr-ca.js": 269,
-	"./fr-ch": 270,
-	"./fr-ch.js": 270,
-	"./fr.js": 268,
-	"./fy": 271,
-	"./fy.js": 271,
-	"./gd": 272,
-	"./gd.js": 272,
-	"./gl": 273,
-	"./gl.js": 273,
-	"./gom-latn": 274,
-	"./gom-latn.js": 274,
-	"./he": 275,
-	"./he.js": 275,
-	"./hi": 276,
-	"./hi.js": 276,
-	"./hr": 277,
-	"./hr.js": 277,
-	"./hu": 278,
-	"./hu.js": 278,
-	"./hy-am": 279,
-	"./hy-am.js": 279,
-	"./id": 280,
-	"./id.js": 280,
-	"./is": 281,
-	"./is.js": 281,
-	"./it": 282,
-	"./it.js": 282,
-	"./ja": 283,
-	"./ja.js": 283,
-	"./jv": 284,
-	"./jv.js": 284,
-	"./ka": 285,
-	"./ka.js": 285,
-	"./kk": 286,
-	"./kk.js": 286,
-	"./km": 287,
-	"./km.js": 287,
-	"./kn": 288,
-	"./kn.js": 288,
-	"./ko": 289,
-	"./ko.js": 289,
-	"./ky": 290,
-	"./ky.js": 290,
-	"./lb": 291,
-	"./lb.js": 291,
-	"./lo": 292,
-	"./lo.js": 292,
-	"./lt": 293,
-	"./lt.js": 293,
-	"./lv": 294,
-	"./lv.js": 294,
-	"./me": 295,
-	"./me.js": 295,
-	"./mi": 296,
-	"./mi.js": 296,
-	"./mk": 297,
-	"./mk.js": 297,
-	"./ml": 298,
-	"./ml.js": 298,
-	"./mr": 299,
-	"./mr.js": 299,
-	"./ms": 300,
-	"./ms-my": 301,
-	"./ms-my.js": 301,
-	"./ms.js": 300,
-	"./my": 302,
-	"./my.js": 302,
-	"./nb": 303,
-	"./nb.js": 303,
-	"./ne": 304,
-	"./ne.js": 304,
-	"./nl": 305,
-	"./nl-be": 306,
-	"./nl-be.js": 306,
-	"./nl.js": 305,
-	"./nn": 307,
-	"./nn.js": 307,
-	"./pa-in": 308,
-	"./pa-in.js": 308,
-	"./pl": 309,
-	"./pl.js": 309,
-	"./pt": 310,
-	"./pt-br": 311,
-	"./pt-br.js": 311,
-	"./pt.js": 310,
-	"./ro": 312,
-	"./ro.js": 312,
-	"./ru": 313,
-	"./ru.js": 313,
-	"./sd": 314,
-	"./sd.js": 314,
-	"./se": 315,
-	"./se.js": 315,
-	"./si": 316,
-	"./si.js": 316,
-	"./sk": 317,
-	"./sk.js": 317,
-	"./sl": 318,
-	"./sl.js": 318,
-	"./sq": 319,
-	"./sq.js": 319,
-	"./sr": 320,
-	"./sr-cyrl": 321,
-	"./sr-cyrl.js": 321,
-	"./sr.js": 320,
-	"./ss": 322,
-	"./ss.js": 322,
-	"./sv": 323,
-	"./sv.js": 323,
-	"./sw": 324,
-	"./sw.js": 324,
-	"./ta": 325,
-	"./ta.js": 325,
-	"./te": 326,
-	"./te.js": 326,
-	"./tet": 327,
-	"./tet.js": 327,
-	"./th": 328,
-	"./th.js": 328,
-	"./tl-ph": 329,
-	"./tl-ph.js": 329,
-	"./tlh": 330,
-	"./tlh.js": 330,
-	"./tr": 331,
-	"./tr.js": 331,
-	"./tzl": 332,
-	"./tzl.js": 332,
-	"./tzm": 333,
-	"./tzm-latn": 334,
-	"./tzm-latn.js": 334,
-	"./tzm.js": 333,
-	"./uk": 335,
-	"./uk.js": 335,
-	"./ur": 336,
-	"./ur.js": 336,
-	"./uz": 337,
-	"./uz-latn": 338,
-	"./uz-latn.js": 338,
-	"./uz.js": 337,
-	"./vi": 339,
-	"./vi.js": 339,
-	"./x-pseudo": 340,
-	"./x-pseudo.js": 340,
-	"./yo": 341,
-	"./yo.js": 341,
-	"./zh-cn": 342,
-	"./zh-cn.js": 342,
-	"./zh-hk": 343,
-	"./zh-hk.js": 343,
-	"./zh-tw": 344,
-	"./zh-tw.js": 344
+	"./af": 231,
+	"./af.js": 231,
+	"./ar": 232,
+	"./ar-dz": 233,
+	"./ar-dz.js": 233,
+	"./ar-kw": 234,
+	"./ar-kw.js": 234,
+	"./ar-ly": 235,
+	"./ar-ly.js": 235,
+	"./ar-ma": 236,
+	"./ar-ma.js": 236,
+	"./ar-sa": 237,
+	"./ar-sa.js": 237,
+	"./ar-tn": 238,
+	"./ar-tn.js": 238,
+	"./ar.js": 232,
+	"./az": 239,
+	"./az.js": 239,
+	"./be": 240,
+	"./be.js": 240,
+	"./bg": 241,
+	"./bg.js": 241,
+	"./bn": 242,
+	"./bn.js": 242,
+	"./bo": 243,
+	"./bo.js": 243,
+	"./br": 244,
+	"./br.js": 244,
+	"./bs": 245,
+	"./bs.js": 245,
+	"./ca": 246,
+	"./ca.js": 246,
+	"./cs": 247,
+	"./cs.js": 247,
+	"./cv": 248,
+	"./cv.js": 248,
+	"./cy": 249,
+	"./cy.js": 249,
+	"./da": 250,
+	"./da.js": 250,
+	"./de": 251,
+	"./de-at": 252,
+	"./de-at.js": 252,
+	"./de-ch": 253,
+	"./de-ch.js": 253,
+	"./de.js": 251,
+	"./dv": 254,
+	"./dv.js": 254,
+	"./el": 255,
+	"./el.js": 255,
+	"./en-au": 256,
+	"./en-au.js": 256,
+	"./en-ca": 257,
+	"./en-ca.js": 257,
+	"./en-gb": 258,
+	"./en-gb.js": 258,
+	"./en-ie": 259,
+	"./en-ie.js": 259,
+	"./en-nz": 260,
+	"./en-nz.js": 260,
+	"./eo": 261,
+	"./eo.js": 261,
+	"./es": 262,
+	"./es-do": 263,
+	"./es-do.js": 263,
+	"./es.js": 262,
+	"./et": 264,
+	"./et.js": 264,
+	"./eu": 265,
+	"./eu.js": 265,
+	"./fa": 266,
+	"./fa.js": 266,
+	"./fi": 267,
+	"./fi.js": 267,
+	"./fo": 268,
+	"./fo.js": 268,
+	"./fr": 269,
+	"./fr-ca": 270,
+	"./fr-ca.js": 270,
+	"./fr-ch": 271,
+	"./fr-ch.js": 271,
+	"./fr.js": 269,
+	"./fy": 272,
+	"./fy.js": 272,
+	"./gd": 273,
+	"./gd.js": 273,
+	"./gl": 274,
+	"./gl.js": 274,
+	"./gom-latn": 275,
+	"./gom-latn.js": 275,
+	"./he": 276,
+	"./he.js": 276,
+	"./hi": 277,
+	"./hi.js": 277,
+	"./hr": 278,
+	"./hr.js": 278,
+	"./hu": 279,
+	"./hu.js": 279,
+	"./hy-am": 280,
+	"./hy-am.js": 280,
+	"./id": 281,
+	"./id.js": 281,
+	"./is": 282,
+	"./is.js": 282,
+	"./it": 283,
+	"./it.js": 283,
+	"./ja": 284,
+	"./ja.js": 284,
+	"./jv": 285,
+	"./jv.js": 285,
+	"./ka": 286,
+	"./ka.js": 286,
+	"./kk": 287,
+	"./kk.js": 287,
+	"./km": 288,
+	"./km.js": 288,
+	"./kn": 289,
+	"./kn.js": 289,
+	"./ko": 290,
+	"./ko.js": 290,
+	"./ky": 291,
+	"./ky.js": 291,
+	"./lb": 292,
+	"./lb.js": 292,
+	"./lo": 293,
+	"./lo.js": 293,
+	"./lt": 294,
+	"./lt.js": 294,
+	"./lv": 295,
+	"./lv.js": 295,
+	"./me": 296,
+	"./me.js": 296,
+	"./mi": 297,
+	"./mi.js": 297,
+	"./mk": 298,
+	"./mk.js": 298,
+	"./ml": 299,
+	"./ml.js": 299,
+	"./mr": 300,
+	"./mr.js": 300,
+	"./ms": 301,
+	"./ms-my": 302,
+	"./ms-my.js": 302,
+	"./ms.js": 301,
+	"./my": 303,
+	"./my.js": 303,
+	"./nb": 304,
+	"./nb.js": 304,
+	"./ne": 305,
+	"./ne.js": 305,
+	"./nl": 306,
+	"./nl-be": 307,
+	"./nl-be.js": 307,
+	"./nl.js": 306,
+	"./nn": 308,
+	"./nn.js": 308,
+	"./pa-in": 309,
+	"./pa-in.js": 309,
+	"./pl": 310,
+	"./pl.js": 310,
+	"./pt": 311,
+	"./pt-br": 312,
+	"./pt-br.js": 312,
+	"./pt.js": 311,
+	"./ro": 313,
+	"./ro.js": 313,
+	"./ru": 314,
+	"./ru.js": 314,
+	"./sd": 315,
+	"./sd.js": 315,
+	"./se": 316,
+	"./se.js": 316,
+	"./si": 317,
+	"./si.js": 317,
+	"./sk": 318,
+	"./sk.js": 318,
+	"./sl": 319,
+	"./sl.js": 319,
+	"./sq": 320,
+	"./sq.js": 320,
+	"./sr": 321,
+	"./sr-cyrl": 322,
+	"./sr-cyrl.js": 322,
+	"./sr.js": 321,
+	"./ss": 323,
+	"./ss.js": 323,
+	"./sv": 324,
+	"./sv.js": 324,
+	"./sw": 325,
+	"./sw.js": 325,
+	"./ta": 326,
+	"./ta.js": 326,
+	"./te": 327,
+	"./te.js": 327,
+	"./tet": 328,
+	"./tet.js": 328,
+	"./th": 329,
+	"./th.js": 329,
+	"./tl-ph": 330,
+	"./tl-ph.js": 330,
+	"./tlh": 331,
+	"./tlh.js": 331,
+	"./tr": 332,
+	"./tr.js": 332,
+	"./tzl": 333,
+	"./tzl.js": 333,
+	"./tzm": 334,
+	"./tzm-latn": 335,
+	"./tzm-latn.js": 335,
+	"./tzm.js": 334,
+	"./uk": 336,
+	"./uk.js": 336,
+	"./ur": 337,
+	"./ur.js": 337,
+	"./uz": 338,
+	"./uz-latn": 339,
+	"./uz-latn.js": 339,
+	"./uz.js": 338,
+	"./vi": 340,
+	"./vi.js": 340,
+	"./x-pseudo": 341,
+	"./x-pseudo.js": 341,
+	"./yo": 342,
+	"./yo.js": 342,
+	"./zh-cn": 343,
+	"./zh-cn.js": 343,
+	"./zh-hk": 344,
+	"./zh-hk.js": 344,
+	"./zh-tw": 345,
+	"./zh-tw.js": 345
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -97166,7 +97249,7 @@ exports.push([module.i, ".oc-content {\n  height: 100%; }\n", ""]);
 /* 677 */
 /***/ (function(module, exports) {
 
-module.exports = {"Yes":"Yes","No":"No","Edit":"Edit","Add":"Add","Delete":"Delete","Save":"Save","Cancel":"Cancel","ValidateIsRequired":"Value is required","Warning":"Warning","ValueIsMissing":"value is missing"}
+module.exports = {"Yes":"Yes","No":"No","Edit":"Edit","Add":"Add","Delete":"Delete","Save":"Save","Cancel":"Cancel","ShowFilteringRow":"Show filtering row","ValidateIsRequired":"Value is required","Warning":"Warning","ValueIsMissing":"value is missing"}
 
 /***/ }),
 /* 678 */
