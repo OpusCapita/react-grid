@@ -29,7 +29,7 @@ export default class FilteringControls extends React.PureComponent {
         <Checkbox
           checked={this.props.isFiltering}
           disabled={this.props.isBusy || this.props.isCreating || this.props.isEditing}
-          onClick={this.toggleFiltering}
+          onChange={this.toggleFiltering}
           inline
         >
           <M id="ShowFilteringRow" />

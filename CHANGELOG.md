@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add 500ms delay to loading spinner
+* Upgrade packages to get rid of warnings in console
 
 ## 2.1.0
 * Display asterisk at the header of required column
