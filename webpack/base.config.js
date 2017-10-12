@@ -36,6 +36,17 @@ function getBaseConfiguration(config) {
         dry: false,
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        output: {
+          comments: false,
+        },
+      }),
+      /* new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('development'),
+        },
+      }), */
     ],
   };
 }
