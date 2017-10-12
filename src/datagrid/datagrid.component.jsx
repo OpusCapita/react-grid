@@ -399,7 +399,7 @@ export default class DataGrid extends React.PureComponent {
             <Checkbox
               className="oc-row-select-checkbox"
               checked={selected}
-              onChange={() => {
+              onClick={() => {
                 this.props.itemSelectionChange(
                   this.props.grid, rowIndex, true, false);
               }}

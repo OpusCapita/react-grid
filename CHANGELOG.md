@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Change to development build to avoid warnings
+* Fix checkbox warning
 
 ## 2.1.1
 * Add 500ms delay to loading spinner
