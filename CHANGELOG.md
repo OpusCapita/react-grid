@@ -3,6 +3,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 2.1.2
 * Change to development build to avoid warnings
 * Fix checkbox warning
 
