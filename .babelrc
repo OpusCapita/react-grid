@@ -6,6 +6,9 @@
   ],
   "plugins": ["react-hot-loader/babel", "transform-decorators-legacy"],
   "env": {
+    "production": {
+      "plugins": ["transform-react-remove-prop-types"]
+    },
     "test": {
       "presets": ["es2015", "react", "stage-1"],
       "plugins": ["transform-decorators-legacy"]
