@@ -1,20 +1,18 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const flexbugs = require('postcss-flexbugs-fixes');
 const merge = require('webpack-merge');
 
-const libraryName = 'react-grid';
-const outputJsFile = `${libraryName}.js`;
-
+const utils = require('./webpack/utils.js');
 const getBaseConfiguration = require('./webpack/base.config.js');
+
+const libraryName = 'react-grid';
+const isProduction = utils.isProduction();
 
 const params = {
   root: __dirname,
   buildPath: 'lib',
   output: {
     path: path.join(__dirname, '/lib'),
-    filename: outputJsFile,
+    filename: isProduction ? `${libraryName}.min.js` : `${libraryName}.js`,
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true,
@@ -25,7 +23,6 @@ const params = {
 };
 
 const config = merge(getBaseConfiguration(params), {
-  devtool: 'source-map',
   externals: {
     react: {
       root: 'React',
@@ -41,39 +38,6 @@ const config = merge(getBaseConfiguration(params), {
       amd: 'react-dom',
       umd: 'react-dom',
     },
-  },
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [flexbugs, precss, autoprefixer],
-              minimize: true,
-            },
-          },
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [flexbugs, precss, autoprefixer],
-              minimize: true,
-            },
-          },
-        ],
-      },
-    ],
   },
 });
 
