@@ -36,6 +36,8 @@ export const columnShape = shape({
   createComponentProps: object,   // additional props to the create component
   filterComponentProps: object,   // additional props to the filter component
   width: number,
+  minWidth: number,
+  maxWidth: number,
   align: string,                  // vertical cell alignment, defaults to 'left'
   fixed: bool,                    // is column fixed
   allowCellsRecycling: bool,      // allow cells to be recycled for better horizontal scrolling perf
