@@ -31,6 +31,7 @@ export const columns = [
     valueKeyPath: ['text2'],
     valueType: 'text',
     componentType: 'text',
+    isRequired: true,
     width: 200,
     validators: [
       { unique: true },
@@ -42,7 +43,9 @@ export const columns = [
     valueKeyPath: ['number'],
     valueType: 'number',
     componentType: 'number',
+    isRequired: true,
     width: 80,
+    defaultValue: 123,
     validators: [
       { validate: VALIDATE.isRequired },
     ],
@@ -51,8 +54,8 @@ export const columns = [
     header: 'Float',
     valueKeyPath: ['float'],
     valueType: 'float',
-    componentType: 'float',
     isRequired: true,
+    componentType: 'float',
     width: 100,
     validators: [
       { validate: VALIDATE.isRequired },
@@ -70,6 +73,7 @@ export const columns = [
     valueKeyPath: ['date'],
     valueType: 'date',
     componentType: 'date',
+    isRequired: true,
     width: 100,
     validators: [
       { validate: VALIDATE.isRequired },
