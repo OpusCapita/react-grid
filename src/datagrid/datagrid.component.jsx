@@ -1119,6 +1119,7 @@ export default class DataGrid extends React.PureComponent {
             currentSortColumn={this.props.sortColumn}
             currentSortOrder={this.props.sortOrder}
             onSortChange={this.props.sortChange}
+            isBusy={this.props.isBusy}
           >
             {col.header}
           </HeaderCell>
