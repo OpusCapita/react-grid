@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Don't allow sorting when grid is busy
 
 ## 2.1.3
 * Include both development and production builds
