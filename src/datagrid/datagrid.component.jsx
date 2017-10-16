@@ -418,6 +418,8 @@ export default class DataGrid extends React.PureComponent {
         header: col.header,
         columnKey: Utils.getColumnKey(col),
         width: col.width,
+        minWidth: col.minWidth || 20,
+        maxWidth: col.maxWidth,
         isResizable: !col.disableResizing,
         fixed: !!col.fixed,
         allowCellsRecycling: !!col.allowCellsRecycling,
@@ -1122,6 +1124,8 @@ export default class DataGrid extends React.PureComponent {
         }
         cell={cellProps => (this.renderCell(col, cellProps))}
         width={this.props.columnWidths.get(col.columnKey, (col.width || 200))}
+        minWidth={col.minWidth}
+        maxWidth={col.maxWidth}
         isResizable={col.isResizable}
         flexGrow={col.flexGrow ? col.flexGrow : 0}
         fixed={col.fixed}
