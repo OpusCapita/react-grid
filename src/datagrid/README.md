@@ -114,7 +114,9 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | editComponentProps         | object         |         | Additional props for the edit component  |
 | createComponentProps       | object         |         | Additional props for the create component |
 | filterComponentProps       | object         |         | Additional props for the filter component |
-| width                      | number         |         | The pixel width of the column            |
+| width                      | number         |     200 | The pixel width of the column            |
+| minWidth                   | number         |      20 | The minimum pixel width of the column    |
+| maxWidth                   | number         |         | The maximum pixel width of the column    |
 | align                      | number         |         | The horizontal alignment of the column   |
 | fixed                      | boolean        |         | Column is fixed                          |
 | allowCellsRecycling        | boolean        |         | Recycle cells that are outside viewport horizontally, better horizontal scrolling performance. |
