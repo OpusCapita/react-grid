@@ -4,6 +4,7 @@
 
 ## <next>
 * Don't allow sorting when grid is busy
+* Add scrollbar to dropdown menu
 
 ## 2.1.3
 * Include both development and production builds
