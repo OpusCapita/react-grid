@@ -4,6 +4,7 @@
 
 ## <next>
 * Don't allow sorting when grid is busy
+* Add scrollbar to dropdown menu
 * Fix bug: Default values are not applied to new items if grid is empty
 
 ## 2.1.3
