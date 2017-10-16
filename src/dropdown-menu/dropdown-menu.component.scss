@@ -7,8 +7,13 @@
     color: inherit!important;
   }
 
-  .dropdown-menu a {
-    padding: 3px 30px 2px 5px!important;
+  .dropdown-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    a {
+      padding: 3px 30px 2px 5px!important;
+    }
   }
 
   .oc-dropdown-menu-icon {
