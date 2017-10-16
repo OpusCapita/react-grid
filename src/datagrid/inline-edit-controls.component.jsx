@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage as M } from 'react-intl';
 import CellToolTip from './cell-tooltip.component';
 import { gridShape } from './datagrid.props';
+import Utils from './datagrid.utils';
 import './inline-edit-controls.component.scss';
 
 export default class InlineEditControls extends React.PureComponent {
@@ -25,7 +26,6 @@ export default class InlineEditControls extends React.PureComponent {
     onAddClick: PropTypes.func,
     onEditClick: PropTypes.func,
     columns: PropTypes.array.isRequired,
-    columnDefaultValues: PropTypes.object.isRequired,
     firstInvalidInput: PropTypes.object,
     disableActions: PropTypes.bool,
     disableActionsMessage: PropTypes.shape({
@@ -72,7 +72,7 @@ export default class InlineEditControls extends React.PureComponent {
   }
 
   handleAddButtonClick = () => {
-    this.props.addNewItem(this.props.grid, this.props.columnDefaultValues);
+    this.props.addNewItem(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
   }
 
   handleEditButtonClick = () => {
@@ -89,7 +89,7 @@ export default class InlineEditControls extends React.PureComponent {
       if (this.props.onAddClick) {
         this.props.onAddClick();
       } else {
-        this.props.create(this.props.grid, this.props.columnDefaultValues);
+        this.props.create(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
       }
     }
   }
