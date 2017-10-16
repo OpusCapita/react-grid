@@ -79,7 +79,6 @@ export default class DataGrid extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { currentRow: 0, currentColumn: 0 };
-    this.columnDefaultValues = {}; // Used when creating new items
     this.cellRefs = {};
   }
 
@@ -93,7 +92,7 @@ export default class DataGrid extends React.PureComponent {
 
   onCreateCellKeyDown = (e) => {
     if (e.keyCode === KEY_CODES.ENTER) {
-      this.props.addNewItem(this.props.grid, this.columnDefaultValues);
+      this.props.addNewItem(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
     }
   }
 
@@ -425,9 +424,6 @@ export default class DataGrid extends React.PureComponent {
         disableSorting: !!col.disableSorting,
         isRequired: !!col.isRequired,
       };
-      if (col.defaultValue !== undefined) {
-        this.columnDefaultValues[column.columnKey] = col.defaultValue;
-      }
       const inputStyle = {};
       if (col.align) {
         column.align = col.align;
@@ -1161,7 +1157,6 @@ export default class DataGrid extends React.PureComponent {
           }
           { this.props.inlineEdit &&
             <InlineEditControls
-              columnDefaultValues={this.columnDefaultValues}
               firstInvalidInput={this.refFirstInvalidInput}
               {...this.props}
             />

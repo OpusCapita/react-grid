@@ -6,6 +6,15 @@ export default {
   getColumnKey: col => (
     col.columnKey || col.valueKeyPath.join('/')
   ),
+  getColumnDefaultValues: (cols) => {
+    const columnDefaultValues = {};
+    cols.forEach((col) => {
+      if (col.defaultValue !== undefined) {
+        columnDefaultValues[col.columnKey || col.valueKeyPath.join('/')] = col.defaultValue;
+      }
+    });
+    return columnDefaultValues;
+  },
   isSortable: col => (
     col.valueType &&
     (col.sortValueGetter || col.valueKeyPath) &&
