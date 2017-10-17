@@ -25,8 +25,9 @@ export default class InlineEditControls extends React.PureComponent {
     onCancel: PropTypes.func.isRequired,
     onAddClick: PropTypes.func,
     onEditClick: PropTypes.func,
+    afterAddItem: PropTypes.func.isRequired,
+    afterValidationError: PropTypes.func.isRequired,
     columns: PropTypes.array.isRequired,
-    firstInvalidInput: PropTypes.object,
     disableActions: PropTypes.bool,
     disableActionsMessage: PropTypes.shape({
       messageId: PropTypes.string,
@@ -42,7 +43,6 @@ export default class InlineEditControls extends React.PureComponent {
     disableActionsMessage: { messageId: 'GridActionsDisabledOtherGridBusy' },
     disableActionSave: false,
     inlineAdd: true,
-    firstInvalidInput: null,
     onAddClick: null,
     onEditClick: null,
     tabIndex: 1,
@@ -61,8 +61,8 @@ export default class InlineEditControls extends React.PureComponent {
     }
     if (valid) {
       this.props.save(this.props.grid, this.props.onSave);
-    } else if (this.props.firstInvalidInput) {
-      this.props.firstInvalidInput.focus();
+    } else {
+      this.props.afterValidationError();
     }
   }
 
@@ -73,6 +73,7 @@ export default class InlineEditControls extends React.PureComponent {
 
   handleAddButtonClick = () => {
     this.props.addNewItem(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
+    this.props.afterAddItem();
   }
 
   handleEditButtonClick = () => {
@@ -90,6 +91,7 @@ export default class InlineEditControls extends React.PureComponent {
         this.props.onAddClick();
       } else {
         this.props.create(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
+        this.props.afterAddItem();
       }
     }
   }

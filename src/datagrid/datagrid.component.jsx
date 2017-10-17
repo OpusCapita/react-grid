@@ -80,6 +80,8 @@ export default class DataGrid extends React.PureComponent {
     super(props);
     this.state = { currentRow: 0, currentColumn: 0 };
     this.cellRefs = {};
+    this.focusToCreateCell = false;
+    this.focusToErrorCell = false; // TODO: Handle focusing when true
   }
 
   componentWillUnmount() {
@@ -93,6 +95,7 @@ export default class DataGrid extends React.PureComponent {
   onCreateCellKeyDown = (e) => {
     if (e.keyCode === KEY_CODES.ENTER) {
       this.props.addNewItem(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
+      this.focusToCreateCell = true;
     }
   }
 
@@ -369,6 +372,19 @@ export default class DataGrid extends React.PureComponent {
     return returnData;
   }
 
+  handleCreateCellRef = (ref, rowIndex, col) => {
+    // Focus to create cell
+    if (
+      this.props.createData.size &&
+      this.props.createData.size === rowIndex + 1 &&
+      this.focusToCreateCell &&
+      !this.getComponentDisabledState(rowIndex, col, 'create')
+    ) {
+      ref.focus();
+      this.focusToCreateCell = false;
+    }
+  }
+
   moveCellFocus = (nextElement, rowIndex, columnIndex) => {
     if (nextElement && (nextElement.type === 'text' || nextElement.type === 'number')) {
       if (rowIndex !== -1) {
@@ -382,7 +398,6 @@ export default class DataGrid extends React.PureComponent {
   }
 
   generateColumns = () => {
-    delete this.refFirstInvalidInput;
     const columns = [];
     const tabIndex = String(this.props.tabIndex);
     if (this.props.rowSelectCheckboxColumn) {
@@ -545,6 +560,7 @@ export default class DataGrid extends React.PureComponent {
                       e.target.value,
                     )}
                     onKeyDown={this.onCreateCellKeyDown}
+                    inputRef={(ref) => { this.handleCreateCellRef(ref, rowIndex, col); }}
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -626,6 +642,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     onFocus={this.onCellFocus}
                     onKeyDown={this.onCreateCellKeyDown}
+                    inputRef={(ref) => { this.handleCreateCellRef(ref, rowIndex, col); }}
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -707,6 +724,7 @@ export default class DataGrid extends React.PureComponent {
                       editValueParser(e.target.value),
                     )}
                     onKeyDown={this.onCreateCellKeyDown}
+                    inputRef={(ref) => { this.handleCreateCellRef(ref, rowIndex, col); }}
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -760,8 +778,10 @@ export default class DataGrid extends React.PureComponent {
                       this.getEditItemValue(rowIndex, col),
                     )}
                     searchable={selectOptions && (selectOptions.length > 9)}
-                    clearable={false}
+                    clearable={!col.isRequired}
                     backspaceRemoves={false}
+                    tabSelectsValue={false}
+                    openOnFocus
                     inputProps={{
                       id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
@@ -792,8 +812,11 @@ export default class DataGrid extends React.PureComponent {
                       this.getEditItemValue(rowIndex, col),
                     )}
                     searchable={selectOptions && (selectOptions.length > 9)}
-                    clearable={false}
+                    clearable={!col.isRequired}
                     backspaceRemoves={false}
+                    tabSelectsValue={false}
+                    openOnFocus
+                    ref={(ref) => { this.handleCreateCellRef(ref, rowIndex, col); }}
                     inputProps={{
                       id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
@@ -820,6 +843,8 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     searchable={selectOptions && (selectOptions.length > 9)}
                     clearable
+                    tabSelectsValue={false}
+                    openOnFocus
                     inputProps={{
                       id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
                     }}
@@ -843,6 +868,11 @@ export default class DataGrid extends React.PureComponent {
                       editValueParser(data),
                     )}
                     language={this.props.userLanguage}
+                    inputRef={(input) => {
+                      if (this.props.enableArrowNavigation) {
+                        this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
+                      }
+                    }}
                     inputProps={{
                       tabIndex,
                       id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
@@ -851,12 +881,6 @@ export default class DataGrid extends React.PureComponent {
                         column.columnKey,
                         rowIndex,
                       ),
-                      inputRef: (input) => {
-                        if (this.props.enableArrowNavigation) {
-                          this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
-                        }
-                      },
-                      style: column.style,
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -874,6 +898,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     onKeyDown={this.onCreateCellKeyDown}
                     language={this.props.userLanguage}
+                    inputRef={(ref) => { this.handleCreateCellRef(ref, rowIndex, col); }}
                     inputProps={{
                       tabIndex,
                       id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
@@ -930,8 +955,10 @@ export default class DataGrid extends React.PureComponent {
                       this.getEditItemValue(rowIndex, col),
                     )}
                     searchable={false}
-                    clearable={false}
+                    clearable={!col.isRequired}
                     backspaceRemoves={false}
+                    tabSelectsValue={false}
+                    openOnFocus
                     inputProps={{
                       id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
@@ -958,8 +985,11 @@ export default class DataGrid extends React.PureComponent {
                       this.getEditItemValue(rowIndex, col),
                     )}
                     searchable={false}
-                    clearable={false}
+                    clearable={!col.isRequired}
                     backspaceRemoves={false}
+                    tabSelectsValue={false}
+                    openOnFocus
+                    ref={(ref) => { this.handleCreateCellRef(ref, rowIndex, col); }}
                     inputProps={{
                       id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                     }}
@@ -983,6 +1013,8 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     searchable={false}
                     clearable
+                    tabSelectsValue={false}
+                    openOnFocus
                     inputProps={{
                       id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
                     }}
@@ -1157,7 +1189,8 @@ export default class DataGrid extends React.PureComponent {
           }
           { this.props.inlineEdit &&
             <InlineEditControls
-              firstInvalidInput={this.refFirstInvalidInput}
+              afterAddItem={() => { this.focusToCreateCell = true; }}
+              afterValidationError={() => { this.focusToErrorCell = true; }}
               {...this.props}
             />
           }
