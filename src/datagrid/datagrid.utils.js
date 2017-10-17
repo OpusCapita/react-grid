@@ -15,6 +15,23 @@ export default {
     });
     return columnDefaultValues;
   },
+  getCellStyleByCol: (col) => {
+    if (col.align) {
+      return {
+        textAlign: col.align,
+      };
+    }
+    switch (col.valueType) {
+      case 'number':
+      case 'float':
+      case 'date':
+        return {
+          textAlign: 'right',
+        };
+      default:
+        return {};
+    }
+  },
   isSortable: col => (
     col.valueType &&
     (col.sortValueGetter || col.valueKeyPath) &&
@@ -71,10 +88,7 @@ export default {
           val === undefined
         );
         filterFunctions.filterMatcher = (val, filterVal) => {
-          let parsedFilterVal = filterVal;
-          if (this.props.decimalSeparator && this.props.decimalSeparator !== '.') {
-            parsedFilterVal = parsedFilterVal.replace(this.props.decimalSeparator, '.');
-          }
+          const parsedFilterVal = filterVal.replace(',', '.');
           return parseFloat(parsedFilterVal) === val;
         };
         break;
