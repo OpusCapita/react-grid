@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 function getBaseEnvConfiguration(config) {
   return {
@@ -16,6 +17,7 @@ function getBaseEnvConfiguration(config) {
         },
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new WebpackNotifierPlugin(),
     ],
   };
 }
