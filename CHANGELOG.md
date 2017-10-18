@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 2.2.1
+* Fix default align to left if component type is select, even if data type is number
+
 ## 2.2.0
 * Align numbers and dates to right by default
 * Focus to new cell when adding new item
