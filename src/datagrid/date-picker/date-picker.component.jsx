@@ -17,6 +17,7 @@ export default class DatePicker extends React.Component {
     language: React.PropTypes.string.isRequired,
     dateFormat: React.PropTypes.string,
     inputProps: React.PropTypes.object,
+    inputRef: React.PropTypes.func,
     disabled: React.PropTypes.bool,
   };
 
@@ -25,6 +26,7 @@ export default class DatePicker extends React.Component {
     dateFormat: 'L',
     onChange() {},
     inputProps: {},
+    inputRef() {},
     disabled: false,
   };
 
@@ -135,6 +137,7 @@ export default class DatePicker extends React.Component {
       onChange,
       intl,
       inputProps,
+      inputRef,
       disabled,
       ...otherProps } = this.props;
     const overlayStyle = {
@@ -154,6 +157,7 @@ export default class DatePicker extends React.Component {
             type="text"
             inputRef={(el) => {
               this.input = el;
+              inputRef(el);
             }}
             value={value}
             onChange={this.handleInputChange}

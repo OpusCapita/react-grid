@@ -6,6 +6,7 @@
 
 ## 2.2.0
 * Align numbers and dates to right by default
+* Focus to new cell when adding new item
 * Don't allow sorting when grid is busy
 * Add scrollbar to dropdown menu
 * Add minWidth and maxWidth props to columns
