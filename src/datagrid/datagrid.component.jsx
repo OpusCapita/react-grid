@@ -425,12 +425,8 @@ export default class DataGrid extends React.PureComponent {
         allowCellsRecycling: !!col.allowCellsRecycling,
         disableSorting: !!col.disableSorting,
         isRequired: !!col.isRequired,
+        style: Utils.getCellStyleByCol(col),
       };
-      const inputStyle = {};
-      if (col.align) {
-        column.align = col.align;
-        inputStyle.textAlign = col.align;
-      }
       if (col.valueKeyPath) {
         column.valueKeyPath = col.valueKeyPath;
       }
@@ -528,7 +524,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -552,7 +548,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -570,7 +566,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -608,7 +604,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -633,7 +629,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -651,7 +647,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -690,7 +686,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -714,7 +710,7 @@ export default class DataGrid extends React.PureComponent {
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -732,7 +728,7 @@ export default class DataGrid extends React.PureComponent {
                     )}
                     id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
                     {...col.filterComponentProps}
-                    style={inputStyle}
+                    style={column.style}
                     tabIndex={tabIndex}
                   />
                 );
@@ -860,6 +856,7 @@ export default class DataGrid extends React.PureComponent {
                           this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
                         }
                       },
+                      style: column.style,
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -880,6 +877,7 @@ export default class DataGrid extends React.PureComponent {
                     inputProps={{
                       tabIndex,
                       id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
+                      style: column.style,
                     }}
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
@@ -900,6 +898,7 @@ export default class DataGrid extends React.PureComponent {
                     inputProps={{
                       tabIndex,
                       id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
+                      style: column.style,
                     }}
                     {...col.filterComponentProps}
                   />
@@ -1044,15 +1043,12 @@ export default class DataGrid extends React.PureComponent {
   renderCell(col, cellProps) {
     const { isCreating, isEditing, isFiltering, createData } = this.props;
     const { rowIndex, ...props } = cellProps;
-    const style = {};
     const isCheckbox = this.isSelectionCheckbox(cellProps);
     let cell;
     let cellType = 'view';
     let extraRowCount = 0; // how many rows to ignore from top, new + filter rows
     if (isCreating) extraRowCount = createData.size;
     if (isFiltering) extraRowCount += 1;
-    if (col.align && col.align === 'right') style.textAlign = 'right';
-    if (col.align && col.align === 'center') style.textAlign = 'center';
     if (isFiltering && rowIndex === 0) {
       cell = col.cellFilter();
       cellType = 'filter';
@@ -1082,7 +1078,7 @@ export default class DataGrid extends React.PureComponent {
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
       const isEdited = this.isCellEdited(getRowIndex, col, cellType);
       return (
-        <Cell {...props} className="oc-datagrid-cell" style={style}>
+        <Cell {...props} className="oc-datagrid-cell" style={col.style}>
           <CellTooltip
             id={cellType + col.columnKey + (rowIndex - extraRowCount)}
             isEdited={isEdited}
@@ -1099,7 +1095,7 @@ export default class DataGrid extends React.PureComponent {
       );
     }
     return (
-      <Cell {...props} className="oc-datagrid-cell" style={style}>{ cell }</Cell>
+      <Cell {...props} className="oc-datagrid-cell" style={col.style}>{ cell }</Cell>
     );
   }
 

@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Align numbers and dates to right by default
 * Don't allow sorting when grid is busy
 * Add scrollbar to dropdown menu
 * Add minWidth and maxWidth props to columns
