@@ -25,7 +25,7 @@
     "react-dom": "15.4.x"
   },
   "devDependencies": {
-    "autoprefixer": "6.6.x",
+    "autoprefixer": "6.7.7",
     "babel": "6.23.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.1",

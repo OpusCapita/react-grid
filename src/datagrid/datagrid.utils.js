@@ -21,6 +21,12 @@ export default {
         textAlign: col.align,
       };
     }
+    // No default align if component is select
+    // Because rendered data is most likely text
+    // Even if valueType is number
+    if (col.componentType === 'select') {
+      return {};
+    }
     switch (col.valueType) {
       case 'number':
       case 'float':
