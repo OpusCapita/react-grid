@@ -371,6 +371,11 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return newState;
     }
 
+    case TYPES.PLATFORM_DATAGRID_EDIT_DATA_SET:
+      return state
+        .setIn([action.id, 'session', 'isEditing'], true)
+        .setIn([action.id, 'editData'], action.data);
+
     default:
       return state;
   }

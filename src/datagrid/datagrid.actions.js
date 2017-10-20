@@ -36,6 +36,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_FILTER_DATA_CHANGE: 'PLATFORM_DATAGRID_FILTER_DATA_CHANGE',
   PLATFORM_DATAGRID_APPLY_FILTERS: 'PLATFORM_DATAGRID_APPLY_FILTERS',
   PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: 'PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE',
+  PLATFORM_DATAGRID_EDIT_DATA_SET: 'PLATFORM_DATAGRID_EDIT_DATA_SET',
 };
 
 export const invalidate = grid =>
@@ -737,5 +738,15 @@ export const updateExistingCellValue = (grid, dataId, keyPath, value) =>
       dataId,
       keyPath,
       value,
+    });
+  };
+
+export const editDataSet = (grid, data) =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_EDIT_DATA_SET,
+      id: grid.id,
+      data,
     });
   };
