@@ -381,4 +381,19 @@ describe('Datagrid reducers', () => {
     expect(newState.getIn([id, 'data', 1, 'name'])).to.eql('Edith');
     expect(newState.getIn([id, 'allData', 1, 'name'])).to.eql('Edith');
   });
+
+  it('set edited data', () => {
+    const state = INITIAL_STATE.setIn([id, 'data'], data);
+    const newData = Map().setIn([1, 'name'], 'abc');
+    const action = {
+      id,
+      cellMessages: Map(),
+      data: newData,
+      type: TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA,
+    };
+    const newState = datagridReducer(state, action);
+    expect(newState.getIn([id, 'data', 0, 'name'])).to.eql('Mary');
+    expect(newState.getIn([id, 'editData', 1, 'name'])).to.eql('abc');
+    expect(newState.getIn([id, 'cellMessages'])).to.eql(Map());
+  });
 });

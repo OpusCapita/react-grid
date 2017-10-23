@@ -755,4 +755,18 @@ describe('Datagrid actions', () => {
     this.store.dispatch(action);
     expect(this.store.getActions()[0]).to.eql(expectedAction);
   });
+
+  it('set edited data', function () {
+    const newData = Map().setIn([1, 'name'], 'abc');
+    const action = actions.setEditData(GRID, newData);
+    const expectedAction = {
+      cellMessages: Map(),
+      data: newData,
+      id: GRID.id,
+      type: actions.TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA,
+    };
+
+    this.store.dispatch(action);
+    expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
 });
