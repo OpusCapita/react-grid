@@ -308,7 +308,6 @@ export default class DataGrid extends React.PureComponent {
       grid,
       isCreating,
       isEditing,
-      isFiltering,
       createData,
       selectedItems,
       data,
@@ -316,23 +315,18 @@ export default class DataGrid extends React.PureComponent {
     const rowClassNames = ['oc-datagrid-row'];
     let extraRowCount = 0; // how many rows to ignore from top, new + filter rows
     if (isCreating) extraRowCount = createData.size;
-    if (isFiltering) extraRowCount += 1;
-    if (isFiltering && rowIndex === 0) {
-      rowClassNames.push('oc-datagrid-row-filter');
-    } else {
-      if (isCreating) {
-        if (rowIndex <= (extraRowCount - 1)) {
-          rowClassNames.push('oc-datagrid-row-new');
-        }
-      } else if (isEditing) {
-        rowClassNames.push('oc-datagrid-row-edit');
+    if (isCreating) {
+      if (rowIndex <= (extraRowCount - 1)) {
+        rowClassNames.push('oc-datagrid-row-new');
       }
+    } else if (isEditing) {
+      rowClassNames.push('oc-datagrid-row-edit');
     }
+
 
     // check if row is selected
     if ((!isCreating && !isEditing) &&
-        (selectedItems && grid.idKeyPath) &&
-        (!isFiltering || rowIndex > 0)) {
+        (selectedItems && grid.idKeyPath)) {
       if (
         selectedItems.indexOf(data.getIn([rowIndex - extraRowCount, ...grid.idKeyPath])) !== -1
       ) {
@@ -440,6 +434,7 @@ export default class DataGrid extends React.PureComponent {
         allowCellsRecycling: !!col.allowCellsRecycling,
         disableSorting: !!col.disableSorting,
         isRequired: !!col.isRequired,
+        componentType: col.componentType,
         style: Utils.getCellStyleByCol(col),
       };
       if (col.valueKeyPath) {
@@ -1073,37 +1068,30 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderCell(col, cellProps) {
-    const { isCreating, isEditing, isFiltering, createData } = this.props;
+    const { isCreating, isEditing, createData } = this.props;
     const { rowIndex, ...props } = cellProps;
     const isCheckbox = this.isSelectionCheckbox(cellProps);
     let cell;
     let cellType = 'view';
     let extraRowCount = 0; // how many rows to ignore from top, new + filter rows
     if (isCreating) extraRowCount = createData.size;
-    if (isFiltering) extraRowCount += 1;
-    if (isFiltering && rowIndex === 0) {
-      cell = col.cellFilter();
-      cellType = 'filter';
-    } else {
-      if (isCreating) {
-        if (rowIndex <= (extraRowCount - 1)) {
-          if (col.cellCreate) {
-            const realIndex = isFiltering ? rowIndex - 1 : rowIndex;
-            cell = col.cellCreate(realIndex);
-            cellType = 'create';
-          } else {
-            cell = null;
-            cellType = null;
-          }
+    if (isCreating) {
+      if (rowIndex <= (extraRowCount - 1)) {
+        if (col.cellCreate) {
+          cell = col.cellCreate(rowIndex);
+          cellType = 'create';
         } else {
-          cell = col.cell(rowIndex - extraRowCount);
+          cell = null;
+          cellType = null;
         }
-      } else if (isEditing && col.cellEdit) {
-        cell = col.cellEdit(rowIndex - extraRowCount);
-        cellType = 'edit';
       } else {
         cell = col.cell(rowIndex - extraRowCount);
       }
+    } else if (isEditing && col.cellEdit) {
+      cell = col.cellEdit(rowIndex - extraRowCount);
+      cellType = 'edit';
+    } else {
+      cell = col.cell(rowIndex - extraRowCount);
     }
     if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isCheckbox) {
       const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
@@ -1146,6 +1134,7 @@ export default class DataGrid extends React.PureComponent {
             currentSortOrder={this.props.sortOrder}
             onSortChange={this.props.sortChange}
             isBusy={this.props.isBusy}
+            filtering={this.props.isFiltering}
           >
             {col.header}
           </HeaderCell>
@@ -1168,7 +1157,6 @@ export default class DataGrid extends React.PureComponent {
       'is-busy': this.props.isBusy,
       'is-editing': this.props.isEditing,
       'is-creating': this.props.isCreating,
-      'is-filtering': this.props.isFiltering,
     });
     let actionBar = null;
     let actionBarRight = null;
@@ -1223,7 +1211,6 @@ export default class DataGrid extends React.PureComponent {
         this.props.rowsCount :
         this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
-    if (this.props.isFiltering) rowsCount += 1;
     let scrollToRow = this.props.scrollToRow || this.state.currentRow;
     if (!scrollToRow && this.props.selectedItems.size > 0) {
       scrollToRow = this.getSelectedItemIndex(this.props.selectedItems.first());
@@ -1239,18 +1226,13 @@ export default class DataGrid extends React.PureComponent {
         <ResponsiveFixedDataTable
           id={this.props.grid.id}
           rowsCount={rowsCount}
-          headerHeight={this.props.headerHeight}
+          headerHeight={this.props.isFiltering ?
+            this.props.headerHeight + this.props.filterRowHeight
+            : this.props.headerHeight}
           rowHeight={this.props.rowHeight}
           onColumnResizeEndCallback={this.onColumnResizeEndCallback}
           isColumnResizing={false}
           onRowClick={(e, rowIndex) => {
-            let realRowIndex = rowIndex;
-            if (this.props.isFiltering) {
-              if (rowIndex === 0) {
-                return false;
-              }
-              realRowIndex -= 1;
-            }
             if (this.props.rowSelect && !this.props.isCreating && !this.props.isEditing) {
               if (e.ctrlKey || e.shiftKey) {
                 document.getSelection().removeAllRanges();
@@ -1260,14 +1242,14 @@ export default class DataGrid extends React.PureComponent {
               if (e.target.type !== 'checkbox') {
                 this.props.itemSelectionChange(
                   this.props.grid,
-                  realRowIndex,
+                  rowIndex,
                   this.props.multiSelect && e.ctrlKey,
                   this.props.multiSelect && e.shiftKey,
                 );
               }
             }
             if (this.props.onRowClick) {
-              this.props.onRowClick(e, realRowIndex, this.props.data.get(realRowIndex));
+              this.props.onRowClick(e, rowIndex, this.props.data.get(rowIndex));
             }
             return true;
           }}

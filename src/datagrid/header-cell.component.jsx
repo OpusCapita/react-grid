@@ -15,6 +15,7 @@ export default class HeaderCell extends React.PureComponent {
     currentSortOrder: PropTypes.string,
     onSortChange: PropTypes.func.isRequired,
     isBusy: PropTypes.bool.isRequired,
+    filtering: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -24,6 +25,7 @@ export default class HeaderCell extends React.PureComponent {
   };
 
   onSortChange = (e) => {
+    if (e.target.className !== 'public_fixedDataTableCell_cellContent') return false; // filtering input should not trigger sorting
     if (!Utils.isSortable(this.props.column)) return false;
     if (this.props.isBusy) return false;
     e.preventDefault();
@@ -42,6 +44,11 @@ export default class HeaderCell extends React.PureComponent {
     return true;
   }
 
+  getFilteringComponent = (filtering, column) => (
+    filtering ?
+      <div className="oc-datagrid-row-filter">{column.cellFilter()}</div> : null
+  )
+
   render() {
     const {
       children,
@@ -52,6 +59,7 @@ export default class HeaderCell extends React.PureComponent {
       column,
       onSortChange,
       isBusy,
+      filtering,
       ...props
     } = this.props;
     const cellClassNames = classNames({
@@ -67,6 +75,7 @@ export default class HeaderCell extends React.PureComponent {
           currentSortOrder &&
           (currentSortOrder === 'desc' ? ' ↓' : ' ↑')
         }
+        {this.getFilteringComponent(filtering, column)}
       </Cell>
     );
   }
