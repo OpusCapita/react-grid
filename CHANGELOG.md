@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add 'setEditData' action to import data from external sources
 
 ## 2.2.1
 * Fix default align to left if component type is select, even if data type is number
