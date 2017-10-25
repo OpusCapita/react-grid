@@ -154,6 +154,7 @@ export const propTypes = {
   tabIndex: number,                   // tabIndex value for inputs in cells
   // Fixed data table built-in features
   headerHeight: number,
+  filterRowHeight: number,
   rowHeight: number,
   containerStyle: object,
   scrollToColumn: number,
@@ -179,6 +180,7 @@ export const defaultProps = {
   disableActionSave: false,
   enableArrowNavigation: false,
   headerHeight: 40,
+  filterRowHeight: 40,
   rowHeight: 40,
   onSave: () => {},
   onRemove: () => {},

@@ -32,6 +32,11 @@
     }
   }
   .oc-datagrid-row-filter {
+    margin-top: 10px;
+    font-weight: normal;
+    .form-group {
+      margin-bottom: 0;
+    }
     .public_fixedDataTableCell_cellContent {
       padding: 3px;
     }
