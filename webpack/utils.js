@@ -1,11 +1,16 @@
 module.exports = {
-  isProduction: () => {
-    let isProd = false;
+  getTarget: () => {
+    let target = 'development';
     if (process.argv.indexOf('-p') !== -1) {
-      isProd = true;
+      target = 'production';
     } else if (process.env.NODE_ENV === 'production') {
-      isProd = true;
+      target = 'production';
+    } else if (process.env.BUILD_TARGET === 'production') {
+      target = 'production';
     }
-    return isProd;
+    if (process.env.BUILD_TARGET === 'release') {
+      target = 'release';
+    }
+    return target;
   },
 };

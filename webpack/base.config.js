@@ -1,24 +1,31 @@
 /* eslint-disable global-require, no-console */
 const path = require('path');
 const merge = require('webpack-merge');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const flexbugs = require('postcss-flexbugs-fixes');
 const colors = require('colors/safe');
 const utils = require('./utils.js');
 
-const isProduction = utils.isProduction();
+const target = utils.getTarget();
+const isMinimized = !!target === 'production';
 
 let getBaseEnvConfiguration;
 
-if (isProduction) {
-  getBaseEnvConfiguration = require('./base.production.config.js');
-} else {
-  getBaseEnvConfiguration = require('./base.development.config.js');
+switch (target) {
+  case 'production':
+    getBaseEnvConfiguration = require('./base.production.config.js');
+    break;
+  case 'release':
+    getBaseEnvConfiguration = require('./base.release.config.js');
+    break;
+  default:
+    getBaseEnvConfiguration = require('./base.development.config.js');
 }
 
 function getBaseConfiguration(config) {
-  console.log(`${colors.green.underline('Building:')} ${colors.yellow(`${config.buildPath}/${config.output.filename}`)} ${colors.grey(isProduction ? '[production]' : '[development]')}`);
+  console.log(`${colors.green.underline('Building:')} ${colors.yellow(`${config.buildPath}/${config.output.filename}`)} ${colors.grey(`[${target}]`)}`);
   return merge(getBaseEnvConfiguration(config), {
     entry: config.entry,
     output: config.output,
@@ -50,7 +57,7 @@ function getBaseConfiguration(config) {
               loader: 'postcss-loader',
               options: {
                 plugins: () => [flexbugs, precss, autoprefixer],
-                minimize: isProduction,
+                minimize: isMinimized,
               },
             },
             'sass-loader',
@@ -72,7 +79,7 @@ function getBaseConfiguration(config) {
               loader: 'postcss-loader',
               options: {
                 plugins: () => [flexbugs, precss, autoprefixer],
-                minimize: isProduction,
+                minimize: isMinimized,
               },
             },
           ],
@@ -86,6 +93,13 @@ function getBaseConfiguration(config) {
       ],
       extensions: ['.js', '.jsx'],
     },
+    plugins: [
+      new CleanWebpackPlugin([config.buildPath], {
+        root: config.root,
+        verbose: false,
+        dry: false,
+      }),
+    ],
   });
 }
 
