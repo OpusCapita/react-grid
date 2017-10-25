@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 2.3.1
+* Fix release build warnings
+
 ## 2.3.0
 * Add 'setEditData' action to import data from external sources
 * Move filtering row to header
