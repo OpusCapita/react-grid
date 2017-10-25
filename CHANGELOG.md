@@ -4,6 +4,9 @@
 
 ## <next>
 
+## 2.3.2
+* Fix development and production builds
+
 ## 2.3.1
 * Fix release build warnings
 
