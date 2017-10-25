@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Move filtering row to header
 * Add 'setEditData' action to import data from external sources
 
 ## 2.2.1
