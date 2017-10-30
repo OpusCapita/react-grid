@@ -302,6 +302,17 @@ describe('Datagrid reducers', () => {
     expect(newState.getIn([id, 'createCellMessages', 'error', 2, 'age'])).to.be.undefined;
   });
 
+  it('sets selected cell', () => {
+    const state = INITIAL_STATE.setIn([id, 'selectedCell'], Map());
+    const action = {
+      id,
+      selectedCell: Map({ rowIndex: 0, columnKey: 'text1' }),
+      type: TYPES.PLATFORM_DATAGRID_CELL_SELECTION_CHANGE,
+    };
+    const newState = datagridReducer(state, action);
+    expect(newState.getIn([id, 'selectedCell'])).to.eql(Map({ rowIndex: 0, columnKey: 'text1' }));
+  });
+
   it('sets selected items', () => {
     const state = INITIAL_STATE.setIn([id, 'data'], data);
     const action = {
