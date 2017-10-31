@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add 'cellSelect' prop and 'cellSelectionChange' action to enable cell selection
 
 ## 2.3.2
 * Fix development and production builds

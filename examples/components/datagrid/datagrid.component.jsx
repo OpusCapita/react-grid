@@ -109,7 +109,6 @@ export default class DatagridView extends React.Component {
           columns={columns}
           disableActionSave={disableActionSave}
           actionBarLeft={actionBar}
-          enableArrowNavigation
           filtering
           inlineEdit
           removing

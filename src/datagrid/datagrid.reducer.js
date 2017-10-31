@@ -9,6 +9,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'data'])
         .deleteIn([action.id, 'allData'])
         .deleteIn([action.id, 'session'])
+        .deleteIn([action.id, 'selectedCell'])
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
         .deleteIn([action.id, 'createCellMessages'])
@@ -25,6 +26,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
           isCreating: false,
           isBusy: false,
         })
+        .deleteIn([action.id, 'selectedCell'])
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
         .deleteIn([action.id, 'createCellMessages'])
@@ -52,11 +54,13 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state.setIn([action.id, 'config', 'columnWidths'], action.columnWidths);
 
     case TYPES.PLATFORM_DATAGRID_EDIT:
-      return state.setIn([action.id, 'session', 'isEditing'], true);
+      return state.setIn([action.id, 'session', 'isEditing'], true)
+        .deleteIn([action.id, 'selectedCell']);
 
     case TYPES.PLATFORM_DATAGRID_CREATE:
       return state
         .setIn([action.id, 'createData'], List([Immutable.fromJS(action.columnDefaultValues)]))
+        .deleteIn([action.id, 'selectedCell'])
         .mergeIn([action.id, 'session'], {
           isCreating: true,
         });
@@ -250,6 +254,9 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state;
     }
 
+    case TYPES.PLATFORM_DATAGRID_CELL_SELECTION_CHANGE:
+      return state.setIn([action.id, 'selectedCell'], action.selectedCell);
+
     case TYPES.PLATFORM_DATAGRID_ITEM_SELECTION_CHANGE: {
       const newState = state.setIn([action.id, 'session', 'lastClickedRowIndex'], action.rowIndex);
 
@@ -374,6 +381,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     case TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA:
       return state
         .setIn([action.id, 'session', 'isEditing'], true)
+        .deleteIn([action.id, 'selectedCell'])
         .setIn([action.id, 'editData'], action.data)
         .setIn([action.id, 'cellMessages'], action.cellMessages);
 
