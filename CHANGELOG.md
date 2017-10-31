@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fix bug: Column width 0 defaults to 200
 
 ## 2.3.2
 * Fix development and production builds
