@@ -20,7 +20,6 @@ export const columns = [
     valueType: 'text',
     componentType: 'text',
     isRequired: true,
-    width: 200,
     validators: [
       { unique: true },
       { validate: VALIDATE.isRequired },
@@ -32,7 +31,6 @@ export const columns = [
     valueType: 'text',
     componentType: 'text',
     isRequired: true,
-    width: 200,
     validators: [
       { unique: true },
       { validate: VALIDATE.isRequired },
@@ -85,7 +83,6 @@ export const columns = [
     valueType: 'text',
     componentType: 'select',
     selectComponentOptions: selectOptions,
-    width: 200,
   },
 ];
 
