@@ -81,6 +81,7 @@ export default class DataGrid extends React.PureComponent {
     this.state = { currentRow: 0, currentColumn: 0 };
     this.cellRefs = {};
     this.focusToCreateCell = false;
+    this.focusToEditCell = false; // TODO: Handle focusing when true
     this.focusToErrorCell = false; // TODO: Handle focusing when true
   }
 
@@ -366,6 +367,28 @@ export default class DataGrid extends React.PureComponent {
     return returnData;
   }
 
+  getScrollToRow = () => {
+    let scrollToRow;
+    if (this.props.isCreating && !this.focusToCreateCell) return scrollToRow;
+    if (this.focusToCreateCell) {
+      const scrollNewRow = this.props.createData.size - 1;
+      if (scrollNewRow >= 0) {
+        scrollToRow = scrollNewRow;
+      }
+    } else {
+      if (this.props.isEditing) {
+        scrollToRow = this.state.currentRow;
+      } else {
+        scrollToRow = this.props.scrollToRow;
+      }
+      if (scrollToRow === undefined && this.props.selectedItems.size > 0) {
+        scrollToRow = this.getSelectedItemIndex(this.props.selectedItems.first());
+      }
+    }
+    console.log('SCROLL TO ROW', scrollToRow);
+    return scrollToRow;
+  }
+
   handleCreateCellRef = (ref, rowIndex, col) => {
     // Focus to create cell
     if (
@@ -376,6 +399,17 @@ export default class DataGrid extends React.PureComponent {
     ) {
       ref.focus();
       this.focusToCreateCell = false;
+    }
+  }
+
+  handleInputCellRef = ref => (rowIndex, col) => {
+    if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
+      ref.focus();
+      this.focusToEditCell = false;
+    }
+    if (this.props.enableArrowNavigation) {
+      const columnKey = Utils.getColumnKey(col);
+      this.cellRefs[`${this.props.grid.id}_${columnKey}_${rowIndex}`] = ref;
     }
   }
 
@@ -526,11 +560,7 @@ export default class DataGrid extends React.PureComponent {
                       column.columnKey,
                       rowIndex,
                     )}
-                    inputRef={(input) => {
-                      if (this.props.enableArrowNavigation) {
-                        this.cellRefs[`${this.props.grid.id}_${column.columnKey}_${rowIndex}`] = input;
-                      }
-                    }}
+                    inputRef={this.handleInputCellRef(ref, rowIndex, column.columnKey)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -1178,6 +1208,7 @@ export default class DataGrid extends React.PureComponent {
           { this.props.inlineEdit &&
             <InlineEditControls
               afterAddItem={() => { this.focusToCreateCell = true; }}
+              afterEditPress={() => { this.focusToEditCell = true; }}
               afterValidationError={() => { this.focusToErrorCell = true; }}
               {...this.props}
             />
@@ -1211,10 +1242,6 @@ export default class DataGrid extends React.PureComponent {
         this.props.rowsCount :
         this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
-    let scrollToRow = this.props.scrollToRow || this.state.currentRow;
-    if (!scrollToRow && this.props.selectedItems.size > 0) {
-      scrollToRow = this.getSelectedItemIndex(this.props.selectedItems.first());
-    }
     return (
       <div
         id={`oc-datagrid-${this.props.grid.id}`}
@@ -1255,7 +1282,7 @@ export default class DataGrid extends React.PureComponent {
           }}
           scrollToColumn={this.props.scrollToColumn || this.state.currentColumn}
           scrollTop={this.props.scrollTop}
-          scrollToRow={scrollToRow}
+          scrollToRow={this.getScrollToRow()}
           onRowDoubleClick={this.props.onRowDoubleClick}
           onRowMouseDown={this.props.onRowMouseDown}
           onRowMouseEnter={this.props.onRowMouseEnter}

@@ -26,6 +26,7 @@ export default class InlineEditControls extends React.PureComponent {
     onAddClick: PropTypes.func,
     onEditClick: PropTypes.func,
     afterAddItem: PropTypes.func.isRequired,
+    afterEditPress: PropTypes.func.isRequired,
     afterValidationError: PropTypes.func.isRequired,
     columns: PropTypes.array.isRequired,
     disableActions: PropTypes.bool,
@@ -79,6 +80,7 @@ export default class InlineEditControls extends React.PureComponent {
   handleEditButtonClick = () => {
     if (!this.props.disableActions) {
       this.props.edit(this.props.grid);
+      this.props.afterEditPress();
       if (this.props.onEditClick) {
         this.props.onEditClick();
       }
