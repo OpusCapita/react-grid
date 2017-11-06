@@ -46,26 +46,24 @@ Object.keys(config.entry).forEach((key) => {
   }
 });
 
-// Add react transforms as babel plugin
-// https://github.com/gaearon/babel-plugin-react-transform
-config.module.rules.forEach((loader, index) => {
-  if (/^babel/.test(loader.loader)) {
-    const reactTransformPlugin = ['react-transform', {
-      transforms: [
-        {
-          transform: 'react-transform-hmr',
-          imports: ['react'],
-          locals: ['module'],
-        },
-      ],
-    }];
-    if (config.module.rules[index].query.plugins) {
-      config.module.rules[index].query.plugins.push(reactTransformPlugin);
-    } else {
-      config.module.rules[index].query.plugins = [reactTransformPlugin];
-    }
-  }
-});
+config.module.rules[0].use = {
+  loader: 'babel-loader',
+  options: {
+    plugins: [
+      ['react-transform', {
+        transforms: [
+          {
+            transform: 'react-transform-hmr',
+            imports: ['react'],
+            locals: ['module'],
+          },
+          // visually show and count when and why component is rendered
+          // { transform: 'react-transform-render-visualizer-fork' },
+        ],
+      }],
+    ],
+  },
+};
 
 config.devServer = {
   noInfo: true,
