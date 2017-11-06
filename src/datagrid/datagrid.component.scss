@@ -78,6 +78,12 @@
     }
   }
 
+  .oc-datagrid-cell {
+    &.is-selected {
+      border: 2px solid $oc-color-grid-warning !important;
+    }    
+  }
+
   .oc-datagrid-row-edit, .oc-datagrid-row-new {
     .form-group {
       margin: 0;

@@ -654,6 +654,19 @@ describe('Datagrid actions', () => {
     expect(this.store.getActions()[0]).to.eql(expectedAction);
   });
 
+  it('call cell selection change', function () {
+    const selectedCell = Map({ rowIndex: 0, columnKey: 'text1' });
+    const action = actions.cellSelectionChange(GRID, selectedCell);
+    const expectedAction = {
+      selectedCell,
+      id: GRID.id,
+      type: actions.TYPES.PLATFORM_DATAGRID_CELL_SELECTION_CHANGE,
+    };
+
+    this.store.dispatch(action);
+    expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
+
   it('call item selection change', function () {
     const action = actions.itemSelectionChange(GRID, 5, true, true);
     const expectedAction = {
