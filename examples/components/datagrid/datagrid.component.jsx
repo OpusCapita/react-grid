@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Button } from 'react-bootstrap';
+import Perf from 'react-addons-perf';
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { GRID, columns, data } from './datagrid.constants';
 import './datagrid.component.scss';
@@ -54,6 +55,15 @@ export default class DatagridView extends React.Component {
     this.props.cellShowMessage(GRID, 'warning', 3, ['float'], 'Warning');
   }
 
+  handleStartClick = () => {
+    Perf.start();
+  }
+
+  handleStopClick = () => {
+    Perf.stop();
+    Perf.printWasted(Perf.getLastMeasurements());
+  }
+
   handleOnSave = () => {
     const { createData, editData, allData } = this.props;
     let newData = [];
@@ -93,11 +103,23 @@ export default class DatagridView extends React.Component {
   render() {
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
     const actionBar = (
-      <Button
-        onClick={this.handleWarnClick}
-      >
-        Warn
-      </Button>
+      <div>
+        <Button
+          onClick={this.handleWarnClick}
+        >
+          Show Warning
+        </Button>
+        <Button
+          onClick={this.handleStartClick}
+        >
+          Start Perf
+        </Button>
+        <Button
+          onClick={this.handleStopClick}
+        >
+          Stop Perf
+        </Button>
+      </div>
     );
     return (
       <div className="oc-content oc-flex-column">
