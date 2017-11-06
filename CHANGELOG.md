@@ -4,6 +4,8 @@
 
 ## <next>
 * Add 'cellSelect' prop and 'cellSelectionChange' action to enable cell selection
+* Fix scroll to row when there's selected rows
+* Performance refactor, remove arrow functions from event handlers in the render
 
 ## 2.3.2
 * Fix development and production builds
