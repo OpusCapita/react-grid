@@ -3,6 +3,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fix bug: Column width 0 defaults to 200
 * Add 'cellSelect' prop and 'cellSelectionChange' action to enable cell selection
 * Fix scroll to row when there's selected rows
 * Performance refactor, remove arrow functions from event handlers in the render
