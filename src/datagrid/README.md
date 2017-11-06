@@ -43,6 +43,7 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | gridHeader               | node             |                                          | Grid header displayed on top of grid     |
 | actionBar                | node             |                                          | Action bar element displayed at top right |
 | actionBarLeft            | node             |                                          | Action bar element displayed at top left |
+| cellSelect               | boolean          | false                                    | Enable cell selecting                    |
 | disableDropdown          | boolean          | false                                    | Don't use dropdown menu in the action bar |
 | disableFilteringControls | boolean          | false                                    | Don't display the filtering controls (only used if disableDropdown is true) |
 | dropdownMenuItems        | array            |                                          | Additional dropdown menu items           |

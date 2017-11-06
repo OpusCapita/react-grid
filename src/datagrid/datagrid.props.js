@@ -83,6 +83,7 @@ export const propTypes = {
   sortChange: func.isRequired,
   resizeColumn: func.isRequired,
   invalidate: func.isRequired,
+  cellSelectionChange: func.isRequired,
   itemSelectionChange: func.isRequired,
   toggleFiltering: func.isRequired,
   editCellValueChange: func.isRequired,
@@ -103,6 +104,7 @@ export const propTypes = {
   ]),
   sortOrder: string,
   columnWidths: mapOf(number.isRequired),
+  selectedCell: map.isRequired,
   selectedItems: list.isRequired,
   data: list.isRequired,
   editData: map.isRequired,
@@ -122,6 +124,7 @@ export const propTypes = {
   gridHeader: node,
   actionBar: node,
   actionBarLeft: node,
+  cellSelect: bool,
   disableDropdown: bool,              // Don't use dropdown menu in the action bar
   disableFilteringControls: bool,     // Don't display the filtering controls (only valid if disableDropdown is true)
   dropdownMenuItems: array,
@@ -175,6 +178,7 @@ export const propTypes = {
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */
 
 export const defaultProps = {
+  cellSelect: false,
   children: undefined,
   containerStyle: {},
   disableActionSave: false,

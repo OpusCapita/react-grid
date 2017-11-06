@@ -53,6 +53,7 @@ const mapStateToProps = (state, ownProps) => {
     sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
     sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
     columnWidths: state.datagrid.getIn([GRID.id, 'config', 'columnWidths'], Map()),
+    selectedCell: state.datagrid.getIn([GRID.id, 'selectedCell'], Map()),
     selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
     data: state.datagrid.getIn([GRID.id, 'data'], List()),
     editData: state.datagrid.getIn([GRID.id, 'editData'], Map()),
@@ -364,6 +365,12 @@ export default class DataGrid extends React.PureComponent {
       returnData.warningMessageValues = warningMessage.values || {};
     }
     return returnData;
+  }
+
+  handleCellSelect = (cellType, rowIndex, columnKey) => () => {
+    if (cellType === 'view' && this.props.cellSelect) {
+      this.props.cellSelectionChange(this.props.grid, Map({ rowIndex, columnKey }));
+    }
   }
 
   handleCreateCellRef = (ref, rowIndex, col) => {
@@ -1068,7 +1075,7 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderCell(col, cellProps) {
-    const { isCreating, isEditing, createData } = this.props;
+    const { isCreating, isEditing, createData, selectedCell } = this.props;
     const { rowIndex, ...props } = cellProps;
     const isCheckbox = this.isSelectionCheckbox(cellProps);
     let cell;
@@ -1097,8 +1104,15 @@ export default class DataGrid extends React.PureComponent {
       const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
       const isEdited = this.isCellEdited(getRowIndex, col, cellType);
+      const className = (selectedCell.get('rowIndex') === rowIndex && selectedCell.get('columnKey') === props.columnKey) ?
+        'oc-datagrid-cell is-selected' : 'oc-datagrid-cell';
       return (
-        <Cell {...props} className="oc-datagrid-cell" style={col.style}>
+        <Cell
+          {...props}
+          className={className}
+          style={col.style}
+          onClick={this.handleCellSelect(cellType, rowIndex, props.columnKey)}
+        >
           <CellTooltip
             id={cellType + col.columnKey + (rowIndex - extraRowCount)}
             isEdited={isEdited}

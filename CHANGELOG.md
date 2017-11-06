@@ -4,6 +4,7 @@
 
 ## <next>
 * Fix bug: Column width 0 defaults to 200
+* Add 'cellSelect' prop and 'cellSelectionChange' action to enable cell selection
 
 ## 2.3.2
 * Fix development and production builds
