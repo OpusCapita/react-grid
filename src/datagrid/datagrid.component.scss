@@ -80,7 +80,8 @@
 
   .oc-datagrid-cell {
     &.is-selected {
-      border: 2px solid $oc-color-grid-warning !important;
+      border: 1px solid $oc-color-grid-warning !important;
+      border-bottom: 2px solid $oc-color-grid-warning !important;
     }    
   }
 
@@ -88,6 +89,11 @@
     .form-group {
       margin: 0;
     }
+
+    .form-control, .Select-control, .Select-input {
+      height: 31px !important;
+    }
+
     // Cell message input element borders when active or highlight
     .oc-datagrid-tooltip.warning {
       .form-control, .Select-control {

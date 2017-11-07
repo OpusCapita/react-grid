@@ -2,9 +2,10 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Enable cell selection in the edit mode
 
 ## 2.4.0
-* Add `cellSelect` prop and `cellSelectionChange` action to enable cell selection
+* Add `cellSelect` prop and `cellSelectionChange` action to enable cell selection in the view mode
 * Fix bug: Scroll to row when there's selected rows
 * Fix bug: Column width 0 defaults to 200
 * Performance refactor: Remove arrow functions from event handlers in the render
