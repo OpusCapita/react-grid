@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Update npm package for react-floating-select
 * Enable cell selection in the edit mode
 
 ## 2.4.0

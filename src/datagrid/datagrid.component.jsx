@@ -467,10 +467,10 @@ export default class DataGrid extends React.PureComponent {
           ref.focus();
           this.focusToEditCell = false;
         }
+      } else if (selectedRowIndex === undefined) {
+        this.focusToEditCell = false;
       } else if (selectedRowIndex === rowIndex) {
         ref.focus();
-        this.focusToEditCell = false;
-      } else {
         this.focusToEditCell = false;
       }
     }
@@ -614,7 +614,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', 'text', rowIndex, column.columnKey)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -668,7 +668,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', 'number', rowIndex, column.columnKey)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -725,7 +725,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col, editValueParser)}
-                    onFocus={this.onCellFocus('edit', 'float', rowIndex, column.columnKey)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -786,6 +786,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     searchable={selectOptions && (selectOptions.length > 9)}
                     clearable={!col.isRequired}
                     backspaceRemoves={false}
@@ -869,7 +870,7 @@ export default class DataGrid extends React.PureComponent {
                       id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                       onKeyDown: this.onEditCellKeyDown(col, rowIndex),
                       onBlur: this.onEditCellBlur(rowIndex, col),
-                      onFocus: this.onCellFocus('edit', 'date', rowIndex, column.columnKey),
+                      onFocus: this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey),
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -928,6 +929,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     searchable={false}
                     clearable={!col.isRequired}
                     backspaceRemoves={false}

@@ -82,16 +82,16 @@
     &.is-selected {
       border: 1px solid $oc-color-grid-warning !important;
       border-bottom: 2px solid $oc-color-grid-warning !important;
-    }    
+    }
+    
+    .form-control, .Select-control, .Select-input {
+      height: 31px !important;
+    }
   }
 
   .oc-datagrid-row-edit, .oc-datagrid-row-new {
     .form-group {
       margin: 0;
-    }
-
-    .form-control, .Select-control, .Select-input {
-      height: 31px !important;
     }
 
     // Cell message input element borders when active or highlight

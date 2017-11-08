@@ -87,7 +87,7 @@
     "write-file-webpack-plugin": "4.2.0"
   },
   "dependencies": {
-    "@opuscapita/react-floating-select": "1.0.0",
+    "@opuscapita/react-floating-select": "1.1.0",
     "@opuscapita/react-icons": "1.1.8",
     "classnames": "2.2.5",
     "fixed-data-table-2": "0.8.5",
