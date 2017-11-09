@@ -1,6 +1,7 @@
 {
   "Yes": "Yes",
   "No": "No",
+  "OK": "OK",
   "Edit": "Edit",
   "Add": "Add",
   "Delete": "Delete",
@@ -9,5 +10,9 @@
   "ShowFilteringRow": "Show filtering row",
   "ValidateIsRequired": "Value is required",
   "Warning": "Warning",
-  "ValueIsMissing": "value is missing"
+  "ValueIsMissing": "value is missing",
+  "ColumnSettings": "Column settings",
+  "SelectColumns": "Select columns",
+  "SelectedColumns": "Selected columns",
+  "AvailableColumns": "Available columns"
 }

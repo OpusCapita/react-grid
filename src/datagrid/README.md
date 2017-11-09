@@ -51,6 +51,7 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | inlineAdd                | boolean          | true                                     | Enable inline adding (defaults to true if inlineEdit is enabled) |
 | filtering                | boolean          | false                                    | Enable column filtering                  |
 | removing                 | boolean          | false                                    | Enable item removing                     |
+| columnSettings           | boolean          | false                                    | Enable column settings popup (column selecting and re-ordering) |
 | rowSelect                | boolean          | false                                    | Enable row selecting                     |
 | rowSelectCheckboxColumn  | boolean          | false                                    | Enable additional checkbox column for row selecting |
 | multiSelect              | boolean          | false                                    | Enable multi selecting on row selecting  |

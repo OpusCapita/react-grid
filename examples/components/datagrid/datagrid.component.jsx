@@ -133,6 +133,7 @@ export default class DatagridView extends React.Component {
           actionBarLeft={actionBar}
           enableArrowNavigation
           filtering
+          columnSettings
           inlineEdit
           removing
           multiSelect

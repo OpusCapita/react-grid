@@ -16,6 +16,7 @@ export default class DropdownControls extends React.PureComponent {
     // actions
     remove: PropTypes.func.isRequired,
     toggleFiltering: PropTypes.func.isRequired,
+    openColumnSettingsModal: PropTypes.func.isRequired,
     // data
     selectedItems: ImmutablePropTypes.list.isRequired,
     isBusy: PropTypes.bool.isRequired,
@@ -26,6 +27,7 @@ export default class DropdownControls extends React.PureComponent {
     onRemove: PropTypes.func.isRequired,
     filtering: PropTypes.bool,
     removing: PropTypes.bool,
+    columnSettings: PropTypes.bool,
     dropdownMenuItems: PropTypes.array,
     disableActions: PropTypes.bool,
   };
@@ -33,18 +35,23 @@ export default class DropdownControls extends React.PureComponent {
   static defaultProps = {
     filtering: false,
     removing: false,
+    columnSettings: false,
     dropdownMenuItems: [],
     disableActions: false,
   };
 
-  onRemove = () => {
+  handleRemoveClick = () => {
     if (this.props.selectedItems.has(0)) {
       this.props.remove(this.props.grid, this.props.onRemove);
     }
   }
 
-  toggleFiltering = () => {
+  handleToggleFilteringClick = () => {
     this.props.toggleFiltering(this.props.grid);
+  }
+
+  handleColumnSettingsClick = () => {
+    this.props.openColumnSettingsModal(this.props.grid);
   }
 
   render() {
@@ -63,17 +70,23 @@ export default class DropdownControls extends React.PureComponent {
             width={18}
             height={18}
           /> : undefined,
-        onClick: this.toggleFiltering,
+        onClick: this.handleToggleFilteringClick,
       });
     }
     if (this.props.dropdownMenuItems && this.props.dropdownMenuItems.length) {
       menuItems = menuItems.concat(this.props.dropdownMenuItems);
     }
+    if (this.props.columnSettings) {
+      menuItems.push({
+        title: <M id="ColumnSettings" />,
+        onClick: this.handleColumnSettingsClick,
+      });
+    }
     if (this.props.removing) {
       menuItems.push({
         title: <M id="Delete" />,
         disabled: !this.props.selectedItems.has(0),
-        onClick: this.onRemove,
+        onClick: this.handleRemoveClick,
       });
     }
     return (

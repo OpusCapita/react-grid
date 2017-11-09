@@ -23,6 +23,7 @@ import DropdownControls from './dropdown-controls.component';
 import * as datagridActions from './datagrid.actions';
 import DateInput from './date-picker/date-picker.component';
 import CellTooltip from './cell-tooltip.component';
+import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';
 import Utils from './datagrid.utils';
 import './datagrid.component.scss';
@@ -50,9 +51,11 @@ const mapStateToProps = (state, ownProps) => {
     isCreating: state.datagrid.getIn([GRID.id, 'session', 'isCreating'], false),
     isFiltering:
       state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'isFiltering'], false),
+    isColumnSettingsModalOpen:
+      state.datagrid.getIn([GRID.id, 'session', 'columnSettingsModal', 'open'], false),
     sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
     sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
-    columnWidths: state.datagrid.getIn([GRID.id, 'config', 'columnWidths'], Map()),
+    columnConfig: state.datagrid.getIn([GRID.id, 'config', 'columns'], Map()),
     selectedCell: state.datagrid.getIn([GRID.id, 'selectedCell'], Map()),
     selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
     data: state.datagrid.getIn([GRID.id, 'data'], List()),
@@ -1140,7 +1143,7 @@ export default class DataGrid extends React.PureComponent {
           </HeaderCell>
         }
         cell={this.renderCell(col)}
-        width={this.props.columnWidths.get(col.columnKey, col.width)}
+        width={this.props.columnConfig.getIn([col.columnKey, 'width']) || col.width}
         minWidth={col.minWidth}
         maxWidth={col.maxWidth}
         isResizable={col.isResizable}
@@ -1185,6 +1188,7 @@ export default class DataGrid extends React.PureComponent {
           }
           { (this.props.dropdownMenuItems ||
              this.props.removing ||
+             this.props.columnSettings ||
              (this.props.filtering && !this.props.disableDropdown)) &&
              <DropdownControls {...this.props} />
           }
@@ -1255,6 +1259,15 @@ export default class DataGrid extends React.PureComponent {
               this.renderColumns()
           }
         </ResponsiveFixedDataTable>
+        { this.props.isColumnSettingsModalOpen &&
+          <ColumnSettingsModal
+            grid={this.props.grid}
+            columns={this.props.columns}
+            columnConfig={this.props.columnConfig}
+            closeColumnSettingsModal={this.props.closeColumnSettingsModal}
+            saveColumnSettings={this.props.saveColumnSettings}
+          />
+        }
         { this.props.children }
       </div>
     );

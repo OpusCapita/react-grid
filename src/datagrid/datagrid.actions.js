@@ -38,6 +38,9 @@ export const TYPES = {
   PLATFORM_DATAGRID_APPLY_FILTERS: 'PLATFORM_DATAGRID_APPLY_FILTERS',
   PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: 'PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE',
   PLATFORM_DATAGRID_SET_EDIT_DATA: 'PLATFORM_DATAGRID_SET_EDIT_DATA',
+  PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN',
+  PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE',
+  PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE',
 };
 
 export const invalidate = grid =>
@@ -199,11 +202,8 @@ export const sortChange = (grid, columns, column, newSort) =>
 export const setData = (grid, columns, data) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
-    const configData = Utils.loadGridConfig(grid);
-    if (!columns) { // if columns is not defined, can't support pre-sort/filter
-      delete configData.sortingData;
-      delete configData.filteringData;
-    }
+    Utils.checkColumnsParam(columns);
+    const configData = Utils.loadGridConfig(grid, columns);
     const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
     const selectedItems = Utils.loadSelectedItems(grid).filter(item => (
       !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
@@ -220,17 +220,14 @@ export const setData = (grid, columns, data) =>
   };
 
 export const resizeColumn = (grid, columnKey, width) =>
-  (dispatch, getState) => {
+  (dispatch) => {
     Utils.checkGridParam(grid);
-    const columnWidths = getState()
-      .datagrid
-      .getIn([grid.id, 'config', 'columnWidths'], Map())
-      .set(columnKey, width);
-    Utils.saveColumnWidths(grid, columnWidths);
+    Utils.saveColumnWidth(grid, columnKey, width);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN,
       id: grid.id,
-      columnWidths,
+      columnKey,
+      width,
     });
   };
 
@@ -762,3 +759,32 @@ export const setEditData = (grid, data, cellMessages = Map()) =>
       type: TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA,
     });
   };
+
+export const openColumnSettingsModal = grid =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN,
+      id: grid.id,
+    });
+  };
+
+export const closeColumnSettingsModal = grid =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE,
+      id: grid.id,
+    });
+  };
+
+export const saveColumnSettings = (grid, settings) =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE,
+      id: grid.id,
+      settings,
+    });
+  };
+

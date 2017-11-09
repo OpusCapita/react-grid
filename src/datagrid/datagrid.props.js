@@ -103,7 +103,7 @@ export const propTypes = {
     number,
   ]),
   sortOrder: string,
-  columnWidths: mapOf(number.isRequired),
+  columnConfig: map.isRequired,
   selectedCell: map.isRequired,
   selectedItems: list.isRequired,
   data: list.isRequired,
@@ -132,6 +132,7 @@ export const propTypes = {
   inlineAdd: bool,
   filtering: bool,
   removing: bool,
+  columnSettings: bool,
   rowSelect: bool,
   rowSelectCheckboxColumn: bool,
   multiSelect: bool,
@@ -179,6 +180,7 @@ export const propTypes = {
 
 export const defaultProps = {
   cellSelect: false,
+  columnSettings: false,
   children: undefined,
   containerStyle: {},
   disableActionSave: false,
