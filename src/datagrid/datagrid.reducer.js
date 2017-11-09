@@ -57,8 +57,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       );
 
     case TYPES.PLATFORM_DATAGRID_EDIT:
-      return state.setIn([action.id, 'session', 'isEditing'], true)
-        .deleteIn([action.id, 'selectedCell']);
+      return state.setIn([action.id, 'session', 'isEditing'], true);
 
     case TYPES.PLATFORM_DATAGRID_CREATE:
       return state
@@ -384,7 +383,6 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     case TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA:
       return state
         .setIn([action.id, 'session', 'isEditing'], true)
-        .deleteIn([action.id, 'selectedCell'])
         .setIn([action.id, 'editData'], action.data)
         .setIn([action.id, 'cellMessages'], action.cellMessages);
 

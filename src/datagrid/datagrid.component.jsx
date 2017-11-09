@@ -276,8 +276,13 @@ export default class DataGrid extends React.PureComponent {
     }
   }
 
-  onCellFocus = (e) => {
-    e.target.select();
+  onCellFocus = (cellType, inputType, rowIndex, columnKey) => (e) => {
+    if (inputType === 'number') {
+      e.target.select();
+    }
+    if (cellType === 'edit' && this.props.cellSelect) {
+      this.props.cellSelectionChange(this.props.grid, Map({ rowIndex, columnKey }));
+    }
   }
 
   getDataIdByRowIndex = rowIndex =>
@@ -456,9 +461,16 @@ export default class DataGrid extends React.PureComponent {
 
   // Tweak to get array function away from render
   handleEditCellRef = (rowIndex, col) => (ref) => {
+    const columnKey = Utils.getColumnKey(col);
     if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
       const selectedRowIndex = this.getSelectedItemIndex(this.props.selectedItems.first());
-      if (selectedRowIndex === undefined) {
+      const selectedCell = this.props.selectedCell;
+      if (selectedCell.size > 0) {
+        if (selectedCell.get('rowIndex') === rowIndex && selectedCell.get('columnKey') === columnKey) {
+          ref.focus();
+          this.focusToEditCell = false;
+        }
+      } else if (selectedRowIndex === undefined) {
         this.focusToEditCell = false;
       } else if (selectedRowIndex === rowIndex) {
         ref.focus();
@@ -466,7 +478,6 @@ export default class DataGrid extends React.PureComponent {
       }
     }
     if (this.props.enableArrowNavigation) {
-      const columnKey = Utils.getColumnKey(col);
       this.cellRefs[`${this.props.grid.id}_${columnKey}_${rowIndex}`] = ref;
     }
   }
@@ -606,6 +617,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -659,7 +671,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -677,7 +689,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getCreateItemValue(rowIndex, col)}
                     onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onCreateCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus}
+                    onFocus={this.onCellFocus('create', 'number', rowIndex, column.columnKey)}
                     onKeyDown={this.onCreateCellKeyDown}
                     inputRef={this.handleCreateCellRef(rowIndex, col)}
                     id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -716,6 +728,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col, editValueParser)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
@@ -776,6 +789,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     searchable={selectOptions && (selectOptions.length > 9)}
                     clearable={!col.isRequired}
                     backspaceRemoves={false}
@@ -859,6 +873,7 @@ export default class DataGrid extends React.PureComponent {
                       id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
                       onKeyDown: this.onEditCellKeyDown(col, rowIndex),
                       onBlur: this.onEditCellBlur(rowIndex, col),
+                      onFocus: this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey),
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
@@ -917,6 +932,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     searchable={false}
                     clearable={!col.isRequired}
                     backspaceRemoves={false}
