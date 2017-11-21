@@ -47,6 +47,7 @@ export const columns = [
     validators: [
       { validate: VALIDATE.isRequired },
     ],
+    isLocked: true,
   },
   {
     header: 'Float',
@@ -83,6 +84,66 @@ export const columns = [
     valueType: 'text',
     componentType: 'select',
     selectComponentOptions: selectOptions,
+  },
+  {
+    header: 'Text 3',
+    valueKeyPath: ['text3'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text4',
+    valueKeyPath: ['text4'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text5',
+    valueKeyPath: ['text5'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text6',
+    valueKeyPath: ['text6'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text7',
+    valueKeyPath: ['text7'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text8',
+    valueKeyPath: ['text8'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text9',
+    valueKeyPath: ['text9'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text10',
+    valueKeyPath: ['text10'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text11',
+    valueKeyPath: ['text11'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text12',
+    valueKeyPath: ['text12'],
+    valueType: 'text',
+    componentType: 'text',
   },
 ];
 

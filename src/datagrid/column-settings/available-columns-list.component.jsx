@@ -1,32 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactList from 'react-list';
+import ScrollBar from '@opuscapita/react-perfect-scrollbar';
+import ColumnItem from './available-columns-item.component';
 
 export default class AvailableColumnsList extends React.PureComponent {
   static propTypes = {
     items: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   };
 
-  renderListItem = (index) => {
-    const item = this.props.items[index];
-    return (
-      <div
-        key={item.columnKey}
-      >
-        <span>
-          {item.name}
-        </span>
-      </div>
-    );
+  handleItemClick = item => (e) => {
+    console.log('ITEM CLICK', item);
   }
 
   render() {
     return (
-      <ReactList
-        itemRenderer={this.renderListItem}
-        length={this.props.items.length}
-        type="uniform"
-      />
+      <div className="oc-datagrid-available-columns-list">
+        <ScrollBar>
+          {this.props.items.map(item => (
+            <ColumnItem
+              key={item.columnKey}
+              item={item}
+              handleItemClick={this.handleItemClick(item)}
+            />
+          ))}
+        </ScrollBar>
+      </div>
     );
   }
 }

@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { Icon } from '@opuscapita/react-icons';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
+import 'font-awesome/scss/font-awesome.scss';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
 import HeaderCell from './header-cell.component';

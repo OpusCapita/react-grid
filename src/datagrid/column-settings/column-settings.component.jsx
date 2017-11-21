@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map } from 'immutable';
 import {
   Modal,
   Grid,
@@ -13,10 +12,12 @@ import {
   Button } from 'react-bootstrap';
 import { arrayMove } from 'react-sortable-hoc';
 import { FormattedMessage as M } from 'react-intl';
+import FontAwesome from 'react-fontawesome';
 import { gridShape } from '../datagrid.props';
 import Utils from '../datagrid.utils';
 import AvailableColumnsList from './available-columns-list.component';
 import SelectedColumnsList from './selected-columns-list.component';
+import './column-settings.component.scss';
 
 const getInitialColumnData = (columns, columnConfig) => {
   const availableColumns = [];
@@ -38,7 +39,7 @@ const getInitialColumnData = (columns, columnConfig) => {
         columnKey,
         name: col.header,
         isLocked: col.isLocked,
-        sort: colConfig.get('sort', 0),
+        sort: colConfig.get('order', 0),
       });
     }
   });
@@ -86,9 +87,36 @@ export default class ColumnSettings extends React.PureComponent {
   }
 
   handleSortChange = ({ oldIndex, newIndex }) => {
-    this.setState({
-      selectedColumns: arrayMove(this.state.selectedColumns, oldIndex, newIndex),
-    });
+    let changeOverLockedItems = false;
+    if (oldIndex + 1 < newIndex) {
+      for (let i = oldIndex; i < newIndex; i += 1) {
+        if (this.state.selectedColumns[i] && this.state.selectedColumns[i].isLocked) {
+          changeOverLockedItems = true;
+        }
+      }
+    }
+    if (oldIndex > newIndex + 1) {
+      for (let i = oldIndex; i > newIndex; i -= 1) {
+        if (this.state.selectedColumns[i] && this.state.selectedColumns[i].isLocked) {
+          changeOverLockedItems = true;
+        }
+      }
+    }
+    let selectedColumns = [];
+    if (changeOverLockedItems) {
+      // Swap items if sorting is done over locked item to keep it in place
+      let i = this.state.selectedColumns.length;
+      while (i > 0) {
+        i -= 1;
+        selectedColumns[i] = this.state.selectedColumns[i];
+      }
+      selectedColumns[oldIndex] = this.state.selectedColumns[newIndex];
+      selectedColumns[newIndex] = this.state.selectedColumns[oldIndex];
+    } else {
+      // Normal sorting move all other items up/down
+      selectedColumns = arrayMove(this.state.selectedColumns, oldIndex, newIndex);
+    }
+    this.setState({ selectedColumns });
   }
 
   render() {
@@ -104,25 +132,47 @@ export default class ColumnSettings extends React.PureComponent {
           <Modal.Title><M id="SelectColumns" /></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Grid>
+          <Grid fluid>
             <Row>
               <Col xs={6}>
-                <FormGroup controlId={`ocDatagridColumnSettings-${this.props.grid.id}-keyword-input`}>
+                <FormGroup>
                   <ControlLabel><M id="AvailableColumns" /></ControlLabel>
+                </FormGroup>
+              </Col>
+              <Col xs={6}>
+                <FormGroup>
+                  <ControlLabel><M id="SelectedColumns" /></ControlLabel>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <FormGroup className="oc-datagrid-column-settings-keyword-group">
                   <FormControl
-                    type="input"
+                    id={`ocDatagridColumnSettings-${this.props.grid.id}-keyword`}
+                    type="text"
+                    name="keyword"
                     value={this.state.keyword}
                     onChange={this.handleKeywordChange}
+                    className="oc-datagrid-column-settings-keyword-input"
                   />
+                  <FontAwesome className="oc-datagrid-column-settings-keyword-icon" name="search" />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <FormGroup>
                   <AvailableColumnsList
+                    id={`ocDatagridColumnSettings-${this.props.grid.id}-available-columns`}
                     items={this.state.availableColumns}
                   />
                 </FormGroup>
               </Col>
               <Col xs={6}>
-                <FormGroup controlId="selected-columns">
-                  <ControlLabel><M id="SelectedColumns" /></ControlLabel>
+                <FormGroup>
                   <SelectedColumnsList
+                    id={`ocDatagridColumnSettings-${this.props.grid.id}-selected-columns`}
                     items={this.state.selectedColumns}
                     onSortChange={this.handleSortChange}
                   />

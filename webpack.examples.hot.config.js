@@ -30,7 +30,7 @@ const config = merge(getBaseConfiguration(params), {
   plugins,
 });
 
-const wdsEntries = [
+/*const wdsEntries = [
   'webpack-dev-server/client?http://localhost:5555',
   'webpack/hot/only-dev-server',
 ];
@@ -44,9 +44,9 @@ Object.keys(config.entry).forEach((key) => {
     config.entry[key] = wdsEntries.slice(0);
     config.entry[key].push(originalEntry);
   }
-});
+}); */
 
-config.module.rules[0].use = {
+/*config.module.rules[0].use = {
   loader: 'babel-loader',
   options: {
     plugins: [
@@ -63,7 +63,7 @@ config.module.rules[0].use = {
       }],
     ],
   },
-};
+};*/
 
 config.devServer = {
   noInfo: true,
@@ -72,6 +72,7 @@ config.devServer = {
   historyApiFallback: true,
   clientLogLevel: 'error',
   hot: true,
+  inline: true,
   stats: { colors: true },
   // host: '192.168.0.101', // make dev server available on specific IP
 };
