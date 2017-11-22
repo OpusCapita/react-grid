@@ -59,13 +59,11 @@ export default class SelectedColumnsList extends React.PureComponent {
   static propTypes = {
     items: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     onSortChange: PropTypes.func.isRequired,
+    onRemoveItem: PropTypes.func.isRequired,
   };
 
-  handleItemRemove = value => (e) => {
-    console.log('ITEM REMOVE CLICK', value);
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
+  handleItemRemove = value => () => {
+    this.props.onRemoveItem(value);
   }
 
   shouldCancelStart = (e) => {

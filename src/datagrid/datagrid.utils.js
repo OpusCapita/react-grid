@@ -6,27 +6,20 @@ const getColumnKey = col => (
   col.columnKey || col.valueKeyPath.join('/')
 );
 
-const combineColumnConfig = (cols, columnWidths, hiddenColumns, columnOrder) => {
-  const conf = {};
-  let columnOrdersFound = 0;
-  cols.forEach((col, order) => {
+const getVisibleColumns = (cols, hiddenColumns = [], columnOrder = []) => {
+  const orderedColumnList = [];
+  cols.forEach((col, i) => {
     const columnKey = getColumnKey(col);
-    conf[columnKey] = {
-      width: (columnWidths && columnWidths[columnKey] !== undefined) ?
-        columnWidths[columnKey] :
-        col.width,
-      hidden: hiddenColumns && hiddenColumns.indexOf(columnKey !== -1),
-      order,
-    };
-    if (columnOrder && columnOrder.indexOf(columnKey)) columnOrdersFound += 1;
+    if (hiddenColumns.indexOf(columnKey) === -1) {
+      const colOrderIdx = columnOrder.indexOf(columnKey);
+      const order = colOrderIdx !== -1 ? colOrderIdx : (i + 1);
+      orderedColumnList.push({
+        columnKey,
+        order,
+      });
+    }
   });
-  if (columnOrdersFound === cols.length) {
-    // columnOrder has all columns, config OK!
-    columnOrder.forEach((columnKey, order) => {
-      conf[columnKey].order = order;
-    });
-  }
-  return conf;
+  return orderedColumnList.sort((a, b) => (a.order - b.order)).map(item => item.columnKey);
 };
 
 export default {
@@ -76,9 +69,9 @@ export default {
       case 'text':
         return (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
       case 'number':
-        return (a, b) => (a === b ? 0 : (a < b ? -1 : 1));
+        return (a, b) => (a - b);
       case 'float':
-        return (a, b) => (a === b ? 0 : (a < b ? -1 : 1));
+        return (a, b) => (a - b);
       case 'boolean':
         return (a, b) => (a === b ? 0 : (a ? -1 : 1));
       case 'date':
@@ -156,24 +149,17 @@ export default {
   loadGridConfig: (grid, cols) => {
     const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
     const hiddenColumns = localStorage.getItem(`oc_grid_hiddenColumns_${grid.id}`);
-    const columnOrders = localStorage.getItem(`oc_grid_columnOrders_${grid.id}`);
+    const columnOrder = localStorage.getItem(`oc_grid_columnOrder_${grid.id}`);
     const sortingData = sessionStorage.getItem(`oc_grid_sorting_${grid.id}`);
     const filterData = sessionStorage.getItem(`oc_grid_filtering_${grid.id}`);
     const isFilteringData = localStorage.getItem(`oc_grid_isFiltering_${grid.id}`);
-    let parsedColWidths;
     let parsedHiddenCols;
-    let parsedColOrders;
+    let parsedColOrder;
     let isFiltering = false;
     if (isFilteringData && !grid.disableRememberIsFiltering) {
       try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing isFilteringData from localStorage', e);
-      }
-    }
-    if (columnWidths && !grid.disableRememberColumnWidths) {
-      try { parsedColWidths = JSON.parse(columnWidths); } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing columnWidths from localStorage', e);
       }
     }
     if (hiddenColumns) {
@@ -182,18 +168,24 @@ export default {
         console.error('Datagrid: error parsing hiddenColumns from localStorage', e);
       }
     }
-    if (columnOrders) {
-      try { parsedColOrders = JSON.parse(columnOrders); } catch (e) {
+    if (columnOrder) {
+      try { parsedColOrder = JSON.parse(columnOrder); } catch (e) {
         // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing columnOrders from localStorage', e);
+        console.error('Datagrid: error parsing columnOrder from localStorage', e);
       }
     }
     const config = {
-      columns: combineColumnConfig(cols, parsedColWidths, parsedHiddenCols, parsedColOrders),
+      visibleColumns: getVisibleColumns(cols, parsedHiddenCols, parsedColOrder),
       filteringData: {
         isFiltering,
       },
     };
+    if (columnWidths && !grid.disableRememberColumnWidths) {
+      try { config.columnWidths = JSON.parse(columnWidths); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing columnWidths from localStorage', e);
+      }
+    }
     if (sortingData && !grid.disableRememberSortData) {
       try { config.sortingData = JSON.parse(sortingData); } catch (e) {
         // eslint-disable-next-line no-console
@@ -214,22 +206,9 @@ export default {
     sessionStorage.setItem(`oc_grid_selectedItems_${grid.id}`, JSON.stringify(selectedItems));
     return true;
   },
-  saveColumnWidth: (grid, columnKey, columnWidth) => {
+  saveColumnWidths: (grid, columnWidths) => {
     if (grid.disableRememberColumnWidths) return false;
-    if (!columnKey || !columnWidth) return false;
-    let columnWidths = {};
-    const storedColumnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
-    if (storedColumnWidths) {
-      let parsed;
-      try {
-        parsed = JSON.parse(storedColumnWidths);
-        columnWidths = parsed;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing columnWidths from localStorage', e);
-      }
-    }
-    columnWidths[columnKey] = columnWidth;
+    if (!columnWidths) return false;
     localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnWidths));
     return true;
   },
@@ -238,9 +217,9 @@ export default {
     localStorage.setItem(`oc_grid_hiddenColumns_${grid.id}`, JSON.stringify(hiddenColumns));
     return true;
   },
-  saveColumnOrders: (grid, columnOrders) => {
-    if (!columnOrders) return false;
-    localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnOrders));
+  saveColumnOrder: (grid, columnOrder) => {
+    if (!columnOrder) return false;
+    localStorage.setItem(`oc_grid_columnOrder_${grid.id}`, JSON.stringify(columnOrder));
     return true;
   },
   saveSortData: (grid, sortingData) => {

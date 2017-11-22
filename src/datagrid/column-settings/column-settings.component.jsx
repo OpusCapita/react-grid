@@ -10,65 +10,34 @@ import {
   ControlLabel,
   FormControl,
   Button } from 'react-bootstrap';
-import { arrayMove } from 'react-sortable-hoc';
 import { FormattedMessage as M } from 'react-intl';
 import FontAwesome from 'react-fontawesome';
 import { gridShape } from '../datagrid.props';
-import Utils from '../datagrid.utils';
 import AvailableColumnsList from './available-columns-list.component';
 import SelectedColumnsList from './selected-columns-list.component';
+import ColumnSettingsUtils from './column-settings.utils';
 import './column-settings.component.scss';
-
-const getInitialColumnData = (columns, columnConfig) => {
-  const availableColumns = [];
-  let selectedColumns = []; // eslint-disable-line prefer-const
-  columns.forEach((col) => {
-    const columnKey = Utils.getColumnKey(col);
-    const name = col.header;
-    const isLocked = col.isLocked;
-    const colConfig = columnConfig.get(columnKey);
-    const isSelected = colConfig ? !colConfig.get('isHidden') : true;
-    availableColumns.push({
-      columnKey,
-      name,
-      isLocked,
-      isSelected,
-    });
-    if (isSelected) {
-      selectedColumns.push({
-        columnKey,
-        name: col.header,
-        isLocked: col.isLocked,
-        sort: colConfig.get('order', 0),
-      });
-    }
-  });
-  selectedColumns.sort((a, b) =>
-    // eslint-disable-next-line no-nested-ternary
-    (a.sort === b.sort ? 0 : (a.sort < b.sort ? -1 : 1)),
-  );
-  return {
-    availableColumns,
-    selectedColumns,
-  };
-};
 
 export default class ColumnSettings extends React.PureComponent {
   static propTypes = {
     grid: gridShape.isRequired,
     columns: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-    columnConfig: ImmutablePropTypes.map.isRequired,
+    visibleColumns: ImmutablePropTypes.list.isRequired,
     closeColumnSettingsModal: PropTypes.func.isRequired,
     saveColumnSettings: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
-    const cols = getInitialColumnData(props.columns, props.columnConfig);
+    const availableColumns =
+      ColumnSettingsUtils.getAvailableColumns(props.columns, props.visibleColumns);
+    const selectedColumns =
+      ColumnSettingsUtils.getSelectedColumns(props.columns, props.visibleColumns);
     this.state = {
       keyword: '',
-      availableColumns: cols.availableColumns,
-      selectedColumns: cols.selectedColumns,
+      availableColumns,
+      visibleAvailableColumns: availableColumns,
+      selectedColumns,
     };
   }
 
@@ -77,46 +46,76 @@ export default class ColumnSettings extends React.PureComponent {
   }
 
   handleOkClick = () => {
-    this.props.saveColumnSettings(this.props.grid);
+    const hiddenColumns = ColumnSettingsUtils.getHiddenColumns(this.state.availableColumns);
+    const columnOrders = ColumnSettingsUtils.getColumnOrders(this.state.selectedColumns);
+    this.props.saveColumnSettings(this.props.grid, hiddenColumns, columnOrders);
     this.props.closeColumnSettingsModal(this.props.grid);
   }
 
   handleKeywordChange = (e) => {
-    const value = e.target.value;
-    console.log('Keyword change', value);
+    const keyword = e.target.value;
+    const visibleAvailableColumns =
+      ColumnSettingsUtils.filterColumns(
+        this.state.availableColumns,
+        keyword,
+      );
+    this.setState({ keyword, visibleAvailableColumns });
   }
 
   handleSortChange = ({ oldIndex, newIndex }) => {
-    let changeOverLockedItems = false;
-    if (oldIndex + 1 < newIndex) {
-      for (let i = oldIndex; i < newIndex; i += 1) {
-        if (this.state.selectedColumns[i] && this.state.selectedColumns[i].isLocked) {
-          changeOverLockedItems = true;
-        }
-      }
-    }
-    if (oldIndex > newIndex + 1) {
-      for (let i = oldIndex; i > newIndex; i -= 1) {
-        if (this.state.selectedColumns[i] && this.state.selectedColumns[i].isLocked) {
-          changeOverLockedItems = true;
-        }
-      }
-    }
-    let selectedColumns = [];
-    if (changeOverLockedItems) {
-      // Swap items if sorting is done over locked item to keep it in place
-      let i = this.state.selectedColumns.length;
-      while (i > 0) {
-        i -= 1;
-        selectedColumns[i] = this.state.selectedColumns[i];
-      }
-      selectedColumns[oldIndex] = this.state.selectedColumns[newIndex];
-      selectedColumns[newIndex] = this.state.selectedColumns[oldIndex];
-    } else {
-      // Normal sorting move all other items up/down
-      selectedColumns = arrayMove(this.state.selectedColumns, oldIndex, newIndex);
-    }
+    const selectedColumns =
+      ColumnSettingsUtils.changeColumnSort(
+        this.state.selectedColumns,
+        oldIndex,
+        newIndex,
+      );
     this.setState({ selectedColumns });
+  }
+
+  handleSelectItem = (item) => {
+    // add item to right position by it's sort value
+    const availableColumns = this.state.availableColumns;
+    const visibleAvailableColumns = this.state.visibleAvailableColumns;
+    const selectedColumns = [];
+    let pushed = false;
+    this.state.selectedColumns.forEach((col, i) => {
+      if (!pushed && item.sort <= i) {
+        selectedColumns.push(item);
+        pushed = true;
+      }
+      selectedColumns.push(col);
+    });
+    if (!pushed) {
+      selectedColumns.push(item);
+    }
+    availableColumns.forEach((col, i) => {
+      if (col.columnKey === item.columnKey) {
+        availableColumns[i].isSelected = true;
+      }
+    });
+    visibleAvailableColumns.forEach((col, i) => {
+      if (col.columnKey === item.columnKey) {
+        visibleAvailableColumns[i].isSelected = true;
+      }
+    });
+    this.setState({ availableColumns, visibleAvailableColumns, selectedColumns });
+  }
+
+  handleDeselectItem = (item) => {
+    const availableColumns = this.state.availableColumns;
+    const visibleAvailableColumns = this.state.visibleAvailableColumns;
+    const selectedColumns = this.state.selectedColumns.filter(c => c.columnKey !== item.columnKey);
+    availableColumns.forEach((col, i) => {
+      if (col.columnKey === item.columnKey) {
+        availableColumns[i].isSelected = false;
+      }
+    });
+    visibleAvailableColumns.forEach((col, i) => {
+      if (col.columnKey === item.columnKey) {
+        visibleAvailableColumns[i].isSelected = false;
+      }
+    });
+    this.setState({ availableColumns, visibleAvailableColumns, selectedColumns });
   }
 
   render() {
@@ -165,7 +164,9 @@ export default class ColumnSettings extends React.PureComponent {
                 <FormGroup>
                   <AvailableColumnsList
                     id={`ocDatagridColumnSettings-${this.props.grid.id}-available-columns`}
-                    items={this.state.availableColumns}
+                    items={this.state.visibleAvailableColumns}
+                    onSelectItem={this.handleSelectItem}
+                    onDeselectItem={this.handleDeselectItem}
                   />
                 </FormGroup>
               </Col>
@@ -175,6 +176,7 @@ export default class ColumnSettings extends React.PureComponent {
                     id={`ocDatagridColumnSettings-${this.props.grid.id}-selected-columns`}
                     items={this.state.selectedColumns}
                     onSortChange={this.handleSortChange}
+                    onRemoveItem={this.handleDeselectItem}
                   />
                 </FormGroup>
               </Col>

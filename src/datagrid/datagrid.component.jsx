@@ -56,7 +56,8 @@ const mapStateToProps = (state, ownProps) => {
       state.datagrid.getIn([GRID.id, 'session', 'columnSettingsModal', 'open'], false),
     sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
     sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
-    columnConfig: state.datagrid.getIn([GRID.id, 'config', 'columns'], Map()),
+    visibleColumns: state.datagrid.getIn([GRID.id, 'config', 'visibleColumns'], List()),
+    columnWidths: state.datagrid.getIn([GRID.id, 'config', 'columnWidths'], Map()),
     selectedCell: state.datagrid.getIn([GRID.id, 'selectedCell'], Map()),
     selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
     data: state.datagrid.getIn([GRID.id, 'data'], List()),
@@ -460,7 +461,6 @@ export default class DataGrid extends React.PureComponent {
     }
   }
 
-  // Tweak to get array function away from render
   handleEditCellRef = (rowIndex, col) => (ref) => {
     const columnKey = Utils.getColumnKey(col);
     if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
@@ -526,8 +526,15 @@ export default class DataGrid extends React.PureComponent {
       });
     }
 
-
-    this.props.columns.forEach((col) => {
+    const visibleColumns = [];
+    this.props.visibleColumns.forEach((visibleColumnKey) => {
+      this.props.columns.forEach((orgCol) => {
+        if (Utils.getColumnKey(orgCol) === visibleColumnKey) {
+          visibleColumns.push(orgCol);
+        }
+      });
+    });
+    visibleColumns.forEach((col) => {
       const column = {
         header: col.header,
         columnKey: Utils.getColumnKey(col),
@@ -1160,7 +1167,7 @@ export default class DataGrid extends React.PureComponent {
           </HeaderCell>
         }
         cell={this.renderCell(col)}
-        width={this.props.columnConfig.getIn([col.columnKey, 'width']) || col.width}
+        width={this.props.columnWidths.get(col.columnKey, col.width)}
         minWidth={col.minWidth}
         maxWidth={col.maxWidth}
         isResizable={col.isResizable}
@@ -1280,7 +1287,7 @@ export default class DataGrid extends React.PureComponent {
           <ColumnSettingsModal
             grid={this.props.grid}
             columns={this.props.columns}
-            columnConfig={this.props.columnConfig}
+            visibleColumns={this.props.visibleColumns}
             closeColumnSettingsModal={this.props.closeColumnSettingsModal}
             saveColumnSettings={this.props.saveColumnSettings}
           />

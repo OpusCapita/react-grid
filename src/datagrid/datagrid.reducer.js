@@ -51,10 +51,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         }));
 
     case TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN:
-      return state.setIn(
-        [action.id, 'config', 'columns', action.columnKey, 'width'],
-        action.width,
-      );
+      return state.setIn([action.id, 'config', 'columnWidths'], action.columnWidths);
 
     case TYPES.PLATFORM_DATAGRID_EDIT:
       return state.setIn([action.id, 'session', 'isEditing'], true);
@@ -391,6 +388,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
     case TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE:
       return state.deleteIn([action.id, 'session', 'columnSettingsModal']);
+
+    case TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE:
+      return state
+        .setIn([action.id, 'config', 'visibleColumns'], Immutable.fromJS(action.columnOrder));
 
     default:
       return state;

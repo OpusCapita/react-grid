@@ -40,13 +40,17 @@
     font-size: $oc-grid-font-size-icon;
   }
   .oc-datagrid-available-columns-item-icon {      
-    font-size: calc(#{$oc-grid-font-size-icon} + 0.7rem);
-    font-weight: 900;
+    font-size: calc(#{$oc-grid-font-size-icon} + 0.9rem);
     margin-right: 10px;
     cursor: pointer;
     &.is-locked {
       color: $oc-grid-color-text-disabled;
       cursor: default;
+      font-weight: normal;
+    }
+    &.fa-check-square {
+    font-size: calc(#{$oc-grid-font-size-icon} + 0.7rem);
+      font-weight: 900;
     }
   }
   .oc-datagrid-available-columns-item-text,

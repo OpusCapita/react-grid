@@ -220,14 +220,17 @@ export const setData = (grid, columns, data) =>
   };
 
 export const resizeColumn = (grid, columnKey, width) =>
-  (dispatch) => {
+  (dispatch, getState) => {
     Utils.checkGridParam(grid);
-    Utils.saveColumnWidth(grid, columnKey, width);
+    const columnWidths = getState()
+      .datagrid
+      .getIn([grid.id, 'config', 'columnWidths'], Map())
+      .set(columnKey, width);
+    Utils.saveColumnWidths(grid, columnWidths);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN,
       id: grid.id,
-      columnKey,
-      width,
+      columnWidths,
     });
   };
 
@@ -778,13 +781,15 @@ export const closeColumnSettingsModal = grid =>
     });
   };
 
-export const saveColumnSettings = (grid, settings) =>
+export const saveColumnSettings = (grid, hiddenColumns, columnOrder) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
+    Utils.saveHiddenColumns(grid, hiddenColumns);
+    Utils.saveColumnOrder(grid, columnOrder);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE,
       id: grid.id,
-      settings,
+      columnOrder,
     });
   };
 
