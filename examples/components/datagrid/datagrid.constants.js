@@ -20,6 +20,7 @@ export const columns = [
     valueType: 'text',
     componentType: 'text',
     isRequired: true,
+    isLocked: true,
     validators: [
       { unique: true },
       { validate: VALIDATE.isRequired },
@@ -47,7 +48,6 @@ export const columns = [
     validators: [
       { validate: VALIDATE.isRequired },
     ],
-    isLocked: true,
   },
   {
     header: 'Float',
@@ -85,73 +85,13 @@ export const columns = [
     componentType: 'select',
     selectComponentOptions: selectOptions,
   },
-  {
-    header: 'Text 3',
-    valueKeyPath: ['text3'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text4',
-    valueKeyPath: ['text4'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text5',
-    valueKeyPath: ['text5'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text6',
-    valueKeyPath: ['text6'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text7',
-    valueKeyPath: ['text7'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text8',
-    valueKeyPath: ['text8'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text9',
-    valueKeyPath: ['text9'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text10',
-    valueKeyPath: ['text10'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text11',
-    valueKeyPath: ['text11'],
-    valueType: 'text',
-    componentType: 'text',
-  },
-  {
-    header: 'Text12',
-    valueKeyPath: ['text12'],
-    valueType: 'text',
-    componentType: 'text',
-  },
 ];
 
 export const data = [
   {
     id: 1,
     text: 'Text 1',
-    text2: 'Text 1',
+    text2: 'Some text 2',
     number: 1,
     float: 5.5,
     boolean: true,
@@ -161,7 +101,7 @@ export const data = [
   {
     id: 2,
     text: 'Text 2',
-    text2: 'Text 1',
+    text2: 'Some text 2',
     number: 2,
     float: 4.4,
     boolean: false,
@@ -171,7 +111,7 @@ export const data = [
   {
     id: 3,
     text: 'Text 3',
-    text2: 'Text 1',
+    text2: 'Some text 3',
     number: 3,
     float: 3.3,
     boolean: false,
@@ -181,7 +121,7 @@ export const data = [
   {
     id: 4,
     text: 'Text 4',
-    text2: 'Text 1',
+    text2: 'Some text 4',
     number: 4,
     float: 2.2,
     boolean: false,
@@ -191,7 +131,7 @@ export const data = [
   {
     id: 5,
     text: 'Text 5',
-    text2: 'Text 1',
+    text2: 'Some text 5',
     number: 5,
     float: 1.1,
     boolean: false,

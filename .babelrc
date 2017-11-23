@@ -1,8 +1,8 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],
-    "react",
-    "stage-1"
+    ["env", { "modules": false }],
+    "stage-1",
+    "react"
   ],
   "plugins": ["react-hot-loader/babel", "transform-decorators-legacy"],
   "env": {
@@ -10,7 +10,7 @@
       "plugins": ["transform-react-remove-prop-types"]
     },
     "test": {
-      "presets": ["es2015", "react", "stage-1"],
+      "presets": ["env", "stage-1", "react"],
       "plugins": ["transform-decorators-legacy"]
     }
   }

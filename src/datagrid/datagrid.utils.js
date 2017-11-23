@@ -67,7 +67,7 @@ export default {
     }
     switch (col.valueType) {
       case 'text':
-        return (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
+        return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
       case 'number':
         return (a, b) => (a - b);
       case 'float':
@@ -75,9 +75,9 @@ export default {
       case 'boolean':
         return (a, b) => (a === b ? 0 : (a ? -1 : 1));
       case 'date':
-        return (a, b) => new Date(b) - new Date(a);
+        return (a, b) => (new Date(b) - new Date(a));
       default:
-        return (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
+        return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
     }
   },
   getSortValueGetter: (col) => {

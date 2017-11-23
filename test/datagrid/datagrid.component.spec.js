@@ -37,6 +37,7 @@ describe('Datagrid component', () => {
           filteringData: {
             isFiltering: false,
           },
+          visibleColumns: columns.map(c => c.valueKeyPath.join('/')),
           selectedItems: [],
         },
       },
