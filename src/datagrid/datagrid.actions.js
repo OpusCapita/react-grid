@@ -170,12 +170,14 @@ export const applySort = (grid, columns) =>
     // Sort also filtered data separately
     if (gridData.getIn(['config', 'filteringData', 'isFiltering'], false)) {
       data = gridData.get('data').sort((a, b) => {
-        if (a === null || a === undefined) return 1;
-        if (b === null || b === undefined) return -1;
+        const valA = valueGetter(a);
+        const valB = valueGetter(b);
+        if (valA === null || valA === undefined) return 1;
+        if (valB === null || valB === undefined) return -1;
         if (sortOrder === 'asc') {
-          return comparator(valueGetter(a), valueGetter(b));
+          return comparator(valA, valB);
         }
-        return comparator(valueGetter(b), valueGetter(a));
+        return comparator(valB, valA);
       });
     } else {
       data = allData;
