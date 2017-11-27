@@ -7,7 +7,7 @@ export default class ColumnItem extends React.PureComponent {
   static propTypes = {
     isLocked: PropTypes.bool,
     isSelected: PropTypes.bool,
-    name: PropTypes.string,
+    name: PropTypes.node,
     handleItemClick: PropTypes.func.isRequired,
   }
 

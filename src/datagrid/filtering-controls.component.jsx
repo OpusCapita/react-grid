@@ -32,7 +32,7 @@ export default class FilteringControls extends React.PureComponent {
           onChange={this.toggleFiltering}
           inline
         >
-          <M id="ShowFilteringRow" />
+          <M id="GridShowFilteringRow" />
         </Checkbox>
       </div>
     );

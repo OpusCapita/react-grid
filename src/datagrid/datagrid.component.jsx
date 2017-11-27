@@ -568,7 +568,7 @@ export default class DataGrid extends React.PureComponent {
       const valueRender = (rowIndex, format) => {
         const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
         if (val === undefined || val === null) {
-          return col.isRequired ? <M id="ValueIsMissing" /> : '';
+          return col.isRequired ? <M id="GridValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
       };
@@ -1147,7 +1147,41 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderColumns = () => {
+    if (!this.props.allDataSize && !this.props.isBusy && !this.props.isCreating) {
+      return (
+        <Column
+          columnKey="dataEmptyColumn"
+          header={<Cell style={{ textAlign: 'center' }}><M id="GridNoItems" /></Cell>}
+          width={10}
+          isResizable={false}
+          flexGrow={1}
+        />
+      );
+    }
+    if (!this.props.visibleColumns.size) {
+      if (this.props.isBusy) {
+        return (
+          <Column
+            columnKey="dataEmptyColumn"
+            header={<Cell>{' '}</Cell>}
+            width={10}
+            isResizable={false}
+            flexGrow={1}
+          />
+        );
+      }
+      return (
+        <Column
+          columnKey="dataEmptyColumn"
+          header={<Cell style={{ textAlign: 'center' }}><M id="GridNoColumns" /></Cell>}
+          width={10}
+          isResizable={false}
+          flexGrow={1}
+        />
+      );
+    }
     const columns = this.generateColumns();
+    if (columns.lenght === 0) return null;
     return columns.map(col => (
       <Column
         key={col.columnKey}
@@ -1240,6 +1274,7 @@ export default class DataGrid extends React.PureComponent {
         this.props.rowsCount :
         this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
+    if (!this.props.visibleColumns.size) rowsCount = 0;
     return (
       <div
         id={`oc-datagrid-${this.props.grid.id}`}
@@ -1271,17 +1306,7 @@ export default class DataGrid extends React.PureComponent {
           rowHeightGetter={this.props.rowHeightGetter}
           onContentHeightChange={this.props.onContentHeightChange}
         >
-          {
-            (!this.props.allDataSize && !this.props.isBusy && !this.props.isCreating) ?
-              <Column
-                columnKey="dataEmptyColumn"
-                header={<Cell style={{ textAlign: 'center' }}><M id="GridNoItems" /></Cell>}
-                width={10}
-                isResizable={false}
-                flexGrow={1}
-              /> :
-              this.renderColumns()
-          }
+          { this.renderColumns() }
         </ResponsiveFixedDataTable>
         { this.props.isColumnSettingsModalOpen &&
           <ColumnSettingsModal

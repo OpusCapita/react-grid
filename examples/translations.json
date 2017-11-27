@@ -1,18 +1,18 @@
 {
   "Yes": "Yes",
   "No": "No",
-  "OK": "OK",
+  "Ok": "OK",
   "Edit": "Edit",
   "Add": "Add",
   "Delete": "Delete",
   "Save": "Save",
   "Cancel": "Cancel",
-  "ShowFilteringRow": "Show filtering row",
   "ValidateIsRequired": "Value is required",
   "Warning": "Warning",
-  "ValueIsMissing": "value is missing",
-  "ColumnSettings": "Column settings",
-  "SelectColumns": "Select columns",
-  "SelectedColumns": "Selected columns",
-  "AvailableColumns": "Available columns"
+  "GridAvailableColumns": "Available columns",
+  "GridColumnSettings": "Column settings",
+  "GridShowFilteringRow": "Show filtering row",
+  "GridSelectColumns": "Select columns",
+  "GridSelectedColumns": "Selected columns",
+  "GridValueIsMissing": "Value is missing"
 }

@@ -128,19 +128,19 @@ export default class ColumnSettings extends React.PureComponent {
         onHide={this.handleCancelClick}
       >
         <Modal.Header closeButton>
-          <Modal.Title><M id="SelectColumns" /></Modal.Title>
+          <Modal.Title><M id="GridSelectColumns" /></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Grid fluid>
             <Row>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel><M id="AvailableColumns" /></ControlLabel>
+                  <ControlLabel><M id="GridAvailableColumns" /></ControlLabel>
                 </FormGroup>
               </Col>
               <Col xs={6}>
                 <FormGroup>
-                  <ControlLabel><M id="SelectedColumns" /></ControlLabel>
+                  <ControlLabel><M id="GridSelectedColumns" /></ControlLabel>
                 </FormGroup>
               </Col>
             </Row>
@@ -189,7 +189,7 @@ export default class ColumnSettings extends React.PureComponent {
             bsStyle="primary"
             onClick={this.handleOkClick}
           >
-            <M id="OK" />
+            <M id="Ok" />
           </Button>
           <Button
             id={`ocDatagridColumnSettings-${this.props.grid.id}-cancel-button`}
