@@ -110,7 +110,9 @@ export default class DatePicker extends React.Component {
       this.setState({
         selectedDay: momentDay.toDate(),
       }, () => {
-        this.daypicker.showMonth(this.state.selectedDay);
+        if (this.daypicker) {
+          this.daypicker.showMonth(this.state.selectedDay);
+        }
       });
     }
   }

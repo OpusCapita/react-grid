@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { Icon } from '@opuscapita/react-icons';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
+import 'font-awesome/scss/font-awesome.scss';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
 import HeaderCell from './header-cell.component';
@@ -23,6 +24,7 @@ import DropdownControls from './dropdown-controls.component';
 import * as datagridActions from './datagrid.actions';
 import DateInput from './date-picker/date-picker.component';
 import CellTooltip from './cell-tooltip.component';
+import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';
 import Utils from './datagrid.utils';
 import './datagrid.component.scss';
@@ -50,8 +52,11 @@ const mapStateToProps = (state, ownProps) => {
     isCreating: state.datagrid.getIn([GRID.id, 'session', 'isCreating'], false),
     isFiltering:
       state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'isFiltering'], false),
+    isColumnSettingsModalOpen:
+      state.datagrid.getIn([GRID.id, 'session', 'columnSettingsModal', 'open'], false),
     sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
     sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
+    visibleColumns: state.datagrid.getIn([GRID.id, 'config', 'visibleColumns'], List()),
     columnWidths: state.datagrid.getIn([GRID.id, 'config', 'columnWidths'], Map()),
     selectedCell: state.datagrid.getIn([GRID.id, 'selectedCell'], Map()),
     selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
@@ -456,7 +461,6 @@ export default class DataGrid extends React.PureComponent {
     }
   }
 
-  // Tweak to get array function away from render
   handleEditCellRef = (rowIndex, col) => (ref) => {
     const columnKey = Utils.getColumnKey(col);
     if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
@@ -522,8 +526,15 @@ export default class DataGrid extends React.PureComponent {
       });
     }
 
-
-    this.props.columns.forEach((col) => {
+    const visibleColumns = [];
+    this.props.visibleColumns.forEach((visibleColumnKey) => {
+      this.props.columns.forEach((orgCol) => {
+        if (Utils.getColumnKey(orgCol) === visibleColumnKey) {
+          visibleColumns.push(orgCol);
+        }
+      });
+    });
+    visibleColumns.forEach((col) => {
       const column = {
         header: col.header,
         columnKey: Utils.getColumnKey(col),
@@ -557,7 +568,7 @@ export default class DataGrid extends React.PureComponent {
       const valueRender = (rowIndex, format) => {
         const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
         if (val === undefined || val === null) {
-          return col.isRequired ? <M id="ValueIsMissing" /> : '';
+          return col.isRequired ? <M id="GridValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
       };
@@ -1136,7 +1147,41 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderColumns = () => {
+    if (!this.props.allDataSize && !this.props.isBusy && !this.props.isCreating) {
+      return (
+        <Column
+          columnKey="dataEmptyColumn"
+          header={<Cell style={{ textAlign: 'center' }}><M id="GridNoItems" /></Cell>}
+          width={10}
+          isResizable={false}
+          flexGrow={1}
+        />
+      );
+    }
+    if (!this.props.visibleColumns.size) {
+      if (this.props.isBusy) {
+        return (
+          <Column
+            columnKey="dataEmptyColumn"
+            header={<Cell>{' '}</Cell>}
+            width={10}
+            isResizable={false}
+            flexGrow={1}
+          />
+        );
+      }
+      return (
+        <Column
+          columnKey="dataEmptyColumn"
+          header={<Cell style={{ textAlign: 'center' }}><M id="GridNoColumns" /></Cell>}
+          width={10}
+          isResizable={false}
+          flexGrow={1}
+        />
+      );
+    }
     const columns = this.generateColumns();
+    if (columns.lenght === 0) return null;
     return columns.map(col => (
       <Column
         key={col.columnKey}
@@ -1201,6 +1246,7 @@ export default class DataGrid extends React.PureComponent {
           }
           { (this.props.dropdownMenuItems ||
              this.props.removing ||
+             this.props.columnSettings ||
              (this.props.filtering && !this.props.disableDropdown)) &&
              <DropdownControls {...this.props} />
           }
@@ -1228,6 +1274,7 @@ export default class DataGrid extends React.PureComponent {
         this.props.rowsCount :
         this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
+    if (!this.props.visibleColumns.size) rowsCount = 0;
     return (
       <div
         id={`oc-datagrid-${this.props.grid.id}`}
@@ -1259,18 +1306,17 @@ export default class DataGrid extends React.PureComponent {
           rowHeightGetter={this.props.rowHeightGetter}
           onContentHeightChange={this.props.onContentHeightChange}
         >
-          {
-            (!this.props.allDataSize && !this.props.isBusy && !this.props.isCreating) ?
-              <Column
-                columnKey="dataEmptyColumn"
-                header={<Cell style={{ textAlign: 'center' }}><M id="GridNoItems" /></Cell>}
-                width={10}
-                isResizable={false}
-                flexGrow={1}
-              /> :
-              this.renderColumns()
-          }
+          { this.renderColumns() }
         </ResponsiveFixedDataTable>
+        { this.props.isColumnSettingsModalOpen &&
+          <ColumnSettingsModal
+            grid={this.props.grid}
+            columns={this.props.columns}
+            visibleColumns={this.props.visibleColumns}
+            closeColumnSettingsModal={this.props.closeColumnSettingsModal}
+            saveColumnSettings={this.props.saveColumnSettings}
+          />
+        }
         { this.props.children }
       </div>
     );

@@ -51,6 +51,7 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | inlineAdd                | boolean          | true                                     | Enable inline adding (defaults to true if inlineEdit is enabled) |
 | filtering                | boolean          | false                                    | Enable column filtering                  |
 | removing                 | boolean          | false                                    | Enable item removing                     |
+| columnSettings           | boolean          | false                                    | Enable column settings popup (column selecting and re-ordering) |
 | rowSelect                | boolean          | false                                    | Enable row selecting                     |
 | rowSelectCheckboxColumn  | boolean          | false                                    | Enable additional checkbox column for row selecting |
 | multiSelect              | boolean          | false                                    | Enable multi selecting on row selecting  |
@@ -89,6 +90,8 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | --------------------------- | ---------------- | ---------------------------------------- | ---------------------------------------------------------- |
 | id                          | string           | required                                 | ID of the datagrid                                         |
 | idKeyPath                   | array of strings |                                          | Key path to unique ID value in the grid data, used in many |
+| defaultSortColumnKey        | string           |                                          | columnKey of column sorted by default. ColumnKey is joined with '/' from valueKeyPath array, if columnKey is not defined in the column props |
+| defaultSortOrder            | string           | 'asc'                                    | Default sort order of default sort [asc/desc]              |
 | disableRememberIsFiltering  | boolean          | true                                     | Disable remembering is filtering ebabled                   |
 | disableRememberSortData     | boolean          | true                                     | Disable remembering the sorting                            |
 | disableRememberIsFiltering  | boolean          | true                                     | Disable remembering the filters                            |

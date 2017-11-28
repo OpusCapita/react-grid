@@ -2,15 +2,33 @@
 import moment from 'moment';
 import isNaN from 'lodash/isNaN';
 
+const getColumnKey = col => (
+  col.columnKey || col.valueKeyPath.join('/')
+);
+
+const getVisibleColumns = (cols, hiddenColumns = [], columnOrder = []) => {
+  const orderedColumnList = [];
+  cols.forEach((col, i) => {
+    const columnKey = getColumnKey(col);
+    if (hiddenColumns.indexOf(columnKey) === -1) {
+      const colOrderIdx = columnOrder.indexOf(columnKey);
+      const order = colOrderIdx !== -1 ? colOrderIdx : (i + 1);
+      orderedColumnList.push({
+        columnKey,
+        order,
+      });
+    }
+  });
+  return orderedColumnList.sort((a, b) => (a.order - b.order)).map(item => item.columnKey);
+};
+
 export default {
-  getColumnKey: col => (
-    col.columnKey || col.valueKeyPath.join('/')
-  ),
+  getColumnKey,
   getColumnDefaultValues: (cols) => {
     const columnDefaultValues = {};
     cols.forEach((col) => {
       if (col.defaultValue !== undefined) {
-        columnDefaultValues[col.columnKey || col.valueKeyPath.join('/')] = col.defaultValue;
+        columnDefaultValues[getColumnKey(col)] = col.defaultValue;
       }
     });
     return columnDefaultValues;
@@ -49,17 +67,17 @@ export default {
     }
     switch (col.valueType) {
       case 'text':
-        return (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
+        return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
       case 'number':
-        return (a, b) => (a === b ? 0 : (a < b ? -1 : 1));
+        return (a, b) => (a - b);
       case 'float':
-        return (a, b) => (a === b ? 0 : (a < b ? -1 : 1));
+        return (a, b) => (a - b);
       case 'boolean':
         return (a, b) => (a === b ? 0 : (a ? -1 : 1));
       case 'date':
-        return (a, b) => new Date(b) - new Date(a);
+        return (a, b) => (new Date(b) - new Date(a));
       default:
-        return (a, b) => (a && a.localeCompare ? a.localeCompare(b) : 1);
+        return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
     }
   },
   getSortValueGetter: (col) => {
@@ -128,11 +146,15 @@ export default {
     }
     return [];
   },
-  loadGridConfig: (grid) => {
+  loadGridConfig: (grid, cols) => {
     const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
+    const hiddenColumns = localStorage.getItem(`oc_grid_hiddenColumns_${grid.id}`);
+    const columnOrder = localStorage.getItem(`oc_grid_columnOrder_${grid.id}`);
     const sortingData = sessionStorage.getItem(`oc_grid_sorting_${grid.id}`);
     const filterData = sessionStorage.getItem(`oc_grid_filtering_${grid.id}`);
     const isFilteringData = localStorage.getItem(`oc_grid_isFiltering_${grid.id}`);
+    let parsedHiddenCols;
+    let parsedColOrder;
     let isFiltering = false;
     if (isFilteringData && !grid.disableRememberIsFiltering) {
       try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
@@ -140,7 +162,20 @@ export default {
         console.error('Datagrid: error parsing isFilteringData from localStorage', e);
       }
     }
+    if (hiddenColumns) {
+      try { parsedHiddenCols = JSON.parse(hiddenColumns); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing hiddenColumns from localStorage', e);
+      }
+    }
+    if (columnOrder) {
+      try { parsedColOrder = JSON.parse(columnOrder); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing columnOrder from localStorage', e);
+      }
+    }
     const config = {
+      visibleColumns: getVisibleColumns(cols, parsedHiddenCols, parsedColOrder),
       filteringData: {
         isFiltering,
       },
@@ -163,6 +198,13 @@ export default {
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
       }
     }
+
+    if (!config.sortingData && grid.defaultSortColumn) {
+      config.sortingData = {
+        sortColumn: grid.defaultSortColumn,
+        sortOrder: grid.defaultSortOrder || 'asc',
+      };
+    }
     return config;
   },
   saveSelectedItems: (grid, selectedItems) => {
@@ -175,6 +217,16 @@ export default {
     if (grid.disableRememberColumnWidths) return false;
     if (!columnWidths) return false;
     localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnWidths));
+    return true;
+  },
+  saveHiddenColumns: (grid, hiddenColumns) => {
+    if (!hiddenColumns) return false;
+    localStorage.setItem(`oc_grid_hiddenColumns_${grid.id}`, JSON.stringify(hiddenColumns));
+    return true;
+  },
+  saveColumnOrder: (grid, columnOrder) => {
+    if (!columnOrder) return false;
+    localStorage.setItem(`oc_grid_columnOrder_${grid.id}`, JSON.stringify(columnOrder));
     return true;
   },
   saveSortData: (grid, sortingData) => {
@@ -209,6 +261,11 @@ export default {
       }
     } else {
       throw new Error('[Grid] Invalid `grid` parameter, update action parameters to new format!');
+    }
+  },
+  checkColumnsParam: (columnsParam) => {
+    if (!columnsParam) {
+      throw new Error('[Grid] Invalid `columns` parameter, update action parameters to new format!');
     }
   },
 };

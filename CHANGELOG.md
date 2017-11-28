@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add `columnSettings` prop, that enables column order and visibility settings dialog
+* Add `defaultSortColumn` and `defaultSortOrder` to `grid` props that enables column default sorting
 
 ## 2.5.0
 * Update npm package for react-floating-select

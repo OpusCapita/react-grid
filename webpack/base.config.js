@@ -29,16 +29,29 @@ function getBaseConfiguration(config) {
           use: [
             'babel-loader',
           ],
-          exclude: /(node_modules|bower_components)/,
-        },
-        {
-          test: /\.svg$/,
-          use: ['babel-loader', 'react-svg-loader'],
+          exclude: {
+            test: path.resolve(__dirname, '..', 'node_modules'),
+            exclude: path.resolve(__dirname, '..', 'node_modules', '@opuscapita', 'react-perfect-scrollbar'),
+          },
         },
         {
           test: /\.ejs$/,
           use: [
             'ejs-loader?variable=data',
+          ],
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [flexbugs, precss, autoprefixer],
+                minimize: !!isProduction,
+              },
+            },
           ],
         },
         {
@@ -57,25 +70,39 @@ function getBaseConfiguration(config) {
           ],
         },
         {
+          test: /\.svg$/,
+          exclude: path.resolve(__dirname, '..', 'node_modules', 'font-awesome'),
+          use: ['babel-loader', 'react-svg-loader'],
+        },
+        {
+          test: /\.svg$/,
+          include: path.resolve(__dirname, '..', 'node_modules', 'font-awesome'),
+          use: ['file-loader?name=[name].[ext]'],
+        },
+        {
+          test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            'url-loader?limit=100&mimetype=application/font-woff&name=[name].[ext]',
+          ],
+        },
+        {
+          test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            'url-loader?limit=100&mimetype=application/octet-stream&name=[name].[ext]',
+          ],
+        },
+        {
+          test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            'file-loader?name=[name].[ext]',
+          ],
+        },
+        {
           test: /\.ico$/,
           use: [
             'file-loader?name=[name].[ext]',
           ],
           include: /images/,
-        },
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [flexbugs, precss, autoprefixer],
-                minimize: !!isProduction,
-              },
-            },
-          ],
         },
       ],
     },

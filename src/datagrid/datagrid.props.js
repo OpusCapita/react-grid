@@ -10,6 +10,8 @@ const { list, map, mapOf } = ImmutablePropTypes;
 export const gridShape = shape({
   id: string.isRequired,
   idKeyPath: arrayOf(string).isRequired, // keyPath to id data
+  defaultSortColumn: string,             // columnKey of column that is sorted by default
+  defaultSortOrder: string,              // default sort order [asc/desc]
   disableRememberColumnWidths: bool,
   disableRememberSortData: bool,
   disableRememberIsFiltering: bool,
@@ -103,7 +105,8 @@ export const propTypes = {
     number,
   ]),
   sortOrder: string,
-  columnWidths: mapOf(number.isRequired),
+  visibleColumns: list.isRequired,
+  columnWidths: map.isRequired,
   selectedCell: map.isRequired,
   selectedItems: list.isRequired,
   data: list.isRequired,
@@ -132,6 +135,7 @@ export const propTypes = {
   inlineAdd: bool,
   filtering: bool,
   removing: bool,
+  columnSettings: bool,
   rowSelect: bool,
   rowSelectCheckboxColumn: bool,
   multiSelect: bool,
@@ -179,6 +183,7 @@ export const propTypes = {
 
 export const defaultProps = {
   cellSelect: false,
+  columnSettings: false,
   children: undefined,
   containerStyle: {},
   disableActionSave: false,

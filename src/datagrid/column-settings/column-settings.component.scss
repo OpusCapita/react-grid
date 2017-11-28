@@ -1,0 +1,95 @@
+@import '../datagrid.variables.scss';
+
+.oc-datagrid-column-settings-modal {
+  .oc-datagrid-column-settings-keyword-group {
+    position: relative;
+    .oc-datagrid-column-settings-keyword-input {
+      // width: 90px;
+      border: 2px solid $oc-grid-color-border;
+    }
+    .oc-datagrid-column-settings-keyword-icon {
+      position: absolute;
+      font-size: $oc-grid-font-size-icon;
+      top: 8px;
+      right: 9px;
+      cursor: pointer;
+      color: $oc-grid-color-text;
+    }
+  }
+
+  .oc-datagrid-available-columns-list, .oc-datagrid-selected-columns-list {
+    height: 50vh;
+    overflow: auto;
+    font-size: $oc-grid-font-size-small;
+    padding: 5px;
+    border: 2px solid $oc-grid-color-border;
+  }
+}
+.oc-datagrid-available-columns-item, .oc-datagrid-selected-columns-item {
+  z-index: 10000;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  .oc-datagrid-available-columns-item-icon,
+  .oc-datagrid-selected-columns-item-icon {
+    flex: 0 0 auto;
+    overflow: hidden;
+    min-height: 0px;
+    min-width: 0px;
+    font-size: $oc-grid-font-size-icon;
+  }
+  .oc-datagrid-available-columns-item-icon {      
+    font-size: calc(#{$oc-grid-font-size-icon} + 0.9rem);
+    margin-right: 10px;
+    cursor: pointer;
+    &.is-locked {
+      color: $oc-grid-color-text-disabled;
+      cursor: default;
+      font-weight: normal;
+    }
+    &.fa-check-square {
+    font-size: calc(#{$oc-grid-font-size-icon} + 0.7rem);
+      font-weight: 900;
+    }
+  }
+  .oc-datagrid-available-columns-item-text,
+  .oc-datagrid-selected-columns-item-text {
+    flex: 1 1 auto;
+    overflow: hidden;
+    min-height: 0px;
+    min-width: 0px;
+  }
+  .oc-datagrid-selected-columns-dragging-icon {
+    margin-right: 10px;
+    path {
+      fill: $oc-grid-color-text;
+    }
+  }
+  .oc-datagrid-selected-columns-locked-icon {
+    margin-right: 10px;
+    path {
+      fill: $oc-grid-color-text;
+    }
+  }
+  .oc-datagrid-selected-columns-remove-icon {
+    margin-right: 17px;
+    path {
+      fill: $oc-grid-color-text;
+    }
+  }
+}
+
+.oc-datagrid-selected-columns-item {
+  cursor: pointer;
+}
+
+body > .oc-datagrid-selected-columns-item {
+  background: #eee;
+}
+
+.oc-datagrid-selected-columns-item.locked {
+  cursor: default;
+  background: inherit;
+}
+

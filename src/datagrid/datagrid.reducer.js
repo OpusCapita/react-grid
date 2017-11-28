@@ -383,6 +383,16 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .setIn([action.id, 'editData'], action.data)
         .setIn([action.id, 'cellMessages'], action.cellMessages);
 
+    case TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN:
+      return state.setIn([action.id, 'session', 'columnSettingsModal', 'open'], true);
+
+    case TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE:
+      return state.deleteIn([action.id, 'session', 'columnSettingsModal']);
+
+    case TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE:
+      return state
+        .setIn([action.id, 'config', 'visibleColumns'], Immutable.fromJS(action.columnOrder));
+
     default:
       return state;
   }

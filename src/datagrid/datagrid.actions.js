@@ -38,6 +38,9 @@ export const TYPES = {
   PLATFORM_DATAGRID_APPLY_FILTERS: 'PLATFORM_DATAGRID_APPLY_FILTERS',
   PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: 'PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE',
   PLATFORM_DATAGRID_SET_EDIT_DATA: 'PLATFORM_DATAGRID_SET_EDIT_DATA',
+  PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN',
+  PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE',
+  PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE',
 };
 
 export const invalidate = grid =>
@@ -154,19 +157,27 @@ export const applySort = (grid, columns) =>
     const comparator = Utils.getSortComparator(column);
     const valueGetter = Utils.getSortValueGetter(column);
     const allData = origAllData.sort((a, b) => {
+      const valA = valueGetter(a);
+      const valB = valueGetter(b);
+      if (valA === null || valA === undefined) return 1;
+      if (valB === null || valB === undefined) return -1;
       if (sortOrder === 'asc') {
-        return comparator(valueGetter(a), valueGetter(b));
+        return comparator(valA, valB);
       }
-      return comparator(valueGetter(b), valueGetter(a));
+      return comparator(valB, valA);
     });
     let data;
     // Sort also filtered data separately
     if (gridData.getIn(['config', 'filteringData', 'isFiltering'], false)) {
       data = gridData.get('data').sort((a, b) => {
+        const valA = valueGetter(a);
+        const valB = valueGetter(b);
+        if (valA === null || valA === undefined) return 1;
+        if (valB === null || valB === undefined) return -1;
         if (sortOrder === 'asc') {
-          return comparator(valueGetter(a), valueGetter(b));
+          return comparator(valA, valB);
         }
-        return comparator(valueGetter(b), valueGetter(a));
+        return comparator(valB, valA);
       });
     } else {
       data = allData;
@@ -199,11 +210,8 @@ export const sortChange = (grid, columns, column, newSort) =>
 export const setData = (grid, columns, data) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
-    const configData = Utils.loadGridConfig(grid);
-    if (!columns) { // if columns is not defined, can't support pre-sort/filter
-      delete configData.sortingData;
-      delete configData.filteringData;
-    }
+    Utils.checkColumnsParam(columns);
+    const configData = Utils.loadGridConfig(grid, columns);
     const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
     const selectedItems = Utils.loadSelectedItems(grid).filter(item => (
       !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
@@ -762,3 +770,34 @@ export const setEditData = (grid, data, cellMessages = Map()) =>
       type: TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA,
     });
   };
+
+export const openColumnSettingsModal = grid =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN,
+      id: grid.id,
+    });
+  };
+
+export const closeColumnSettingsModal = grid =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE,
+      id: grid.id,
+    });
+  };
+
+export const saveColumnSettings = (grid, hiddenColumns, columnOrder) =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    Utils.saveHiddenColumns(grid, hiddenColumns);
+    Utils.saveColumnOrder(grid, columnOrder);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE,
+      id: grid.id,
+      columnOrder,
+    });
+  };
+

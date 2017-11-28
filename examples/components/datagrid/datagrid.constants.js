@@ -20,6 +20,7 @@ export const columns = [
     valueType: 'text',
     componentType: 'text',
     isRequired: true,
+    isLocked: true,
     validators: [
       { unique: true },
       { validate: VALIDATE.isRequired },
@@ -90,7 +91,7 @@ export const data = [
   {
     id: 1,
     text: 'Text 1',
-    text2: 'Text 1',
+    text2: 'Some text 2',
     number: 1,
     float: 5.5,
     boolean: true,
@@ -100,7 +101,7 @@ export const data = [
   {
     id: 2,
     text: 'Text 2',
-    text2: 'Text 1',
+    text2: 'Some text 2',
     number: 2,
     float: 4.4,
     boolean: false,
@@ -110,7 +111,7 @@ export const data = [
   {
     id: 3,
     text: 'Text 3',
-    text2: 'Text 1',
+    text2: 'Some text 3',
     number: 3,
     float: 3.3,
     boolean: false,
@@ -120,7 +121,7 @@ export const data = [
   {
     id: 4,
     text: 'Text 4',
-    text2: 'Text 1',
+    text2: 'Some text 4',
     number: 4,
     float: 2.2,
     boolean: false,
@@ -130,7 +131,7 @@ export const data = [
   {
     id: 5,
     text: 'Text 5',
-    text2: 'Text 1',
+    text2: 'Some text 5',
     number: 5,
     float: 1.1,
     boolean: false,

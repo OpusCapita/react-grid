@@ -8,7 +8,7 @@
   overflow: hidden;
 
   .oc-datagrid-actions-disabled-notification {
-    background-color: $oc-color-grid-background;
+    background-color: $oc-grid-color-background;
     text-align: right;
     padding-right: 10px;
     padding-bottom: 10px;
@@ -33,7 +33,7 @@
   }
   .oc-datagrid-row-filter {
     margin-top: 10px;
-    font-weight: normal;
+    font-weight: $oc-grid-font-weight-normal;
     .form-group {
       margin-bottom: 0;
     }
@@ -45,18 +45,18 @@
   // TABLE
   .public_fixedDataTable_main {
     border: none;
-    background-color: $oc-color-grid-background;
+    background-color: $oc-grid-color-background;
   }
 
   // HEADER
   .public_fixedDataTable_header {
-    background: $oc-color-grid-background;
+    background: $oc-grid-color-background;
     border-style: solid;
-    border-color: $oc-color-grid-border;
+    border-color: $oc-grid-color-border;
     border-width: 1px 0 0px 0;
     .oc-datagrid-cell-header {
       border-style: solid;
-      border-color: $oc-color-grid-border;
+      border-color: $oc-grid-color-border;
       border-width: 0 1px 0 0;
       &.clickable {
         cursor: pointer;
@@ -68,9 +68,9 @@
   // CELL
   .public_fixedDataTableCell_main {
     border: none;
-    background: $oc-color-grid-background;
-    color: $oc-color-grid-text;
-    font-size: 1.2rem;
+    background: $oc-grid-color-background;
+    color: $oc-grid-color-text;
+    font-size: $oc-grid-font-size-small;
     line-height: 100%;
 
     &[type="text"], &[type="email"], &[type="password"] {
@@ -80,8 +80,8 @@
 
   .oc-datagrid-cell {
     &.is-selected {
-      border: 1px solid $oc-color-grid-warning !important;
-      border-bottom: 2px solid $oc-color-grid-warning !important;
+      border: 1px solid $oc-grid-color-warning !important;
+      border-bottom: 2px solid $oc-grid-color-warning !important;
     }
     
     .form-control, .Select-control, .Select-input {
@@ -98,30 +98,30 @@
     .oc-datagrid-tooltip.warning {
       .form-control, .Select-control {
         &:focus, &:hover {
-          border: 1px solid $oc-color-grid-warning !important;
+          border: 1px solid $oc-grid-color-warning !important;
         }
         &:active {
-          border: 1px solid $oc-color-grid-warning !important;
+          border: 1px solid $oc-grid-color-warning !important;
         }
       }
       .Select.is-focused {
         .Select-control {
-          border: 1px solid $oc-color-grid-warning !important;
+          border: 1px solid $oc-grid-color-warning !important;
         }
       }
     }
     .oc-datagrid-tooltip.error {
       .form-control, .Select-control {
         &:focus, &:hover {
-          border: 1px solid $oc-color-grid-error !important;
+          border: 1px solid $oc-grid-color-error !important;
         }
         &:active {
-          border: 1px solid $oc-color-grid-error !important;
+          border: 1px solid $oc-grid-color-error !important;
         }
       }
       .Select.is-focused {
         .Select-control {
-          border: 1px solid $oc-color-grid-error !important;
+          border: 1px solid $oc-grid-color-error !important;
         }
       }
     }
@@ -129,21 +129,21 @@
 
   // ROW
   .oc-datagrid-row {
-    background: $oc-color-grid-background;
+    background: $oc-grid-color-background;
     border-style: solid;
-    border-color: $oc-color-grid-border;
+    border-color: $oc-grid-color-border;
     border-width: 1px 0 0 0;
     &.is-selected {
-      background-color: $oc-color-grid-selected;
+      background-color: $oc-grid-color-selected;
       .public_fixedDataTableCell_main {
-        background-color: $oc-color-grid-selected;
+        background-color: $oc-grid-color-selected;
       }
     }
     &:hover {
       cursor: pointer;
-      background-color: $oc-color-grid-highlight;
+      background-color: $oc-grid-color-highlight;
       .public_fixedDataTableCell_main {
-        background-color: $oc-color-grid-highlight;
+        background-color: $oc-grid-color-highlight;
       }
     }
   }
@@ -151,11 +151,11 @@
 
   // COLUMN RESIZER
   .public_fixedDataTableCell_columnResizerKnob {
-    background-color: $oc-color-grid-column-resizer;
+    background-color: $oc-grid-color-column-resizer;
   }
 
   .public_fixedDataTableColumnResizerLine_main {
-    border-color: $oc-color-grid-column-resizer;
+    border-color: $oc-grid-color-column-resizer;
   }
 
 
@@ -178,8 +178,8 @@
         border-color: transparent;
         border-style: solid;
         border-width: 7px;
-        border-right-color: $oc-color-grid-error;
-        border-top-color: $oc-color-grid-error;
+        border-right-color: $oc-grid-color-error;
+        border-top-color: $oc-grid-color-error;
         z-index: 100000;
       }
     }
@@ -193,8 +193,8 @@
         border-color: transparent;
         border-style: solid;
         border-width: 7px;
-        border-right-color: $oc-color-grid-warning;
-        border-top-color: $oc-color-grid-warning;
+        border-right-color: $oc-grid-color-warning;
+        border-top-color: $oc-grid-color-warning;
         z-index: 100000;
       }
     }
@@ -208,8 +208,8 @@
         border-color: transparent;
         border-style: solid;
         border-width: 7px;
-        border-right-color: $oc-color-grid-edited;
-        border-bottom-color: $oc-color-grid-edited;
+        border-right-color: $oc-grid-color-edited;
+        border-bottom-color: $oc-grid-color-edited;
         z-index: 100000;
       }
     }
@@ -220,21 +220,21 @@
 .tooltip.bottom {
   margin-top: 0;
   .tooltip-arrow {
-    border-bottom-color: $oc-color-grid-tooltip !important;
+    border-bottom-color: $oc-grid-color-tooltip !important;
     &.error {
-      border-bottom-color: $oc-color-grid-error !important;
+      border-bottom-color: $oc-grid-color-error !important;
     }
     &.warning {
-      border-bottom-color: $oc-color-grid-warning !important;
+      border-bottom-color: $oc-grid-color-warning !important;
     }
   }
   .tooltip-inner {
-    background-color: $oc-color-grid-tooltip !important;
+    background-color: $oc-grid-color-tooltip !important;
     &.error {
-      background-color: $oc-color-grid-error !important;
+      background-color: $oc-grid-color-error !important;
     }
     &.warning {
-      background-color: $oc-color-grid-warning !important;
+      background-color: $oc-grid-color-warning !important;
       color: black;
     }
   }

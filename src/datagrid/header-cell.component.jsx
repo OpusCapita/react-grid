@@ -25,7 +25,13 @@ export default class HeaderCell extends React.PureComponent {
   };
 
   onSortChange = (e) => {
-    if (e.target.className !== 'public_fixedDataTableCell_cellContent') return false; // filtering input should not trigger sorting
+    // Check if click target is in actual header table cell, not the filtering input component
+    if (
+      e.target.className !== 'public_fixedDataTableCell_cellContent' &&
+      e.target.parentElement.className !== 'public_fixedDataTableCell_cellContent'
+    ) {
+      return false;
+    }
     if (!Utils.isSortable(this.props.column)) return false;
     if (this.props.isBusy) return false;
     e.preventDefault();

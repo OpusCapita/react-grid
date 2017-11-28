@@ -132,6 +132,7 @@ export default class DatagridView extends React.Component {
           disableActionSave={disableActionSave}
           actionBarLeft={actionBar}
           filtering
+          columnSettings
           inlineEdit
           removing
           multiSelect

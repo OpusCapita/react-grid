@@ -102,6 +102,13 @@ describe('Datagrid actions', () => {
         filteringData: {
           isFiltering: false,
         },
+        visibleColumns: [
+          'id',
+          'name',
+          'age',
+          'married',
+          'dob',
+        ],
       },
       selectedItems: [],
     };
