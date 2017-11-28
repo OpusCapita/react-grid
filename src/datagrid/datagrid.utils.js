@@ -198,6 +198,13 @@ export default {
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
       }
     }
+
+    if (!config.sortingData && grid.defaultSortColumn) {
+      config.sortingData = {
+        sortColumn: grid.defaultSortColumn,
+        sortOrder: grid.defaultSortOrder || 'asc',
+      };
+    }
     return config;
   },
   saveSelectedItems: (grid, selectedItems) => {

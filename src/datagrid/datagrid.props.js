@@ -10,6 +10,8 @@ const { list, map, mapOf } = ImmutablePropTypes;
 export const gridShape = shape({
   id: string.isRequired,
   idKeyPath: arrayOf(string).isRequired, // keyPath to id data
+  defaultSortColumn: string,             // columnKey of column that is sorted by default
+  defaultSortOrder: string,              // default sort order [asc/desc]
   disableRememberColumnWidths: bool,
   disableRememberSortData: bool,
   disableRememberIsFiltering: bool,
