@@ -882,6 +882,7 @@ export default class DataGrid extends React.PureComponent {
                       onKeyDown: this.onEditCellKeyDown(col, rowIndex),
                       onBlur: this.onEditCellBlur(rowIndex, col),
                       onFocus: this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey),
+                      style: column.style,
                     }}
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}

@@ -3,6 +3,8 @@ import * as VALIDATE from './datagrid.validators';
 export const GRID = {
   id: 'TestGrid',
   idKeyPath: ['id'],
+  defaultSortColumn: 'float',
+  defaultSortOrder: 'asc',
 };
 
 export const selectOptions = [
