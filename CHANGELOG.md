@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 2.6.1
+* Update perfect-scrollbar dependency to 1.3.0
+
 ## 2.6.0
 * Add `columnSettings` prop, that enables column order and visibility settings dialog
 * Add `defaultSortColumn` and `defaultSortOrder` to `grid` props that enables column default sorting
