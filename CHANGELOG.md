@@ -2,9 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
-
-## 2.6.1
-* Update perfect-scrollbar dependency to 1.3.0
+* Update react-perfect-scrollbar
 
 ## 2.6.0
 * Add `columnSettings` prop, that enables column order and visibility settings dialog
