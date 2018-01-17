@@ -1,5 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormGroup, FormControl } from 'react-bootstrap';
 import { injectIntl, intlShape } from 'react-intl';
 import moment from 'moment';
@@ -12,13 +13,13 @@ import 'react-day-picker/lib/style.css';
 export default class DatePicker extends React.Component {
   static propTypes = {
     intl: intlShape.isRequired,
-    value: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    language: React.PropTypes.string.isRequired,
-    dateFormat: React.PropTypes.string,
-    inputProps: React.PropTypes.object,
-    inputRef: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    language: PropTypes.string.isRequired,
+    dateFormat: PropTypes.string,
+    inputProps: PropTypes.object,
+    inputRef: PropTypes.func,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {

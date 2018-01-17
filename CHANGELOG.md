@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 3.0.0
+* Update to react-15.6.2
+
 ## 2.6.1
 * Update npm package for react-perfect-scrollbar
 

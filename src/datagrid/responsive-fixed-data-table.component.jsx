@@ -1,5 +1,6 @@
 /* eslint-disable react/forbid-prop-types, react/no-find-dom-node */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { Table } from 'fixed-data-table-2';
 import debounce from 'lodash/debounce';
@@ -9,8 +10,8 @@ const initialPixels = 1;
 
 export default class ResponsiveFixedDataTable extends React.Component {
   static propTypes = {
-    containerStyle: React.PropTypes.object,
-    refreshRate: React.PropTypes.number,
+    containerStyle: PropTypes.object,
+    refreshRate: PropTypes.number,
   };
 
   static defaultProps = {
