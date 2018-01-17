@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add a checked column to the end of the selected columns list in column settings
 
 ## 2.6.1
 * Update npm package for react-perfect-scrollbar
