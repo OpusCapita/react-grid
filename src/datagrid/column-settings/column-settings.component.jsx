@@ -73,21 +73,10 @@ export default class ColumnSettings extends React.PureComponent {
   }
 
   handleSelectItem = (item) => {
-    // add item to right position by it's sort value
+    // add item to the end of the list
     const availableColumns = this.state.availableColumns;
     const visibleAvailableColumns = this.state.visibleAvailableColumns;
-    const selectedColumns = [];
-    let pushed = false;
-    this.state.selectedColumns.forEach((col, i) => {
-      if (!pushed && item.sort <= i) {
-        selectedColumns.push(item);
-        pushed = true;
-      }
-      selectedColumns.push(col);
-    });
-    if (!pushed) {
-      selectedColumns.push(item);
-    }
+    const selectedColumns = [...this.state.selectedColumns, item];
     availableColumns.forEach((col, i) => {
       if (col.columnKey === item.columnKey) {
         availableColumns[i].isSelected = true;
