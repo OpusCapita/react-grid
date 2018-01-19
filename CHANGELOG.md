@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 3.0.1
 * Add a checked column to the end of the selected columns list in column settings
 
 ## 3.0.0
