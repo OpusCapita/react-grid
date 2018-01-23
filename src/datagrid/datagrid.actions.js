@@ -792,8 +792,7 @@ export const closeColumnSettingsModal = grid =>
 export const saveColumnSettings = (grid, hiddenColumns, columnOrder) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
-    Utils.saveHiddenColumns(grid, hiddenColumns);
-    Utils.saveColumnOrder(grid, columnOrder);
+    Utils.saveColumnSettings(grid, hiddenColumns, columnOrder);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE,
       id: grid.id,

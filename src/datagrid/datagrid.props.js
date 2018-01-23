@@ -6,6 +6,11 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 const { bool, number, string, func, object, node, array, shape, any, oneOfType, arrayOf } = PropTypes;
 const { list, map, mapOf } = ImmutablePropTypes;
 
+export const configStorageShape = shape({
+  load: func.isRequired,
+  save: func.isRequired,
+});
+
 // Grid object holds data that also actions uses
 export const gridShape = shape({
   id: string.isRequired,
@@ -17,6 +22,7 @@ export const gridShape = shape({
   disableRememberIsFiltering: bool,
   disableRememberFilteData: bool,
   disableRememberSelectedItems: bool,
+  configStorage: configStorageShape,
 });
 
 export const columnShape = shape({
@@ -158,6 +164,7 @@ export const propTypes = {
   onCancel: func,
   onAddClick: func,
   onEditClick: func,
+  onSaveConfig: func,
   tabIndex: number,                   // tabIndex value for inputs in cells
   // Fixed data table built-in features
   headerHeight: number,

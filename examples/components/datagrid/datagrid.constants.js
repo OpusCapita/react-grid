@@ -40,6 +40,18 @@ export const columns = [
     ],
   },
   {
+    header: 'Text3',
+    valueKeyPath: ['text3'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
+    header: 'Text4',
+    valueKeyPath: ['text4'],
+    valueType: 'text',
+    componentType: 'text',
+  },
+  {
     header: 'Number',
     valueKeyPath: ['number'],
     valueType: 'number',

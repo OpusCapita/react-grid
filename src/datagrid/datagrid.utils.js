@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import moment from 'moment';
 import isNaN from 'lodash/isNaN';
+import { isFunction } from 'util';
 
 const getColumnKey = col => (
   col.columnKey || col.valueKeyPath.join('/')
@@ -147,43 +148,62 @@ export default {
     return [];
   },
   loadGridConfig: (grid, cols) => {
-    const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
-    const hiddenColumns = localStorage.getItem(`oc_grid_hiddenColumns_${grid.id}`);
-    const columnOrder = localStorage.getItem(`oc_grid_columnOrder_${grid.id}`);
+    const configStorage = grid.configStorage || {};
     const sortingData = sessionStorage.getItem(`oc_grid_sorting_${grid.id}`);
     const filterData = sessionStorage.getItem(`oc_grid_filtering_${grid.id}`);
     const isFilteringData = localStorage.getItem(`oc_grid_isFiltering_${grid.id}`);
-    let parsedHiddenCols;
-    let parsedColOrder;
+    let loadedConfig = {};
+    let hiddenColumns;
+    let columnOrder;
     let isFiltering = false;
+
+    if (isFunction(configStorage.load)) {
+      loadedConfig = configStorage.load();
+    }
+
     if (isFilteringData && !grid.disableRememberIsFiltering) {
       try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing isFilteringData from localStorage', e);
       }
     }
-    if (hiddenColumns) {
-      try { parsedHiddenCols = JSON.parse(hiddenColumns); } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing hiddenColumns from localStorage', e);
+    if (loadedConfig.hiddenColumns) {
+      hiddenColumns = loadedConfig.hiddenColumns;
+    } else {
+      const hiddenColumnsJson = localStorage.getItem(`oc_grid_hiddenColumns_${grid.id}`);
+      if (hiddenColumnsJson) {
+        try { hiddenColumns = JSON.parse(hiddenColumnsJson); } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Datagrid: error parsing hiddenColumns from localStorage', e);
+        }
       }
     }
-    if (columnOrder) {
-      try { parsedColOrder = JSON.parse(columnOrder); } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing columnOrder from localStorage', e);
+    if (loadedConfig.columnOrder) {
+      columnOrder = loadedConfig.columnOrder;
+    } else {
+      const columnOrderJson = localStorage.getItem(`oc_grid_columnOrder_${grid.id}`);
+      if (columnOrderJson) {
+        try { columnOrder = JSON.parse(columnOrderJson); } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Datagrid: error parsing columnOrder from localStorage', e);
+        }
       }
     }
     const config = {
-      visibleColumns: getVisibleColumns(cols, parsedHiddenCols, parsedColOrder),
+      visibleColumns: getVisibleColumns(cols, hiddenColumns, columnOrder),
       filteringData: {
         isFiltering,
       },
     };
-    if (columnWidths && !grid.disableRememberColumnWidths) {
-      try { config.columnWidths = JSON.parse(columnWidths); } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing columnWidths from localStorage', e);
+    if (loadedConfig.columnWidths) {
+      config.columnWidths = loadedConfig.columnWidths;
+    } else {
+      const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
+      if (columnWidths && !grid.disableRememberColumnWidths) {
+        try { config.columnWidths = JSON.parse(columnWidths); } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Datagrid: error parsing columnWidths from localStorage', e);
+        }
       }
     }
     if (sortingData && !grid.disableRememberSortData) {
@@ -216,17 +236,21 @@ export default {
   saveColumnWidths: (grid, columnWidths) => {
     if (grid.disableRememberColumnWidths) return false;
     if (!columnWidths) return false;
-    localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnWidths));
+    if (grid.configStorage && isFunction(grid.configStorage.save)) {
+      grid.configStorage.save({ columnWidths });
+    } else {
+      localStorage.setItem(`oc_grid_columnWidths_${grid.id}`, JSON.stringify(columnWidths));
+    }
     return true;
   },
-  saveHiddenColumns: (grid, hiddenColumns) => {
-    if (!hiddenColumns) return false;
-    localStorage.setItem(`oc_grid_hiddenColumns_${grid.id}`, JSON.stringify(hiddenColumns));
-    return true;
-  },
-  saveColumnOrder: (grid, columnOrder) => {
-    if (!columnOrder) return false;
-    localStorage.setItem(`oc_grid_columnOrder_${grid.id}`, JSON.stringify(columnOrder));
+  saveColumnSettings: (grid, hiddenColumns, columnOrder) => {
+    if (!hiddenColumns || !columnOrder) return false;
+    if (grid.configStorage && isFunction(grid.configStorage.save)) {
+      grid.configStorage.save({ hiddenColumns, columnOrder });
+    } else {
+      localStorage.setItem(`oc_grid_hiddenColumns_${grid.id}`, JSON.stringify(hiddenColumns));
+      localStorage.setItem(`oc_grid_columnOrder_${grid.id}`, JSON.stringify(columnOrder));
+    }
     return true;
   },
   saveSortData: (grid, sortingData) => {
