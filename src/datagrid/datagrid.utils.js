@@ -11,14 +11,16 @@ const getVisibleColumns = (cols, hiddenColumns = [], columnOrder = []) => {
   const orderedColumnList = [];
   cols.forEach((col, i) => {
     const columnKey = getColumnKey(col);
-    if (hiddenColumns.indexOf(columnKey) === -1) {
-      const colOrderIdx = columnOrder.indexOf(columnKey);
-      const order = colOrderIdx !== -1 ? colOrderIdx : (i + 1);
-      orderedColumnList.push({
-        columnKey,
-        order,
-      });
+    const colOrderIdx = columnOrder.indexOf(columnKey);
+    const defaultHidden = col.isHidden && colOrderIdx === -1;
+    if (defaultHidden || hiddenColumns.indexOf(columnKey) > -1) {
+      return;
     }
+    const order = colOrderIdx !== -1 ? colOrderIdx : (i + 1);
+    orderedColumnList.push({
+      columnKey,
+      order,
+    });
   });
   return orderedColumnList.sort((a, b) => (a.order - b.order)).map(item => item.columnKey);
 };

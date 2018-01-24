@@ -66,6 +66,7 @@ export const columnShape = shape({
   sortComparator: func,           // override sort comparator function, default sorts by valueType
   defaultValue: any,              // default value for the column when creating new item
   isRequired: bool,               // is column value required
+  isHidden: bool,                 // is column hidden by default
   onEditValueChange: func,        // callback with (value, valueKeyPath, rowIndex, dataId)
   onCreateValueChange: func,      // callbac with (value, valueKeyPath, rowIndex)
   onCreateBlur: func,             // callback with (value, rowIndex)

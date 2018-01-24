@@ -34,6 +34,7 @@ export const columns = [
     valueType: 'text',
     componentType: 'text',
     isRequired: true,
+    isHidden: true,
     validators: [
       { unique: true },
       { validate: VALIDATE.isRequired },
@@ -44,6 +45,7 @@ export const columns = [
     valueKeyPath: ['text3'],
     valueType: 'text',
     componentType: 'text',
+    isHidden: true,
   },
   {
     header: 'Text4',

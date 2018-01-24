@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* New `isHidden` property for column, which indicates the default visibility.
 * Add a possibility to use custom config storage instead of the local storage.
 
 ## 3.0.1
