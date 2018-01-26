@@ -165,7 +165,6 @@ export const propTypes = {
   onCancel: func,
   onAddClick: func,
   onEditClick: func,
-  onSaveConfig: func,
   tabIndex: number,                   // tabIndex value for inputs in cells
   // Fixed data table built-in features
   headerHeight: number,
