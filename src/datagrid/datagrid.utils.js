@@ -163,11 +163,15 @@ export default {
       loadedConfig = configStorage.load();
     }
 
-    if (isFilteringData && !grid.disableRememberIsFiltering) {
-      try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Datagrid: error parsing isFilteringData from localStorage', e);
+    if (isFilteringData) {
+      if (!grid.disableRememberIsFiltering) {
+        try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Datagrid: error parsing isFilteringData from localStorage', e);
+        }
       }
+    } else if (grid.defaultShowFilteringRow) {
+      isFiltering = true;
     }
     if (loadedConfig.hiddenColumns) {
       hiddenColumns = loadedConfig.hiddenColumns;

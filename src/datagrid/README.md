@@ -90,6 +90,7 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | --------------------------- | ---------------- | ---------------------------------------- | ---------------------------------------------------------- |
 | id                          | string           | required                                 | ID of the datagrid                                         |
 | idKeyPath                   | array of strings |                                          | Key path to unique ID value in the grid data, used in many |
+| defaultShowFilteringRow     | boolean          | false                                    | Show filtering row as default                              |
 | defaultSortColumn           | string           |                                          | columnKey of column sorted by default. ColumnKey is joined with '/' from valueKeyPath array, if columnKey is not defined in the column props |
 | defaultSortOrder            | string           | 'asc'                                    | Default sort order of default sort [asc/desc]              |
 | disableRememberIsFiltering  | boolean          | true                                     | Disable remembering is filtering ebabled                   |

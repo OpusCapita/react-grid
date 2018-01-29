@@ -15,6 +15,7 @@ export const configStorageShape = shape({
 export const gridShape = shape({
   id: string.isRequired,
   idKeyPath: arrayOf(string).isRequired, // keyPath to id data
+  defaultShowFilteringRow: bool,         // is filtering row shown as default
   defaultSortColumn: string,             // columnKey of column that is sorted by default
   defaultSortOrder: string,              // default sort order [asc/desc]
   disableRememberColumnWidths: bool,
