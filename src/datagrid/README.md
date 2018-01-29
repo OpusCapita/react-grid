@@ -163,6 +163,10 @@ import { Datagrid } from '@opuscapita/react-grid';
 
 export default class DatagridView extends React.Component {
   render() {
+    const GRID = {
+      id: 'accounts',
+      idKeyPath: ['accountId'],
+    };
     const columns = [
       {
         header: 'Account Name',
@@ -177,9 +181,10 @@ export default class DatagridView extends React.Component {
         width: 200,
       },
     ];
+
     return (
       <Datagrid
-        id="accounts"
+        grid={GRID}
         columns={columns}
     );
   }
