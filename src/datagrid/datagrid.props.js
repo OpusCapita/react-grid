@@ -6,6 +6,11 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 const { bool, number, string, func, object, node, array, shape, any, oneOfType, arrayOf } = PropTypes;
 const { list, map, mapOf } = ImmutablePropTypes;
 
+export const configStorageShape = shape({
+  load: func.isRequired,
+  save: func.isRequired,
+});
+
 // Grid object holds data that also actions uses
 export const gridShape = shape({
   id: string.isRequired,
@@ -18,6 +23,7 @@ export const gridShape = shape({
   disableRememberIsFiltering: bool,
   disableRememberFilteData: bool,
   disableRememberSelectedItems: bool,
+  configStorage: configStorageShape,
 });
 
 export const columnShape = shape({
@@ -61,6 +67,7 @@ export const columnShape = shape({
   sortComparator: func,           // override sort comparator function, default sorts by valueType
   defaultValue: any,              // default value for the column when creating new item
   isRequired: bool,               // is column value required
+  isHidden: bool,                 // is column hidden by default
   onEditValueChange: func,        // callback with (value, valueKeyPath, rowIndex, dataId)
   onCreateValueChange: func,      // callbac with (value, valueKeyPath, rowIndex)
   onCreateBlur: func,             // callback with (value, rowIndex)

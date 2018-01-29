@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Button } from 'react-bootstrap';
+import { Form, FormGroup, Button, Radio } from 'react-bootstrap';
 import Perf from 'react-addons-perf';
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { GRID, columns, data } from './datagrid.constants';
@@ -46,6 +46,14 @@ export default class DatagridView extends React.Component {
     saveFail: PropTypes.func.isRequired,
     removeFail: PropTypes.func.isRequired,
   };
+
+  constructor() {
+    super();
+
+    this.state = {
+      gridSettings: GRID,
+    };
+  }
 
   componentWillMount() {
     this.props.setData(GRID, columns, data);
@@ -100,10 +108,33 @@ export default class DatagridView extends React.Component {
     }
   }
 
+  useLocalStorage = () => {
+    this.setState({ gridSettings: GRID });
+    this.props.setData(GRID, columns, data);
+  }
+
+  useCustomStorage = () => {
+    const gridSettings = {
+      ...GRID,
+      configStorage: {
+        load: () => ({
+          hiddenColumns: ['text3', 'text4'],
+          columnOrder: ['select', 'text', 'text2', 'number', 'float', 'boolean', 'date'],
+          columnWidths: { text3: 200, text4: 300 },
+        }),
+        save: (conf) => {
+          console.log(`Save config: ${JSON.stringify(conf)}`);
+        },
+      },
+    };
+    this.setState({ gridSettings });
+    this.props.setData(gridSettings, columns, data);
+  }
+
   render() {
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
     const actionBar = (
-      <div>
+      <Form inline>
         <Button
           onClick={this.handleWarnClick}
         >
@@ -118,8 +149,25 @@ export default class DatagridView extends React.Component {
           onClick={this.handleStopClick}
         >
           Stop Perf
-        </Button>
-      </div>
+        </Button>{' '}
+        <FormGroup>
+          <Radio
+            name="configStorage"
+            onChange={this.useLocalStorage}
+            defaultChecked
+            inline
+          >
+            Local storage
+          </Radio>
+          <Radio
+            name="configStorage"
+            onChange={this.useCustomStorage}
+            inline
+          >
+            Custom storage
+          </Radio>
+        </FormGroup>
+      </Form>
     );
     return (
       <div className="oc-content oc-flex-column">
@@ -127,7 +175,7 @@ export default class DatagridView extends React.Component {
           <h1>Datagrid</h1>
         </div>
         <Datagrid
-          grid={GRID}
+          grid={this.state.gridSettings}
           columns={columns}
           disableActionSave={disableActionSave}
           actionBarLeft={actionBar}

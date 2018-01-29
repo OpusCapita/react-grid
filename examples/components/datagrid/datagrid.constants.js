@@ -34,10 +34,24 @@ export const columns = [
     valueType: 'text',
     componentType: 'text',
     isRequired: true,
+    isHidden: true,
     validators: [
       { unique: true },
       { validate: VALIDATE.isRequired },
     ],
+  },
+  {
+    header: 'Text3',
+    valueKeyPath: ['text3'],
+    valueType: 'text',
+    componentType: 'text',
+    isHidden: true,
+  },
+  {
+    header: 'Text4',
+    valueKeyPath: ['text4'],
+    valueType: 'text',
+    componentType: 'text',
   },
   {
     header: 'Number',
