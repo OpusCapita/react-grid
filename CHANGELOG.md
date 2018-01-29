@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add `defaultShowFilteringRow` to `grid` props, allows filtering row to be shown as default
 
 ## 3.0.1
 * Add a checked column to the end of the selected columns list in column settings
