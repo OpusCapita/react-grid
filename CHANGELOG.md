@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add `defaultShowFilteringRow` to `grid` props, allows filtering row to be shown as default
 
 ## 2.6.1
 * Update npm package for react-perfect-scrollbar
