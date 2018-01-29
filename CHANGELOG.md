@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 3.1.0
 * New `isHidden` property for column, which indicates the default visibility.
 * Add a possibility to use custom config storage instead of the local storage.
 * Add `defaultShowFilteringRow` to `grid` props, allows filtering row to be shown as default
