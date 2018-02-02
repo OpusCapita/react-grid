@@ -14,5 +14,6 @@
   "GridShowFilteringRow": "Show filtering row",
   "GridSelectColumns": "Select columns",
   "GridSelectedColumns": "Selected columns",
-  "GridValueIsMissing": "Value is missing"
+  "GridValueIsMissing": "Value is missing",
+  "GridColumnsAll": "All"
 }

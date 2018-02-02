@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 3.1.1
+* Implemented react-select-order-list control
+
 ## 3.1.0
 * New `isHidden` property for column, which indicates the default visibility.
 * Add a possibility to use custom config storage instead of the local storage.
