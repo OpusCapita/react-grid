@@ -1,7 +1,13 @@
-input[type=checkbox], input[type=radio], input[type=file] {
+@import "./colors";
+
+input[type=radio], input[type=file] {
   &:focus {
     outline: 1px auto $oc-color-primary-yellow !important;
   }
+}
+
+.checkbox.disabled, .radio.disabled > label {
+  color: $oc-color-text-disabled;
 }
 
 .oc-mandatory label::after {
@@ -11,4 +17,42 @@ input[type=checkbox], input[type=radio], input[type=file] {
 .oc-mandatory-error label::after {
   color: $oc-color-error;
   content: " *";
+}
+
+.checkbox label {
+  max-height: 20px;
+  line-height: 20px !important;
+}
+
+input[type=checkbox] {
+  &:focus {
+    box-shadow: 0 0 0 1px $oc-color-white, 0 0 0 3px $oc-color-primary-yellow;
+  }
+  outline: none !important;
+  height: 16px;
+  width: 16px;
+  margin-top: 2px !important;
+  &:before {
+    height: 16px;
+    width: 16px;
+    content: "\f00c";
+    font-family: FontAwesome;
+    color: $oc-color-white;
+    position: absolute;
+    display: inline-block !important;
+    background: $oc-color-white;
+    border: 1px solid $oc-color-primary-azure;
+    cursor: pointer;
+  }
+  &:checked {
+    &:before {
+      color: $oc-color-primary-azure;
+    }
+  }
+  &:disabled {
+    &:before {
+      color: $oc-color-text-disabled;
+      border: 1px solid $oc-color-text-disabled;
+    }
+  }
 }
