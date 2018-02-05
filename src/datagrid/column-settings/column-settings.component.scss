@@ -17,6 +17,14 @@
     }
   }
 
+  .oc-datagrid-column-settings-label {
+    margin: 10px 0 10px 0;
+  }
+
+  .oc-datagrid-column-settings-select-all-checkbox {
+    float: right;
+  }
+
   .oc-datagrid-available-columns-list, .oc-datagrid-selected-columns-list {
     height: 50vh;
     overflow: auto;
