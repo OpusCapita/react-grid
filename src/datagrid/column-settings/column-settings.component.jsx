@@ -7,6 +7,7 @@ import {
   Row,
   Col,
   FormGroup,
+  Checkbox,
   ControlLabel,
   FormControl,
   Button } from 'react-bootstrap';
@@ -30,19 +31,53 @@ export default class ColumnSettings extends React.PureComponent {
   constructor(props) {
     super(props);
     const availableColumns =
-      ColumnSettingsUtils.getAvailableColumns(props.columns, props.visibleColumns);
+      ColumnSettingsUtils.getAvailableColumns(props.columns, props.visibleColumns) || [];
     const selectedColumns =
-      ColumnSettingsUtils.getSelectedColumns(props.columns, props.visibleColumns);
+      ColumnSettingsUtils.getSelectedColumns(props.columns, props.visibleColumns) || [];
     this.state = {
-      keyword: '',
       availableColumns,
-      visibleAvailableColumns: availableColumns,
       selectedColumns,
+      keyword: '',
+      selectedAll: availableColumns.length === selectedColumns.length,
+      visibleAvailableColumns: [...availableColumns],
     };
   }
 
   handleCancelClick = () => {
     this.props.closeColumnSettingsModal(this.props.grid);
+  }
+
+  handleSelectedAllChange = () => {
+    const selectedAll = !this.state.selectedAll;
+    const availableColumns = this.state.availableColumns;
+    const selectedColumns = [];
+    let visibleAvailableColumns = this.state.visibleAvailableColumns;
+    let keyword = this.state.keyword;
+    availableColumns.forEach((col, i) => {
+      if (!availableColumns[i].isLocked) {
+        availableColumns[i].isSelected = selectedAll;
+      }
+      if (selectedAll || availableColumns[i].isLocked) {
+        selectedColumns.push(availableColumns[i]);
+      }
+    });
+    if (selectedAll) {
+      keyword = '';
+      visibleAvailableColumns = [...availableColumns];
+    } else {
+      visibleAvailableColumns.forEach((col, i) => {
+        if (!visibleAvailableColumns[i].isLocked) {
+          visibleAvailableColumns[i].isSelected = selectedAll;
+        }
+      });
+    }
+    this.setState({
+      availableColumns,
+      keyword,
+      selectedAll,
+      selectedColumns,
+      visibleAvailableColumns,
+    });
   }
 
   handleOkClick = () => {
@@ -104,7 +139,12 @@ export default class ColumnSettings extends React.PureComponent {
         visibleAvailableColumns[i].isSelected = false;
       }
     });
-    this.setState({ availableColumns, visibleAvailableColumns, selectedColumns });
+    this.setState({
+      availableColumns,
+      visibleAvailableColumns,
+      selectedColumns,
+      selectedAll: false,
+    });
   }
 
   render() {
@@ -123,18 +163,6 @@ export default class ColumnSettings extends React.PureComponent {
           <Grid fluid>
             <Row>
               <Col xs={6}>
-                <FormGroup>
-                  <ControlLabel><M id="GridAvailableColumns" /></ControlLabel>
-                </FormGroup>
-              </Col>
-              <Col xs={6}>
-                <FormGroup>
-                  <ControlLabel><M id="GridSelectedColumns" /></ControlLabel>
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={6}>
                 <FormGroup className="oc-datagrid-column-settings-keyword-group">
                   <FormControl
                     id={`ocDatagridColumnSettings-${this.props.grid.id}-keyword`}
@@ -145,6 +173,30 @@ export default class ColumnSettings extends React.PureComponent {
                     className="oc-datagrid-column-settings-keyword-input"
                   />
                   <FontAwesome className="oc-datagrid-column-settings-keyword-icon" name="search" />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={4}>
+                <FormGroup className="oc-datagrid-column-settings-label">
+                  <ControlLabel><M id="GridAvailableColumns" /></ControlLabel>
+                </FormGroup>
+              </Col>
+              <Col xs={2}>
+                <FormGroup>
+                  <Checkbox
+                    className="oc-datagrid-column-settings-select-all-checkbox"
+                    checked={this.state.selectedAll}
+                    id={`ocDatagridColumnSettings-${this.props.grid.id}-selected-all-columns`}
+                    onChange={this.handleSelectedAllChange}
+                  >
+                    <M id="GridSelectedAllColumns" />
+                  </Checkbox>
+                </FormGroup>
+              </Col>
+              <Col xs={6}>
+                <FormGroup className="oc-datagrid-column-settings-label">
+                  <ControlLabel><M id="GridSelectedColumns" /></ControlLabel>
                 </FormGroup>
               </Col>
             </Row>

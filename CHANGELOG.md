@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add checkbox to select all columns in column settings
 
 ## 3.1.0
 * New `isHidden` property for column, which indicates the default visibility.

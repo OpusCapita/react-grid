@@ -10,6 +10,7 @@
   "ValidateIsRequired": "Value is required",
   "Warning": "Warning",
   "GridAvailableColumns": "Available columns",
+  "GridSelectedAllColumns": "All",
   "GridColumnSettings": "Column settings",
   "GridShowFilteringRow": "Show filtering row",
   "GridSelectColumns": "Select columns",
