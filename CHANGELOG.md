@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 3.2.0
 * Add checkbox to select all columns in column settings
 
 ## 3.1.0
