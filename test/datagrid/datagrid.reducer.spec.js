@@ -243,6 +243,19 @@ describe('Datagrid reducers', () => {
     });
   });
 
+  it('sets cell messages', () => {
+    const messages = Map()
+      .setIn(['info', 1], Map({ id: 'Id message', name: 'Name message' }));
+    const action = {
+      type: TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGES,
+      id,
+      messages,
+    };
+    const newState = datagridReducer(undefined, action);
+    expect(newState.getIn([id, 'cellMessages', 'info', 1, 'id'])).to.eql('Id message');
+    expect(newState.getIn([id, 'cellMessages', 'info', 1, 'name'])).to.eql('Name message');
+  });
+
   it('hides cell message', () => {
     const state = INITIAL_STATE
       .setIn([id, 'cellMessages', 'error', 2, 'age'], {

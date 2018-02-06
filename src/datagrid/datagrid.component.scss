@@ -168,6 +168,21 @@
   // CELL MESSAGES
   .oc-datagrid-tooltip {
     position: static;
+    &.info {
+      &:before {
+        display: block;
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 7px;
+        border-right-color: $oc-grid-color-tooltip;
+        border-top-color: $oc-grid-color-tooltip;
+        z-index: 100000;
+      }
+    }
     &.error {
       &:before {
         display: block;

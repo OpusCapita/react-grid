@@ -13,6 +13,7 @@ import './datagrid.component.scss';
 // There's more in /src/datagrid/datagrid.actions.js
 const mapDispatchToProps = {
   cellShowMessage: DatagridActions.cellShowMessage,
+  cellShowMessages: DatagridActions.cellShowMessages,
   setData: DatagridActions.setData,
   saveSuccess: DatagridActions.saveSuccess,
   removeSuccess: DatagridActions.removeSuccess,
@@ -40,6 +41,7 @@ export default class DatagridView extends React.Component {
     isEditing: PropTypes.bool.isRequired,
     // Action props
     cellShowMessage: PropTypes.func.isRequired,
+    cellShowMessages: PropTypes.func.isRequired,
     setData: PropTypes.func.isRequired,
     saveSuccess: PropTypes.func.isRequired,
     removeSuccess: PropTypes.func.isRequired,
@@ -61,6 +63,13 @@ export default class DatagridView extends React.Component {
 
   handleWarnClick = () => {
     this.props.cellShowMessage(GRID, 'warning', 3, ['float'], 'Warning');
+  }
+
+  handleInfoClick = () => {
+    const messages = Map()
+      .setIn(['info', 1], Map({ text: 'Text message 1', date: 'Date message 1' }))
+      .setIn(['info', 3], Map({ text: 'Text message 3' }));
+    this.props.cellShowMessages(GRID, messages);
   }
 
   handleStartClick = () => {
@@ -139,6 +148,11 @@ export default class DatagridView extends React.Component {
           onClick={this.handleWarnClick}
         >
           Show Warning
+        </Button>
+        <Button
+          onClick={this.handleInfoClick}
+        >
+          Show Info
         </Button>
         <Button
           onClick={this.handleStartClick}

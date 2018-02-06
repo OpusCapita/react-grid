@@ -15,12 +15,27 @@ export default class DatagridTooltip extends React.Component {
     isEdited: PropTypes.bool,
     isError: PropTypes.bool,
     isWarning: PropTypes.bool,
-    messageId: PropTypes.string,
-    messageValues: PropTypes.object,
-    errorMessageId: PropTypes.string,
-    errorMessageValues: PropTypes.object,
-    warningMessageId: PropTypes.string,
-    warningMessageValues: PropTypes.object,
+    infoMessage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        id: PropTypes.string,
+        values: PropTypes.object,
+      }),
+    ]),
+    errorMessage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        id: PropTypes.string,
+        values: PropTypes.object,
+      }),
+    ]),
+    warningMessage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        id: PropTypes.string,
+        values: PropTypes.object,
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -28,12 +43,9 @@ export default class DatagridTooltip extends React.Component {
     isEdited: false,
     isError: false,
     isWarning: false,
-    messageId: null,
-    messageValues: null,
-    errorMessageId: null,
-    errorMessageValues: null,
-    warningMessageId: null,
-    warningMessageValues: null,
+    infoMessage: null,
+    errorMessage: null,
+    warningMessage: null,
   };
 
   render() {
@@ -43,21 +55,15 @@ export default class DatagridTooltip extends React.Component {
       isEdited,
       isError,
       isWarning,
-      messageId,
-      messageValues,
-      errorMessageId,
-      errorMessageValues,
-      warningMessageId,
-      warningMessageValues,
+      infoMessage,
+      errorMessage,
+      warningMessage,
     } = this.props;
     let overlayAttrs = {
       overlay: <Tooltip id={`Tooltip_${id}`} style={{ display: 'none' }} />,
     };
-    const message = {
-      id: errorMessageId || warningMessageId || messageId || false,
-      values: errorMessageValues || warningMessageValues || messageValues || {},
-    };
-    if (message.id) {
+    const message = errorMessage || warningMessage || infoMessage;
+    if (message) {
       let tooltipClassName = 'tooltip';
       if (isError) {
         tooltipClassName = 'error tooltip';
@@ -68,7 +74,7 @@ export default class DatagridTooltip extends React.Component {
         placement: 'bottom',
         overlay: (
           <Tooltip id={`Tooltip_${id}`} bsClass={tooltipClassName}>
-            <M id={message.id} values={message.values} />
+            { message.id ? <M id={message.id} values={message.values} /> : <span>{message}</span> }
           </Tooltip>
         ),
       };
@@ -78,6 +84,7 @@ export default class DatagridTooltip extends React.Component {
       edited: isEdited,
       error: isError,
       warning: isWarning && !isError,
+      info: infoMessage && !isError && !isWarning,
     });
     return (
       <OverlayTrigger {...overlayAttrs}>
