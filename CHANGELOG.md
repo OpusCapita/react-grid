@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Update column settings component to utilize `react-select-order-list`
 
 ## 3.2.0
 * Add checkbox to select all columns in column settings
