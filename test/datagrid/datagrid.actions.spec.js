@@ -617,6 +617,26 @@ describe('Datagrid actions', () => {
     expect(this.store.getActions()[0]).to.eql(expectedAction);
   });
 
+  it('show cell messages', function () {
+    const messages = {
+      info: {
+        1: {
+          id: 'Id message',
+          name: 'Name message',
+        },
+      },
+    };
+    const action = actions.cellShowMessages(GRID, messages);
+    const expectedAction = {
+      type: actions.TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGES,
+      id: GRID.id,
+      messages,
+    };
+
+    this.store.dispatch(action);
+    expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
+
   it('hide cell message', function () {
     const action = actions.cellHideMessage(GRID, 'warning', 123, ['id']);
     const expectedAction = {

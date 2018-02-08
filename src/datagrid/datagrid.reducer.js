@@ -196,6 +196,9 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
           { id: action.messageId, values: action.messageValues },
         );
 
+    case TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGES:
+      return state.mergeIn([action.id, 'cellMessages'], Immutable.fromJS(action.messages));
+
     case TYPES.PLATFORM_DATAGRID_CELL_HIDE_MESSAGE: {
       if (action.messageType === null) {
         return state.deleteIn([action.id, 'cellMessages']);

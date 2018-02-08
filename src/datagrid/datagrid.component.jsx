@@ -400,23 +400,27 @@ export default class DataGrid extends React.PureComponent {
     if (!this.props.grid.idKeyPath || !col.valueKeyPath) {
       return returnData;
     }
+    let infoMessage;
     let errorMessage;
     let warningMessage;
     if (cellType === 'create') {
+      infoMessage = this.props.createCellMessages.getIn(['info', rowIndex, ...col.valueKeyPath]);
       errorMessage = this.props.createCellMessages.getIn(['error', rowIndex, ...col.valueKeyPath]);
       warningMessage = this.props.createCellMessages.getIn(['warning', rowIndex, ...col.valueKeyPath]);
     } else {
       const id = this.getDataIdByRowIndex(rowIndex);
+      infoMessage = this.props.cellMessages.getIn(['info', id, ...col.valueKeyPath]);
       errorMessage = this.props.cellMessages.getIn(['error', id, ...col.valueKeyPath]);
       warningMessage = this.props.cellMessages.getIn(['warning', id, ...col.valueKeyPath]);
     }
+    if (infoMessage) {
+      returnData.infoMessage = infoMessage;
+    }
     if (errorMessage) {
-      returnData.errorMessageId = errorMessage.id || null;
-      returnData.errorMessageValues = errorMessage.values || {};
+      returnData.errorMessage = errorMessage;
     }
     if (warningMessage) {
-      returnData.warningMessageId = warningMessage.id || null;
-      returnData.warningMessageValues = warningMessage.values || {};
+      returnData.warningMessage = warningMessage;
     }
     return returnData;
   }
@@ -1130,12 +1134,11 @@ export default class DataGrid extends React.PureComponent {
           <CellTooltip
             id={cellType + col.columnKey + (rowIndex - extraRowCount)}
             isEdited={isEdited}
-            isError={!!messageData.errorMessageId}
-            isWarning={!!messageData.warningMessageId}
-            errorMessageId={messageData.errorMessageId}
-            errorMessageValues={messageData.errorMessageValues}
-            warningMessageId={messageData.warningMessageId}
-            warningMessageValues={messageData.warningMessageValues}
+            isError={!!messageData.errorMessage}
+            isWarning={!!messageData.warningMessage}
+            infoMessage={messageData.infoMessage}
+            errorMessage={messageData.errorMessage}
+            warningMessage={messageData.warningMessage}
           >
             { cell }
           </CellTooltip>
