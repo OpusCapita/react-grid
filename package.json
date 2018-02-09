@@ -92,6 +92,7 @@
   "dependencies": {
     "@opuscapita/react-floating-select": "2.0.0",
     "@opuscapita/react-icons": "2.0.0",
+    "@opuscapita/react-dropdown": "1.0.1",
     "@opuscapita/react-perfect-scrollbar": "1.0.0",
     "classnames": "2.2.5",
     "fixed-data-table-2": "0.8.5",
