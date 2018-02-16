@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Change id to the classname the main div of `responsive-fixed-data-table` component
 
 ## 3.3.1
 * Add id to the main div of `responsive-fixed-data-table` component
