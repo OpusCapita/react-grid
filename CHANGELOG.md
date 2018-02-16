@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add id to the main div of `responsive-fixed-data-table` component
+
 ## 3.3.0
 * New `info` cell message type and action for setting multiple messages
 * Update column settings component to utilize `react-select-order-list`
