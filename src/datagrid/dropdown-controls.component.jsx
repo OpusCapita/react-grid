@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { FormattedMessage as M } from 'react-intl';
 import { Icon } from '@opuscapita/react-icons';
+import { DropdownMenu } from '@opuscapita/react-dropdown';
 
 import { gridShape } from './datagrid.props';
-import { DropdownMenu } from '../dropdown-menu';
+
 
 import './dropdown-controls.component.scss';
 
