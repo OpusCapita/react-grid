@@ -78,7 +78,7 @@ export default {
       case 'boolean':
         return (a, b) => (a === b ? 0 : (a ? -1 : 1));
       case 'date':
-        return (a, b) => (new Date(b) - new Date(a));
+        return (a, b) => (new Date(a) - new Date(b));
       default:
         return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
     }
