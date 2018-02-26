@@ -12,8 +12,8 @@ import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { Icon } from '@opuscapita/react-icons';
+import { Spinner } from '@opuscapita/react-spinner';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
-import 'font-awesome/scss/font-awesome.scss';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
 import HeaderCell from './header-cell.component';
@@ -29,7 +29,6 @@ import { propTypes, defaultProps } from './datagrid.props';
 import Utils from './datagrid.utils';
 import './datagrid.component.scss';
 
-import { Spinner } from '../spinner';
 import KEY_CODES from '../constants/key-codes.constant';
 
 const mapStateToProps = (state, ownProps) => {

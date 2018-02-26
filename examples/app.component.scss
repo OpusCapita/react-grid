@@ -11,7 +11,8 @@
 
 @import './flex';
 
-
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome.scss';
 
 .oc-margin-bottom {
     margin-bottom: 1rem;
