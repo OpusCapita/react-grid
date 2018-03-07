@@ -91,8 +91,8 @@ export const applyFilters = (grid, columns) =>
             if (Utils.getColumnKey(column) === filterColumn) {
               const rowData = row.getIn(column.valueKeyPath);
               if (rowData || rowData === 0 || rowData === false) {
-                const filterFunctions = Utils.getFilterFunctions(column);
-                if (filterFunctions.filterMatcher(rowData, filterValue)) {
+                const filterMatcher = Utils.getFilterMatcher(column);
+                if (filterMatcher(rowData, filterValue)) {
                   hits += 1;
                 }
               }
@@ -118,9 +118,9 @@ export const filterCellValueChange = (grid, columns, column, value) =>
       .datagrid
       .getIn([grid.id, 'config', 'filteringData', 'filterData'], Map());
     const columnKey = Utils.getColumnKey(column);
-    const filterFunctions = Utils.getFilterFunctions(column);
+    const valueEmptyChecker = Utils.getValueEmptyChecker(column);
     let filterData;
-    if (filterFunctions.valueEmptyChecker(value)) {
+    if (valueEmptyChecker(value)) {
       filterData = origFilterData.delete(columnKey);
     } else {
       filterData = origFilterData.set(columnKey, value);
@@ -157,11 +157,12 @@ export const applySort = (grid, columns) =>
     const origAllData = gridData.get('allData');
     const comparator = Utils.getSortComparator(column);
     const valueGetter = Utils.getSortValueGetter(column);
+    const valueEmptyChecker = Utils.getValueEmptyChecker(column);
     const allData = origAllData.sort((a, b) => {
       const valA = valueGetter(a);
       const valB = valueGetter(b);
-      if (valA === null || valA === undefined) return 1;
-      if (valB === null || valB === undefined) return -1;
+      if (valueEmptyChecker(valA)) return 1;
+      if (valueEmptyChecker(valB)) return -1;
       if (sortOrder === 'asc') {
         return comparator(valA, valB);
       }
@@ -173,8 +174,8 @@ export const applySort = (grid, columns) =>
       data = gridData.get('data').sort((a, b) => {
         const valA = valueGetter(a);
         const valB = valueGetter(b);
-        if (valA === null || valA === undefined) return 1;
-        if (valB === null || valB === undefined) return -1;
+        if (valueEmptyChecker(valA)) return 1;
+        if (valueEmptyChecker(valB)) return -1;
         if (sortOrder === 'asc') {
           return comparator(valA, valB);
         }

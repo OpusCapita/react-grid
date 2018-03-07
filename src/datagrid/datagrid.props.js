@@ -23,6 +23,10 @@ export const gridShape = shape({
   disableRememberIsFiltering: bool,
   disableRememberFilteData: bool,
   disableRememberSelectedItems: bool,
+  language: string,
+  dateFormat: string,
+  thousandSeparator: string,
+  decimalSeparator: string,
   configStorage: configStorageShape,
 });
 
@@ -63,8 +67,10 @@ export const columnShape = shape({
     newValue: any,
   }),
   flexGrow: number,
+  valueEmptyChecker: func,        // override function that checks if value is considered as empty
   sortValueGetter: func,          // override sort value getter, defaults to getIn(valueKeyPath)
   sortComparator: func,           // override sort comparator function, default sorts by valueType
+  filterMatcher: func,            // override filter matcher function, that defined when filter matches data
   defaultValue: any,              // default value for the column when creating new item
   isRequired: bool,               // is column value required
   isHidden: bool,                 // is column hidden by default

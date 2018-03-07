@@ -5,6 +5,10 @@ export const GRID = {
   idKeyPath: ['id'],
   defaultSortColumn: 'float',
   defaultSortOrder: 'asc',
+  language: 'en',
+  dateFormat: 'DD/MM/YYYY',
+  decimalSeparator: '.',
+  thousandSeparator: '',
 };
 
 export const selectOptions = [

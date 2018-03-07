@@ -89,55 +89,51 @@ export default {
     }
     return data => data.getIn(col.valueKeyPath);
   },
-  getFilterFunctions: (col) => {
-    const filterFunctions = {
-      valueEmptyChecker: val => val === '' || val === null || val === undefined,
-      filterMatcher: (val, filterVal) => (new RegExp(filterVal, 'i')).test(val),
-    };
+  getValueEmptyChecker: (col) => {
+    if (col.valueEmptyChecker) {
+      return col.valueEmptyChecker;
+    }
     switch (col.valueType) {
-      case 'text':
-        break;
       case 'number':
-        filterFunctions.valueEmptyChecker = (
-          val => val === '' ||
-          isNaN(val) ||
-          val === null ||
-          val === undefined
-        );
-        filterFunctions.filterMatcher = (val, filterVal) =>
-          parseInt(val, 10) === parseInt(filterVal, 10);
-        break;
-      case 'float':
-        filterFunctions.valueEmptyChecker = val => (
+        return val => (
           val === '' ||
           isNaN(val) ||
           val === null ||
           val === undefined
         );
-        filterFunctions.filterMatcher = (val, filterVal) => {
-          const parsedFilterVal = filterVal.replace(',', '.');
-          return parseFloat(parsedFilterVal) === val;
-        };
-        break;
+      case 'float':
+        return val => (
+          val === '' ||
+          isNaN(val) ||
+          val === null ||
+          val === undefined
+        );
+      case 'text':
       case 'boolean':
-        filterFunctions.filterMatcher = (val, filterVal) => val === filterVal;
-        break;
       case 'date':
-        filterFunctions.filterMatcher = (val, filterVal) =>
-          moment(filterVal, 'L').isSame(val, 'day');
-        break;
       case 'select':
-        filterFunctions.filterMatcher = (val, filterVal) => val === filterVal;
-        break;
       default:
+        return val => val === '' || val === null || val === undefined;
     }
-    if (col.valueEmptyChecker) {
-      filterFunctions.valueEmptyChecker = col.valueEmptyChecker;
-    }
+  },
+  getFilterMatcher: (col) => {
     if (col.filterMatcher) {
-      filterFunctions.filterMatcher = col.filterMatcher;
+      return col.filterMatcher;
     }
-    return filterFunctions;
+    switch (col.valueType) {
+      case 'number':
+        return (val, filterVal) => parseInt(val, 10) === parseInt(filterVal, 10);
+      case 'float':
+        return (val, filterVal) => parseFloat(filterVal.replace(',', '.')) === val;
+      case 'date':
+        return (val, filterVal) => moment(filterVal, 'L').isSame(val, 'day');
+      case 'boolean':
+      case 'select':
+        return (val, filterVal) => val === filterVal;
+      case 'text':
+      default:
+        return (val, filterVal) => (new RegExp(filterVal, 'i')).test(val);
+    }
   },
   loadSelectedItems: (grid) => {
     const sessionItem = sessionStorage.getItem(`oc_grid_selectedItems_${grid.id}`);
@@ -297,5 +293,25 @@ export default {
     if (!columnsParam) {
       throw new Error('[Grid] Invalid `columns` parameter, update action parameters to new format!');
     }
+  },
+  getLanguage: (grid, ocUserState) => {
+    if (grid.userLanguage) return grid.userLanguage;
+    if (ocUserState) return ocUserState.getIn(['user', 'language'], 'en');
+    return 'en';
+  },
+  getDateFormat: (grid, ocUserState) => {
+    if (grid.dateFormat) return grid.dateFormat;
+    if (ocUserState) return ocUserState.getIn(['localeFormat', 'dateFormat'], 'L');
+    return 'L';
+  },
+  getThousandSeparator: (grid, ocUserState) => {
+    if (grid.thousandSeparator) return grid.thousandSeparator;
+    if (ocUserState) return ocUserState.getIn(['localeFormat', 'thousandSeparator'], '');
+    return '';
+  },
+  getDecimalSeparator: (grid, ocUserState) => {
+    if (grid.decimalSeparator) return grid.decimalSeparator;
+    if (ocUserState) return ocUserState.getIn(['localeFormat', 'decimalSeparator'], '.');
+    return '.';
   },
 };

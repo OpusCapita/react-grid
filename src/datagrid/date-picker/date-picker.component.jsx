@@ -32,6 +32,7 @@ export default class DatePicker extends React.Component {
   };
 
   constructor(props) {
+    console.log(props.dateFormat);
     super(props);
     const state = {
       showOverlay: false,
@@ -83,6 +84,9 @@ export default class DatePicker extends React.Component {
     // Force input's focus if blur event was caused by clicking on the calendar
     if (showOverlay) {
       this.input.focus();
+      if (this.daypicker && this.state.selectedDay) {
+        this.daypicker.showMonth(this.state.selectedDay);
+      }
     }
   }
 

@@ -10,6 +10,7 @@ import {
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
+import moment from 'moment';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { Icon } from '@opuscapita/react-icons';
 import { Spinner } from '@opuscapita/react-spinner';
@@ -32,19 +33,7 @@ import './datagrid.component.scss';
 import KEY_CODES from '../constants/key-codes.constant';
 
 const mapStateToProps = (state, ownProps) => {
-  const locale = {};
   const GRID = ownProps.grid;
-  if (ownProps.locale) {
-    locale.userLanguage = ownProps.locale.language || 'en';
-    locale.dateFormat = ownProps.locale.dateFormat || 'L';
-    locale.thousandSeparator = ownProps.locale.thousandSeparator || '';
-    locale.decimalSeparator = ownProps.locale.decimalSeparator || '.';
-  } else if (state.user) {
-    locale.userLanguage = state.user.getIn(['user', 'language'], 'en');
-    locale.dateFormat = state.user.getIn(['localeFormat', 'dateFormat'], 'L');
-    locale.thousandSeparator = state.user.getIn(['localeFormat', 'thousandSeparator'], '');
-    locale.decimalSeparator = state.user.getIn(['localeFormat', 'decimalSeparator'], '.');
-  }
   return {
     isBusy: state.datagrid.getIn([GRID.id, 'session', 'isBusy'], true),
     isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
@@ -66,10 +55,11 @@ const mapStateToProps = (state, ownProps) => {
     cellMessages: state.datagrid.getIn([GRID.id, 'cellMessages'], Map()),
     createCellMessages: state.datagrid.getIn([GRID.id, 'createCellMessages'], Map()),
     allDataSize: state.datagrid.getIn([GRID.id, 'allData'], List()).size,
-    userLanguage: locale.userLanguage || 'en',
-    dateFormat: locale.dateFormat || 'L',
-    thousandSeparator: locale.thousandSeparator || '',
-    decimalSeparator: locale.decimalSeparator || '.',
+    userLanguage: Utils.getLanguage(GRID, state.user),
+    dateFormat: Utils.getDateFormat(GRID, state.user),
+    thousandSeparator: Utils.getThousandSeparator(GRID, state.user),
+    decimalSeparator: Utils.getDecimalSeparator(GRID, state.user),
+    isIntlRegion: state.intl && state.intl.region,
   };
 };
 
@@ -567,10 +557,11 @@ export default class DataGrid extends React.PureComponent {
       if (col.sortValueGetter) {
         column.sortValueGetter = col.sortValueGetter;
       }
+      const valueEmptyChecker = Utils.getValueEmptyChecker(col);
       // Cell value rendering
       const valueRender = (rowIndex, format) => {
         const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
-        if (val === undefined || val === null) {
+        if (valueEmptyChecker(val)) {
           return col.isRequired ? <M id="GridValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
@@ -587,10 +578,21 @@ export default class DataGrid extends React.PureComponent {
             column.cell = rowIndex =>
               valueRender(rowIndex, v => <N value={v} {...col.renderComponentProps} />);
             break;
-          case 'date':
-            column.cell = rowIndex =>
-              valueRender(rowIndex, v => <D value={v} {...col.renderComponentProps} />);
+          case 'date': {
+            if (this.props.isIntlRegion) {
+              column.cell = rowIndex =>
+                valueRender(rowIndex, v => <D value={v} {...col.renderComponentProps} />);
+            } else {
+              column.cell = rowIndex =>
+                valueRender(rowIndex, (v) => {
+                  const momentDay = moment.utc(v);
+                  return momentDay.isValid() ?
+                    moment.utc(v).format(this.props.dateFormat) :
+                    <M id="GridInvalidDate" />;
+                });
+            }
             break;
+          }
           case 'boolean':
             column.cell = rowIndex =>
               valueRender(rowIndex, v => <M id={v ? 'Yes' : 'No'} {...col.renderComponentProps} />);
@@ -878,6 +880,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
                     language={this.props.userLanguage}
+                    dateFormat={this.props.dateFormat}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     inputProps={{
                       tabIndex,
@@ -899,6 +902,7 @@ export default class DataGrid extends React.PureComponent {
                     onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
                     onKeyDown={this.onCreateCellKeyDown}
                     language={this.props.userLanguage}
+                    dateFormat={this.props.dateFormat}
                     inputRef={this.handleCreateCellRef(rowIndex, col)}
                     inputProps={{
                       tabIndex,
@@ -917,6 +921,7 @@ export default class DataGrid extends React.PureComponent {
                   <DateInput
                     value={this.getFilterItemValue(col)}
                     onChange={this.onFilterCellValueChange(col, editValueParser)}
+                    dateFormat={this.props.dateFormat}
                     language={this.props.userLanguage}
                     inputProps={{
                       tabIndex,

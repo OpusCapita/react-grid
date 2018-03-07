@@ -202,12 +202,6 @@ export default class DatagridView extends React.Component {
           rowSelectCheckboxColumn
           onSave={this.handleOnSave}
           onRemove={this.handleOnRemove}
-          locale={{
-            language: 'en',
-            dateFormat: 'MM/DD/YYYY',
-            decimalSeparator: '.',
-            thousandSeparator: '',
-          }}
         />
       </div>
     );

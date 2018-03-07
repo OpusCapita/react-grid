@@ -314,7 +314,7 @@ describe('Datagrid actions', () => {
       config: {
         sortingData: {
           sortColumn: 'dob',
-          sortOrder: 'asc',
+          sortOrder: 'desc',
         },
       },
     });
@@ -330,14 +330,14 @@ describe('Datagrid actions', () => {
       GRID,
       COLUMNS,
       COLUMNS[4],
-      'asc',
+      'desc',
     );
     const expectedActions = [
       {
         type: actions.TYPES.PLATFORM_DATAGRID_SORT_CHANGE,
         id: GRID.id,
         sortColumn: 'dob',
-        sortOrder: 'asc',
+        sortOrder: 'desc',
       },
       {
         type: actions.TYPES.PLATFORM_DATAGRID_BUSY,

@@ -97,6 +97,10 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | disableRememberSortData     | boolean          | true                                     | Disable remembering the sorting                            |
 | disableRememberIsFiltering  | boolean          | true                                     | Disable remembering the filters                            |
 | disableRememberColumnWidths | boolean          | true                                     | Disable remembering the column widths                      |
+| language                    | string           | 'en'                                     | Default taken from redux user state used in OC apps        |
+| dateFormat                  | string           | 'L'                                      | Default taken from redux user state used in OC apps        |
+| thousandSeparator           | string           | ''                                       | Default taken from redux user state used in OC apps        |
+| decimalSeparator            | string           | '.'                                      | Default taken from redux user state used in OC apps        |
 
 #### Datagrid - `column` prop attributes
 
@@ -129,8 +133,10 @@ See the code [example](../../examples/components/datagrid/datagrid.component.jsx
 | disableSorting             | boolean        |         | Disable column sorting this column       |
 | disableEditing             | boolean        |         | Disable inline editing this column       |
 | flexGrow                   | number         |         | The grow factor relative to other columns |
+| valueEmptyChecker          | function       |         | Checker function defined when data is empty |
 | sortValueGetter            | function       |         | Getter function for the sort data        |
 | sortComparator             | function       |         | Comparator function for the sort data    |
+| filterMatcher              | function       |         | Matcher function that matches filter to data |
 | defaultValue               | string, number |         | Default value for the item when creating new item |
 | isRequired                 | bool           |         | Indicating if column value is required   |
 | onValueMatchChangeValue    | object         |         | Change other column value if own value matches |
