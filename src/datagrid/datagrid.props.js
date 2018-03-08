@@ -129,7 +129,7 @@ export const propTypes = {
   filterData: map.isRequired,
   cellMessages: map.isRequired,
   createCellMessages: map.isRequired,
-  userLanguage: string.isRequired,
+  language: string.isRequired,
   thousandSeparator: string.isRequired,
   decimalSeparator: string.isRequired,
   allDataSize: number.isRequired,

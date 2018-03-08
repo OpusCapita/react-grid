@@ -2,17 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, FormControl } from 'react-bootstrap';
-import { injectIntl, intlShape } from 'react-intl';
 import moment from 'moment';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import LocaleUtils from 'react-day-picker/moment';
 import TetherComponent from 'react-tether';
 import 'react-day-picker/lib/style.css';
 
-@injectIntl
 export default class DatePicker extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     value: PropTypes.string,
     onChange: PropTypes.func,
     language: PropTypes.string.isRequired,
@@ -32,7 +29,6 @@ export default class DatePicker extends React.Component {
   };
 
   constructor(props) {
-    console.log(props.dateFormat);
     super(props);
     const state = {
       showOverlay: false,
@@ -68,36 +64,40 @@ export default class DatePicker extends React.Component {
     }, 0);
   }
 
-  handleInputFocus = () => {
+  handleInputFocus = (e) => {
+    const origShow = this.state.showOverlay;
     this.setState({
       showOverlay: true,
+    }, () => {
+      if (!origShow && this.daypicker && this.state.selectedDay) {
+        this.daypicker.showMonth(this.state.selectedDay);
+      }
     });
+    if (this.props.inputProps.onFocus) {
+      this.props.inputProps.onFocus(e);
+    }
   }
 
-  handleInputBlur = () => {
+  handleInputBlur = (e) => {
     const showOverlay = this.clickedInside;
-
     this.setState({
       showOverlay,
     });
-
     // Force input's focus if blur event was caused by clicking on the calendar
     if (showOverlay) {
       this.input.focus();
-      if (this.daypicker && this.state.selectedDay) {
-        this.daypicker.showMonth(this.state.selectedDay);
-      }
+    }
+    if (this.props.inputProps.onBlur) {
+      this.props.inputProps.onBlur(e);
     }
   }
 
   handleInputChange = (e) => {
     let { value } = e.target;
-
     // Remove invisble LRM chars from datestring
     if (value.replace) {
       value = value.replace(/\u200E/g, '');
     }
-
     if (value === '') {
       this.setState({
         selectedDay: null,
@@ -120,17 +120,20 @@ export default class DatePicker extends React.Component {
         }
       });
     }
+    if (this.props.inputProps.onChange) {
+      this.props.inputProps.onChange(e);
+    }
   }
 
 
-  handleDayClick = (e, day) => {
+  handleDayClick = (day) => {
     this.setState({
       selectedDay: day,
       showOverlay: false,
     });
     // Remove invisble LRM chars from datestring
     this.props.onChange(
-      this.props.intl.formatDate(moment.utc(day).format()).replace(/\u200E/g, ''),
+      moment.utc(day).format(this.props.dateFormat).replace(/\u200E/g, ''),
     );
     this.input.blur();
   }
@@ -142,7 +145,6 @@ export default class DatePicker extends React.Component {
       dateFormat,
       value,
       onChange,
-      intl,
       inputProps,
       inputRef,
       disabled,
@@ -167,11 +169,11 @@ export default class DatePicker extends React.Component {
               inputRef(el);
             }}
             value={value}
+            disabled={disabled}
+            {...inputProps}
             onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
             onBlur={this.handleInputBlur}
-            disabled={disabled}
-            {...inputProps}
           />
         </FormGroup>
         { this.state.showOverlay &&

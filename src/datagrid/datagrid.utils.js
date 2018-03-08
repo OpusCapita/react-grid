@@ -116,7 +116,7 @@ export default {
         return val => val === '' || val === null || val === undefined;
     }
   },
-  getFilterMatcher: (col) => {
+  getFilterMatcher: (col, dateFormat) => {
     if (col.filterMatcher) {
       return col.filterMatcher;
     }
@@ -126,7 +126,15 @@ export default {
       case 'float':
         return (val, filterVal) => parseFloat(filterVal.replace(',', '.')) === val;
       case 'date':
-        return (val, filterVal) => moment(filterVal, 'L').isSame(val, 'day');
+        return (val, filterVal) => {
+          if (moment(val, dateFormat, true).isValid()) {
+            return moment.utc(filterVal, dateFormat).isSame(moment.utc(val, dateFormat), 'day');
+          }
+          if (moment(val).isValid()) {
+            return moment.utc(filterVal, dateFormat).isSame(val, 'day');
+          }
+          return false;
+        }
       case 'boolean':
       case 'select':
         return (val, filterVal) => val === filterVal;
@@ -294,24 +302,41 @@ export default {
       throw new Error('[Grid] Invalid `columns` parameter, update action parameters to new format!');
     }
   },
+  // Locale getters, support grid param or user state used in OC applications
   getLanguage: (grid, ocUserState) => {
-    if (grid.userLanguage) return grid.userLanguage;
-    if (ocUserState) return ocUserState.getIn(['user', 'language'], 'en');
+    if (grid.language && typeof grid.language === 'string') {
+      return grid.language;
+    }
+    if (ocUserState) {
+      return ocUserState.getIn(['user', 'language'], 'en');
+    }
     return 'en';
   },
   getDateFormat: (grid, ocUserState) => {
-    if (grid.dateFormat) return grid.dateFormat;
-    if (ocUserState) return ocUserState.getIn(['localeFormat', 'dateFormat'], 'L');
+    if (grid.dateFormat && typeof grid.language === 'string') {
+      return grid.dateFormat.toUpperCase();
+    }
+    if (ocUserState) {
+      return ocUserState.getIn(['localeFormat', 'dateFormat'], 'L');
+    }
     return 'L';
   },
   getThousandSeparator: (grid, ocUserState) => {
-    if (grid.thousandSeparator) return grid.thousandSeparator;
-    if (ocUserState) return ocUserState.getIn(['localeFormat', 'thousandSeparator'], '');
+    if (grid.thousandSeparator && typeof grid.language === 'string') {
+      return grid.thousandSeparator;
+    }
+    if (ocUserState) {
+      return ocUserState.getIn(['localeFormat', 'thousandSeparator'], '');
+    }
     return '';
   },
   getDecimalSeparator: (grid, ocUserState) => {
-    if (grid.decimalSeparator) return grid.decimalSeparator;
-    if (ocUserState) return ocUserState.getIn(['localeFormat', 'decimalSeparator'], '.');
+    if (grid.decimalSeparator && typeof grid.language === 'string') {
+      return grid.decimalSeparator;
+    }
+    if (ocUserState) {
+      return ocUserState.getIn(['localeFormat', 'decimalSeparator'], '.');
+    }
     return '.';
   },
 };

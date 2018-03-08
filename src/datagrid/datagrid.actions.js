@@ -84,6 +84,7 @@ export const applyFilters = (grid, columns) =>
     if (filterData.isEmpty()) {
       data = allData;
     } else {
+      const dateFormat = Utils.getDateFormat(grid, getState().user);
       data = allData.filter((row) => {
         let hits = 0;
         filterData.forEach((filterValue, filterColumn) => {
@@ -91,7 +92,7 @@ export const applyFilters = (grid, columns) =>
             if (Utils.getColumnKey(column) === filterColumn) {
               const rowData = row.getIn(column.valueKeyPath);
               if (rowData || rowData === 0 || rowData === false) {
-                const filterMatcher = Utils.getFilterMatcher(column);
+                const filterMatcher = Utils.getFilterMatcher(column, dateFormat);
                 if (filterMatcher(rowData, filterValue)) {
                   hits += 1;
                 }
