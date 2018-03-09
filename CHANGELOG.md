@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added ids to dropdown menu items.
 
 ## 3.3.2
 * Change id to the classname the main div of `responsive-fixed-data-table` component
