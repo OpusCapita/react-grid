@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import {
   injectIntl,
   FormattedMessage as M,
-  FormattedDate as D,
   FormattedNumber as N } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
 import moment from 'moment';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
+import { DateInput } from '@opuscapita/react-datetime';
 import { Icon } from '@opuscapita/react-icons';
 import { Spinner } from '@opuscapita/react-spinner';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
@@ -23,7 +23,6 @@ import InlineEditControls from './inline-edit-controls.component';
 import FilteringControls from './filtering-controls.component';
 import DropdownControls from './dropdown-controls.component';
 import * as datagridActions from './datagrid.actions';
-import DateInput from './date-picker/date-picker.component';
 import CellTooltip from './cell-tooltip.component';
 import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';

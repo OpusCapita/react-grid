@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
