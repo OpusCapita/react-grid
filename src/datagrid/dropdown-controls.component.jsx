@@ -63,6 +63,7 @@ export default class DropdownControls extends React.PureComponent {
     let menuItems = [];
     if (this.props.filtering) {
       menuItems.push({
+        id: `${this.props.grid.id}-menu-item-filtering`,
         title: <M id="GridShowFilteringRow" />,
         icon: this.props.isFiltering ?
           <Icon
@@ -79,12 +80,14 @@ export default class DropdownControls extends React.PureComponent {
     }
     if (this.props.columnSettings) {
       menuItems.push({
+        id: `${this.props.grid.id}-menu-item-column-settings`,
         title: <M id="GridColumnSettings" />,
         onClick: this.handleColumnSettingsClick,
       });
     }
     if (this.props.removing) {
       menuItems.push({
+        id: `${this.props.grid.id}-menu-item-delete`,
         title: <M id="Delete" />,
         disabled: !this.props.selectedItems.has(0),
         onClick: this.handleRemoveClick,
