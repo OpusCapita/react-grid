@@ -2,6 +2,10 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 3.4.0
+* Improved date handling, fixes input, sorting and filtering bugs.
+* Use new @opuscapita/react-datetime component as date input.
 * Added ids to dropdown menu items.
 
 ## 3.3.2
