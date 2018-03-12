@@ -132,7 +132,7 @@ export default class DatagridView extends React.Component {
           columnWidths: { text3: 200, text4: 300 },
         }),
         save: (conf) => {
-          console.log(`Save config: ${JSON.stringify(conf)}`);
+          console.log(`Save config: ${JSON.stringify(conf)}`); // eslint-disable-line
         },
       },
     };

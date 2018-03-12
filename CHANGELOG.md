@@ -4,9 +4,12 @@
 ## <next>
 
 ## 3.4.0
-* Improved date handling, fixes input, sorting and filtering bugs.
-* Use new @opuscapita/react-datetime component as date input.
-* Added ids to dropdown menu items.
+* Use new @opuscapita/react-datetime component as date input
+* Update @opuscapita/react-select-order-list
+* Update @opuscapita/react-perfect-scrollbar
+* Improved date handling, fixes input, sorting and filtering bugs
+* Added ids to dropdown menu items
+* Remove close cross from Column settings modal
 
 ## 3.3.2
 * Change id to the classname the main div of `responsive-fixed-data-table` component

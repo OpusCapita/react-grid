@@ -134,7 +134,7 @@ export default {
             return moment.utc(filterVal, dateFormat).isSame(val, 'day');
           }
           return false;
-        }
+        };
       case 'boolean':
       case 'select':
         return (val, filterVal) => val === filterVal;

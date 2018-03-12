@@ -77,32 +77,57 @@ function getBaseConfiguration(config) {
         {
           test: /\.svg$/,
           include: path.resolve(__dirname, '..', 'node_modules', 'font-awesome'),
-          use: ['file-loader?name=[name].[ext]'],
+          use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          }],
         },
         {
           test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-          use: [
-            'url-loader?limit=100&mimetype=application/font-woff&name=[name].[ext]',
-          ],
+          use: [{
+            loader: 'url-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+              limit: 100,
+              mimetype: 'application/font-woff',
+            },
+          }],
         },
         {
           test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-          use: [
-            'url-loader?limit=100&mimetype=application/octet-stream&name=[name].[ext]',
-          ],
+          use: [{
+            loader: 'url-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+              limit: 100,
+              mimetype: 'application/octet-stream',
+            },
+          }],
         },
         {
           test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-          use: [
-            'file-loader?name=[name].[ext]',
-          ],
+          use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          }],
         },
         {
           test: /\.ico$/,
-          use: [
-            'file-loader?name=[name].[ext]',
-          ],
           include: /images/,
+          use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          }],
         },
       ],
     },

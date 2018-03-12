@@ -55,7 +55,7 @@ export default class ColumnSettings extends React.PureComponent {
         show
         onHide={this.handleCancelClick}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title><M id="GridSelectColumns" /></Modal.Title>
         </Modal.Header>
         <Modal.Body>
