@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=development webpack && cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack --progress --colors --watch",
     "test": "cross-env NODE_ENV=test mocha --require test/register.js --colors test/test.setup.js test/**/*.spec.*",
-    "docs": "cross-env NODE_ENV=development webpack --config webpack.docs.config.js",
+    "docs": "cross-env NODE_ENV=production webpack --config webpack.docs.config.js",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --config webpack.examples.hot.config.js",
     "preversion": "npm run lint && npm test",
     "version": "npm run build && git add -A lib",
