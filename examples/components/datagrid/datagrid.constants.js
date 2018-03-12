@@ -93,7 +93,7 @@ export const columns = [
     valueType: 'date',
     componentType: 'date',
     isRequired: true,
-    width: 100,
+    width: 120,
     validators: [
       { validate: VALIDATE.isRequired },
     ],
