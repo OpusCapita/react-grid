@@ -1,0 +1,14 @@
+input[type=checkbox], input[type=radio], input[type=file] {
+  &:focus {
+    outline: 1px auto $oc-color-primary-yellow !important;
+  }
+}
+
+.oc-mandatory label::after {
+  content: " *";
+}
+
+.oc-mandatory-error label::after {
+  color: $oc-color-error;
+  content: " *";
+}

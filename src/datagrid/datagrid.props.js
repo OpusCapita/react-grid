@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types, react/forbid-prop-types, max-len */
-/* eslint-disable no-multi-spaces */
+/* eslint-disable no-multi-spaces, object-curly-newline */
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
@@ -153,12 +153,10 @@ export const propTypes = {
   rowSelect: bool,
   rowSelectCheckboxColumn: bool,
   multiSelect: bool,
-  selectComponentOptions: mapOf( // Options data for the react-select components
-    arrayOf(shape({
-      value: oneOfType([number, string, bool]).isRequired,
-      label: oneOfType([number, string]).isRequired,
-    })),
-  ),
+  selectComponentOptions: mapOf(arrayOf(shape({  // Options data for the react-select components
+    value: oneOfType([number, string, bool]).isRequired,
+    label: oneOfType([number, string]).isRequired,
+  }))),
   disableActions: bool,               // Disable actions in the action bar
   disableActionsMessage: shape({
     messageId: string,

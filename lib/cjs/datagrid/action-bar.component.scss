@@ -1,0 +1,35 @@
+@import 'datagrid.variables.scss';
+
+.oc-datagrid-actionbar-container {
+  background: white;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: flex-start;
+  flex: 0 0 auto;
+}
+
+.oc-datagrid-actionbar {
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: row wrap;
+  button:not(.dropdown-toggle) {
+    margin-left: 5px;
+    min-width: 100px;
+  }
+  &.left {
+    justify-content: flex-start;
+  }
+  &.right {
+    justify-content: flex-end;
+  }
+}
+
+.oc-datagrid-gridheader {
+  font-size: $oc-grid-font-size-medium;
+  color: $oc-grid-color-text;
+}

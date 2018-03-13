@@ -1,0 +1,4 @@
+--colors
+--require test/register.js
+--require test/test.setup.js
+test/**/*.spec.*

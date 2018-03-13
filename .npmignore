@@ -26,19 +26,13 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
-# Webpack base configurations directory
-webpack
-
 docs
-examples
-examples-build
 src
+src_docs
+tools
 test
-images
 .babelrc
 .eslintrc
 .npmignore
-readme.md
-webpack.config.js
-webpack.docs.config.js
-webpack.examples.hot.config.js
+.npmrc
+webpack.*

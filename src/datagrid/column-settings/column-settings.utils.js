@@ -5,7 +5,7 @@ export default {
     columns.map((col) => {
       const value = Utils.getColumnKey(col);
       const label = col.header;
-      const isLocked = col.isLocked;
+      const { isLocked } = col;
       return { isLocked, label, value };
     })
   ),
@@ -15,7 +15,7 @@ export default {
       columns.forEach((col) => {
         if (Utils.getColumnKey(col) === value) {
           const label = col.header;
-          const isLocked = col.isLocked;
+          const { isLocked } = col;
           selectedColumns.push({ isLocked, label, value });
         }
       });

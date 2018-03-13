@@ -1,5 +1,5 @@
 require('babel-register')({
-  ignore: /node_modules\/(?!@opuscapita\/react-perfect-scrollbar)/,
+  ignore: /node_modules/,
 });
 require('ignore-styles');
 require('global-jsdom')();

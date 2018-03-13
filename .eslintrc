@@ -35,6 +35,6 @@
       "devDependencies": true,
       "optionalDependencies": true,
       "peerDependencies": true}],
-    "jsx-a11y/href-no-hash": "off"
+    "react/prefer-stateless-function": "off"
   }
 }

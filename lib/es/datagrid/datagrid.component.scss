@@ -1,0 +1,256 @@
+@import 'datagrid.variables.scss';
+
+.oc-datagrid-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  overflow: hidden;
+
+  .oc-datagrid-actions-disabled-notification {
+    background-color: $oc-grid-color-background;
+    text-align: right;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+
+  // Fixed data table overrides
+  .public_fixedDataTable_bodyRow {
+    .public_fixedDataTableCell_cellContent {
+      padding: 0;
+      .oc-datagrid-tooltip {
+        padding: 0px 8px 0px 8px;
+      }
+    }
+  }
+  .oc-datagrid-row-edit,
+  .oc-datagrid-row-new {
+    .public_fixedDataTableCell_cellContent {
+      .oc-datagrid-tooltip {
+        padding: 3px;
+      }
+    }
+  }
+  .oc-datagrid-row-filter {
+    margin-top: 10px;
+    font-weight: $oc-grid-font-weight-normal;
+    .form-group {
+      margin-bottom: 0;
+    }
+    .public_fixedDataTableCell_cellContent {
+      padding: 3px;
+    }
+  }
+
+  // TABLE
+  .public_fixedDataTable_main {
+    border: none;
+    background-color: $oc-grid-color-background;
+  }
+
+  // HEADER
+  .public_fixedDataTable_header {
+    background: $oc-grid-color-background;
+    border-style: solid;
+    border-color: $oc-grid-color-border;
+    border-width: 1px 0 0px 0;
+    .oc-datagrid-cell-header {
+      border-style: solid;
+      border-color: $oc-grid-color-border;
+      border-width: 0 1px 0 0;
+      &.clickable {
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+  }
+
+  // CELL
+  .public_fixedDataTableCell_main {
+    border: none;
+    background: $oc-grid-color-background;
+    color: $oc-grid-color-text;
+    font-size: $oc-grid-font-size-small;
+    line-height: 100%;
+
+    &[type="text"], &[type="email"], &[type="password"] {
+      width: 100%;
+    }
+  }
+
+  .oc-datagrid-cell {
+    &.is-selected {
+      border: 1px solid $oc-grid-color-warning !important;
+      border-bottom: 2px solid $oc-grid-color-warning !important;
+    }
+    
+    .form-control, .Select-control, .Select-input {
+      height: 31px !important;
+    }
+  }
+
+  .oc-datagrid-row-edit, .oc-datagrid-row-new {
+    .form-group {
+      margin: 0;
+    }
+
+    // Cell message input element borders when active or highlight
+    .oc-datagrid-tooltip.warning {
+      .form-control, .Select-control {
+        &:focus, &:hover {
+          border: 1px solid $oc-grid-color-warning !important;
+        }
+        &:active {
+          border: 1px solid $oc-grid-color-warning !important;
+        }
+      }
+      .Select.is-focused {
+        .Select-control {
+          border: 1px solid $oc-grid-color-warning !important;
+        }
+      }
+    }
+    .oc-datagrid-tooltip.error {
+      .form-control, .Select-control {
+        &:focus, &:hover {
+          border: 1px solid $oc-grid-color-error !important;
+        }
+        &:active {
+          border: 1px solid $oc-grid-color-error !important;
+        }
+      }
+      .Select.is-focused {
+        .Select-control {
+          border: 1px solid $oc-grid-color-error !important;
+        }
+      }
+    }
+  }
+
+  // ROW
+  .oc-datagrid-row {
+    background: $oc-grid-color-background;
+    border-style: solid;
+    border-color: $oc-grid-color-border;
+    border-width: 1px 0 0 0;
+    &.is-selected {
+      background-color: $oc-grid-color-selected;
+      .public_fixedDataTableCell_main {
+        background-color: $oc-grid-color-selected;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: $oc-grid-color-highlight;
+      .public_fixedDataTableCell_main {
+        background-color: $oc-grid-color-highlight;
+      }
+    }
+  }
+
+
+  // COLUMN RESIZER
+  .public_fixedDataTableCell_columnResizerKnob {
+    background-color: $oc-grid-color-column-resizer;
+  }
+
+  .public_fixedDataTableColumnResizerLine_main {
+    border-color: $oc-grid-color-column-resizer;
+  }
+
+
+  // CUSTOMIZATIONS
+  .oc-datagrid-cell-header-clickable {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  // CELL MESSAGES
+  .oc-datagrid-tooltip {
+    position: static;
+    &.info {
+      &:before {
+        display: block;
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 7px;
+        border-right-color: $oc-grid-color-tooltip;
+        border-top-color: $oc-grid-color-tooltip;
+        z-index: 100000;
+      }
+    }
+    &.error {
+      &:before {
+        display: block;
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 7px;
+        border-right-color: $oc-grid-color-error;
+        border-top-color: $oc-grid-color-error;
+        z-index: 100000;
+      }
+    }
+    &.warning {
+      &:before {
+        display: block;
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 7px;
+        border-right-color: $oc-grid-color-warning;
+        border-top-color: $oc-grid-color-warning;
+        z-index: 100000;
+      }
+    }
+    &.edited {
+      &:after {
+        display: block;
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 7px;
+        border-right-color: $oc-grid-color-edited;
+        border-bottom-color: $oc-grid-color-edited;
+        z-index: 100000;
+      }
+    }
+  }
+
+}
+
+.tooltip.bottom {
+  margin-top: 0;
+  .tooltip-arrow {
+    border-bottom-color: $oc-grid-color-tooltip !important;
+    &.error {
+      border-bottom-color: $oc-grid-color-error !important;
+    }
+    &.warning {
+      border-bottom-color: $oc-grid-color-warning !important;
+    }
+  }
+  .tooltip-inner {
+    background-color: $oc-grid-color-tooltip !important;
+    &.error {
+      background-color: $oc-grid-color-error !important;
+    }
+    &.warning {
+      background-color: $oc-grid-color-warning !important;
+      color: black;
+    }
+  }
+}

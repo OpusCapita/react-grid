@@ -178,7 +178,7 @@ export default {
       isFiltering = true;
     }
     if (loadedConfig.hiddenColumns) {
-      hiddenColumns = loadedConfig.hiddenColumns;
+      hiddenColumns = loadedConfig.hiddenColumns; // eslint-disable-line
     } else {
       const hiddenColumnsJson = localStorage.getItem(`oc_grid_hiddenColumns_${grid.id}`);
       if (hiddenColumnsJson) {
@@ -189,7 +189,7 @@ export default {
       }
     }
     if (loadedConfig.columnOrder) {
-      columnOrder = loadedConfig.columnOrder;
+      columnOrder = loadedConfig.columnOrder; // eslint-disable-line
     } else {
       const columnOrderJson = localStorage.getItem(`oc_grid_columnOrder_${grid.id}`);
       if (columnOrderJson) {

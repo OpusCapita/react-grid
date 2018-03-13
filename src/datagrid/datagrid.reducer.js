@@ -76,7 +76,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS:
       return state
-        .setIn([action.id, 'createData'],
+        .setIn(
+          [action.id, 'createData'],
           state
             .getIn([action.id, 'createData'], List())
             .filter((val, idx) => action.indexes.indexOf(idx) === -1),
@@ -236,17 +237,23 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       if (action.rowIndex === null) {
         return state.deleteIn([action.id, 'createCellMessages', action.messageType]);
       }
-      let rowMessage = state.getIn(
-        [action.id, 'createCellMessages', action.messageType, action.rowIndex],
-      );
+      let rowMessage = state.getIn([
+        action.id,
+        'createCellMessages',
+        action.messageType,
+        action.rowIndex,
+      ]);
       if (rowMessage) {
         if (action.keyPath) {
           rowMessage = rowMessage.deleteIn(action.keyPath);
         }
         if (rowMessage.size === 0 || !action.keyPath) {
-          return state.deleteIn(
-            [action.id, 'createCellMessages', action.messageType, action.rowIndex],
-          );
+          return state.deleteIn([
+            action.id,
+            'createCellMessages',
+            action.messageType,
+            action.rowIndex,
+          ]);
         }
         return state.setIn(
           [action.id, 'createCellMessages', action.messageType, action.rowIndex],

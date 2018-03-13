@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import {
   injectIntl,
   FormattedMessage as M,
-  FormattedNumber as N } from 'react-intl';
+  FormattedNumber as N,
+} from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
 import { Checkbox, FormControl } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -26,10 +27,9 @@ import * as datagridActions from './datagrid.actions';
 import CellTooltip from './cell-tooltip.component';
 import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';
+import { KEY_CODES } from './datagrid.constants';
 import Utils from './datagrid.utils';
 import './datagrid.component.scss';
-
-import KEY_CODES from '../constants/key-codes.constant';
 
 const mapStateToProps = (state, ownProps) => {
   const GRID = ownProps.grid;
@@ -95,7 +95,7 @@ export default class DataGrid extends React.PureComponent {
 
   onEditCellKeyDown = (col, rowIndex) => (e) => {
     if (this.props.enableArrowNavigation) {
-      const columns = this.props.columns;
+      const { columns } = this.props;
       const rowsSize = this.props.data.size;
       const columnKey = Utils.getColumnKey(col);
       switch (e.keyCode) {
@@ -430,7 +430,7 @@ export default class DataGrid extends React.PureComponent {
       if (this.props.isEditing) {
         scrollToRow = this.state.currentRow;
       } else {
-        scrollToRow = this.props.scrollToRow;
+        scrollToRow = this.props.scrollToRow; // eslint-disable-line
       }
       if (scrollToRow === undefined && this.props.selectedItems.size > 0) {
         scrollToRow = this.getSelectedItemIndex(this.props.selectedItems.first());
@@ -462,7 +462,7 @@ export default class DataGrid extends React.PureComponent {
     const columnKey = Utils.getColumnKey(col);
     if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
       const selectedRowIndex = this.getSelectedItemIndex(this.props.selectedItems.first());
-      const selectedCell = this.props.selectedCell;
+      const { selectedCell } = this.props;
       if (selectedCell.size > 0) {
         if (selectedCell.get('rowIndex') === rowIndex && selectedCell.get('columnKey') === columnKey) {
           ref.focus();
@@ -1098,7 +1098,12 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderCell = col => (cellProps) => {
-    const { isCreating, isEditing, createData, selectedCell } = this.props;
+    const {
+      isCreating,
+      isEditing,
+      createData,
+      selectedCell,
+    } = this.props;
     const { rowIndex, ...props } = cellProps;
     const isCheckbox = this.isSelectionCheckbox(cellProps);
     let cell;
@@ -1172,7 +1177,7 @@ export default class DataGrid extends React.PureComponent {
         return (
           <Column
             columnKey="dataEmptyColumn"
-            header={<Cell>{' '}</Cell>}
+            header={<Cell>&nbsp;</Cell>}
             width={10}
             isResizable={false}
             flexGrow={1}
