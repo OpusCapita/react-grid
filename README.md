@@ -1,24 +1,24 @@
 # react-grid
 
 ### Description
-Contains **Datagrid** component that can be used to present data in table. Datagrid supports inline edit, action bar and lot more. Component is highly customizable to meet different use cases.
+**Datagrid** is a component that can be used to present data in table. It supports inline edit, action bar and lot more. Component is highly customizable to meet different use cases.
 
 Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fixed-data-table) react component, which is designed to handle large amounts amounts of data without sacraficing performance.
 
 ### Installation
 ```
-npm install @opuscapita/react-component-template
+npm install @opuscapita/react-grid
+npm install font-awesome
+npm install react-immutable-proptypes
 ```
 
 ### Demo
 View the [DEMO](https://opuscapita.github.io/react-grid)
 
 ### Redux dependency
-
 Datagrid uses redux as data store, so you must have redux set up in your project. It also depends on redux-thunk and react-intl-redux to be present. These dependencies comes from the fact that this component is separated from another project and it is known that these dependencies should be removed at some point.
 
 ### Usage
-
 First you have to connect your component to the redux. Then you can map the datagrid's state and actions to your component's props. The mappings are needed only for those parts that you need in your component. For example if you only load data to the grid, you can only map the `setData` action. If you need to know currently selected items, you need to map `selectedItems` from the grid state.
 
 - Create a `GRID` object that contains `id` and `idKeyPath` of your grid. This object is passed to every action you call and to the Datagrid component itself as prop.
