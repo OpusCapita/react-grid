@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 4.0.0
+* Update to new component build template with separate es, cjs and umd builds.
+
 ## 3.4.0
 * Use new @opuscapita/react-datetime component as date input
 * Update @opuscapita/react-select-order-list
