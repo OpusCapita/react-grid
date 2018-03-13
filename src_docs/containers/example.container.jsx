@@ -9,11 +9,11 @@ export default () => (
       <Col xs={11} md={8} lg={6}>
         <Row>
           <Col xs={10}>
-            <h3>React component template</h3>
+            <h3>React Grid</h3>
           </Col>
           <Col xs={2}>
             <a
-              href="https://github.com/OpusCapita/react-component-template"
+              href="https://github.com/OpusCapita/react-grid"
               style={{ marginTop: '20px', display: 'block' }}
             >
               <GithubLogo />
