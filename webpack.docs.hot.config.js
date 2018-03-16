@@ -30,10 +30,5 @@ const hotConfig = {
 };
 
 const mergedConfig = merge(devConfig, hotConfig);
-mergedConfig.entry = [
-  'babel-polyfill',
-  'react-hot-loader/patch',
-  devConfig.entry[1],
-];
 
 module.exports = mergedConfig;

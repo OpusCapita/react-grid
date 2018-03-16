@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 5.0.0
+* Refactor translation keys. All keys are now prefixed with "Grid."
+* Update HMR to use latest react-hot-loader format
+
 ## 4.0.0
 * Update to new component build template with separate es, cjs and umd builds.
 

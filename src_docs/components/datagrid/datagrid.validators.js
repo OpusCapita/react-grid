@@ -1,4 +1,4 @@
-const PREFIX = 'Validation';
+const PREFIX = 'Validation.';
 
 const isNotDefined = val => (
   val === '' || val === null || val === undefined
@@ -6,7 +6,7 @@ const isNotDefined = val => (
 
 export const isRequired = (value) => {
   if (isNotDefined(value)) {
-    return { valid: false, message: `${PREFIX}isRequired` };
+    return { valid: false, message: `${PREFIX}IsRequired` };
   }
   return { valid: true };
 };

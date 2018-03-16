@@ -56,18 +56,18 @@ export default class ColumnSettings extends React.PureComponent {
         onHide={this.handleCancelClick}
       >
         <Modal.Header>
-          <Modal.Title><M id="GridSelectColumns" /></Modal.Title>
+          <Modal.Title><M id="Grid.ColumnSettings.Header" /></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <SelectOrderList
-            allLabel={<M id="GridSelectedAllColumns" />}
+            allLabel={<M id="Grid.ColumnSettings.All" />}
             allSelected={this.state.allSelected}
             availableData={List(this.state.availableColumns)}
-            availableListLabel={<M id="GridAvailableColumns" />}
+            availableListLabel={<M id="Grid.ColumnSettings.AvailableColumns" />}
             id={`ocDatagridColumnSettings-${this.props.grid.id}`}
             onChange={this.handleSelectionChange}
             selectedData={List(this.state.selectedColumns)}
-            selectedListLabel={<M id="GridSelectedColumns" />}
+            selectedListLabel={<M id="Grid.ColumnSettings.SelectedColumns" />}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -76,13 +76,13 @@ export default class ColumnSettings extends React.PureComponent {
             bsStyle="primary"
             onClick={this.handleOkClick}
           >
-            <M id="Ok" />
+            <M id="Grid.Ok" />
           </Button>
           <Button
             id={`ocDatagridColumnSettings-${this.props.grid.id}-cancel-button`}
             onClick={this.handleCancelClick}
           >
-            <M id="Cancel" />
+            <M id="Grid.Cancel" />
           </Button>
         </Modal.Footer>
       </Modal>

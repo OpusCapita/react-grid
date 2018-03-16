@@ -41,7 +41,7 @@ export default class InlineEditControls extends React.PureComponent {
 
   static defaultProps = {
     disableActions: false,
-    disableActionsMessage: { messageId: 'GridActionsDisabledOtherGridBusy' },
+    disableActionsMessage: { messageId: 'Grid.DisableActionsMessage' },
     disableActionSave: false,
     inlineAdd: true,
     onAddClick: null,
@@ -119,7 +119,7 @@ export default class InlineEditControls extends React.PureComponent {
             tabIndex={tabIndex + 1}
             id={`oc-datagrid-controls-save-${grid.id}`}
           >
-            <M id="Save" />
+            <M id="Grid.Save" />
           </Button>
           <Button
             disabled={isBusy || disableActions}
@@ -127,7 +127,7 @@ export default class InlineEditControls extends React.PureComponent {
             tabIndex={tabIndex + 2}
             id={`oc-datagrid-controls-cancel-${grid.id}`}
           >
-            <M id="Cancel" />
+            <M id="Grid.Cancel" />
           </Button>
           {isCreating &&
             <Button
@@ -136,7 +136,7 @@ export default class InlineEditControls extends React.PureComponent {
               tabIndex={tabIndex + 3}
               id={`oc-datagrid-controls-add-${grid.id}`}
             >
-              <M id="Add" />
+              <M id="Grid.Add" />
             </Button>
           }
         </div>
@@ -160,7 +160,7 @@ export default class InlineEditControls extends React.PureComponent {
             onClick={this.handleEditButtonClick}
             id={`oc-datagrid-controls-edit-${grid.id}`}
           >
-            <M id="Edit" />
+            <M id="Grid.Edit" />
           </Button>
           {inlineAdd &&
             <Button
@@ -168,7 +168,7 @@ export default class InlineEditControls extends React.PureComponent {
               onClick={this.handleCreateButtonClick}
               id={`oc-datagrid-controls-create-${grid.id}`}
             >
-              <M id="Add" />
+              <M id="Grid.Add" />
             </Button>
           }
         </CellToolTip>

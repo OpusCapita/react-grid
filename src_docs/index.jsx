@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { AppContainer } from 'react-hot-loader';
+import { hot } from 'react-hot-loader';
 import {
   createStore,
   applyMiddleware,
@@ -36,28 +36,22 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk)),
 );
 
-const renderApp = (Component) => {
-  render(
-    <AppContainer>
+@hot(module)
+class App extends React.Component {
+  render() {
+    return (
       <Provider store={store}>
         <IntlProvider locale="en">
           <Router>
-            <Route path="/" component={Component} />
+            <Route path="/" component={ExampleContainer} />
           </Router>
         </IntlProvider>
       </Provider>
-    </AppContainer>,
-    document.getElementById('oc-examples'),
-  );
-};
-
-renderApp(ExampleContainer);
-
-// Webpack Hot Module Replacement API
-/* eslint-disable global-require */
-if (module.hot) {
-  module.hot.accept('./containers/example.container', () => {
-    const Comp = require('./containers/example.container').default;
-    renderApp(Comp);
-  });
+    );
+  }
 }
+
+render(
+  <App />,
+  document.getElementById('oc-examples'),
+);

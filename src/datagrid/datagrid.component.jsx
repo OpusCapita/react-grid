@@ -566,7 +566,7 @@ export default class DataGrid extends React.PureComponent {
       const valueRender = (rowIndex, format) => {
         const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
         if (valueEmptyChecker(val)) {
-          return col.isRequired ? <M id="GridValueIsMissing" /> : '';
+          return col.isRequired ? <M id="Grid.ValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
       };
@@ -591,12 +591,13 @@ export default class DataGrid extends React.PureComponent {
                 if (moment(v).isValid()) {
                   return moment.utc(v).format(this.props.dateFormat);
                 }
-                return <M id="GridInvalidDate" />;
+                return <M id="Grid.InvalidDate" />;
               });
             break;
           case 'boolean':
             column.cell = rowIndex =>
-              valueRender(rowIndex, v => <M id={v ? 'Yes' : 'No'} {...col.renderComponentProps} />);
+              valueRender(rowIndex, v =>
+                <M id={v ? 'Grid.Yes' : 'Grid.No'} {...col.renderComponentProps} />);
             break;
           default:
             column.cell = rowIndex => valueRender(rowIndex);
@@ -938,8 +939,8 @@ export default class DataGrid extends React.PureComponent {
           }
           case 'boolean': {
             const selectOptions = [
-              { value: true, label: this.props.intl.formatMessage({ id: 'Yes' }) },
-              { value: false, label: this.props.intl.formatMessage({ id: 'No' }) },
+              { value: true, label: this.props.intl.formatMessage({ id: 'Grid.Yes' }) },
+              { value: false, label: this.props.intl.formatMessage({ id: 'Grid.No' }) },
             ];
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
@@ -1165,7 +1166,7 @@ export default class DataGrid extends React.PureComponent {
       return (
         <Column
           columnKey="dataEmptyColumn"
-          header={<Cell style={{ textAlign: 'center' }}><M id="GridNoItems" /></Cell>}
+          header={<Cell style={{ textAlign: 'center' }}><M id="Grid.NoItems" /></Cell>}
           width={10}
           isResizable={false}
           flexGrow={1}
@@ -1187,7 +1188,7 @@ export default class DataGrid extends React.PureComponent {
       return (
         <Column
           columnKey="dataEmptyColumn"
-          header={<Cell style={{ textAlign: 'center' }}><M id="GridNoColumns" /></Cell>}
+          header={<Cell style={{ textAlign: 'center' }}><M id="Grid.NoColumns" /></Cell>}
           width={10}
           isResizable={false}
           flexGrow={1}

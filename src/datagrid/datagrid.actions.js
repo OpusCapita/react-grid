@@ -430,7 +430,7 @@ export const editCellValueValidate = (
             if (finding) {
               validationState = {
                 valid: false,
-                message: 'ValidationUnique',
+                message: 'Validation.Unique',
               };
             }
           }
@@ -500,7 +500,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
             if (finding) {
               validationState = {
                 valid: false,
-                message: 'ValidationUnique',
+                message: 'Validation.Unique',
               };
             } else {
               const find2 = getState()
@@ -510,7 +510,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
               if (find2) {
                 validationState = {
                   valid: false,
-                  message: 'ValidationUnique',
+                  message: 'Validation.Unique',
                 };
               }
             }
