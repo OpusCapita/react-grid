@@ -60,14 +60,16 @@ export default class ColumnSettings extends React.PureComponent {
         </Modal.Header>
         <Modal.Body>
           <SelectOrderList
-            allLabel={<M id="Grid.ColumnSettings.All" />}
             allSelected={this.state.allSelected}
             availableData={List(this.state.availableColumns)}
-            availableListLabel={<M id="Grid.ColumnSettings.AvailableColumns" />}
             id={`ocDatagridColumnSettings-${this.props.grid.id}`}
             onChange={this.handleSelectionChange}
             selectedData={List(this.state.selectedColumns)}
-            selectedListLabel={<M id="Grid.ColumnSettings.SelectedColumns" />}
+            translations={{
+              allLabel: <M id="Grid.ColumnSettings.All" />,
+              availableListLabel: <M id="Grid.ColumnSettings.AvailableColumns" />,
+              selectedListLabel: <M id="Grid.ColumnSettings.SelectedColumns" />,
+            }}
           />
         </Modal.Body>
         <Modal.Footer>
