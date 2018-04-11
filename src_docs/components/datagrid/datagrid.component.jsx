@@ -133,7 +133,7 @@ export default class DatagridView extends React.Component {
   render() {
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
     const actionBar = (
-      <Form inline>
+      <Form inline style={{ marginLeft: '20px' }}>
         <Button
           onClick={this.handleWarnClick}
         >
@@ -164,26 +164,22 @@ export default class DatagridView extends React.Component {
       </Form>
     );
     return (
-      <div className="oc-content oc-flex-column">
-        <div>
-          <h1>Datagrid</h1>
-        </div>
-        <Datagrid
-          grid={this.state.gridSettings}
-          columns={columns}
-          disableActionSave={disableActionSave}
-          actionBarLeft={actionBar}
-          filtering
-          columnSettings
-          inlineEdit
-          removing
-          multiSelect
-          rowSelect
-          rowSelectCheckboxColumn
-          onSave={this.handleOnSave}
-          onRemove={this.handleOnRemove}
-        />
-      </div>
+      <Datagrid
+        grid={this.state.gridSettings}
+        gridHeader="Example Grid"
+        columns={columns}
+        disableActionSave={disableActionSave}
+        actionBarLeft={actionBar}
+        filtering
+        columnSettings
+        inlineEdit
+        removing
+        multiSelect
+        rowSelect
+        rowSelectCheckboxColumn
+        onSave={this.handleOnSave}
+        onRemove={this.handleOnRemove}
+      />
     );
   }
 }

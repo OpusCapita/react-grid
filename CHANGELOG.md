@@ -3,6 +3,13 @@
 
 ## <next>
 
+## 5.1.0
+* Package upgrades:
+  * @opuscapita/react-dropdown@2.1.0
+  * @opuscapita/react-select-order-list@3.1.2
+  * fixed-data-table-2@0.8.11
+* Fix: Center grid header vertically to container
+
 ## 5.0.0
 * Refactor translation keys. All keys are now prefixed with "Grid."
 * Update HMR to use latest react-hot-loader format

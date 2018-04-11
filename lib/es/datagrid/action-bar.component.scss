@@ -32,4 +32,6 @@
 .oc-datagrid-gridheader {
   font-size: $oc-grid-font-size-medium;
   color: $oc-grid-color-text;
+  display: flex;
+  align-items: center;
 }

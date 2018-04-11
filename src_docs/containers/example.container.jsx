@@ -21,7 +21,7 @@ export default () => (
             </a>
           </Col>
         </Row>
-        <Panel>
+        <Panel style={{ height: '100%' }}>
           <Datagrid />
         </Panel>
       </Col>

@@ -24,5 +24,7 @@
   "Validation.MinLength": "Value is too short",
   "Validation.MaxLength": "Value is too long",
   "Validation.MinValue": "Value is too big",
-  "Validation.MaxValue": "Value is too small"
+  "Validation.MaxValue": "Value is too small",
+
+  "Warning": "Warning"
 }
