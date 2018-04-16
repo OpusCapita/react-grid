@@ -162,11 +162,13 @@ export const applySort = (grid, columns) =>
     const allData = origAllData.sort((a, b) => {
       const valA = valueGetter(a);
       const valB = valueGetter(b);
-      if (valueEmptyChecker(valA)) return 1;
-      if (valueEmptyChecker(valB)) return -1;
       if (sortOrder === 'asc') {
+        if (valueEmptyChecker(valA)) return -1;
+        if (valueEmptyChecker(valB)) return 1;
         return comparator(valA, valB);
       }
+      if (valueEmptyChecker(valA)) return 1;
+      if (valueEmptyChecker(valB)) return -1;
       return comparator(valB, valA);
     });
     let data;
@@ -175,11 +177,13 @@ export const applySort = (grid, columns) =>
       data = gridData.get('data').sort((a, b) => {
         const valA = valueGetter(a);
         const valB = valueGetter(b);
-        if (valueEmptyChecker(valA)) return 1;
-        if (valueEmptyChecker(valB)) return -1;
         if (sortOrder === 'asc') {
+          if (valueEmptyChecker(valA)) return -1;
+          if (valueEmptyChecker(valB)) return 1;
           return comparator(valA, valB);
         }
+        if (valueEmptyChecker(valA)) return 1;
+        if (valueEmptyChecker(valB)) return -1;
         return comparator(valB, valA);
       });
     } else {

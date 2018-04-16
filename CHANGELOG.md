@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add translation for search tooltip
+* Change empty value sorting so that it gets sorted too
 
 ## 5.1.0
 * Package upgrades:

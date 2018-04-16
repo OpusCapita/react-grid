@@ -69,6 +69,7 @@ export default class ColumnSettings extends React.PureComponent {
               allLabel: <M id="Grid.ColumnSettings.All" />,
               availableListLabel: <M id="Grid.ColumnSettings.AvailableColumns" />,
               selectedListLabel: <M id="Grid.ColumnSettings.SelectedColumns" />,
+              searchTooltip: <M id="Grid.ColumnSettings.SearchTooltip" />,
             }}
           />
         </Modal.Body>

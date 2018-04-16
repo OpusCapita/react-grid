@@ -18,6 +18,7 @@
   "Grid.ColumnSettings.AvailableColumns": "Available columns",
   "Grid.ColumnSettings.Header": "Select columns",
   "Grid.ColumnSettings.SelectedColumns": "Selected columns",
+  "Grid.ColumnSettings.SearchTooltip": "Search starts when you have entered enough characters",
 
   "Validation.Unique": "Value must be unique",
   "Validation.IsRequired": "Value is required",
