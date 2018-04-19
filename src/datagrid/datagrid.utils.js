@@ -239,8 +239,7 @@ export default {
   },
   saveSelectedItems: (grid, selectedItems) => {
     if (grid.disableRememberSelectedItems) return false;
-    if (!selectedItems) return false;
-    sessionStorage.setItem(`oc_grid_selectedItems_${grid.id}`, JSON.stringify(selectedItems));
+    sessionStorage.setItem(`oc_grid_selectedItems_${grid.id}`, JSON.stringify(selectedItems || []));
     return true;
   },
   saveColumnWidths: (grid, columnWidths) => {
