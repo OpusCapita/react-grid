@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed a bug: renamed passed CellTooltip prop messageId->infoMessage  
 
 ## 5.1.2
 * Fixed a bug: when clearSelectedItems action called, it doesn't change saved selected items in a session storage
