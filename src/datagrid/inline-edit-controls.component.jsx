@@ -145,8 +145,10 @@ export default class InlineEditControls extends React.PureComponent {
     let message = {};
     if (disableActions && disableActionsMessage) {
       message = {
-        messageId: disableActionsMessage.messageId,
-        messageValues: disableActionsMessage.messageValues,
+        infoMessage: {
+          id: disableActionsMessage.messageId,
+          values: disableActionsMessage.messageValues,
+        },
       };
     }
     return (
