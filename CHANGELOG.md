@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed :before color-corner shown only for grid cells, not for action bar items 
 
 ## 5.1.3
 * Fixed a bug: renamed passed CellTooltip prop messageId->infoMessage  
