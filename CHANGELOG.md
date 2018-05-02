@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.1.5
+* Upgraded `@opuscapita/react-select-order-list` to the latest version.
+
 ## 5.1.4
 * Fixed :before color-corner shown only for grid cells, not for action bar items 
 
