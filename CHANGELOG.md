@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 5.1.6
 * Upgraded `@opuscapita/react-select-order-list` and `@opuscapita/react-dropdown` to the latest versions.
 
 ## 5.1.5
