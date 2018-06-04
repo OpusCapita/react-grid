@@ -15,7 +15,6 @@ export default class DropdownControls extends React.PureComponent {
   static propTypes = {
     grid: gridShape.isRequired,
     // actions
-    remove: PropTypes.func.isRequired,
     toggleFiltering: PropTypes.func.isRequired,
     openColumnSettingsModal: PropTypes.func.isRequired,
     // data
@@ -42,8 +41,8 @@ export default class DropdownControls extends React.PureComponent {
   };
 
   handleRemoveClick = () => {
-    if (this.props.selectedItems.has(0)) {
-      this.props.remove(this.props.grid, this.props.onRemove);
+    if (this.props.selectedItems.size > 0) {
+      this.props.onRemove();
     }
   }
 

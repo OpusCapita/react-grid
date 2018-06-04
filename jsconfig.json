@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+      "experimentalDecorators": true
+  },
+  "include": [
+    "src/**/*",
+    "src_docs/**/*",
+    "test/**/*",
+    "tools/**/*"
+  ]
+}
