@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 5.1.7
+* Don't set grid to busy state when delete is clicked from dropdown menu.
+* Upgraded packages that needs no changes.
+
 ## 5.1.6
 * Upgraded `@opuscapita/react-select-order-list` and `@opuscapita/react-dropdown` to the latest versions.
 
