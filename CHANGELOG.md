@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Updated `@opuscapita/react-datetime` to version 2.2.3.
 
 ## 5.1.8
 * Upgraded `@opuscapita/react-select-order-list` to the latest version.

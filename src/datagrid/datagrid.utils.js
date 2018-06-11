@@ -127,11 +127,8 @@ export default {
         return (val, filterVal) => parseFloat(filterVal.replace(',', '.')) === val;
       case 'date':
         return (val, filterVal) => {
-          if (moment(val, dateFormat, true).isValid()) {
-            return moment.utc(filterVal, dateFormat).isSame(moment.utc(val, dateFormat), 'day');
-          }
           if (moment(val).isValid()) {
-            return moment.utc(filterVal, dateFormat).isSame(val, 'day');
+            return moment(val).format(dateFormat) === moment(filterVal).format(dateFormat);
           }
           return false;
         };
