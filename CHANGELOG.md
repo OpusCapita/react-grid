@@ -3,6 +3,7 @@
 
 ## <next>
 
+## 5.1.8
 * Upgraded `@opuscapita/react-select-order-list` to the latest version.
 
 ## 5.1.7
