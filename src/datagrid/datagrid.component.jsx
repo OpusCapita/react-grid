@@ -299,15 +299,7 @@ export default class DataGrid extends React.PureComponent {
       return '';
     }
     // Special formatting by component type
-    if (col.componentType === 'date') {
-      if (moment(originalValue, this.props.dateFormat, true).isValid()) {
-        return moment.utc(originalValue, this.props.dateFormat).format(this.props.dateFormat);
-      }
-      if (moment(originalValue).isValid()) {
-        return moment.utc(originalValue).format(this.props.dateFormat);
-      }
-      return '';
-    } else if (
+    if (
       col.componentType === 'float' &&
       String(originalValue).length > 0
     ) {
@@ -890,7 +882,7 @@ export default class DataGrid extends React.PureComponent {
                   <DateInput
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    language={this.props.language}
+                    locale={this.props.language}
                     dateFormat={this.props.dateFormat}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     inputProps={{
@@ -912,7 +904,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getCreateItemValue(rowIndex, col)}
                     onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
                     onKeyDown={this.onCreateCellKeyDown}
-                    language={this.props.language}
+                    locale={this.props.language}
                     dateFormat={this.props.dateFormat}
                     inputRef={this.handleCreateCellRef(rowIndex, col)}
                     inputProps={{
@@ -933,7 +925,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getFilterItemValue(col)}
                     onChange={this.onFilterCellValueChange(col, editValueParser)}
                     dateFormat={this.props.dateFormat}
-                    language={this.props.language}
+                    locale={this.props.language}
                     inputProps={{
                       tabIndex,
                       id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
