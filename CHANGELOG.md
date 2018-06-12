@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added option selectComponentTranslations to customize react-selects default placeholder and noResultsTexts. By default uses the Grids translations.
 * Updated `@opuscapita/react-datetime` to version 2.2.3.
 
 ## 5.1.8

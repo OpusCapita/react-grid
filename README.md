@@ -64,6 +64,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | rowSelectCheckboxColumn  | boolean          | false                                    | Enable additional checkbox column for row selecting |
 | multiSelect              | boolean          | false                                    | Enable multi selecting on row selecting  |
 | selectComponentOptions   | Immutable.Map    |                                          | Options data for the react-select components |
+| selectComponentTranslations | object          |                                         | Translation strings for react-select placeholder and noResultsText texts. |
 | disableActions           | boolean          | false                                    | Disable action bar actions, eg. when other grid busy |
 | disableActionsMessage    | object           | { messageId: 'GridActionsDisabledOtherGridBusy' } | Message about the reason of disabled action bar actions |
 | disableActionBar         | boolean          | false                                    | Disable action bar rendering             |
