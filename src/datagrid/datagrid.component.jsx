@@ -789,8 +789,14 @@ export default class DataGrid extends React.PureComponent {
             }
             break;
           case 'select': {
+            const { intl } = this.props;
             const selectOptions = col.selectComponentOptions ||
               this.props.selectComponentOptions.get(column.columnKey);
+            const selectTranslations = col.selectComponentTranslations ||
+              {
+                placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
+                noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
+              };
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -817,6 +823,7 @@ export default class DataGrid extends React.PureComponent {
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }
@@ -844,6 +851,7 @@ export default class DataGrid extends React.PureComponent {
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }
@@ -868,6 +876,7 @@ export default class DataGrid extends React.PureComponent {
                     }}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }

@@ -11,6 +11,11 @@ export const GRID = {
   thousandSeparator: '',
 };
 
+export const selectTranslations = {
+  placeholder: 'Plain String Placeholder',
+  noResultsText: 'No hits found',
+};
+
 export const selectOptions = [
   { value: 'Option 1', label: 'Option 1' },
   { value: 'Option 2', label: 'Option 2' },
@@ -105,6 +110,14 @@ export const columns = [
     componentType: 'select',
     selectComponentOptions: selectOptions,
   },
+  {
+    header: 'Select2',
+    valueKeyPath: ['select2'],
+    valueType: 'text',
+    componentType: 'select',
+    selectComponentOptions: selectOptions,
+    selectComponentTranslations: selectTranslations,
+  },
 ];
 
 export const data = [
@@ -117,6 +130,7 @@ export const data = [
     boolean: true,
     date: '2011-04-20T00:00:00Z',
     select: 'Option 1',
+    select2: 'Option 2',
   },
   {
     id: 2,
@@ -127,6 +141,7 @@ export const data = [
     boolean: false,
     date: '2012-04-20T00:00:00Z',
     select: 'Option 2',
+    select2: 'Option 3',
   },
   {
     id: 3,
@@ -137,6 +152,7 @@ export const data = [
     boolean: false,
     date: '2013-04-20T00:00:00Z',
     select: 'Option 3',
+    select2: 'Option 4',
   },
   {
     id: 4,
@@ -147,6 +163,7 @@ export const data = [
     boolean: false,
     date: '2014-04-20T00:00:00Z',
     select: 'Option 4',
+    select2: 'Option 5',
   },
   {
     id: 5,
@@ -157,6 +174,7 @@ export const data = [
     boolean: false,
     date: '2015-04-20T00:00:00Z',
     select: 'Option 5',
+    select2: 'Option 6',
   },
   {
     id: 6,

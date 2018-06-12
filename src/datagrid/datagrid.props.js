@@ -82,6 +82,10 @@ export const columnShape = shape({
     value: oneOfType([number, string, bool]).isRequired,
     label: oneOfType([number, string]).isRequired,
   })),
+  selectComponentTranslations: shape({ // customize select components placeholder and noResults texts.
+    placeholder: string,
+    noResultsText: string,
+  }),
 });
 
 export const propTypes = {
@@ -157,6 +161,10 @@ export const propTypes = {
     value: oneOfType([number, string, bool]).isRequired,
     label: oneOfType([number, string]).isRequired,
   }))),
+  selectComponentTranslations: shape({  // Options for react-select text translations
+    placeholder: string.isRequired,
+    noResultsText: string.isRequired,
+  }),
   disableActions: bool,               // Disable actions in the action bar
   disableActionsMessage: shape({
     messageId: string,

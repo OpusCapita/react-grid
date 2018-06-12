@@ -20,6 +20,9 @@
   "Grid.ColumnSettings.SelectedColumns": "Selected columns",
   "Grid.ColumnSettings.SearchTooltip": "Search starts when you have entered enough characters",
 
+  "Grid.FloatingSelect.Select": "Select...",
+  "Grid.FloatingSelect.NoResults": "No search results",
+
   "Validation.Unique": "Value must be unique",
   "Validation.IsRequired": "Value is required",
   "Validation.MinLength": "Value is too short",
