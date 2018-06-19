@@ -366,7 +366,7 @@ export default class DataGrid extends React.PureComponent {
 
     // check if row is selected
     if ((!isCreating && !isEditing) &&
-      (selectedItems && grid.idKeyPath)) {
+        (selectedItems && grid.idKeyPath)) {
       if (
         selectedItems.indexOf(data.getIn([rowIndex - extraRowCount, ...grid.idKeyPath])) !== -1
       ) {
@@ -940,16 +940,16 @@ export default class DataGrid extends React.PureComponent {
           }
           case 'boolean': {
             const { intl } = this.props;
+            const selectOptions = [
+              { value: true, label: intl.formatMessage({ id: 'Grid.Yes' }) },
+              { value: false, label: intl.formatMessage({ id: 'Grid.No' }) },
+            ];
+
             const selectTranslations = col.selectComponentTranslations || {
               placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
               noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
             };
 
-
-            const selectOptions = [
-              { value: true, label: intl.formatMessage({ id: 'Grid.Yes' }) },
-              { value: false, label: intl.formatMessage({ id: 'Grid.No' }) },
-            ];
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -1162,13 +1162,13 @@ export default class DataGrid extends React.PureComponent {
             errorMessage={messageData.errorMessage}
             warningMessage={messageData.warningMessage}
           >
-            {cell}
+            { cell }
           </CellTooltip>
         </Cell>
       );
     }
     return (
-      <Cell {...props} className="oc-datagrid-cell" style={col.style}>{cell}</Cell>
+      <Cell {...props} className="oc-datagrid-cell" style={col.style}>{ cell }</Cell>
     );
   }
 
@@ -1250,31 +1250,31 @@ export default class DataGrid extends React.PureComponent {
     let actionBarLeft = null;
     if (
       (this.props.actionBar ||
-        this.props.inlineEdit ||
-        this.props.filtering ||
-        this.props.removing) &&
+      this.props.inlineEdit ||
+      this.props.filtering ||
+      this.props.removing) &&
       !this.props.disableActionBar
     ) {
       actionBarRight = (
         <ActionBar position="right">
-          <div className="oc-datagrid-actionbar-right">{this.props.actionBar}</div>
-          {(this.props.filtering && this.props.disableDropdown
+          <div className="oc-datagrid-actionbar-right">{ this.props.actionBar }</div>
+          { (this.props.filtering && this.props.disableDropdown
             && !this.props.disableFilteringControls) &&
             <FilteringControls {...this.props} />
           }
-          {this.props.inlineEdit &&
-          <InlineEditControls
-            afterAddItem={this.handleAfterAddItem}
-            afterEditPress={this.handleAfterEditPress}
-            afterValidationError={this.handleAfterValidationError}
-            {...this.props}
-          />
+          { this.props.inlineEdit &&
+            <InlineEditControls
+              afterAddItem={this.handleAfterAddItem}
+              afterEditPress={this.handleAfterEditPress}
+              afterValidationError={this.handleAfterValidationError}
+              {...this.props}
+            />
           }
-          {(this.props.dropdownMenuItems ||
-            this.props.removing ||
-            this.props.columnSettings ||
-            (this.props.filtering && !this.props.disableDropdown)) &&
-            <DropdownControls {...this.props} />
+          { (this.props.dropdownMenuItems ||
+             this.props.removing ||
+             this.props.columnSettings ||
+             (this.props.filtering && !this.props.disableDropdown)) &&
+             <DropdownControls {...this.props} />
           }
         </ActionBar>
       );
@@ -1282,16 +1282,16 @@ export default class DataGrid extends React.PureComponent {
     if (this.props.actionBarLeft || this.props.gridHeader) {
       actionBarLeft = (
         <ActionBar position="left">
-          <div className="oc-datagrid-gridheader">{this.props.gridHeader}</div>
-          <div className="oc-datagrid-actionbar-left">{this.props.actionBarLeft}</div>
+          <div className="oc-datagrid-gridheader">{ this.props.gridHeader }</div>
+          <div className="oc-datagrid-actionbar-left">{ this.props.actionBarLeft }</div>
         </ActionBar>
       );
     }
     if (actionBarLeft || actionBarRight) {
       actionBar = (
         <div className="oc-datagrid-actionbar-container">
-          {actionBarLeft}
-          {actionBarRight}
+          { actionBarLeft }
+          { actionBarRight }
         </div>
       );
     }
@@ -1307,8 +1307,8 @@ export default class DataGrid extends React.PureComponent {
         className={gridClassName}
         style={this.props.containerStyle}
       >
-        {this.props.isBusy && <Spinner />}
-        {actionBar}
+        { this.props.isBusy && <Spinner /> }
+        { actionBar }
         <ResponsiveFixedDataTable
           id={this.props.grid.id}
           rowsCount={rowsCount}
@@ -1332,18 +1332,18 @@ export default class DataGrid extends React.PureComponent {
           rowHeightGetter={this.props.rowHeightGetter}
           onContentHeightChange={this.props.onContentHeightChange}
         >
-          {this.renderColumns()}
+          { this.renderColumns() }
         </ResponsiveFixedDataTable>
-        {this.props.isColumnSettingsModalOpen &&
-        <ColumnSettingsModal
-          grid={this.props.grid}
-          columns={this.props.columns}
-          visibleColumns={this.props.visibleColumns}
-          closeColumnSettingsModal={this.props.closeColumnSettingsModal}
-          saveColumnSettings={this.props.saveColumnSettings}
-        />
+        { this.props.isColumnSettingsModalOpen &&
+          <ColumnSettingsModal
+            grid={this.props.grid}
+            columns={this.props.columns}
+            visibleColumns={this.props.visibleColumns}
+            closeColumnSettingsModal={this.props.closeColumnSettingsModal}
+            saveColumnSettings={this.props.saveColumnSettings}
+          />
         }
-        {this.props.children}
+        { this.props.children }
       </div>
     );
   }
