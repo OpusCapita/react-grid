@@ -939,10 +939,17 @@ export default class DataGrid extends React.PureComponent {
             break;
           }
           case 'boolean': {
+            const { intl } = this.props;
             const selectOptions = [
-              { value: true, label: this.props.intl.formatMessage({ id: 'Grid.Yes' }) },
-              { value: false, label: this.props.intl.formatMessage({ id: 'Grid.No' }) },
+              { value: true, label: intl.formatMessage({ id: 'Grid.Yes' }) },
+              { value: false, label: intl.formatMessage({ id: 'Grid.No' }) },
             ];
+
+            const selectTranslations = col.selectComponentTranslations || {
+              placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
+              noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
+            };
+
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
                 column.cellEdit = rowIndex => (
@@ -965,6 +972,7 @@ export default class DataGrid extends React.PureComponent {
                     {...col.editComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }
@@ -988,6 +996,7 @@ export default class DataGrid extends React.PureComponent {
                     {...col.createComponentProps}
                     disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }
@@ -1009,6 +1018,7 @@ export default class DataGrid extends React.PureComponent {
                     }}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }
