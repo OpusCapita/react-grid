@@ -97,6 +97,14 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     case TYPES.PLATFORM_DATAGRID_SAVE:
       return state.setIn([action.id, 'session', 'isBusy'], true);
 
+    case TYPES.PLATFORM_DATAGRID_EXTEND_DATA: {
+      const allData = state.getIn([action.id, 'allData']);
+      const extendedData = allData.concat(action.data);
+      return state
+        .setIn([action.id, 'data'], extendedData)
+        .setIn([action.id, 'allData'], extendedData);
+    }
+
     case TYPES.PLATFORM_DATAGRID_SAVE_SUCCESS: {
       let allData = state.getIn([action.id, 'allData']);
       action.savedItems.forEach((savedItemJS) => {

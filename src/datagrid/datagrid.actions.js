@@ -12,6 +12,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_EDIT: 'PLATFORM_DATAGRID_EDIT',
   PLATFORM_DATAGRID_CANCEL: 'PLATFORM_DATAGRID_CANCEL',
   PLATFORM_DATAGRID_SAVE: 'PLATFORM_DATAGRID_SAVE',
+  PLATFORM_DATAGRID_EXTEND_DATA: 'PLATFORM_DATAGRID_EXTEND_DATA',
   PLATFORM_DATAGRID_SAVE_SUCCESS: 'PLATFORM_DATAGRID_SAVE_SUCCESS',
   PLATFORM_DATAGRID_SAVE_PARTIAL_SUCCESS: 'PLATFORM_DATAGRID_SAVE_PARTIAL_SUCCESS',
   PLATFORM_DATAGRID_SAVE_FAIL: 'PLATFORM_DATAGRID_SAVE_FAIL',
@@ -229,6 +230,19 @@ export const setData = (grid, columns, data) =>
       data: immutableData,
       config: configData,
       selectedItems,
+    });
+    applyFilters(grid, columns)(dispatch, getState);
+    applySort(grid, columns)(dispatch, getState);
+  };
+
+export const extendData = (grid, columns, data) =>
+  (dispatch, getState) => {
+    Utils.checkGridParam(grid);
+    const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_EXTEND_DATA,
+      id: grid.id,
+      data: immutableData,
     });
     applyFilters(grid, columns)(dispatch, getState);
     applySort(grid, columns)(dispatch, getState);
