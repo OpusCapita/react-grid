@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.3.1
+* merge conflict fix
+
 ## 5.3.0
 * removeItem action added
 * forceRefresh actiona added
