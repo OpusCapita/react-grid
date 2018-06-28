@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* removeItem action added
 * forceRefresh actiona added
 
 ## 5.2.2
