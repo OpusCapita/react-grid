@@ -43,6 +43,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN',
   PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE',
   PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE',
+  PLATFORM_DATAGRID_FORCE_REFRESH: 'PLATFORM_DATAGRID_FORCE_REFRESH',
 };
 
 export const invalidate = grid =>
@@ -53,6 +54,19 @@ export const invalidate = grid =>
       id: grid.id,
     });
   };
+
+export const forceRefresh = () => (dispatch) => {
+  // Fire resize event to recalculate component sizes
+  // and to force redraw the grid
+  setTimeout(() => {
+    if (document.createEvent) {
+      const evt = document.createEvent('HTMLEvents');
+      evt.initEvent('resize', true, false);
+      window.dispatchEvent(evt);
+    }
+  }, 1);
+  dispatch({ type: TYPES.PLATFORM_DATAGRID_FORCE_REFRESH });
+};
 
 export const setBusy = grid =>
   (dispatch) => {
