@@ -360,6 +360,16 @@ export const addNewItem = (grid, columnDefaultValues) =>
     });
   };
 
+export const removeItem = (grid, index) =>
+  (dispatch) => {
+    Utils.checkGridParam(grid);
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_REMOVE_ITEM,
+      id: grid.id,
+      index,
+    });
+  };
+
 export const removeNewItem = (grid, index) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
