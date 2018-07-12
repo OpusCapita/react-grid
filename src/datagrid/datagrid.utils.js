@@ -2,6 +2,7 @@
 import moment from 'moment';
 import isNaN from 'lodash/isNaN';
 import { isFunction } from 'util';
+import { Map, fromJS } from 'immutable';
 
 const getColumnKey = col => (
   col.columnKey || col.valueKeyPath.join('/')
@@ -334,5 +335,21 @@ export default {
       return ocUserState.getIn(['localeFormat', 'decimalSeparator'], '.');
     }
     return '.';
+  },
+  normalizeFilteringData: (filteringData) => {
+    let newFilteringData = Map({ isFiltering: false });
+    if (!filteringData) return newFilteringData;
+
+    const oldFilteringData = Map.isMap(filteringData) ? filteringData : fromJS(filteringData);
+    const isFiltering = oldFilteringData.get('isFiltering', false);
+    const filterData = oldFilteringData.get('filterData', null);
+
+    if (isFiltering && filterData && Map.isMap(filterData)) {
+      newFilteringData = newFilteringData
+        .set('isFiltering', true)
+        .set('filterData', filterData);
+    }
+
+    return newFilteringData;
   },
 };

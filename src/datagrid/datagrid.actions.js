@@ -39,6 +39,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_TOGGLE_FILTERING: 'PLATFORM_DATAGRID_TOGGLE_FILTERING',
   PLATFORM_DATAGRID_FILTER_DATA_CHANGE: 'PLATFORM_DATAGRID_FILTER_DATA_CHANGE',
   PLATFORM_DATAGRID_APPLY_FILTERS: 'PLATFORM_DATAGRID_APPLY_FILTERS',
+  PLATFORM_DATAGRID_SET_FILTERS: 'PLATFORM_DATAGRID_SET_FILTERS',
   PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: 'PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE',
   PLATFORM_DATAGRID_SET_EDIT_DATA: 'PLATFORM_DATAGRID_SET_EDIT_DATA',
   PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_OPEN',
@@ -125,6 +126,17 @@ export const applyFilters = (grid, columns) =>
       data,
     });
     setReady(grid)(dispatch);
+    return true;
+  };
+
+export const setAndApplyFilters = (grid, columns, filteringData) =>
+  (dispatch) => {
+    dispatch({
+      type: TYPES.PLATFORM_DATAGRID_SET_FILTERS,
+      id: grid.id,
+      filteringData: Utils.normalizeFilteringData(filteringData),
+    });
+    dispatch(applyFilters(grid, columns));
     return true;
   };
 

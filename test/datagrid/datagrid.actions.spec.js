@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions, func-names, no-nested-ternary */
 
-import Immutable, { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import thunk from 'redux-thunk';
@@ -65,7 +65,9 @@ describe('Datagrid actions', () => {
         isBusy: false,
       },
       config: {
-        isFiltering: false,
+        filteringData: {
+          isFiltering: false,
+        },
       },
       selectedItems: [],
     }).mergeDeepIn([id], custom),
@@ -97,7 +99,7 @@ describe('Datagrid actions', () => {
     const expectedAction = {
       type: actions.TYPES.PLATFORM_DATAGRID_SET_DATA,
       id: GRID.id,
-      data: Immutable.fromJS(GRID_DATA),
+      data: fromJS(GRID_DATA),
       config: {
         filteringData: {
           isFiltering: false,
@@ -149,7 +151,7 @@ describe('Datagrid actions', () => {
       },
     });
     this.store = mockStore(state);
-    const expectedSortedData = Immutable.fromJS([
+    const expectedSortedData = fromJS([
       { id: 5, name: 'Ava', age: 16, married: false, dob: '1998-10-11T00:00:00Z' },
       { id: 4, name: 'Jake', age: 66, married: true, dob: '1975-10-11T00:00:00Z' },
       { id: 2, name: 'John', age: 9, married: false, dob: '1985-10-11T00:00:00Z' },
@@ -205,7 +207,7 @@ describe('Datagrid actions', () => {
       },
     });
     this.store = mockStore(state);
-    const expectedSortedData = Immutable.fromJS([
+    const expectedSortedData = fromJS([
       { id: 2, name: 'John', age: 9, married: false, dob: '1985-10-11T00:00:00Z' },
       { id: 5, name: 'Ava', age: 16, married: false, dob: '1998-10-11T00:00:00Z' },
       { id: 1, name: 'Mary', age: 35, married: true, dob: '1980-10-11T00:00:00Z' },
@@ -262,7 +264,7 @@ describe('Datagrid actions', () => {
       },
     });
     this.store = mockStore(state);
-    const expectedSortedData = Immutable.fromJS([
+    const expectedSortedData = fromJS([
       { id: 1, name: 'Mary', age: 35, married: true, dob: '1980-10-11T00:00:00Z' },
       { id: 4, name: 'Jake', age: 66, married: true, dob: '1975-10-11T00:00:00Z' },
       { id: 2, name: 'John', age: 9, married: false, dob: '1985-10-11T00:00:00Z' },
@@ -319,7 +321,7 @@ describe('Datagrid actions', () => {
       },
     });
     this.store = mockStore(state);
-    const expectedSortedData = Immutable.fromJS([
+    const expectedSortedData = fromJS([
       { id: 5, name: 'Ava', age: 16, married: false, dob: '1998-10-11T00:00:00Z' },
       { id: 2, name: 'John', age: 9, married: false, dob: '1985-10-11T00:00:00Z' },
       { id: 1, name: 'Mary', age: 35, married: true, dob: '1980-10-11T00:00:00Z' },
@@ -742,11 +744,11 @@ describe('Datagrid actions', () => {
       },
     });
     this.store = mockStore(state);
-    const expectedFilteredData = Immutable.fromJS([
+    const expectedFilteredData = fromJS([
       { id: 1, name: 'Mary', age: 35, married: true, dob: '1980-10-11T00:00:00Z' },
       { id: 3, name: 'Michael', age: 56, married: false, dob: '1962-10-11T00:00:00Z' },
     ]);
-    const expectedFilterData = Immutable.Map({
+    const expectedFilterData = Map({
       name: 'm',
     });
     const action = actions.filterCellValueChange(GRID, COLUMNS, COLUMNS[1], 'm');
@@ -808,5 +810,29 @@ describe('Datagrid actions', () => {
 
     this.store.dispatch(action);
     expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
+
+  it('set and apply filters', function () {
+    const state = getState(GRID.id, GRID_DATA);
+    const initialFilteringData = state.datagrid.getIn([GRID.id, 'config', 'filteringData']);
+    const filteringData = initialFilteringData
+      .set('isFiltering', true)
+      .set('filterData', Map({
+        name: 'John',
+      }));
+
+    const action = actions.setAndApplyFilters(GRID, COLUMNS, filteringData);
+    const expectedAction = {
+      filteringData,
+      id: GRID.id,
+      type: actions.TYPES.PLATFORM_DATAGRID_SET_FILTERS,
+    };
+
+    this.store.dispatch(action);
+    const allActions = this.store.getActions();
+
+    expect(allActions.length).to.eql(4);
+    expect(allActions[0]).to.eql(expectedAction);
+    expect(allActions[2].type).to.eql(actions.TYPES.PLATFORM_DATAGRID_APPLY_FILTERS);
   });
 });
