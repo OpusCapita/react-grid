@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 5.4.1
 * Added setAndApplyFilters action creator
 
 ## 5.3.1
