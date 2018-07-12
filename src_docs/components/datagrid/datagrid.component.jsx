@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Form, FormGroup, Button, Radio } from 'react-bootstrap';
+import { Checkbox, Form, FormGroup, Button, Radio } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
-import { GRID, columns, data } from './datagrid.constants';
+import { GRID, columns, data, preDefinedFilter, preDefinedEmptyFilter } from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -14,6 +14,7 @@ const mapDispatchToProps = {
   cellShowMessage: DatagridActions.cellShowMessage,
   cellShowMessages: DatagridActions.cellShowMessages,
   setData: DatagridActions.setData,
+  setAndApplyFilters: DatagridActions.setAndApplyFilters,
   saveSuccess: DatagridActions.saveSuccess,
   removeSuccess: DatagridActions.removeSuccess,
   saveFail: DatagridActions.saveFail,
@@ -42,6 +43,7 @@ export default class DatagridView extends React.Component {
     cellShowMessage: PropTypes.func.isRequired,
     cellShowMessages: PropTypes.func.isRequired,
     setData: PropTypes.func.isRequired,
+    setAndApplyFilters: PropTypes.func.isRequired,
     saveSuccess: PropTypes.func.isRequired,
     removeSuccess: PropTypes.func.isRequired,
     saveFail: PropTypes.func.isRequired,
@@ -53,6 +55,7 @@ export default class DatagridView extends React.Component {
 
     this.state = {
       gridSettings: GRID,
+      usingPredefinedFilter: false,
     };
   }
 
@@ -130,8 +133,19 @@ export default class DatagridView extends React.Component {
     this.props.setData(gridSettings, columns, data);
   }
 
+  usePredefinedFilter = () => {
+    this.setState({
+      usingPredefinedFilter: !this.state.usingPredefinedFilter,
+    }, () => {
+      const filteringData = this.state.usingPredefinedFilter ?
+        preDefinedFilter : preDefinedEmptyFilter;
+      this.props.setAndApplyFilters(GRID, columns, filteringData);
+    });
+  }
+
   render() {
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
+    const { usingPredefinedFilter } = this.state;
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
         <Button
@@ -161,6 +175,9 @@ export default class DatagridView extends React.Component {
             Custom storage
           </Radio>
         </FormGroup>
+        <Checkbox onChange={this.usePredefinedFilter} checked={usingPredefinedFilter}>
+          Use a pre-defined filter
+        </Checkbox>
       </Form>
     );
     return (

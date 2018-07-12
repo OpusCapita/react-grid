@@ -388,6 +388,13 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
           action.data,
         );
 
+    case TYPES.PLATFORM_DATAGRID_SET_FILTERS:
+      return state
+        .setIn(
+          [action.id, 'config', 'filteringData'],
+          action.filteringData,
+        );
+
     case TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: {
       const newState = state
         .setIn(

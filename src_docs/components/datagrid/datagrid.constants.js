@@ -212,3 +212,15 @@ export const data = [
   { id: 29 },
   { id: 30 },
 ];
+
+export const preDefinedFilter = {
+  isFiltering: true,
+  filterData: {
+    text: 'Text',
+    select: 'Option 5',
+  },
+};
+
+export const preDefinedEmptyFilter = {
+  isFiltering: false,
+};

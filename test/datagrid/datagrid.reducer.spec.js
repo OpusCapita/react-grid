@@ -1,16 +1,22 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
-import Immutable, { Map, List } from 'immutable';
+import { fromJS, Map, List } from 'immutable';
 import datagridReducer from '../../src/datagrid/datagrid.reducer';
 import { TYPES } from '../../src/datagrid/datagrid.actions';
 import { INITIAL_STATE } from '../../src/datagrid/datagrid.constants';
 
 describe('Datagrid reducers', () => {
   const id = 'TestGrid';
-  const data = Immutable.fromJS([
+  const data = fromJS([
     { id: 1, name: 'Mary', age: 11 },
     { id: 2, name: 'John', age: 99 },
   ]);
+  const filteringData = fromJS({
+    isFiltering: true,
+    filterData: {
+      name: 'John',
+    },
+  });
 
   it('invalidates data', () => {
     const action = {
@@ -107,7 +113,7 @@ describe('Datagrid reducers', () => {
     };
     const newState = datagridReducer(undefined, action);
     expect(newState.getIn([id, 'session', 'isCreating'])).to.be.true;
-    expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([columnDefaultValues]));
+    expect(newState.getIn([id, 'createData'])).to.eql(fromJS([columnDefaultValues]));
   });
 
   it('creates new item with default values', () => {
@@ -120,7 +126,7 @@ describe('Datagrid reducers', () => {
       columnDefaultValues,
     };
     const newState = datagridReducer(undefined, action);
-    expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([columnDefaultValues]));
+    expect(newState.getIn([id, 'createData'])).to.eql(fromJS([columnDefaultValues]));
   });
 
   it('removes new item', () => {
@@ -134,7 +140,7 @@ describe('Datagrid reducers', () => {
       index: 0,
     };
     const newState = datagridReducer(state, action);
-    expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([]));
+    expect(newState.getIn([id, 'createData'])).to.eql(fromJS([]));
   });
 
   it('removes new items', () => {
@@ -148,7 +154,7 @@ describe('Datagrid reducers', () => {
       indexes: [0, 1, 2],
     };
     const newState = datagridReducer(state, action);
-    expect(newState.getIn([id, 'createData'])).to.eql(Immutable.fromJS([]));
+    expect(newState.getIn([id, 'createData'])).to.eql(fromJS([]));
   });
 
   it('cancels edit/create operations', () => {
@@ -372,7 +378,7 @@ describe('Datagrid reducers', () => {
   });
 
   it('sets filtering', () => {
-    const filterData = Immutable.fromJS([{ age: 65 }]);
+    const filterData = fromJS([{ age: 65 }]);
     const action = {
       type: TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE,
       id,
@@ -382,7 +388,7 @@ describe('Datagrid reducers', () => {
     expect(newState.getIn([id, 'config', 'filteringData', 'filterData'])).to.eq(filterData);
   });
 
-  it('set filtered data', () => {
+  it('apply filtered data', () => {
     const action = {
       type: TYPES.PLATFORM_DATAGRID_APPLY_FILTERS,
       id,
@@ -390,6 +396,16 @@ describe('Datagrid reducers', () => {
     };
     const newState = datagridReducer(undefined, action);
     expect(newState.getIn([id, 'data'])).to.eql(data);
+  });
+
+  it('set filtered data', () => {
+    const action = {
+      type: TYPES.PLATFORM_DATAGRID_SET_FILTERS,
+      id,
+      filteringData,
+    };
+    const newState = datagridReducer(undefined, action);
+    expect(newState.getIn([id, 'config', 'filteringData'])).to.eql(filteringData);
   });
 
   it('set existing cell value', () => {
