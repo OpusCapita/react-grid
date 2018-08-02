@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 5.4.2
 * Correction to removeItem action (edited items removed correctly)
 
 ## 5.4.1
