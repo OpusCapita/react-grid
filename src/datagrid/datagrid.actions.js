@@ -379,6 +379,7 @@ export const removeItem = (grid, index) =>
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE_ITEM,
       id: grid.id,
+      idKeyPath: grid.idKeyPath,
       index,
     });
   };
