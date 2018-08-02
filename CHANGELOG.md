@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Correction to removeItem action (edited items removed correctly)
 
 ## 5.4.1
 * Added setAndApplyFilters action creator
