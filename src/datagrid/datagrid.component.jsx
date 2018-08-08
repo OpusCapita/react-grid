@@ -15,6 +15,7 @@ import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { DateInput } from '@opuscapita/react-datetime';
 import { Icon } from '@opuscapita/react-icons';
 import { Spinner } from '@opuscapita/react-spinner';
+import { formatCurrencyAmount } from '@opuscapita/format-utils';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
@@ -574,6 +575,17 @@ export default class DataGrid extends React.PureComponent {
             column.cell = rowIndex =>
               valueRender(rowIndex, v => <N value={v} {...col.renderComponentProps} />);
             break;
+          case 'currency': {
+            const currencyKeyPath = col.valueOptions && col.valueOptions.currencyKeyPath || ['currency']; // eslint-disable-line
+            column.cell = rowIndex =>
+              valueRender(rowIndex, v => formatCurrencyAmount(v, {
+                currency: this.props.data.getIn([rowIndex, ...currencyKeyPath]),
+                decimals: col.valueOptions && col.valueOptions.decimals,
+                thousandSeparator: col.valueOptions && col.valueOptions.thousandSeparator || this.props.thousandSeparator, // eslint-disable-line
+                decimalSeparator: col.valueOptions && col.valueOptions.decimalSeparator || this.props.decimalSeparator, // eslint-disable-line
+              }));
+            break;
+          }
           case 'date':
             column.cell = rowIndex =>
               valueRender(rowIndex, (v) => {

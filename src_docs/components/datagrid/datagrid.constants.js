@@ -3,18 +3,26 @@ import * as VALIDATE from './datagrid.validators';
 export const GRID = {
   id: 'TestGrid',
   idKeyPath: ['id'],
-  defaultSortColumn: 'float',
-  defaultSortOrder: 'asc',
+  defaultSortColumn: 'amount',
+  defaultSortOrder: 'desc',
   language: 'en',
   dateFormat: 'DD/MM/YYYY',
-  decimalSeparator: '.',
-  thousandSeparator: '',
+  decimalSeparator: ',',
+  thousandSeparator: '.',
 };
 
 export const selectTranslations = {
   placeholder: 'Plain String Placeholder',
   noResultsText: 'No hits found',
 };
+
+export const currencyOptions = [
+  { value: 'EUR', label: 'EUR' },
+  { value: 'USD', label: 'USD' },
+  { value: 'JPY', label: 'JPY' },
+  { value: 'GBP', label: 'GBP' },
+  { value: 'RUB', label: 'RUB' },
+];
 
 export const selectOptions = [
   { value: 'Option 1', label: 'Option 1' },
@@ -42,12 +50,7 @@ export const columns = [
     valueKeyPath: ['text2'],
     valueType: 'text',
     componentType: 'text',
-    isRequired: true,
     isHidden: true,
-    validators: [
-      { unique: true },
-      { validate: VALIDATE.isRequired },
-    ],
   },
   {
     header: 'Text3',
@@ -104,15 +107,25 @@ export const columns = [
     ],
   },
   {
-    header: 'Select',
-    valueKeyPath: ['select'],
-    valueType: 'text',
-    componentType: 'select',
-    selectComponentOptions: selectOptions,
+    header: 'Amount',
+    valueKeyPath: ['amount'],
+    valueType: 'currency',
+    valueOptions: {
+      currencyKeyPath: ['currency'],
+    },
+    componentType: 'float',
+    width: 100,
   },
   {
-    header: 'Select2',
-    valueKeyPath: ['select2'],
+    header: 'Currency',
+    valueKeyPath: ['currency'],
+    valueType: 'text',
+    componentType: 'select',
+    selectComponentOptions: currencyOptions,
+  },
+  {
+    header: 'Select',
+    valueKeyPath: ['select'],
     valueType: 'text',
     componentType: 'select',
     selectComponentOptions: selectOptions,
@@ -130,7 +143,8 @@ export const data = [
     boolean: true,
     date: '2011-04-20T00:00:00Z',
     select: 'Option 1',
-    select2: 'Option 2',
+    amount: 43432.323,
+    currency: 'EUR',
   },
   {
     id: 2,
@@ -141,7 +155,8 @@ export const data = [
     boolean: false,
     date: '2012-04-20T00:00:00Z',
     select: 'Option 2',
-    select2: 'Option 3',
+    amount: 13235.9837,
+    currency: 'RUB',
   },
   {
     id: 3,
@@ -152,7 +167,8 @@ export const data = [
     boolean: false,
     date: '2013-04-20T00:00:00Z',
     select: 'Option 3',
-    select2: 'Option 4',
+    amount: 874375.3432,
+    currency: 'GBP',
   },
   {
     id: 4,
@@ -163,7 +179,8 @@ export const data = [
     boolean: false,
     date: '2014-04-20T00:00:00Z',
     select: 'Option 4',
-    select2: 'Option 5',
+    amount: 9854387.08734,
+    currency: 'JPY',
   },
   {
     id: 5,
@@ -174,7 +191,8 @@ export const data = [
     boolean: false,
     date: '2015-04-20T00:00:00Z',
     select: 'Option 5',
-    select2: 'Option 6',
+    amount: 600000,
+    currency: 'EUR',
   },
   {
     id: 6,

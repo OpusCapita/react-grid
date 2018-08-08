@@ -52,6 +52,7 @@ export default {
     switch (col.valueType) {
       case 'number':
       case 'float':
+      case 'currency':
       case 'date':
         return {
           textAlign: 'right',
@@ -73,8 +74,8 @@ export default {
       case 'text':
         return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
       case 'number':
-        return (a, b) => (a - b);
       case 'float':
+      case 'currency':
         return (a, b) => (a - b);
       case 'boolean':
         return (a, b) => (a === b ? 0 : (a ? -1 : 1));
@@ -96,13 +97,8 @@ export default {
     }
     switch (col.valueType) {
       case 'number':
-        return val => (
-          val === '' ||
-          isNaN(val) ||
-          val === null ||
-          val === undefined
-        );
       case 'float':
+      case 'currency':
         return val => (
           val === '' ||
           isNaN(val) ||
@@ -125,6 +121,7 @@ export default {
       case 'number':
         return (val, filterVal) => parseInt(val, 10) === parseInt(filterVal, 10);
       case 'float':
+      case 'currency':
         return (val, filterVal) => parseFloat(filterVal.replace(',', '.')) === val;
       case 'date':
         return (val, filterVal) => {

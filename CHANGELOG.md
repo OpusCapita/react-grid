@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.5.0
+* Added `currency` value type
+
 ## 5.4.2
 * Correction to removeItem action (edited items removed correctly)
 
