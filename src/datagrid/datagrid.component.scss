@@ -165,6 +165,10 @@
     user-select: none;
   }
 
+  .oc-datagrid-extra-column-cell {
+    padding-left: 8px;
+  }
+
   // CELL MESSAGES
   .oc-datagrid-main-container .oc-datagrid-tooltip {
     position: static;

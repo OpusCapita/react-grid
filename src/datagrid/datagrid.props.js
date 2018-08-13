@@ -35,6 +35,12 @@ export const columnShape = shape({
   columnKey: string,              // Use valueKeyPath if possible, this is calculated from there
   valueKeyPath: array,            // key path for the cell data value, required if no columnKey is given
   valueType: string,              // data value type [text/number/float/boolean/date]
+  valueOptions: shape({           // options for the value type
+    currencyKeyPath: array,       // key path to currency code (only for currency data type)
+    decimals: number,             // number of decimals override
+    thousandSeparator: string,    // thousand separator override
+    decimalSeparator: string,     // decimal separator override
+  }),
   componentType: string,          // edit component type [text/number/float/select/boolean/date]
   valueRender: func,              // custom renderer for the value, data as parameter
   editValueRender: func,          // custom renderer for the edit value, data as parameter
@@ -179,6 +185,14 @@ export const propTypes = {
   onAddClick: func,
   onEditClick: func,
   tabIndex: number,                   // tabIndex value for inputs in cells
+  extraColumn: shape({                // Extra fixed column that can't be re-ordered or hidden
+    width: string,
+    valueRender: func,
+    cellEdit: func,
+    cellCreate: func,
+    cellFilter: func,
+    isResizable: bool,
+  }),
   // Fixed data table built-in features
   headerHeight: number,
   filterRowHeight: number,

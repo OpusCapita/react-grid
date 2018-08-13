@@ -8,13 +8,14 @@ import {
   FormattedNumber as N,
 } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
-import { Checkbox, FormControl } from 'react-bootstrap';
+import { FormControl, MenuItem } from 'react-bootstrap';
 import classNames from 'classnames';
 import moment from 'moment';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { DateInput } from '@opuscapita/react-datetime';
 import { Icon } from '@opuscapita/react-icons';
 import { Spinner } from '@opuscapita/react-spinner';
+import Checkbox from '@opuscapita/react-checkbox';
 import { formatCurrencyAmount } from '@opuscapita/format-utils';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
@@ -72,7 +73,10 @@ export default class DataGrid extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { currentRow: 0, currentColumn: 0 };
+    this.state = {
+      currentRow: 0,
+      currentColumn: 0,
+    };
     this.cellRefs = {};
     this.focusToCreateCell = false;
     this.focusToEditCell = false; // TODO: Handle focusing when true
@@ -80,7 +84,17 @@ export default class DataGrid extends React.PureComponent {
   }
 
   componentWillUnmount() {
+    document.removeEventListener('click', this.onDocumentClick);
     this.props.invalidate(this.props.grid);
+  }
+
+  onDocumentClick = () => {
+    if (this.props.contextMenuItems) {
+      this.setState({
+        contextMenuOpen: false,
+      });
+    }
+    document.removeEventListener('click', this.onDocumentClick);
   }
 
   onColumnResizeEndCallback = (newColumnWidth, columnKey) => {
@@ -490,12 +504,31 @@ export default class DataGrid extends React.PureComponent {
   }
 
   generateColumns = () => {
+    const { extraColumn } = this.props;
     const columns = [];
     const tabIndex = String(this.props.tabIndex);
+    if (extraColumn) {
+      columns.push({
+        width: extraColumn.width || 40,
+        isResizable: !!extraColumn.isResizable,
+        isSortable: false,
+        columnKey: 'extraColumn',
+        cell: rowIndex => (
+          <div className="oc-datagrid-extra-column-cell">
+            { extraColumn.valueRender(this.props.data.get(rowIndex), tabIndex) }
+          </div>
+        ),
+        cellEdit: rowIndex => (extraColumn.cellEdit ? extraColumn.cellEdit(rowIndex) : null),
+        cellCreate: rowIndex => (extraColumn.cellCreate ? extraColumn.cellCreate(rowIndex) : null),
+        cellFilter: rowIndex => (extraColumn.cellFilter ? extraColumn.cellFilter(rowIndex) : null),
+      });
+    }
+
     if (this.props.rowSelectCheckboxColumn) {
       columns.push({
         width: 40,
         isResizable: false,
+        isSortable: false,
         columnKey: 'selectionCheckbox',
         cell: (rowIndex) => {
           const rowItem = this.props.data.get(rowIndex);
@@ -503,7 +536,8 @@ export default class DataGrid extends React.PureComponent {
           const selected = this.props.selectedItems.includes(itemId);
           return (
             <Checkbox
-              className="oc-row-select-checkbox"
+              id={`ocDatagridSelectCheckBox-${this.props.grid.id}-${rowIndex}`}
+              className="oc-datagrid-select-checkbox-cell"
               checked={selected}
               onChange={this.handleSelectionCheckBoxOnChange(rowIndex)}
               tabIndex={tabIndex}
@@ -1077,12 +1111,6 @@ export default class DataGrid extends React.PureComponent {
     return false;
   }
 
-  // checker for selectionCheckbox
-  isSelectionCheckbox(cellProps) {
-    const expectedColumnKey = 'selectionCheckbox';
-    return (this.props.rowSelectCheckboxColumn && cellProps.columnKey === expectedColumnKey);
-  }
-
   handleAfterAddItem = () => {
     this.focusToCreateCell = true;
   }
@@ -1105,8 +1133,19 @@ export default class DataGrid extends React.PureComponent {
       if (e.ctrlKey || e.shiftKey) {
         document.getSelection().removeAllRanges();
       }
-      // don't trigger selection change on checkbox click
-      if (e.target.type !== 'checkbox') {
+      // Don't trigger selection change on row select checkbox click
+      // Check that clicked node's parent or parent's parent doesn't have checkbox class
+      const { parentNode } = e.target;
+      const parent1class = parentNode.className && parentNode.className.indexOf
+        ? parentNode.className
+        : '';
+      const parent2class = parentNode.parentNode.className && parentNode.parentNode.className.indexOf // eslint-disable-line
+        ? parentNode.parentNode.className
+        : '';
+      if (
+        parent1class.indexOf('oc-datagrid-select-checkbox-cell') === -1 &&
+        parent2class.indexOf('oc-datagrid-select-checkbox-cell') === -1
+      ) {
         this.props.itemSelectionChange(
           this.props.grid,
           rowIndex,
@@ -1121,6 +1160,33 @@ export default class DataGrid extends React.PureComponent {
     return true;
   }
 
+  handleContextMenu = (e, rowIndex) => {
+    if (this.props.onContextMenu) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.props.onContextMenu(e, rowIndex, this.props.data.get(rowIndex));
+    }
+    if (this.props.contextMenuItems) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.setState({
+        contextMenuOpen: true,
+        contextMenuX: e.clientX,
+        contextMenuY: e.clientY,
+        contextMenuRowIndex: rowIndex,
+      });
+      document.addEventListener('click', this.onDocumentClick);
+      return false;
+    }
+    return true;
+  }
+
+  handleContextMenuItemClick = onClick => () => {
+    const { data } = this.props;
+    const { contextMenuRowIndex } = this.state;
+    onClick(contextMenuRowIndex, data.get(contextMenuRowIndex));
+  }
+
   renderCell = col => (cellProps) => {
     const {
       isCreating,
@@ -1129,7 +1195,6 @@ export default class DataGrid extends React.PureComponent {
       selectedCell,
     } = this.props;
     const { rowIndex, ...props } = cellProps;
-    const isCheckbox = this.isSelectionCheckbox(cellProps);
     let cell;
     let cellType = 'view';
     let extraRowCount = 0; // how many rows to ignore from top, new + filter rows
@@ -1152,7 +1217,8 @@ export default class DataGrid extends React.PureComponent {
     } else {
       cell = col.cell(rowIndex - extraRowCount);
     }
-    if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isCheckbox) {
+    const isSpecial = cellProps.columnKey === 'selectionCheckbox' || cellProps.columnKey === 'extraColumn';
+    if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isSpecial) {
       const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
       const isEdited = this.isCellEdited(getRowIndex, col, cellType);
@@ -1249,6 +1315,37 @@ export default class DataGrid extends React.PureComponent {
       />));
   }
 
+  renderContextMenu = () => {
+    const { contextMenuItems } = this.props;
+    const {
+      contextMenuX,
+      contextMenuY,
+    } = this.state;
+    const style = {
+      display: 'block',
+      zIndex: 10000,
+      position: 'absolute',
+      top: `${contextMenuY}px`,
+      left: `${contextMenuX}px`,
+    };
+    return (
+      <ul className="dropdown-menu oc-datagrid-context-menu open" style={style}>
+        { contextMenuItems && contextMenuItems.map && contextMenuItems.map((item, i) => (
+          <MenuItem
+            key={i} // eslint-disable-line
+            header={item.header}
+            divider={item.divider}
+            disabled={item.disabled}
+            title={item.title}
+            onClick={item.onClick && this.handleContextMenuItemClick(item.onClick)}
+          >
+            { item.value }
+          </MenuItem>
+        )) }
+      </ul>
+    );
+  }
+
   render() {
     const gridClassName = classNames({
       'oc-datagrid-container': true,
@@ -1320,6 +1417,7 @@ export default class DataGrid extends React.PureComponent {
         style={this.props.containerStyle}
       >
         { this.props.isBusy && <Spinner /> }
+        { this.state.contextMenuOpen && this.renderContextMenu() }
         { actionBar }
         <ResponsiveFixedDataTable
           id={this.props.grid.id}
@@ -1335,7 +1433,7 @@ export default class DataGrid extends React.PureComponent {
           scrollTop={this.props.scrollTop}
           scrollToRow={this.getScrollToRow()}
           onRowDoubleClick={this.props.onRowDoubleClick}
-          onRowMouseDown={this.props.onRowMouseDown}
+          onRowMouseDown={this.props.onMouseDown}
           onRowMouseEnter={this.props.onRowMouseEnter}
           onRowMouseLeave={this.props.onRowMouseLeave}
           onScrollStart={this.props.onScrollStart}
@@ -1343,6 +1441,7 @@ export default class DataGrid extends React.PureComponent {
           rowClassNameGetter={this.getRowClassName}
           rowHeightGetter={this.props.rowHeightGetter}
           onContentHeightChange={this.props.onContentHeightChange}
+          onRowContextMenu={this.handleContextMenu}
         >
           { this.renderColumns() }
         </ResponsiveFixedDataTable>

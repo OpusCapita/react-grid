@@ -7,8 +7,8 @@ export const GRID = {
   defaultSortOrder: 'desc',
   language: 'en',
   dateFormat: 'DD/MM/YYYY',
-  decimalSeparator: ',',
-  thousandSeparator: '.',
+  decimalSeparator: '.',
+  thousandSeparator: ',',
 };
 
 export const selectTranslations = {

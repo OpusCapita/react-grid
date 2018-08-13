@@ -64,7 +64,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | rowSelectCheckboxColumn  | boolean          | false                                    | Enable additional checkbox column for row selecting |
 | multiSelect              | boolean          | false                                    | Enable multi selecting on row selecting  |
 | selectComponentOptions   | Immutable.Map    |                                          | Options data for the react-select components |
-| selectComponentTranslations | object          |                                         | Translation strings for react-select placeholder and noResultsText texts. |
+| selectComponentTranslations | object        |                                          | Translation strings for react-select placeholder and noResultsText texts. |
 | disableActions           | boolean          | false                                    | Disable action bar actions, eg. when other grid busy |
 | disableActionsMessage    | object           | { messageId: 'GridActionsDisabledOtherGridBusy' } | Message about the reason of disabled action bar actions |
 | disableActionBar         | boolean          | false                                    | Disable action bar rendering             |
@@ -76,6 +76,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onAddClick               | function         |                                          | Callback that is called when add is clicked |
 | onEditClick              | function         |                                          | Callback that is called when edit is clicked |
 | tabIndex                 | number           | 1                                        | tabIndex start value, needed when multiple grids on same page |
+| extraColumn              | object           |                                          | Extra column that cannot be hidden or re-ordered. It's rendered always as first colunn |
 | headerHeight             | number           | 40                                       | Pixel height of the header row           |
 | rowHeight                | number           | 40                                       | Pixel height of rows                     |
 | containerStyle           | object           |                                          | Additional styles to be set on the container div |
@@ -92,6 +93,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | rowClassNameGetter       | function         |                                          | To get any additional CSS classes that should be added to a row, rowClassNameGetter(index) is called |
 | rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(index) is called for each row and the returned value overrides rowHeight for particular row |
 | onContentHeightChange    | function         |                                          | Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content |
+| contextMenuItems         | array            |                                          | Array of items in the context menu |
 
 #### Datagrid - `grid` prop attributes
 
@@ -179,6 +181,26 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | ----------------- | ---------------- | ------- | ---------------------------------- |
 | matchValueKeyPath | array of strings |         | Keypath of the value to be matched |
 | matchValue        | any              |         | The value to be matched            |
+
+#### Datagrid - `extraColumn` prop attributes
+| Name          | Type     | Default      | Description                                            |
+| ------------- | ---------| ------------ | ------------------------------------------------------ |
+| width         | number   | 40           | Column width in pixels                                 |
+| valueRender   | function |              | Value render function                                  |
+| cellEdit      | function |              | Render function for edit mode                          |
+| cellCreate    | function |              | Render function for create mode                        |
+| cellFilter    | function |              | Render function for create mode                        |
+| isResizable   | boolean  | false        | Is column resisable                                    |
+
+#### Datagrid - `contextMenuItems` prop array attributes
+| Name          | Type     | Default      | Description                                            |
+| ------------- | ---------| ------------ | ------------------------------------------------------ |
+| value         | any      |              | Value to display in the menu                           |
+| onClick       | function |              | onClick handles, parameters (rowIndex, rowData)        |
+| title         | function |              | Item title to show when mouse overing                  |
+| disabled      | function | false        | Is item disabled                                       |
+| header        | boolean  | false        | Is item a header                                       |
+| divider       | boolean  | false        | Is item a divider                                      |
 
 ### Code example
 

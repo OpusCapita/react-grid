@@ -3,6 +3,11 @@
 
 ## <next>
 
+## 5.6.0
+* Added `contextMenuItems` prop that displays context menu when clicking row with right mouse button
+* Added `extraColumn` prop that displays a special column as first column
+* Changed row select checkbox to use `@opuscapita/react-select` component
+
 ## 5.5.0
 * Added `currency` value type
 
@@ -17,7 +22,7 @@
 
 ## 5.3.0
 * removeItem action added
-* forceRefresh actiona added
+* forceRefresh action added
 
 ## 5.2.2
 * extendData action added
