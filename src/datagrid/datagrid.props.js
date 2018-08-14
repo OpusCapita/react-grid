@@ -193,14 +193,14 @@ export const propTypes = {
     cellFilter: func,
     isResizable: bool,
   }),
-  contextMenuItems: shape({            // Context menu items to display when row is right-clicked
+  contextMenuItems: arrayOf(shape({   // Context menu items to display when row is right-clicked
     value: node,
     onClick: func,
     title: string,
     header: bool,
-    disbled: bool,
+    disabled: oneOfType([bool, func]),
     divider: bool,
-  }),
+  })),
   // Fixed data table built-in features
   headerHeight: number,
   filterRowHeight: number,

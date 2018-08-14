@@ -514,7 +514,7 @@ export default class DataGrid extends React.PureComponent {
         isSortable: false,
         columnKey: 'extraColumn',
         cell: rowIndex => (
-          <div className="oc-datagrid-extra-column-cell">
+          <div className="oc-datagrid-extra-column-cell no-row-select">
             { extraColumn.valueRender(this.props.data.get(rowIndex), tabIndex) }
           </div>
         ),
@@ -537,7 +537,7 @@ export default class DataGrid extends React.PureComponent {
           return (
             <Checkbox
               id={`ocDatagridSelectCheckBox-${this.props.grid.id}-${rowIndex}`}
-              className="oc-datagrid-select-checkbox-cell"
+              className="oc-datagrid-select-checkbox-cell no-row-select"
               checked={selected}
               onChange={this.handleSelectionCheckBoxOnChange(rowIndex)}
               tabIndex={tabIndex}
@@ -1133,18 +1133,26 @@ export default class DataGrid extends React.PureComponent {
       if (e.ctrlKey || e.shiftKey) {
         document.getSelection().removeAllRanges();
       }
-      // Don't trigger selection change on row select checkbox click
-      // Check that clicked node's parent or parent's parent doesn't have checkbox class
+      // Don't trigger selection change on when user clicks on special cells like checkbox/extra
+      // Check that clicked node's parent or parent's parent doesn't have no-row-select class
       const { parentNode } = e.target;
       const parent1class = parentNode.className && parentNode.className.indexOf
         ? parentNode.className
         : '';
-      const parent2class = parentNode.parentNode.className && parentNode.parentNode.className.indexOf // eslint-disable-line
+        const parent2class = parentNode.parentNode.className && parentNode.parentNode.className.indexOf // eslint-disable-line
         ? parentNode.parentNode.className
         : '';
+        const parent3class = parentNode.parentNode.parentNode.className && parentNode.parentNode.parentNode.className.indexOf // eslint-disable-line
+        ? parentNode.parentNode.parentNode.className
+        : '';
+        const parent4class = parentNode.parentNode.parentNode.parentNode.className && parentNode.parentNode.parentNode.parentNode.className.indexOf // eslint-disable-line
+        ? parentNode.parentNode.parentNode.parentNode.className
+        : '';
       if (
-        parent1class.indexOf('oc-datagrid-select-checkbox-cell') === -1 &&
-        parent2class.indexOf('oc-datagrid-select-checkbox-cell') === -1
+        parent1class.indexOf('no-row-select') === -1 &&
+        parent2class.indexOf('no-row-select') === -1 &&
+        parent3class.indexOf('no-row-select') === -1 &&
+        parent4class.indexOf('no-row-select') === -1
       ) {
         this.props.itemSelectionChange(
           this.props.grid,
@@ -1181,9 +1189,7 @@ export default class DataGrid extends React.PureComponent {
     return true;
   }
 
-  handleContextMenuItemClick = onClick => () => {
-    const { data } = this.props;
-    const { contextMenuRowIndex } = this.state;
+  handleContextMenuItemClick = (onClick, contextMenuRowIndex, data) => () => {
     onClick(contextMenuRowIndex, data.get(contextMenuRowIndex));
   }
 
@@ -1316,10 +1322,11 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderContextMenu = () => {
-    const { contextMenuItems } = this.props;
+    const { contextMenuItems, data } = this.props;
     const {
       contextMenuX,
       contextMenuY,
+      contextMenuRowIndex,
     } = this.state;
     const style = {
       display: 'block',
@@ -1330,18 +1337,28 @@ export default class DataGrid extends React.PureComponent {
     };
     return (
       <ul className="dropdown-menu oc-datagrid-context-menu open" style={style}>
-        { contextMenuItems && contextMenuItems.map && contextMenuItems.map((item, i) => (
-          <MenuItem
-            key={i} // eslint-disable-line
-            header={item.header}
-            divider={item.divider}
-            disabled={item.disabled}
-            title={item.title}
-            onClick={item.onClick && this.handleContextMenuItemClick(item.onClick)}
-          >
-            { item.value }
-          </MenuItem>
-        )) }
+        { contextMenuItems && contextMenuItems.map && contextMenuItems.map((item, i) => {
+          let { disabled } = item;
+          if (typeof item.disabled === 'function') {
+            disabled = item.disabled(contextMenuRowIndex, data.get(contextMenuRowIndex));
+          }
+          return (
+            <MenuItem
+              key={i} // eslint-disable-line
+              header={item.header}
+              divider={item.divider}
+              disabled={disabled}
+              title={item.title}
+              onClick={item.onClick && this.handleContextMenuItemClick(
+                item.onClick,
+                contextMenuRowIndex,
+                data,
+              )}
+            >
+              { item.value }
+            </MenuItem>
+          );
+        }) }
       </ul>
     );
   }

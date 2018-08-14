@@ -193,14 +193,14 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | isResizable   | boolean  | false        | Is column resisable                                    |
 
 #### Datagrid - `contextMenuItems` prop array attributes
-| Name          | Type     | Default      | Description                                            |
-| ------------- | ---------| ------------ | ------------------------------------------------------ |
-| value         | any      |              | Value to display in the menu                           |
-| onClick       | function |              | onClick handles, parameters (rowIndex, rowData)        |
-| title         | function |              | Item title to show when mouse overing                  |
-| disabled      | function | false        | Is item disabled                                       |
-| header        | boolean  | false        | Is item a header                                       |
-| divider       | boolean  | false        | Is item a divider                                      |
+| Name          | Type              | Default | Description                                        |
+| ------------- | ------------------| ------- | -------------------------------------------------- |
+| value         | any               |         | Value to display in the menu                       |
+| onClick       | function          |         | onClick handles, parameters (rowIndex, rowData)    |
+| title         | function          |         | Item title to show when mouse overing              |
+| disabled      | boolean, function | false   | Is item disabled                                   |
+| header        | boolean           | false   | Is item a header                                   |
+| divider       | boolean           | false   | Is item a divider                                  |
 
 ### Code example
 
@@ -242,6 +242,7 @@ export default class DatagridView extends React.Component {
       <Datagrid
         grid={GRID}
         columns={columns}
+      />
     );
   }
 }

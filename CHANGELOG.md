@@ -3,6 +3,11 @@
 
 ## <next>
 
+## 5.6.1
+* Allow also function as context menu item disabled prop
+* Fix row selection change when clicking on select check box
+* Fix row selection change when clicking extra column
+
 ## 5.6.0
 * Added `contextMenuItems` prop that displays context menu when clicking row with right mouse button
 * Added `extraColumn` prop that displays a special column as first column
