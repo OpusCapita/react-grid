@@ -76,13 +76,14 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         ], List(), items => items.push(Immutable.fromJS(action.columnDefaultValues)));
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_ITEM: {
-      const itemId = state.getIn([action.id, 'data', action.index, ...action.idKeyPath]);
       const allDataIndex = state.getIn([action.id, 'allData'], List())
-        .findIndex(item => (item.getIn(action.idKeyPath) === itemId));
+        .findIndex(item => (item.getIn(action.idKeyPath) === action.rowId));
+      const dataIndex = state.getIn([action.id, 'data'], List())
+        .findIndex(item => (item.getIn(action.idKeyPath) === action.rowId));
       return state
-        .deleteIn([action.id, 'data', action.index])
+        .deleteIn([action.id, 'data', dataIndex])
         .deleteIn([action.id, 'allData', allDataIndex])
-        .deleteIn([action.id, 'editData', itemId]);
+        .deleteIn([action.id, 'editData', action.rowId]);
     }
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM:

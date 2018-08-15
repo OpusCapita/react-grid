@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.6.3
+* RemoveItem action changed to use row ID instead of index
+
 ## 5.6.2
 * Fix context menu callback parameters to more usable form
 * Fix right clicking on non-selected item changes selection when context menu is enabled
