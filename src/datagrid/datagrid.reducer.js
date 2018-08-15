@@ -83,7 +83,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .deleteIn([action.id, 'data', dataIndex])
         .deleteIn([action.id, 'allData', allDataIndex])
-        .deleteIn([action.id, 'editData', action.rowId]);
+        .deleteIn([action.id, 'editData', action.rowId])
+        .deleteIn([action.id, 'cellMessages', 'error', action.rowId])
+        .deleteIn([action.id, 'cellMessages', 'info', action.rowId])
+        .deleteIn([action.id, 'cellMessages', 'warning', action.rowId]);
     }
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM:

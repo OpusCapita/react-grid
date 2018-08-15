@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.6.4
+ - RemoveItem action modified to remove error,info and warning cell messages
+
 ## 5.6.3
 * RemoveItem action changed to use row ID instead of index
 
@@ -58,7 +61,7 @@
 * Upgraded `@opuscapita/react-select-order-list` to the latest version.
 
 ## 5.1.4
-* Fixed :before color-corner shown only for grid cells, not for action bar items 
+* Fixed :before color-corner shown only for grid cells, not for action bar items
 
 ## 5.1.3
 * Fixed a bug: renamed passed CellTooltip prop messageId->infoMessage  
