@@ -71,7 +71,7 @@ export default class DatagridTooltip extends React.Component {
         tooltipClassName = 'warning tooltip';
       }
       overlayAttrs = {
-        placement: 'bottom',
+        placement: 'top',
         overlay: (
           <Tooltip id={`Tooltip_${id}`} bsClass={tooltipClassName}>
             { message.id ? <M id={message.id} values={message.values} /> : <span>{message}</span> }

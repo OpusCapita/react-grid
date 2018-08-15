@@ -1169,28 +1169,32 @@ export default class DataGrid extends React.PureComponent {
   }
 
   handleContextMenu = (e, rowIndex) => {
-    if (this.props.onContextMenu) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.props.onContextMenu(e, rowIndex, this.props.data.get(rowIndex));
-    }
     if (this.props.contextMenuItems) {
+      const {
+        itemSelectionChange,
+        selectedItems,
+        grid,
+        data,
+      } = this.props;
       e.preventDefault();
       e.stopPropagation();
       this.setState({
         contextMenuOpen: true,
         contextMenuX: e.clientX,
         contextMenuY: e.clientY,
-        contextMenuRowIndex: rowIndex,
       });
+      // If clicked item is not selected, change selection to it
+      if (!selectedItems.includes(data.getIn([rowIndex, ...grid.idKeyPath]))) {
+        itemSelectionChange(grid, rowIndex);
+      }
       document.addEventListener('click', this.onDocumentClick);
       return false;
     }
     return true;
   }
 
-  handleContextMenuItemClick = (onClick, contextMenuRowIndex, data) => () => {
-    onClick(contextMenuRowIndex, data.get(contextMenuRowIndex));
+  handleContextMenuItemClick = (onClick, selectedItems, selectedData) => () => {
+    onClick(selectedItems, selectedData);
   }
 
   renderCell = col => (cellProps) => {
@@ -1322,11 +1326,15 @@ export default class DataGrid extends React.PureComponent {
   }
 
   renderContextMenu = () => {
-    const { contextMenuItems, data } = this.props;
+    const {
+      contextMenuItems,
+      data,
+      grid,
+      selectedItems,
+    } = this.props;
     const {
       contextMenuX,
       contextMenuY,
-      contextMenuRowIndex,
     } = this.state;
     const style = {
       display: 'block',
@@ -1335,12 +1343,13 @@ export default class DataGrid extends React.PureComponent {
       top: `${contextMenuY}px`,
       left: `${contextMenuX}px`,
     };
+    const selectedData = data.filter(d => selectedItems.includes(d.getIn(grid.idKeyPath)));
     return (
       <ul className="dropdown-menu oc-datagrid-context-menu open" style={style}>
         { contextMenuItems && contextMenuItems.map && contextMenuItems.map((item, i) => {
           let { disabled } = item;
           if (typeof item.disabled === 'function') {
-            disabled = item.disabled(contextMenuRowIndex, data.get(contextMenuRowIndex));
+            disabled = item.disabled(selectedItems, selectedData);
           }
           return (
             <MenuItem
@@ -1349,10 +1358,10 @@ export default class DataGrid extends React.PureComponent {
               divider={item.divider}
               disabled={disabled}
               title={item.title}
-              onClick={item.onClick && this.handleContextMenuItemClick(
+              onClick={(disabled || !item.onClick) ? null : this.handleContextMenuItemClick(
                 item.onClick,
-                contextMenuRowIndex,
-                data,
+                selectedItems,
+                selectedData,
               )}
             >
               { item.value }

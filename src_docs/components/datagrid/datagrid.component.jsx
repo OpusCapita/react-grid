@@ -143,6 +143,10 @@ export default class DatagridView extends React.Component {
     });
   }
 
+  handleContextClick = (selectedIds, selectedData) => {
+    console.log(`Context menu clicked on ID's ${selectedIds.join(', ')}`);
+  }
+
   render() {
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
     const { usingPredefinedFilter } = this.state;
@@ -196,6 +200,20 @@ export default class DatagridView extends React.Component {
         rowSelectCheckboxColumn
         onSave={this.handleOnSave}
         onRemove={this.handleOnRemove}
+        contextMenuItems={[
+          {
+            value: 'Booleans are true',
+            onClick: this.handleContextClick,
+            disabled: (selectedIds, selectedData) =>
+              selectedData.count(d => d.get('boolean', false) === true) !== selectedData.size,
+          },
+          {
+            value: 'Floats are over 3',
+            onClick: this.handleContextClick,
+            disabled: (selectedIds, selectedData) =>
+              selectedData.count(d => d.get('float', 0) > 3) !== selectedData.size,
+          },
+        ]}
       />
     );
   }

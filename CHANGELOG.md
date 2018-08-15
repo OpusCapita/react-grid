@@ -3,6 +3,11 @@
 
 ## <next>
 
+## 5.6.2
+* Fix context menu callback parameters to more usable form
+* Fix right clicking on non-selected item changes selection when context menu is enabled
+* Change tooltip position from bottom to top
+
 ## 5.6.1
 * Allow also function as context menu item disabled prop
 * Fix row selection change when clicking on select check box

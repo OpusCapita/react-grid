@@ -196,9 +196,9 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | Name          | Type              | Default | Description                                        |
 | ------------- | ------------------| ------- | -------------------------------------------------- |
 | value         | any               |         | Value to display in the menu                       |
-| onClick       | function          |         | onClick handles, parameters (rowIndex, rowData)    |
-| title         | function          |         | Item title to show when mouse overing              |
-| disabled      | boolean, function | false   | Is item disabled                                   |
+| onClick       | function          |         | onClick handles, parameters (selectedIds :: List, selectedData :: List) |
+| title         | string            |         | Item title to show when mouse overing              |
+| disabled      | boolean, function | false   | Is item disabled, parameters (selectedIds :: List, selectedData :: List) |
 | header        | boolean           | false   | Is item a header                                   |
 | divider       | boolean           | false   | Is item a divider                                  |
 
