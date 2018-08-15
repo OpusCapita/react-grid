@@ -373,14 +373,14 @@ export const addNewItem = (grid, columnDefaultValues) =>
     });
   };
 
-export const removeItem = (grid, index) =>
+export const removeItem = (grid, rowId) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE_ITEM,
       id: grid.id,
       idKeyPath: grid.idKeyPath,
-      index,
+      rowId,
     });
   };
 
