@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -125,7 +126,7 @@ export default class DatagridView extends React.Component {
           columnWidths: { text3: 200, text4: 300 },
         }),
         save: (conf) => {
-          console.log(`Save config: ${JSON.stringify(conf)}`); // eslint-disable-line
+          console.log(`Save config: ${JSON.stringify(conf)}`);
         },
       },
     };
@@ -144,7 +145,9 @@ export default class DatagridView extends React.Component {
   }
 
   handleContextClick = (selectedIds, selectedData) => {
-    console.log(`Context menu clicked on ID's ${selectedIds.join(', ')}`);
+    console.log('Context menu clicked');
+    console.log(`ID's ${selectedIds.join(', ')}`);
+    console.table(selectedData.toSJ());
   }
 
   render() {
