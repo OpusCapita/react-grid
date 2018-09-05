@@ -117,7 +117,9 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
     case TYPES.PLATFORM_DATAGRID_EXTEND_DATA: {
       const allData = state.getIn([action.id, 'allData']);
-      const extendedData = allData.concat(action.data);
+      const extendedData = action.prepend ?
+        action.data.concat(allData) : allData.concat(action.data);
+
       return state
         .setIn([action.id, 'data'], extendedData)
         .setIn([action.id, 'allData'], extendedData);

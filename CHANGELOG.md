@@ -3,8 +3,11 @@
 
 ## <next>
 
+## 5.6.5
+* ExtendData action modified to allow data prepend to existing grid
+
 ## 5.6.4
- - RemoveItem action modified to remove error,info and warning cell messages
+* RemoveItem action modified to remove error,info and warning cell messages
 
 ## 5.6.3
 * RemoveItem action changed to use row ID instead of index
