@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.6.6
+* fix to arrow key navigation 
+
 ## 5.6.5
 * ExtendData action modified to allow data prepend to existing grid
 
