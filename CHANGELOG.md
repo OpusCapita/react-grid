@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added className prop
 
 ## 5.6.6
 * fix to arrow key navigation 
