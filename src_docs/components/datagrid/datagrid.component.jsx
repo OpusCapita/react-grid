@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Checkbox, Form, FormGroup, Button, Radio } from 'react-bootstrap';
+import { Checkbox, DropdownButton, Form, FormGroup, Button, MenuItem, Radio } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
-import { GRID, columns, data, preDefinedFilter, preDefinedEmptyFilter } from './datagrid.constants';
+import { getLocaleFormatData } from '../../services/internationalization.service';
+import { GRID, columns, data, preDefinedFilter, preDefinedEmptyFilter, REGIONS } from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -54,14 +55,61 @@ export default class DatagridView extends React.Component {
   constructor() {
     super();
 
+    const region = 'en-GB';
+    const { dateFormat, thousandSeparator, decimalSeparator } = getLocaleFormatData(region);
+    const gridSettings = {
+      ...GRID,
+      dateFormat,
+      decimalSeparator,
+      thousandSeparator,
+    };
+
     this.state = {
-      gridSettings: GRID,
+      gridSettings,
+      region,
       usingPredefinedFilter: false,
     };
   }
 
   componentWillMount() {
     this.props.setData(GRID, columns, data);
+  }
+
+  getRegionComponent = () => {
+    const { region } = this.state;
+    const title = `Region: ${REGIONS[region] || ''}`;
+    return (
+      <DropdownButton
+        id="region-selector"
+        title={title}
+      >
+        {Object.keys(REGIONS).map(key => (
+          <MenuItem
+            eventKey={key}
+            key={key}
+            active={key === region}
+            onSelect={this.handleRegionSelect}
+          >
+            {REGIONS[key]}
+          </MenuItem>
+        ))}
+      </DropdownButton>
+    );
+  }
+
+  handleRegionSelect = (eventKey) => {
+    const { dateFormat, thousandSeparator, decimalSeparator } = getLocaleFormatData(eventKey);
+    const gridSettings = {
+      ...GRID,
+      region: eventKey,
+      dateFormat,
+      decimalSeparator,
+      thousandSeparator,
+    };
+    this.setState({
+      gridSettings,
+      region: eventKey,
+    });
   }
 
   handleWarnClick = () => {
@@ -164,7 +212,8 @@ export default class DatagridView extends React.Component {
           onClick={this.handleInfoClick}
         >
           Show Info
-        </Button>{' '}
+        </Button>
+        {this.getRegionComponent()}{' '}
         <FormGroup>
           <Radio
             name="configStorage"
