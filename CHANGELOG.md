@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 5.7.0
 * Fixed issue #60: First day of the week is Su always
 * Added className prop
 
