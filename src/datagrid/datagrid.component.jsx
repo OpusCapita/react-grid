@@ -1379,7 +1379,9 @@ export default class DataGrid extends React.PureComponent {
       'is-busy': this.props.isBusy,
       'is-editing': this.props.isEditing,
       'is-creating': this.props.isCreating,
+      [this.props.className]: !!this.props.className,
     });
+
     let actionBar = null;
     let actionBarRight = null;
     let actionBarLeft = null;
