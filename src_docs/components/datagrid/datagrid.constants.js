@@ -11,7 +11,7 @@ export const GRID = {
   defaultSortColumn: 'amount',
   defaultSortOrder: 'desc',
   language: 'en',
-  dateFormat: 'DD/MM/YYYY',
+  dateFormat: 'L',
   decimalSeparator: '.',
   thousandSeparator: ',',
 };

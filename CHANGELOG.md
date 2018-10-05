@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed issue #60: First day of the week is Su always
 
 ## 5.6.6
 * fix to arrow key navigation 
