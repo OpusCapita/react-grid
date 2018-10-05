@@ -109,6 +109,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | disableRememberIsFiltering  | boolean          | true                                     | Disable remembering the filters                            |
 | disableRememberColumnWidths | boolean          | true                                     | Disable remembering the column widths                      |
 | language                    | string           | 'en'                                     | Default taken from redux user state used in OC apps        |
+| region                      | string           | 'en-GB'                                  | Default taken from redux user state used in OC apps        |
 | dateFormat                  | string           | 'L'                                      | Default taken from redux user state used in OC apps        |
 | thousandSeparator           | string           | ''                                       | Default taken from redux user state used in OC apps        |
 | decimalSeparator            | string           | '.'                                      | Default taken from redux user state used in OC apps        |
