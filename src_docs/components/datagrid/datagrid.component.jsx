@@ -252,6 +252,7 @@ export default class DatagridView extends React.Component {
         rowSelectCheckboxColumn
         onSave={this.handleOnSave}
         onRemove={this.handleOnRemove}
+        className="test-grid"
         contextMenuItems={[
           {
             value: 'Booleans are true',

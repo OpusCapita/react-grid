@@ -221,6 +221,7 @@ export const propTypes = {
   rowClassNameGetter: func,
   rowHeightGetter: func,
   onContentHeightChange: func,
+  className: string,
 };
 
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */
@@ -240,4 +241,5 @@ export const defaultProps = {
   onCancel: () => {},
   tabIndex: 1,
   disableFilteringControls: false,
+  className: '',
 };
