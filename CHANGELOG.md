@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.7.2
+* Added rowData as first parameter to rowHeightGetter function
+
 ## 5.7.1
 * Added rowIndex as second parameter to valueRender functions
 

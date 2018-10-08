@@ -91,7 +91,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onScrollStart            | function         |                                          | Callback that is called when scrolling starts with current horizontal and vertical scroll values |
 | onScrollEnd              | function         |                                          | Callback that is called when scrolling ends or stops with new horizontal and vertical scroll values |
 | rowClassNameGetter       | function         |                                          | To get any additional CSS classes that should be added to a row, rowClassNameGetter(index) is called |
-| rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(index) is called for each row and the returned value overrides rowHeight for particular row |
+| rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(rowData, rowIndex) is called for each row and the returned value overrides rowHeight for particular row |
 | onContentHeightChange    | function         |                                          | Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content |
 | contextMenuItems         | array            |                                          | Array of items in the context menu |
 
