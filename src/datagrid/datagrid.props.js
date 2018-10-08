@@ -154,7 +154,13 @@ export const propTypes = {
   cellSelect: bool,
   disableDropdown: bool,              // Don't use dropdown menu in the action bar
   disableFilteringControls: bool,     // Don't display the filtering controls (only valid if disableDropdown is true)
-  dropdownMenuItems: array,
+  dropdownMenuItems: arrayOf(shape({
+    id: string,
+    title: node,
+    icon: node,
+    onClick: func,
+    disabled: oneOfType([bool, func]),
+  })),
   inlineEdit: bool,
   inlineAdd: bool,
   filtering: bool,

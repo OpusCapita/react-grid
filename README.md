@@ -195,6 +195,15 @@ Also you need to configure sass loader, since all the styles are in sass format.
 #### Datagrid - `contextMenuItems` prop array attributes
 | Name          | Type              | Default | Description                                        |
 | ------------- | ------------------| ------- | -------------------------------------------------- |
+| id            | string            |         | Item id                                            |
+| title         | any               |         | Value to display in the menu                       |
+| icon          | any               |         | Icon element to display with item                  |
+| onClick       | function          |         | onClick handles, parameters (selectedIds :: List, selectedData :: List) |
+| disabled      | boolean, function | false   | Is item disabled, parameters (selectedIds :: List, selectedData :: List) |
+
+#### Datagrid - `contextMenuItems` prop array attributes
+| Name          | Type              | Default | Description                                        |
+| ------------- | ------------------| ------- | -------------------------------------------------- |
 | value         | any               |         | Value to display in the menu                       |
 | onClick       | function          |         | onClick handles, parameters (selectedIds :: List, selectedData :: List) |
 | title         | string            |         | Item title to show when mouse overing              |
