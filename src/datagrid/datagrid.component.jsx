@@ -602,7 +602,7 @@ export default class DataGrid extends React.PureComponent {
       if (col.cell) {
         column.cell = col.cell;
       } else if (col.valueRender) {
-        column.cell = rowIndex => col.valueRender(this.props.data.get(rowIndex));
+        column.cell = rowIndex => col.valueRender(this.props.data.get(rowIndex), rowIndex);
       } else {
         switch (col.valueType) {
           case 'number':
@@ -646,17 +646,20 @@ export default class DataGrid extends React.PureComponent {
       if (col.cellEdit) {
         column.cellEdit = col.cellEdit;
       } else if (col.editValueRender) {
-        column.cellEdit = rowIndex => col.editValueRender(this.props.data.get(rowIndex));
+        column.cellEdit =
+          rowIndex => col.editValueRender(this.props.data.get(rowIndex), rowIndex);
       }
       if (col.cellCreate) {
         column.cellCreate = col.cellCreate;
       } else if (col.createValueRender) {
-        column.cellCreate = rowIndex => col.createValueRender(this.props.data.get(rowIndex));
+        column.cellCreate =
+          rowIndex => col.createValueRender(this.props.data.get(rowIndex), rowIndex);
       }
       if (col.cellFilter) {
         column.cellFilter = col.cellFilter;
       } else if (col.filterValueRender) {
-        column.cellFilter = rowIndex => col.filterValueRender(this.props.data.get(rowIndex));
+        column.cellFilter =
+          rowIndex => col.filterValueRender(this.props.data.get(rowIndex), rowIndex);
       }
       if (col.componentType) {
         let editValueParser = val => val;

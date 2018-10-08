@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 5.7.1
+* Added rowIndex as second parameter to valueRender functions
+
 ## 5.7.0
 * Fixed issue #60: First day of the week is Su always
 * Added className prop

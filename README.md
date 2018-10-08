@@ -3,7 +3,7 @@
 ### Description
 **Datagrid** is a component that can be used to present data in table. It supports inline edit, action bar and lot more. Component is highly customizable to meet different use cases.
 
-Underneath it uses Facebook's [fixed-data-table](https://github.com/facebook/fixed-data-table) react component, which is designed to handle large amounts amounts of data without sacraficing performance.
+Underneath it uses originally Facebook's, but later continued by Schrodinger [fixed-data-table-2](https://github.com/schrodinger/fixed-data-table-2) react component, which is designed to handle large amounts amounts of data without sacraficing performance.
 
 ### Installation
 ```
@@ -124,10 +124,10 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | valueType                  | string         |         | Value type [text/number/float/currency/boolean/date] |
 | valueOptions               | object         |         | Options for the value rendering          |
 | componentType              | string         |         | Input component type [text/number/float/select/boolean/date] |
-| valueRender                | string         |         | Override value render, rowData as parameter |
-| editValueRender            | string         |         | Override value render in editing mode    |
-| createValueRender          | string         |         | Override value render in creating mode   |
-| filterValueRender          | string         |         | Override value render in filtering mode  |
+| valueRender                | function       |         | Override value render, (rowData, rowIndex) as parameters |
+| editValueRender            | function       |         | Override value render in editing mode, (rowData, rowIndex) as parameters |
+| createValueRender          | function       |         | Override value render in creating mode, (rowData, rowIndex) as parameters |
+| filterValueRender          | function       |         | Override value render in filtering mode, (rowData, rowIndex) as parameters |
 | cell                       | function       |         | Override cell content renderer, rowIndex as parameter |
 | cellEdit                   | function       |         | Override content renderer in editing mode |
 | cellCreate                 | function       |         | Override cell content renderer in creating mode |
