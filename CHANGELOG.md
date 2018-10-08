@@ -3,6 +3,22 @@
 
 ## <next>
 
+## 5.7.0
+* Fixed issue #60: First day of the week is Su always
+* Added className prop
+
+## 5.6.6
+* fix to arrow key navigation 
+
+## 5.6.5
+* ExtendData action modified to allow data prepend to existing grid
+
+## 5.6.4
+* RemoveItem action modified to remove error,info and warning cell messages
+
+## 5.6.3
+* RemoveItem action changed to use row ID instead of index
+
 ## 5.6.2
 * Fix context menu callback parameters to more usable form
 * Fix right clicking on non-selected item changes selection when context menu is enabled
@@ -55,7 +71,7 @@
 * Upgraded `@opuscapita/react-select-order-list` to the latest version.
 
 ## 5.1.4
-* Fixed :before color-corner shown only for grid cells, not for action bar items 
+* Fixed :before color-corner shown only for grid cells, not for action bar items
 
 ## 5.1.3
 * Fixed a bug: renamed passed CellTooltip prop messageId->infoMessage  

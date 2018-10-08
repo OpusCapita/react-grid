@@ -1,12 +1,17 @@
 import * as VALIDATE from './datagrid.validators';
 
+export const REGIONS = {
+  'en-GB': 'English (GB)',
+  'fi-FI': 'Finnish (FI)',
+};
+
 export const GRID = {
   id: 'TestGrid',
   idKeyPath: ['id'],
   defaultSortColumn: 'amount',
   defaultSortOrder: 'desc',
   language: 'en',
-  dateFormat: 'DD/MM/YYYY',
+  dateFormat: 'L',
   decimalSeparator: '.',
   thousandSeparator: ',',
 };

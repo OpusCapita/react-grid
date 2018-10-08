@@ -57,6 +57,7 @@ const mapStateToProps = (state, ownProps) => {
     createCellMessages: state.datagrid.getIn([GRID.id, 'createCellMessages'], Map()),
     allDataSize: state.datagrid.getIn([GRID.id, 'allData'], List()).size,
     language: Utils.getLanguage(GRID, state.user),
+    region: Utils.getRegion(GRID, state.user),
     dateFormat: Utils.getDateFormat(GRID, state.user),
     thousandSeparator: Utils.getThousandSeparator(GRID, state.user),
     decimalSeparator: Utils.getDecimalSeparator(GRID, state.user),
@@ -132,7 +133,7 @@ export default class DataGrid extends React.PureComponent {
         case KEY_CODES.RIGHT:
         case KEY_CODES.LEFT: {
           e.preventDefault();
-          let columnInd = columns.findIndex(c => c.valueKeyPath.join() === columnKey);
+          let columnInd = columns.findIndex(c => c.valueKeyPath.join('/') === columnKey);
           if (columnInd !== -1) {
             let disabled = true;
             let nextElement = null;
@@ -928,7 +929,7 @@ export default class DataGrid extends React.PureComponent {
                   <DateInput
                     value={this.getEditItemValue(rowIndex, col)}
                     onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    locale={this.props.language}
+                    locale={this.props.region}
                     dateFormat={this.props.dateFormat}
                     inputRef={this.handleEditCellRef(rowIndex, col)}
                     inputProps={{
@@ -950,7 +951,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getCreateItemValue(rowIndex, col)}
                     onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
                     onKeyDown={this.onCreateCellKeyDown}
-                    locale={this.props.language}
+                    locale={this.props.region}
                     dateFormat={this.props.dateFormat}
                     inputRef={this.handleCreateCellRef(rowIndex, col)}
                     inputProps={{
@@ -971,7 +972,7 @@ export default class DataGrid extends React.PureComponent {
                     value={this.getFilterItemValue(col)}
                     onChange={this.onFilterCellValueChange(col, editValueParser)}
                     dateFormat={this.props.dateFormat}
-                    locale={this.props.language}
+                    locale={this.props.region}
                     inputProps={{
                       tabIndex,
                       id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
@@ -1379,7 +1380,9 @@ export default class DataGrid extends React.PureComponent {
       'is-busy': this.props.isBusy,
       'is-editing': this.props.isEditing,
       'is-creating': this.props.isCreating,
+      [this.props.className]: !!this.props.className,
     });
+
     let actionBar = null;
     let actionBarRight = null;
     let actionBarLeft = null;

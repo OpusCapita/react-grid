@@ -306,8 +306,18 @@ export default {
     }
     return 'en';
   },
+  getRegion: (grid, ocUserState) => {
+    const defaultRegion = 'en_GB';
+    if (grid.region && typeof grid.region === 'string') {
+      return grid.region;
+    }
+    if (ocUserState) {
+      return ocUserState.getIn(['user', 'region'], defaultRegion);
+    }
+    return defaultRegion;
+  },
   getDateFormat: (grid, ocUserState) => {
-    if (grid.dateFormat && typeof grid.language === 'string') {
+    if (grid.dateFormat && typeof grid.dateFormat === 'string') {
       return grid.dateFormat.toUpperCase();
     }
     if (ocUserState) {

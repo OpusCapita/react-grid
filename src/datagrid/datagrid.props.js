@@ -24,6 +24,7 @@ export const gridShape = shape({
   disableRememberFilteData: bool,
   disableRememberSelectedItems: bool,
   language: string,
+  region: string,
   dateFormat: string,
   thousandSeparator: string,
   decimalSeparator: string,
@@ -140,6 +141,7 @@ export const propTypes = {
   cellMessages: map.isRequired,
   createCellMessages: map.isRequired,
   language: string.isRequired,
+  region: string.isRequired,
   thousandSeparator: string.isRequired,
   decimalSeparator: string.isRequired,
   allDataSize: number.isRequired,
@@ -225,6 +227,7 @@ export const propTypes = {
   rowClassNameGetter: func,
   rowHeightGetter: func,
   onContentHeightChange: func,
+  className: string,
 };
 
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */
@@ -244,4 +247,5 @@ export const defaultProps = {
   onCancel: () => {},
   tabIndex: 1,
   disableFilteringControls: false,
+  className: '',
 };

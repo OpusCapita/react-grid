@@ -262,7 +262,7 @@ export const setData = (grid, columns, data) =>
     applySort(grid, columns)(dispatch, getState);
   };
 
-export const extendData = (grid, columns, data) =>
+export const extendData = (grid, columns, data, prepend = false) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
     const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
@@ -270,6 +270,7 @@ export const extendData = (grid, columns, data) =>
       type: TYPES.PLATFORM_DATAGRID_EXTEND_DATA,
       id: grid.id,
       data: immutableData,
+      prepend,
     });
     applyFilters(grid, columns)(dispatch, getState);
     applySort(grid, columns)(dispatch, getState);
@@ -373,14 +374,14 @@ export const addNewItem = (grid, columnDefaultValues) =>
     });
   };
 
-export const removeItem = (grid, index) =>
+export const removeItem = (grid, rowId) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_REMOVE_ITEM,
       id: grid.id,
       idKeyPath: grid.idKeyPath,
-      index,
+      rowId,
     });
   };
 
