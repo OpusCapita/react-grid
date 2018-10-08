@@ -1201,11 +1201,8 @@ export default class DataGrid extends React.PureComponent {
     onClick(selectedItems, selectedData);
   }
 
-  handleRowHeightGetter = (rowIndex) => {
-    if (this.props.rowHeightGetter) {
-      this.props.rowHeightGetter(this.props.data.get(rowIndex), rowIndex);
-    }
-  }
+  handleRowHeightGetter = rowIndex =>
+    this.props.rowHeightGetter(this.props.data.get(rowIndex), rowIndex);
 
   renderCell = col => (cellProps) => {
     const {
@@ -1477,7 +1474,7 @@ export default class DataGrid extends React.PureComponent {
           onScrollStart={this.props.onScrollStart}
           onScrollEnd={this.props.onScrollEnd}
           rowClassNameGetter={this.getRowClassName}
-          rowHeightGetter={this.handleRowHeightGetter}
+          rowHeightGetter={this.props.rowHeightGetter && this.handleRowHeightGetter}
           onContentHeightChange={this.props.onContentHeightChange}
           onRowContextMenu={this.handleContextMenu}
         >
