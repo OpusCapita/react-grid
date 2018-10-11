@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Changed `filterMatcher` parameters: it will now receive rowData and a filterValue. This is a breaking change.
 
 ## 5.7.2
 * Added rowData as first parameter to rowHeightGetter function

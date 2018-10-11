@@ -107,10 +107,10 @@ export const applyFilters = (grid, columns) =>
         filterData.forEach((filterValue, filterColumn) => {
           columns.forEach((column) => {
             if (Utils.getColumnKey(column) === filterColumn) {
-              const rowData = row.getIn(column.valueKeyPath);
-              if (rowData || rowData === 0 || rowData === false) {
+              const value = row.getIn(column.valueKeyPath);
+              if (value || value === 0 || value === false) {
                 const filterMatcher = Utils.getFilterMatcher(column, dateFormat);
-                if (filterMatcher(rowData, filterValue)) {
+                if (filterMatcher(row, filterValue)) {
                   hits += 1;
                 }
               }
