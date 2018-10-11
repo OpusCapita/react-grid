@@ -114,28 +114,29 @@ export default {
     }
   },
   getFilterMatcher: (col, dateFormat) => {
-    if (col.filterMatcher) {
-      return col.filterMatcher;
-    }
+
+    if (col.filterMatcher) return col.filterMatcher;
+    const getVal = row => row.getIn(col.valueKeyPath);
+
     switch (col.valueType) {
       case 'number':
-        return (val, filterVal) => parseInt(val, 10) === parseInt(filterVal, 10);
+        return (row, filterVal) => parseInt(getVal(row), 10) === parseInt(filterVal, 10);
       case 'float':
       case 'currency':
-        return (val, filterVal) => parseFloat(filterVal.replace(',', '.')) === val;
+        return (row, filterVal) => parseFloat(filterVal.replace(',', '.')) === getVal(row);
       case 'date':
-        return (val, filterVal) => {
-          if (moment(val).isValid()) {
-            return moment(val).format(dateFormat) === moment(filterVal).format(dateFormat);
+        return (row, filterVal) => {
+          if (moment(getVal(row)).isValid()) {
+            return moment(getVal(row)).format(dateFormat) === moment(filterVal).format(dateFormat);
           }
           return false;
         };
       case 'boolean':
       case 'select':
-        return (val, filterVal) => val === filterVal;
+        return (row, filterVal) => getVal(row) === filterVal;
       case 'text':
       default:
-        return (val, filterVal) => (new RegExp(filterVal, 'i')).test(val);
+        return (row, filterVal) => (new RegExp(filterVal, 'i')).test(getVal(row));
     }
   },
   loadSelectedItems: (grid) => {

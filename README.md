@@ -149,7 +149,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | valueEmptyChecker          | function       |         | Checker function defined when data is empty |
 | sortValueGetter            | function       |         | Getter function for the sort data        |
 | sortComparator             | function       |         | Comparator function for the sort data    |
-| filterMatcher              | function       |         | Matcher function that matches filter to data |
+| filterMatcher              | function       |         | Matcher function that matches filter to data (parameters: rowData, filterValue) |
 | defaultValue               | string, number |         | Default value for the item when creating new item |
 | isRequired                 | bool           |         | Indicating if column value is required   |
 | onValueMatchChangeValue    | object         |         | Change other column value if own value matches |
