@@ -114,7 +114,6 @@ export default {
     }
   },
   getFilterMatcher: (col, dateFormat) => {
-
     if (col.filterMatcher) return col.filterMatcher;
     const getVal = row => row.getIn(col.valueKeyPath);
 
