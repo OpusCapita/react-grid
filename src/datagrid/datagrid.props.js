@@ -228,6 +228,7 @@ export const propTypes = {
   rowHeightGetter: func,
   onContentHeightChange: func,
   className: string,
+  focusType: map.isRequired,
 };
 
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */

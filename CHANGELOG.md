@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+- setFocusTo -action added. This action can be used to set the focus to either last editedRow, createdRow or to validation error
 
 ## 6.0.0
 * Changed `filterMatcher` parameters: it will now receive rowData and a filterValue. This is a breaking change.

@@ -89,6 +89,15 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'cellMessages', 'warning', action.rowId]);
     }
 
+    case TYPES.PLATFORM_DATAGRID_SET_FOCUS_TO: {
+      // focus type is saved as a immutable Map to make it easier to detect changes
+      // when requesting same type of focus several times
+      return state.setIn(
+        [action.id, 'session', 'focusType'],
+        Map({ type: action.focusTo, focusToLastRow: action.focusToLastRow }),
+      );
+    }
+
     case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEM:
       return state.deleteIn([action.id, 'createData', action.index]);
 
