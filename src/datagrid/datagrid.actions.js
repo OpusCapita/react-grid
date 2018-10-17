@@ -46,6 +46,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_MODAL_CLOSE',
   PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE',
   PLATFORM_DATAGRID_FORCE_REFRESH: 'PLATFORM_DATAGRID_FORCE_REFRESH',
+  PLATFORM_DATAGRID_SET_FOCUS_TO: 'PLATFORM_DATAGRID_SET_FOCUS_TO',
 };
 
 export const invalidate = grid =>
@@ -261,6 +262,22 @@ export const setData = (grid, columns, data) =>
     applyFilters(grid, columns)(dispatch, getState);
     applySort(grid, columns)(dispatch, getState);
   };
+/**
+ * Action to set focus to either last editedRow, createdRow or to validation error
+ * @param {Object} grid
+ * @param {String} focusToType - type of focus request. Possible values:
+ * 'focusToEditCell' || 'focusToErrorCell' || 'focusToCreateCell'
+ * @param {boolean} focusToLastRow - sets focus to last data row instead of selected row
+ */
+export const setFocusTo = (grid, focusTo, focusToLastRow = false) => (dispatch) => {
+  Utils.checkGridParam(grid);
+  dispatch({
+    type: TYPES.PLATFORM_DATAGRID_SET_FOCUS_TO,
+    focusTo,
+    focusToLastRow,
+    id: grid.id,
+  });
+};
 
 export const extendData = (grid, columns, data, prepend = false) =>
   (dispatch, getState) => {
