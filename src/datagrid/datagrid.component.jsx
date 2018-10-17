@@ -14,6 +14,7 @@ import moment from 'moment';
 import { FloatingSelect } from '@opuscapita/react-floating-select';
 import { DateInput } from '@opuscapita/react-datetime';
 import { Icon } from '@opuscapita/react-icons';
+import FaCheck from 'react-icons/lib/fa/check';
 import { Spinner } from '@opuscapita/react-spinner';
 import Checkbox from '@opuscapita/react-checkbox';
 import { formatCurrencyAmount } from '@opuscapita/format-utils';
@@ -160,7 +161,7 @@ export default class DataGrid extends React.PureComponent {
                   break;
                 }
               }
-              const nextColumnKey = Utils.getColumnKey(columns[columnInd]);
+              const nextColumnKey = Utils.getColumnKey(columns[columnInd]);              
               nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowInd}`];
               disabled = nextElement ? nextElement.disabled : false;
             }
@@ -655,6 +656,14 @@ export default class DataGrid extends React.PureComponent {
               valueRender(rowIndex, v =>
                 <M id={v ? 'Grid.Yes' : 'Grid.No'} {...col.renderComponentProps} />);
             break;
+          case 'checkbox':
+            column.cell = rowIndex =>
+              valueRender(rowIndex, v =>
+                (v ?
+                  <FaCheck size={20} /> :
+                  null
+                ));
+            break;
           default:
             column.cell = rowIndex => valueRender(rowIndex);
         }
@@ -1086,6 +1095,51 @@ export default class DataGrid extends React.PureComponent {
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
                     {...selectTranslations}
+                  />
+                );
+              }
+            }
+            break;
+          }
+          case 'checkbox': {
+            if (this.props.inlineEdit) {
+              if (!column.cellEdit) {
+                const checkBoxValueParser = rowIndex => () => !(this.getEditItemValue(rowIndex, col) || false);
+                column.cellEdit = rowIndex => (
+                  <Checkbox
+                    checked={this.getEditItemValue(rowIndex, col) || false}
+                    onChange={this.onEditCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
+                    onBlur={this.onEditCellBlur(rowIndex, col)}
+                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
+                    ref={this.handleEditCellRef(rowIndex, col)}
+                    {...col.filterComponentProps}
+                    tabIndex={tabIndex}
+                  />
+                );
+              }
+              if (!column.cellCreate) {
+                const checkBoxValueParser = rowIndex => () => !(this.getCreateItemValue(rowIndex, col) || false);
+                column.cellCreate = rowIndex => (
+                  <Checkbox
+                    checked={this.getCreateItemValue(rowIndex, col) || false}
+                    onChange={this.onCreateCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
+                    onBlur={this.onCreateCellBlur(rowIndex, col)}
+                    inputRef={this.handleCreateCellRef(rowIndex, col)}
+                    {...col.filterComponentProps}
+                    tabIndex={tabIndex}
+                  />
+                );
+              }
+            }
+            if (this.props.filtering) {
+              if (!column.cellFilter) {
+                const checkBoxValueParser = () => !(this.getFilterItemValue(col) || false);            
+                column.cellFilter = () => (
+                  <Checkbox
+                    checked={this.getFilterItemValue(col) || false}
+                    onChange={this.onFilterCellValueChange(col, checkBoxValueParser)}
+                    {...col.filterComponentProps}
+                    tabIndex={tabIndex}
                   />
                 );
               }
