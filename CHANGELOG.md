@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 6.1.0
 - setFocusTo -action added. This action can be used to set the focus to either last editedRow, createdRow or to validation error
 
 ## 6.0.0
