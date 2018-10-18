@@ -10,6 +10,8 @@
   "Grid.Save": "Save",
   "Grid.Ok": "OK",
   "Grid.Yes": "Yes",
+  "Grid.Checked": "Checked",
+  "Grid.UnChecked": "Unchecked",
   "Grid.ValueIsMissing": "Value is missing",
   "Grid.Warning": "Warning",
   "Grid.ShowFilteringRow": "Show filtering row",
@@ -22,6 +24,7 @@
 
   "Grid.FloatingSelect.Select": "Select...",
   "Grid.FloatingSelect.NoResults": "No search results",
+
 
   "Validation.Unique": "Value must be unique",
   "Validation.IsRequired": "Value is required",
