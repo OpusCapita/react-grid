@@ -62,6 +62,7 @@ const mapStateToProps = (state, ownProps) => {
     thousandSeparator: Utils.getThousandSeparator(GRID, state.user),
     decimalSeparator: Utils.getDecimalSeparator(GRID, state.user),
     forceRefreshTimestamp: state.datagrid.get('forceRefresh', 0), // force re-render when changed
+    focusType: state.datagrid.getIn([GRID.id, 'session', 'focusType'], Map()),
   };
 };
 
@@ -448,6 +449,16 @@ export default class DataGrid extends React.PureComponent {
     return scrollToRow;
   }
 
+  setFocusTo = (focusTo) => {
+    if (this.props.isEditing || this.props.isCreating) {
+      if (focusTo && focusTo.get('type') && focusTo !== this.prevFocusTo) {
+        this[focusTo.get('type')] = true;
+        this.focusToLastRow = focusTo.get('focusToLastRow');
+        this.prevFocusTo = focusTo;
+      }
+    }
+  }
+
   handleCellSelect = (cellType, rowIndex, columnKey) => () => {
     if (cellType === 'view' && this.props.cellSelect) {
       this.props.cellSelectionChange(this.props.grid, Map({ rowIndex, columnKey }));
@@ -470,18 +481,23 @@ export default class DataGrid extends React.PureComponent {
   handleEditCellRef = (rowIndex, col) => (ref) => {
     const columnKey = Utils.getColumnKey(col);
     if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
-      const selectedRowIndex = this.getSelectedItemIndex(this.props.selectedItems.first());
+      const selectedRowIndex = this.focusToLastRow && this.props.data.size > 0 ?
+        this.props.data.size - 1 : this.getSelectedItemIndex(this.props.selectedItems.first());
+
       const { selectedCell } = this.props;
       if (selectedCell.size > 0) {
         if (selectedCell.get('rowIndex') === rowIndex && selectedCell.get('columnKey') === columnKey) {
           ref.focus();
           this.focusToEditCell = false;
+          this.focusToLastRow = false;
         }
       } else if (selectedRowIndex === undefined) {
         this.focusToEditCell = false;
+        this.focusToLastRow = false;
       } else if (selectedRowIndex === rowIndex) {
         ref.focus();
         this.focusToEditCell = false;
+        this.focusToLastRow = false;
       }
     }
     if (this.props.enableArrowNavigation) {
@@ -1389,6 +1405,9 @@ export default class DataGrid extends React.PureComponent {
       'is-creating': this.props.isCreating,
       [this.props.className]: !!this.props.className,
     });
+
+    // check if there is a new request to change edit mode focus
+    this.setFocusTo(this.props.focusType);
 
     let actionBar = null;
     let actionBarRight = null;

@@ -3,8 +3,11 @@
 
 ## <next>
 
-## 6.0.1
+## 6.1.1
 * Force re-render of react component on forceRefresh action
+
+## 6.1.0
+* setFocusTo -action added. This action can be used to set the focus to either last editedRow, createdRow or to validation error
 
 ## 6.0.0
 * Changed `filterMatcher` parameters: it will now receive rowData and a filterValue. This is a breaking change.
