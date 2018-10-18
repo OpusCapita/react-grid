@@ -59,7 +59,7 @@ export const invalidate = grid =>
 
 export const forceRefresh = () => (dispatch) => {
   // Fire resize event to recalculate component sizes
-  // and to force redraw the grid
+  // and to force redraw all mounted grids
   setTimeout(() => {
     if (document.createEvent) {
       const evt = document.createEvent('HTMLEvents');

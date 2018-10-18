@@ -61,6 +61,7 @@ const mapStateToProps = (state, ownProps) => {
     dateFormat: Utils.getDateFormat(GRID, state.user),
     thousandSeparator: Utils.getThousandSeparator(GRID, state.user),
     decimalSeparator: Utils.getDecimalSeparator(GRID, state.user),
+    forceRefreshTimestamp: state.datagrid.get('forceRefresh', 0), // force re-render when changed
   };
 };
 

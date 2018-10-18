@@ -16,8 +16,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'cellMessages']);
 
     case TYPES.PLATFORM_DATAGRID_FORCE_REFRESH:
-      // no need to alter redux state on force refesh
-      return state;
+      return state.set('forceRefresh', Date.now());
 
     case TYPES.PLATFORM_DATAGRID_SET_DATA:
       return state

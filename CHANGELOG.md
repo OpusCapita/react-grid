@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 6.0.1
+* Force re-render of react component on forceRefresh action
+
 ## 6.0.0
 * Changed `filterMatcher` parameters: it will now receive rowData and a filterValue. This is a breaking change.
 
