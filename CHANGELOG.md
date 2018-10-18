@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 6.2.0
+* checkbox valueType and componentType added for boolean values
+
 ## 6.1.1
 * Force re-render of react component on forceRefresh action
 
