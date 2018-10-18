@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 6.2.1
+* library rebuild (wrong @opuscapita/react-checkbox version used in previous build)
+
 ## 6.2.0
 * checkbox valueType and componentType added for boolean values
 
