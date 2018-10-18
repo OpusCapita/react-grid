@@ -161,7 +161,7 @@ export default class DataGrid extends React.PureComponent {
                   break;
                 }
               }
-              const nextColumnKey = Utils.getColumnKey(columns[columnInd]);              
+              const nextColumnKey = Utils.getColumnKey(columns[columnInd]);
               nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowInd}`];
               disabled = nextElement ? nextElement.disabled : false;
             }
@@ -1102,13 +1102,26 @@ export default class DataGrid extends React.PureComponent {
             break;
           }
           case 'checkbox': {
+            const { intl } = this.props;
+            const selectOptions = [
+              { value: true, label: intl.formatMessage({ id: 'Grid.Checked' }) },
+              { value: false, label: intl.formatMessage({ id: 'Grid.UnChecked' }) },
+            ];
+
+            const selectTranslations = col.selectComponentTranslations || {
+              placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
+              noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
+            };
+
             if (this.props.inlineEdit) {
               if (!column.cellEdit) {
-                const checkBoxValueParser = rowIndex => () => !(this.getEditItemValue(rowIndex, col) || false);
+                const checkBoxValueParser =
+                  rowIndex => () => !(this.getEditItemValue(rowIndex, col) || false);
                 column.cellEdit = rowIndex => (
                   <Checkbox
                     checked={this.getEditItemValue(rowIndex, col) || false}
-                    onChange={this.onEditCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
+                    onChange={
+                      this.onEditCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
                     onBlur={this.onEditCellBlur(rowIndex, col)}
                     onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
                     ref={this.handleEditCellRef(rowIndex, col)}
@@ -1118,11 +1131,13 @@ export default class DataGrid extends React.PureComponent {
                 );
               }
               if (!column.cellCreate) {
-                const checkBoxValueParser = rowIndex => () => !(this.getCreateItemValue(rowIndex, col) || false);
+                const checkBoxValueParser =
+                  rowIndex => () => !(this.getCreateItemValue(rowIndex, col) || false);
                 column.cellCreate = rowIndex => (
                   <Checkbox
                     checked={this.getCreateItemValue(rowIndex, col) || false}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
+                    onChange={
+                      this.onCreateCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
                     onBlur={this.onCreateCellBlur(rowIndex, col)}
                     inputRef={this.handleCreateCellRef(rowIndex, col)}
                     {...col.filterComponentProps}
@@ -1133,13 +1148,22 @@ export default class DataGrid extends React.PureComponent {
             }
             if (this.props.filtering) {
               if (!column.cellFilter) {
-                const checkBoxValueParser = () => !(this.getFilterItemValue(col) || false);            
                 column.cellFilter = () => (
-                  <Checkbox
-                    checked={this.getFilterItemValue(col) || false}
-                    onChange={this.onFilterCellValueChange(col, checkBoxValueParser)}
+                  <FloatingSelect
+                    name={col.valueKeyPath.join() + '-filter'}
+                    options={selectOptions}
+                    value={this.getFilterItemValue(col)}
+                    onChange={this.onFilterCellValueChange(col, editValueParser)}
+                    searchable={false}
+                    clearable
+                    tabSelectsValue={false}
+                    openOnFocus
+                    inputProps={{
+                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
+                    }}
                     {...col.filterComponentProps}
                     tabIndex={tabIndex}
+                    {...selectTranslations}
                   />
                 );
               }
