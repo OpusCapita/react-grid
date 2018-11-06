@@ -88,7 +88,10 @@ export default class DatagridTooltip extends React.Component {
     });
     return (
       <OverlayTrigger {...overlayAttrs}>
-        <div className={wrapperClassName}>
+        <div
+          id={id}
+          className={wrapperClassName}
+        >
           { children }
         </div>
       </OverlayTrigger>

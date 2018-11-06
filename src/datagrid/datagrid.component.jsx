@@ -1305,6 +1305,7 @@ export default class DataGrid extends React.PureComponent {
       isEditing,
       createData,
       selectedCell,
+      grid,
     } = this.props;
     const { rowIndex, ...props } = cellProps;
     let cell;
@@ -1329,7 +1330,7 @@ export default class DataGrid extends React.PureComponent {
     } else {
       cell = col.cell(rowIndex - extraRowCount);
     }
-    const isSpecial = cellProps.columnKey === 'selectionCheckbox' || cellProps.columnKey === 'extraColumn';
+    const isSpecial = props.columnKey === 'selectionCheckbox' || props.columnKey === 'extraColumn';
     if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isSpecial) {
       const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
@@ -1344,7 +1345,7 @@ export default class DataGrid extends React.PureComponent {
           onClick={this.handleCellSelect(cellType, rowIndex, props.columnKey)}
         >
           <CellTooltip
-            id={cellType + col.columnKey + (rowIndex - extraRowCount)}
+            id={`ocDatagridCell-${grid.id}-${props.columnKey}-${rowIndex}`}
             isEdited={isEdited}
             isError={!!messageData.errorMessage}
             isWarning={!!messageData.warningMessage}
@@ -1404,6 +1405,7 @@ export default class DataGrid extends React.PureComponent {
         columnKey={col.columnKey}
         header={
           <HeaderCell
+            id={`ocDatagridHeader-${this.props.grid.id}-${col.columnKey}`}
             grid={this.props.grid}
             columns={this.props.columns}
             column={col}

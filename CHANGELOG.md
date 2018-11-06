@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 6.2.2
+* Change header background color, add border around the grid
+* Add ID to all cells in view mode, add ID in header cell
+
 ## 6.2.1
 * library rebuild (wrong @opuscapita/react-checkbox version used in previous build)
 
