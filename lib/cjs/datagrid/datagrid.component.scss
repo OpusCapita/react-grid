@@ -7,6 +7,10 @@
   padding: 10px;
   overflow: hidden;
 
+  .oc-datagrid-main-container {
+    border: 1px solid $oc-grid-color-border-main;
+  }
+
   .oc-datagrid-actions-disabled-notification {
     background-color: $oc-grid-color-background;
     text-align: right;
@@ -50,13 +54,12 @@
 
   // HEADER
   .public_fixedDataTable_header {
-    background: $oc-grid-color-background;
-    border-style: solid;
-    border-color: $oc-grid-color-border;
-    border-width: 1px 0 0px 0;
+    background: $oc-grid-color-background-header;
+    border: none;
     .oc-datagrid-cell-header {
+      background: $oc-grid-color-background-header;
       border-style: solid;
-      border-color: $oc-grid-color-border;
+      border-color: $oc-grid-color-border-main;
       border-width: 0 1px 0 0;
       &.clickable {
         cursor: pointer;
