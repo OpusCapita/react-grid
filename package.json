@@ -110,7 +110,7 @@
     "@opuscapita/react-checkbox": "1.2.0",
     "@opuscapita/react-datetime": "3.2.0",
     "@opuscapita/react-dropdown": "2.1.1",
-    "@opuscapita/react-floating-select": "2.0.0",
+    "@opuscapita/react-floating-select": "3.1.0",
     "@opuscapita/react-icons": "2.0.3",
     "@opuscapita/react-perfect-scrollbar": "3.0.3",
     "@opuscapita/react-select-order-list": "3.1.6",
@@ -120,6 +120,7 @@
     "immutable": "3.8.2",
     "lodash": "4.17.10",
     "moment": "2.22.2",
+    "styled-components": "3",
     "react-icons": "2.2.7",
     "react-intl": "2.4.0",
     "react-redux": "5.0.7"

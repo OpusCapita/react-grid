@@ -3,6 +3,7 @@ import moment from 'moment';
 import isNaN from 'lodash/isNaN';
 import { isFunction } from 'util';
 import { Map, fromJS } from 'immutable';
+import { columns } from '../../test/datagrid/datagrid.constants';
 
 const getColumnKey = col => (
   col.columnKey || col.valueKeyPath.join('/')
@@ -358,5 +359,20 @@ export default {
     }
 
     return newFilteringData;
+  },
+  /*
+   * @function visibleColumns
+   * @desc  Returns either visible columns (if some columns are hidden )
+   *        or grid default columns.
+   * @param origColumns Array of Grid original columns objects
+   * @param visibleColumns Array of Grid visible columns valueKeyPaths
+   * @returns Array of column objects currently visible for user.
+  */
+  visibleColumns: (origColumns, visibleColumns) => {
+    if (!visibleColumns) return origColumns;
+    const filtered = visibleColumns.map(  // eslint-disable-line
+      searchCol => origColumns.find(  // eslint-disable-line
+        col => JSON.stringify(col.valueKeyPath) === JSON.stringify([searchCol])));
+    return filtered.toJS();
   },
 };

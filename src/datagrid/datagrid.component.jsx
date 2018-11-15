@@ -5,19 +5,13 @@ import { connect } from 'react-redux';
 import {
   injectIntl,
   FormattedMessage as M,
-  FormattedNumber as N,
 } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
-import { FormControl, MenuItem } from 'react-bootstrap';
+import { MenuItem } from 'react-bootstrap';
 import classNames from 'classnames';
-import moment from 'moment';
-import { FloatingSelect } from '@opuscapita/react-floating-select';
-import { DateInput } from '@opuscapita/react-datetime';
 import { Icon } from '@opuscapita/react-icons';
-import FaCheck from 'react-icons/lib/fa/check';
 import { Spinner } from '@opuscapita/react-spinner';
 import Checkbox from '@opuscapita/react-checkbox';
-import { formatCurrencyAmount } from '@opuscapita/format-utils';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 import ResponsiveFixedDataTable from './responsive-fixed-data-table.component';
@@ -32,6 +26,7 @@ import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';
 import { KEY_CODES } from './datagrid.constants';
 import Utils from './datagrid.utils';
+import GridColumnService from './column-service/column-service';
 import './datagrid.component.scss';
 
 const mapStateToProps = (state, ownProps) => {
@@ -114,7 +109,8 @@ export default class DataGrid extends React.PureComponent {
 
   onEditCellKeyDown = (col, rowIndex) => (e) => {
     if (this.props.enableArrowNavigation) {
-      const { columns } = this.props;
+      const { columns, visibleColumns } = this.props;
+      const gridColumns = Utils.visibleColumns(columns, visibleColumns);
       const rowsSize = this.props.data.size;
       const columnKey = Utils.getColumnKey(col);
       switch (e.keyCode) {
@@ -136,7 +132,7 @@ export default class DataGrid extends React.PureComponent {
         case KEY_CODES.RIGHT:
         case KEY_CODES.LEFT: {
           e.preventDefault();
-          let columnInd = columns.findIndex(c => c.valueKeyPath.join('/') === columnKey);
+          let columnInd = gridColumns.findIndex(c => c.valueKeyPath.join('/') === columnKey);
           if (columnInd !== -1) {
             let disabled = true;
             let nextElement = null;
@@ -146,13 +142,13 @@ export default class DataGrid extends React.PureComponent {
                 if (columnInd - 1 >= 0) {
                   columnInd -= 1;
                 } else if (rowInd - 1 >= 0) {
-                  columnInd = columns.length - 1;
+                  columnInd = gridColumns.length - 1;
                   rowInd -= 1;
                 } else {
                   break;
                 }
               } else {
-                if (columnInd + 1 < columns.length) {
+                if (columnInd + 1 < gridColumns.length) {
                   columnInd += 1;
                 } else if (rowInd + 1 < rowsSize) {
                   columnInd = 0;
@@ -161,7 +157,7 @@ export default class DataGrid extends React.PureComponent {
                   break;
                 }
               }
-              const nextColumnKey = Utils.getColumnKey(columns[columnInd]);
+              const nextColumnKey = Utils.getColumnKey(gridColumns[columnInd]);
               nextElement = this.cellRefs[`${this.props.grid.id}_${nextColumnKey}_${rowInd}`];
               disabled = nextElement ? nextElement.disabled : false;
             }
@@ -302,7 +298,7 @@ export default class DataGrid extends React.PureComponent {
     return index === -1 ? undefined : index;
   }
 
-  getEditItemValue = (rowIndex, col) => {
+  getEditItemValue = (rowIndex, col, options = []) => {
     // Get the value to display in edit cell
     const id = this.getDataIdByRowIndex(rowIndex);
     const editValue = this.props.editData.getIn([id, ...col.valueKeyPath], undefined);
@@ -312,6 +308,11 @@ export default class DataGrid extends React.PureComponent {
     } else if (editValue === null) {
       return '';
     } else {
+      if (col.componentType === 'select') {
+        return col.selectComponentOptions.find(obj => obj.value === editValue);
+      } else if (['boolean'].includes(col.componentType)) {
+        return options.find(obj => obj.value === editValue);
+      }
       return editValue;
     }
     if (originalValue === null || originalValue === undefined || originalValue === '') {
@@ -327,18 +328,26 @@ export default class DataGrid extends React.PureComponent {
     return originalValue;
   }
 
-  getCreateItemValue = (rowIndex, col) => {
+  getCreateItemValue = (rowIndex, col, options = []) => {
     const val = this.props.createData.getIn([rowIndex, ...col.valueKeyPath], '');
     if (val === null) {
       return '';
+    } else if (col.componentType === 'select') {
+      return col.selectComponentOptions.find(obj => obj.value === val);
+    } else if (['boolean'].includes(col.componentType)) {
+      return options.find(obj => obj.value === val);
     }
     return val;
   }
 
-  getFilterItemValue = (col) => {
+  getFilterItemValue = (col, options = []) => {
     const val = this.props.filterData.get(Utils.getColumnKey(col), '');
     if (val === null) {
       return '';
+    } else if (col.componentType === 'select') {
+      return col.selectComponentOptions.find(obj => obj.value === val);
+    } else if (['checkbox', 'boolean'].includes(col.componentType)) {
+      return options.find(obj => obj.value === val);
     }
     return val;
   }
@@ -507,7 +516,8 @@ export default class DataGrid extends React.PureComponent {
   }
 
   moveCellFocus = (nextElement, rowIndex, columnIndex) => {
-    if (nextElement && (nextElement.type === 'text' || nextElement.type === 'number')) {
+    const elementTypes = ['text', 'number'];
+    if (nextElement && elementTypes.includes(nextElement.type)) {
       if (rowIndex !== -1) {
         this.setState({ currentRow: rowIndex });
       }
@@ -578,601 +588,68 @@ export default class DataGrid extends React.PureComponent {
       });
     });
     visibleColumns.forEach((col) => {
-      const column = {
-        header: col.header,
-        columnKey: Utils.getColumnKey(col),
-        width: (col.width || col.width === 0 ? col.width : 200),
-        minWidth: (col.minWidth || col.minWidth === 0 ? col.minWidth : 40),
-        maxWidth: col.maxWidth,
-        isResizable: !col.disableResizing,
-        fixed: !!col.fixed,
-        allowCellsRecycling: !!col.allowCellsRecycling,
-        disableSorting: !!col.disableSorting,
-        isRequired: !!col.isRequired,
-        componentType: col.componentType,
-        style: Utils.getCellStyleByCol(col),
-      };
-      if (col.valueKeyPath) {
-        column.valueKeyPath = col.valueKeyPath;
-      }
-      if (col.flexGrow) {
-        column.flexGrow = col.flexGrow;
-      }
-      if (col.valueType) {
-        column.valueType = col.valueType;
-      }
-      if (col.sortComparator) {
-        column.sortComparator = col.sortComparator;
-      }
-      if (col.sortValueGetter) {
-        column.sortValueGetter = col.sortValueGetter;
-      }
+      const {
+        data,
+        dateFormat,
+        thousandSeparator,
+        decimalSeparator,
+        grid,
+        inlineEdit,
+        filtering,
+        region,
+        intl,
+        selectComponentOptions,
+      } = this.props;
+
       const valueEmptyChecker = Utils.getValueEmptyChecker(col);
       // Cell value rendering
       const valueRender = (rowIndex, format) => {
-        const val = this.props.data.getIn([rowIndex, ...col.valueKeyPath]);
+        const val = data.getIn([rowIndex, ...col.valueKeyPath]);
         if (valueEmptyChecker(val)) {
           return col.isRequired ? <M id="Grid.ValueIsMissing" /> : '';
         }
         return format ? format(val) : val;
       };
 
-      if (col.cell) {
-        column.cell = col.cell;
-      } else if (col.valueRender) {
-        column.cell = rowIndex => col.valueRender(this.props.data.get(rowIndex), rowIndex);
-      } else {
-        switch (col.valueType) {
-          case 'number':
-          case 'float':
-            column.cell = rowIndex =>
-              valueRender(rowIndex, v => <N value={v} {...col.renderComponentProps} />);
-            break;
-          case 'currency': {
-            const currencyKeyPath = col.valueOptions && col.valueOptions.currencyKeyPath || ['currency']; // eslint-disable-line
-            column.cell = rowIndex =>
-              valueRender(rowIndex, v => formatCurrencyAmount(v, {
-                currency: this.props.data.getIn([rowIndex, ...currencyKeyPath]),
-                decimals: col.valueOptions && col.valueOptions.decimals,
-                thousandSeparator: col.valueOptions && col.valueOptions.thousandSeparator || this.props.thousandSeparator, // eslint-disable-line
-                decimalSeparator: col.valueOptions && col.valueOptions.decimalSeparator || this.props.decimalSeparator, // eslint-disable-line
-              }));
-            break;
-          }
-          case 'date':
-            column.cell = rowIndex =>
-              valueRender(rowIndex, (v) => {
-                if (moment(v, this.props.dateFormat, true).isValid()) {
-                  return moment.utc(v, this.props.dateFormat).format(this.props.dateFormat);
-                }
-                if (moment(v).isValid()) {
-                  return moment.utc(v).format(this.props.dateFormat);
-                }
-                return <M id="Grid.InvalidDate" />;
-              });
-            break;
-          case 'boolean':
-            column.cell = rowIndex =>
-              valueRender(rowIndex, v =>
-                <M id={v ? 'Grid.Yes' : 'Grid.No'} {...col.renderComponentProps} />);
-            break;
-          case 'checkbox':
-            column.cell = rowIndex =>
-              valueRender(rowIndex, v =>
-                (v ?
-                  <FaCheck size={20} /> :
-                  null
-                ));
-            break;
-          default:
-            column.cell = rowIndex => valueRender(rowIndex);
-        }
-      }
-      // Cell edit/create/filter component rendering
-      if (col.cellEdit) {
-        column.cellEdit = col.cellEdit;
-      } else if (col.editValueRender) {
-        column.cellEdit =
-          rowIndex => col.editValueRender(this.props.data.get(rowIndex), rowIndex);
-      }
-      if (col.cellCreate) {
-        column.cellCreate = col.cellCreate;
-      } else if (col.createValueRender) {
-        column.cellCreate =
-          rowIndex => col.createValueRender(this.props.data.get(rowIndex), rowIndex);
-      }
-      if (col.cellFilter) {
-        column.cellFilter = col.cellFilter;
-      } else if (col.filterValueRender) {
-        column.cellFilter =
-          rowIndex => col.filterValueRender(this.props.data.get(rowIndex), rowIndex);
-      }
-      if (col.componentType) {
-        let editValueParser = val => val;
-        switch (col.componentType) {
-          case 'text':
-            // TODO REFACTOR TO FUNCTION
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                column.cellEdit = rowIndex => (
-                  <FormControl
-                    type="text"
-                    value={this.getEditItemValue(rowIndex, col)}
-                    onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
-                    onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
-                    inputRef={this.handleEditCellRef(rowIndex, col)}
-                    id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
-                    {...col.editComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                column.cellCreate = rowIndex => (
-                  <FormControl
-                    type="text"
-                    value={this.getCreateItemValue(rowIndex, col)}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onCreateCellBlur(rowIndex, col)}
-                    onKeyDown={this.onCreateCellKeyDown}
-                    inputRef={this.handleCreateCellRef(rowIndex, col)}
-                    id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
-                    {...col.createComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <FormControl
-                    type="text"
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
-                    {...col.filterComponentProps}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            break;
-          case 'number':
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                column.cellEdit = rowIndex => (
-                  <FormControl
-                    type="number"
-                    value={this.getEditItemValue(rowIndex, col)}
-                    onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
-                    onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
-                    inputRef={this.handleEditCellRef(rowIndex, col)}
-                    id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
-                    {...col.editComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                column.cellCreate = rowIndex => (
-                  <FormControl
-                    type="number"
-                    value={this.getCreateItemValue(rowIndex, col)}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onCreateCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('create', 'number', rowIndex, column.columnKey)}
-                    onKeyDown={this.onCreateCellKeyDown}
-                    inputRef={this.handleCreateCellRef(rowIndex, col)}
-                    id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
-                    {...col.createComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <FormControl
-                    type="number"
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
-                    {...col.filterComponentProps}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            break;
-          case 'float':
-            editValueParser = val =>
-              val.replace(new RegExp(`[^\\d${this.props.decimalSeparator}+-]`, 'g'), '');
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                column.cellEdit = rowIndex => (
-                  <FormControl
-                    type="text"
-                    value={this.getEditItemValue(rowIndex, col)}
-                    onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onEditCellBlur(rowIndex, col, editValueParser)}
-                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
-                    onKeyDown={this.onEditCellKeyDown(col, rowIndex)}
-                    inputRef={this.handleEditCellRef(rowIndex, col)}
-                    id={`ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
-                    {...col.editComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                column.cellCreate = rowIndex => (
-                  <FormControl
-                    type="text"
-                    value={this.getCreateItemValue(rowIndex, col)}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onCreateCellBlur(rowIndex, col, editValueParser)}
-                    onKeyDown={this.onCreateCellKeyDown}
-                    inputRef={this.handleCreateCellRef(rowIndex, col)}
-                    id={`ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`}
-                    {...col.createComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <FormControl
-                    type="text"
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    id={`ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`}
-                    {...col.filterComponentProps}
-                    style={column.style}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            break;
-          case 'select': {
-            const { intl } = this.props;
-            const selectOptions = col.selectComponentOptions ||
-              this.props.selectComponentOptions.get(column.columnKey);
-            const selectTranslations = col.selectComponentTranslations ||
-              {
-                placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
-                noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
-              };
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                column.cellEdit = rowIndex => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-edit-' + rowIndex}
-                    options={
-                      col.editSelectOptionsMod && selectOptions ?
-                        col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-                        selectOptions
-                    }
-                    value={this.getEditItemValue(rowIndex, col)}
-                    onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
-                    searchable={selectOptions && (selectOptions.length > 9)}
-                    clearable={!col.isRequired}
-                    backspaceRemoves={false}
-                    tabSelectsValue={false}
-                    openOnFocus
-                    ref={this.handleEditCellRef(rowIndex, col)}
-                    inputProps={{
-                      id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
-                    }}
-                    {...col.editComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                column.cellCreate = rowIndex => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-create-' + rowIndex}
-                    options={
-                      col.createSelectOptionsMod && selectOptions ?
-                        col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-                        selectOptions
-                    }
-                    value={this.getCreateItemValue(rowIndex, col)}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onCreateCellBlur(rowIndex, col)}
-                    searchable={selectOptions && (selectOptions.length > 9)}
-                    clearable={!col.isRequired}
-                    backspaceRemoves={false}
-                    tabSelectsValue={false}
-                    openOnFocus
-                    ref={this.handleCreateCellRef(rowIndex, col)}
-                    inputProps={{
-                      id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
-                    }}
-                    {...col.createComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-filter'}
-                    options={
-                      col.filterSelectOptionsMod && selectOptions ?
-                        col.filterSelectOptionsMod(selectOptions.slice(), col) :
-                        selectOptions}
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    searchable={selectOptions && (selectOptions.length > 9)}
-                    clearable
-                    tabSelectsValue={false}
-                    openOnFocus
-                    inputProps={{
-                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
-                    }}
-                    {...col.filterComponentProps}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-            }
-            break;
-          }
-          case 'date': {
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                column.cellEdit = rowIndex => (
-                  <DateInput
-                    value={this.getEditItemValue(rowIndex, col)}
-                    onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    locale={this.props.region}
-                    dateFormat={this.props.dateFormat}
-                    inputRef={this.handleEditCellRef(rowIndex, col)}
-                    inputProps={{
-                      tabIndex,
-                      id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
-                      onKeyDown: this.onEditCellKeyDown(col, rowIndex),
-                      onBlur: this.onEditCellBlur(rowIndex, col),
-                      onFocus: this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey),
-                      style: column.style,
-                    }}
-                    {...col.editComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                column.cellCreate = rowIndex => (
-                  <DateInput
-                    value={this.getCreateItemValue(rowIndex, col)}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
-                    onKeyDown={this.onCreateCellKeyDown}
-                    locale={this.props.region}
-                    dateFormat={this.props.dateFormat}
-                    inputRef={this.handleCreateCellRef(rowIndex, col)}
-                    inputProps={{
-                      tabIndex,
-                      id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
-                      style: column.style,
-                    }}
-                    {...col.createComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <DateInput
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    dateFormat={this.props.dateFormat}
-                    locale={this.props.region}
-                    inputProps={{
-                      tabIndex,
-                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
-                      style: column.style,
-                    }}
-                    {...col.filterComponentProps}
-                  />
-                );
-              }
-            }
-            break;
-          }
-          case 'boolean': {
-            const { intl } = this.props;
-            const selectOptions = [
-              { value: true, label: intl.formatMessage({ id: 'Grid.Yes' }) },
-              { value: false, label: intl.formatMessage({ id: 'Grid.No' }) },
-            ];
+      let column = GridColumnService.baseColumn(col);
+      // Collect column functions into one Object
+      const columnFunctions = {
+        edit: {
+          getItemValue: this.getEditItemValue,
+          onCellValueChange: this.onEditCellValueChange,
+          onCellBlur: this.onEditCellBlur,
+          onCellFocus: this.onCellFocus,
+          onCellKeyDown: this.onEditCellKeyDown,
+          handleCellRef: this.handleEditCellRef,
+        },
+        create: {
+          getItemValue: this.getCreateItemValue,
+          onCellValueChange: this.onCreateCellValueChange,
+          onCellBlur: this.onCreateCellBlur,
+          onCellKeyDown: this.onCreateCellKeyDown,
+          handleCellRef: this.handleCreateCellRef,
+        },
+        filter: {
+          getItemValue: this.getFilterItemValue,
+          onCellValueChange: this.onFilterCellValueChange,
+        },
+      };
 
-            const selectTranslations = col.selectComponentTranslations || {
-              placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
-              noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
-            };
+      // handle column.cell / column.cellEdit / column.cellCreate / column.cellFilter
+      const cellProps = { data, dateFormat, thousandSeparator, decimalSeparator }; // eslint-disable-line
+      column = GridColumnService.columnCell(column, cellProps, col, valueRender);
 
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                column.cellEdit = rowIndex => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-edit-' + rowIndex}
-                    options={selectOptions}
-                    value={this.getEditItemValue(rowIndex, col)}
-                    onChange={this.onEditCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
-                    searchable={false}
-                    clearable={!col.isRequired}
-                    backspaceRemoves={false}
-                    tabSelectsValue={false}
-                    openOnFocus
-                    ref={this.handleEditCellRef(rowIndex, col)}
-                    inputProps={{
-                      id: `ocDatagridEditInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
-                    }}
-                    {...col.editComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'edit')}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                column.cellCreate = rowIndex => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-create-' + rowIndex}
-                    options={selectOptions}
-                    value={this.getCreateItemValue(rowIndex, col)}
-                    onChange={this.onCreateCellValueChange(rowIndex, col, editValueParser)}
-                    onBlur={this.onCreateCellBlur(rowIndex, col)}
-                    searchable={false}
-                    clearable={!col.isRequired}
-                    backspaceRemoves={false}
-                    tabSelectsValue={false}
-                    openOnFocus
-                    ref={this.handleCreateCellRef(rowIndex, col)}
-                    inputProps={{
-                      id: `ocDatagridCreateInput-${this.props.grid.id}-${column.columnKey}-${rowIndex}`,
-                    }}
-                    {...col.createComponentProps}
-                    disabled={this.getComponentDisabledState(rowIndex, col, 'create')}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-filter'}
-                    options={selectOptions}
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    searchable={false}
-                    clearable
-                    tabSelectsValue={false}
-                    openOnFocus
-                    inputProps={{
-                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
-                    }}
-                    {...col.filterComponentProps}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-            }
-            break;
-          }
-          case 'checkbox': {
-            const { intl } = this.props;
-            const selectOptions = [
-              { value: true, label: intl.formatMessage({ id: 'Grid.Checked' }) },
-              { value: false, label: intl.formatMessage({ id: 'Grid.UnChecked' }) },
-            ];
+      // handle columnComponentTypes
+      const componentTypeProps = { ...cellProps, grid, inlineEdit, filtering, region, intl, selectComponentOptions }; // eslint-disable-line
+      column = GridColumnService.columnComponentType(
+        column,
+        tabIndex,
+        componentTypeProps,
+        col,
+        columnFunctions,
+        this.getComponentDisabledState,
+      );
 
-            const selectTranslations = col.selectComponentTranslations || {
-              placeholder: intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
-              noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
-            };
-
-            if (this.props.inlineEdit) {
-              if (!column.cellEdit) {
-                const checkBoxValueParser =
-                  rowIndex => () => !(this.getEditItemValue(rowIndex, col) || false);
-                column.cellEdit = rowIndex => (
-                  <Checkbox
-                    checked={this.getEditItemValue(rowIndex, col) || false}
-                    onChange={
-                      this.onEditCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
-                    onBlur={this.onEditCellBlur(rowIndex, col)}
-                    onFocus={this.onCellFocus('edit', col.componentType, rowIndex, column.columnKey)}
-                    ref={this.handleEditCellRef(rowIndex, col)}
-                    {...col.filterComponentProps}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-              if (!column.cellCreate) {
-                const checkBoxValueParser =
-                  rowIndex => () => !(this.getCreateItemValue(rowIndex, col) || false);
-                column.cellCreate = rowIndex => (
-                  <Checkbox
-                    checked={this.getCreateItemValue(rowIndex, col) || false}
-                    onChange={
-                      this.onCreateCellValueChange(rowIndex, col, checkBoxValueParser(rowIndex))}
-                    onBlur={this.onCreateCellBlur(rowIndex, col)}
-                    inputRef={this.handleCreateCellRef(rowIndex, col)}
-                    {...col.filterComponentProps}
-                    tabIndex={tabIndex}
-                  />
-                );
-              }
-            }
-            if (this.props.filtering) {
-              if (!column.cellFilter) {
-                column.cellFilter = () => (
-                  <FloatingSelect
-                    name={col.valueKeyPath.join() + '-filter'}
-                    options={selectOptions}
-                    value={this.getFilterItemValue(col)}
-                    onChange={this.onFilterCellValueChange(col, editValueParser)}
-                    searchable={false}
-                    clearable
-                    tabSelectsValue={false}
-                    openOnFocus
-                    inputProps={{
-                      id: `ocDatagridFilterInput-${this.props.grid.id}-${column.columnKey}`,
-                    }}
-                    {...col.filterComponentProps}
-                    tabIndex={tabIndex}
-                    {...selectTranslations}
-                  />
-                );
-              }
-            }
-            break;
-          }
-          default:
-        }
-      }
       columns.push(column);
     });
 
