@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 6.3.0
+* params added to validateWithRowData validator
+
 ## 6.2.2
 * Change header background color, add border around the grid
 * Add ID to all cells in view mode, add ID in header cell
