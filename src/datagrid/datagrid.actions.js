@@ -514,7 +514,8 @@ export const editCellValueValidate = (
           let rowData = gridData.get('allData').find(item => item.getIn(grid.idKeyPath) === dataId);
           if (rowData) {
             rowData = rowData.mergeDeep(editData);
-            validationState = validator.validateWithRowData(value, rowData);
+            const params = validator.params ? Object.values(validator.params) : [];
+            validationState = validator.validateWithRowData(value, rowData, ...params);
           }
         } else {
           const params = validator.params ? Object.values(validator.params) : [];
@@ -591,7 +592,8 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
           }
         } else if (validator.validateWithRowData) {
           const rowData = getState().datagrid.getIn([grid.id, 'createData', rowIndex]);
-          validationState = validator.validateWithRowData(value, rowData);
+          const params = validator.params ? Object.values(validator.params) : [];
+          validationState = validator.validateWithRowData(value, rowData, ...params);
         } else {
           const params = validator.params ? Object.values(validator.params) : [];
           validationState = validator.validate(value, ...params);
