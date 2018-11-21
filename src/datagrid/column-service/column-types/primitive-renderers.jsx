@@ -55,15 +55,15 @@ export default {
   ) {
     const cellName = 'create';
     const primitiveProps = {
-      tabIndex,
+      id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       style: column.style,
+      tabIndex,
       type: formControlType || col.componentType,
-      blur: functions.onCellBlur(rowIndex, col),
       value: functions.getItemValue(rowIndex, col),
+      onBlur: functions.onCellBlur(rowIndex, col),
       onKeyDown: functions.onCellKeyDown,
       inputRef: functions.handleCellRef(rowIndex, col),
       disabled: getComponentDisabledState(rowIndex, col, cellName),
-      id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       onChange: functions.onCellValueChange(rowIndex, col, createValueParser),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       ...col.createComponentProps,
@@ -81,11 +81,11 @@ export default {
     functions,
   ) {
     const primitiveProps = {
+      id: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
+      style: column.style,
       tabIndex,
       type: formControlType,
-      style: column.style,
       value: functions.getItemValue(col),
-      id: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       onChange: functions.onCellValueChange(col, filterValueParser),
       ...col.filterComponentProps,
     };

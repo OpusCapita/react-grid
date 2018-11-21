@@ -626,6 +626,7 @@ export default class DataGrid extends React.PureComponent {
           getItemValue: this.getCreateItemValue,
           onCellValueChange: this.onCreateCellValueChange,
           onCellBlur: this.onCreateCellBlur,
+          onCellFocus: this.onCellFocus,
           onCellKeyDown: this.onCreateCellKeyDown,
           handleCellRef: this.handleCreateCellRef,
         },
