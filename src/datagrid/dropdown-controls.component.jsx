@@ -70,6 +70,7 @@ export default class DropdownControls extends React.PureComponent {
             name="ok"
             width={18}
             height={18}
+            style={{ padding: '4px' }}
           /> : undefined,
         onClick: this.handleToggleFilteringClick,
       });

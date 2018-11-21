@@ -10,7 +10,7 @@ import { Column, Cell } from 'fixed-data-table-2';
 import { MenuItem } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Icon } from '@opuscapita/react-icons';
-import { Spinner } from '@opuscapita/react-spinner';
+import Spinner from '@opuscapita/react-spinner';
 import Checkbox from '@opuscapita/react-checkbox';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 
@@ -668,6 +668,7 @@ export default class DataGrid extends React.PureComponent {
             name="delete"
             width={30}
             height={30}
+            style={{ padding: '7px' }}
             onClick={() => this.props.removeNewItem(this.props.grid, rowIndex)}
           />
         ),
