@@ -308,24 +308,36 @@ export default class DataGrid extends React.PureComponent {
     } else if (editValue === null) {
       return '';
     } else {
-      if (col.componentType === 'select') {
-        return col.selectComponentOptions.find(obj => obj.value === editValue);
-      } else if (['boolean'].includes(col.componentType)) {
-        return options.find(obj => obj.value === editValue);
+      // Value is found from editData
+      // Format by component type
+      switch (col.componentType) {
+        case 'select':
+          return col.selectComponentOptions.find(obj => obj.value === editValue);
+        case 'boolean':
+          return options.find(obj => obj.value === editValue);
+        default:
+          return editValue;
       }
-      return editValue;
     }
     if (originalValue === null || originalValue === undefined || originalValue === '') {
       return '';
     }
-    // Special formatting by component type
-    if (
-      col.componentType === 'float' &&
-      String(originalValue).length > 0
-    ) {
-      return String(originalValue).replace('.', this.props.decimalSeparator);
+    // Return value from original data, because editData is not available
+    // Format by component type
+    switch (col.componentType) {
+      case 'float': {
+        if (String(originalValue).length > 0) {
+          return String(originalValue).replace('.', this.props.decimalSeparator);
+        }
+        return originalValue;
+      }
+      case 'select':
+        return col.selectComponentOptions.find(obj => obj.value === originalValue);
+      case 'boolean':
+        return options.find(obj => obj.value === originalValue);
+      default:
+        return originalValue;
     }
-    return originalValue;
   }
 
   getCreateItemValue = (rowIndex, col, options = []) => {
