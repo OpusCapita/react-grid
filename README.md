@@ -104,11 +104,11 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | defaultShowFilteringRow     | boolean          | false                                    | Show filtering row as default                              |
 | defaultSortColumn           | string           |                                          | columnKey of column sorted by default. ColumnKey is joined with '/' from valueKeyPath array, if columnKey is not defined in the column props |
 | defaultSortOrder            | string           | 'asc'                                    | Default sort order of default sort [asc/desc]              |
-| disableRememberSelectedItems| boolean          | true                                     | Disable remembering the selected rows                      |
-| disableRememberIsFiltering  | boolean          | true                                     | Disable remembering is filtering ebabled                   |
-| disableRememberFilteData    | boolean          | true                                     | Disable remembering the filters                            |
-| disableRememberSortData     | boolean          | true                                     | Disable remembering the sorting                            |
-| disableRememberColumnWidths | boolean          | true                                     | Disable remembering the column widths                      |
+| disableRememberSelectedItems| boolean          | false                                    | Disable remembering the selected rows                      |
+| disableRememberIsFiltering  | boolean          | false                                    | Disable remembering is filtering ebabled                   |
+| disableRememberFilteData    | boolean          | false                                    | Disable remembering the filters                            |
+| disableRememberSortData     | boolean          | false                                    | Disable remembering the sorting                            |
+| disableRememberColumnWidths | boolean          | false                                    | Disable remembering the column widths                      |
 | language                    | string           | 'en'                                     | Default taken from redux user state used in OC apps        |
 | region                      | string           | 'en-GB'                                  | Default taken from redux user state used in OC apps        |
 | dateFormat                  | string           | 'L'                                      | Default taken from redux user state used in OC apps        |
