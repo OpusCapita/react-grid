@@ -3,6 +3,11 @@
 
 ## <next>
 
+## 7.0.0
+* Major refactor of column types
+* Upgrade all packages that can be upgraded
+* Cleanup demo with better mock data
+
 ## 6.3.0
 * params added to validateWithRowData validator
 
