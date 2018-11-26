@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Checkbox, DropdownButton, Form, FormGroup, Button, MenuItem, Radio } from 'react-bootstrap';
+import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { getLocaleFormatData } from '../../services/internationalization.service';
-import { GRID, columns, data, preDefinedFilter, preDefinedEmptyFilter, REGIONS } from './datagrid.constants';
+import { GRID, columns, getData, REGIONS } from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -16,7 +16,6 @@ const mapDispatchToProps = {
   cellShowMessage: DatagridActions.cellShowMessage,
   cellShowMessages: DatagridActions.cellShowMessages,
   setData: DatagridActions.setData,
-  setAndApplyFilters: DatagridActions.setAndApplyFilters,
   saveSuccess: DatagridActions.saveSuccess,
   removeSuccess: DatagridActions.removeSuccess,
   saveFail: DatagridActions.saveFail,
@@ -32,8 +31,9 @@ const mapStateToProps = state => ({
   isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
 });
 
+export default
 @connect(mapStateToProps, mapDispatchToProps)
-export default class DatagridView extends React.Component {
+class DatagridView extends React.Component {
   static propTypes = {
     // State props
     allData: ImmutablePropTypes.list.isRequired,
@@ -45,7 +45,6 @@ export default class DatagridView extends React.Component {
     cellShowMessage: PropTypes.func.isRequired,
     cellShowMessages: PropTypes.func.isRequired,
     setData: PropTypes.func.isRequired,
-    setAndApplyFilters: PropTypes.func.isRequired,
     saveSuccess: PropTypes.func.isRequired,
     removeSuccess: PropTypes.func.isRequired,
     saveFail: PropTypes.func.isRequired,
@@ -67,12 +66,11 @@ export default class DatagridView extends React.Component {
     this.state = {
       gridSettings,
       region,
-      usingPredefinedFilter: false,
     };
   }
 
   componentWillMount() {
-    this.props.setData(GRID, columns, data);
+    this.props.setData(GRID, columns, getData(1000));
   }
 
   getRegionComponent = () => {
@@ -159,39 +157,6 @@ export default class DatagridView extends React.Component {
     }
   }
 
-  useLocalStorage = () => {
-    this.setState({ gridSettings: GRID });
-    this.props.setData(GRID, columns, data);
-  }
-
-  useCustomStorage = () => {
-    const gridSettings = {
-      ...GRID,
-      configStorage: {
-        load: () => ({
-          hiddenColumns: ['text3', 'text4'],
-          columnOrder: ['select', 'text', 'text2', 'number', 'float', 'boolean', 'date'],
-          columnWidths: { text3: 200, text4: 300 },
-        }),
-        save: (conf) => {
-          console.log(`Save config: ${JSON.stringify(conf)}`);
-        },
-      },
-    };
-    this.setState({ gridSettings });
-    this.props.setData(gridSettings, columns, data);
-  }
-
-  usePredefinedFilter = () => {
-    this.setState({
-      usingPredefinedFilter: !this.state.usingPredefinedFilter,
-    }, () => {
-      const filteringData = this.state.usingPredefinedFilter ?
-        preDefinedFilter : preDefinedEmptyFilter;
-      this.props.setAndApplyFilters(GRID, columns, filteringData);
-    });
-  }
-
   handleContextClick = (selectedIds, selectedData) => {
     console.log('Context menu clicked');
     console.log(`ID's ${selectedIds.join(', ')}`);
@@ -200,7 +165,6 @@ export default class DatagridView extends React.Component {
 
   render() {
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
-    const { usingPredefinedFilter } = this.state;
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
         <Button
@@ -213,31 +177,13 @@ export default class DatagridView extends React.Component {
         >
           Show Info
         </Button>
-        {this.getRegionComponent()}{' '}
-        <FormGroup>
-          <Radio
-            name="configStorage"
-            onChange={this.useLocalStorage}
-            defaultChecked
-            inline
-          >
-            Local storage
-          </Radio>
-          <Radio
-            name="configStorage"
-            onChange={this.useCustomStorage}
-            inline
-          >
-            Custom storage
-          </Radio>
-        </FormGroup>
-        <Checkbox onChange={this.usePredefinedFilter} checked={usingPredefinedFilter}>
-          Use a pre-defined filter
-        </Checkbox>
+        { this.getRegionComponent() }
       </Form>
     );
     return (
       <Datagrid
+        id="test-grid"
+        className="test-grid"
         grid={this.state.gridSettings}
         gridHeader="Example Grid"
         columns={columns}
@@ -252,19 +198,16 @@ export default class DatagridView extends React.Component {
         rowSelectCheckboxColumn
         onSave={this.handleOnSave}
         onRemove={this.handleOnRemove}
-        className="test-grid"
         contextMenuItems={[
           {
-            value: 'Booleans are true',
+            value: 'Selected items are used',
             onClick: this.handleContextClick,
             disabled: (selectedIds, selectedData) =>
-              selectedData.count(d => d.get('boolean', false) === true) !== selectedData.size,
+              selectedData.count(d => d.get('isUsed', false) === true) !== selectedData.size,
           },
           {
-            value: 'Floats are over 3',
+            value: 'View more details...',
             onClick: this.handleContextClick,
-            disabled: (selectedIds, selectedData) =>
-              selectedData.count(d => d.get('float', 0) > 3) !== selectedData.size,
           },
         ]}
       />

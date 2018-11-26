@@ -64,9 +64,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = datagridActions;
 
+export default
 @injectIntl
 @connect(mapStateToProps, mapDispatchToProps)
-export default class DataGrid extends React.PureComponent {
+class DataGrid extends React.PureComponent {
   static propTypes = propTypes;
   static defaultProps = defaultProps;
 

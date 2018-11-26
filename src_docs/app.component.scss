@@ -1,13 +1,13 @@
-@import 'styles/app',
-        'styles/mixins',
-        'styles/bootstrap_v3_custom',
-        'styles/bootstrap_v3_overrides',
-        'styles/bootstrap_v3_without_icons',
-        'styles/buttons',
-        'styles/colors',
-        'styles/icons',
-        'styles/inputs',
-        'styles/variables';
+@import '~@opuscapita/oc-cm-common-styles/styles/app',
+        '~@opuscapita/oc-cm-common-styles/styles/mixins',
+        '~@opuscapita/oc-cm-common-styles/styles/bootstrap_v3_custom',
+        '~@opuscapita/oc-cm-common-styles/styles/bootstrap_v3_overrides',
+        '~@opuscapita/oc-cm-common-styles/styles/bootstrap_v3_without_icons',
+        '~@opuscapita/oc-cm-common-styles/styles/buttons',
+        '~@opuscapita/oc-cm-common-styles/styles/colors',
+        '~@opuscapita/oc-cm-common-styles/styles/icons',
+        '~@opuscapita/oc-cm-common-styles/styles/inputs',
+        '~@opuscapita/oc-cm-common-styles/styles/variables';
 
 @import './flex';
 

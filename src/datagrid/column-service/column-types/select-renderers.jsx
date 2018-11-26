@@ -2,7 +2,7 @@ import React from 'react';
 import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
 
 export const selectRender = selectProps => (
-  <FloatingSelectPortal ref={selectProps.ref} {...selectProps} />
+  <FloatingSelectPortal {...selectProps} />
 );
 
 
@@ -25,7 +25,7 @@ export default {
       col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
       selectOptions;
     const fsProps = {
-      name: `${col.valueKeyPath.join()}-${cellName}-${rowIndex}`,
+      name: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: opts,
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
@@ -36,8 +36,7 @@ export default {
       backSpaceRemovesValue: false,
       tabSelectsValue: false,
       openMenuOnFocus: true,
-      ref: functions.handleCellRef(rowIndex, col),
-      inputId: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
+      innerRef: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
       ...col.editComponentProps,
@@ -64,7 +63,7 @@ export default {
       selectOptions;
 
     const fsProps = {
-      name: `${col.valueKeyPath.join()}-${cellName}-${rowIndex}`,
+      name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: opts,
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
@@ -75,8 +74,7 @@ export default {
       backspaceRemovesValue: false,
       tabSelectsValue: false,
       openMenuOnFocus: true,
-      ref: functions.handleCellRef(rowIndex, col),
-      inputProps: { id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}` },
+      innerRef: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
       ...col.createComponentProps,
@@ -95,12 +93,11 @@ export default {
     editValueParser,
     functions,
   ) {
-    const cellName = 'filter';
     const opts = col.filterSelectOptionsMod && selectOptions ?
       col.filterSelectOptionsMod(selectOptions.slice(), col) :
       selectOptions;
     const fsProps = {
-      name: `${col.valueKeyPath.join()}-${cellName}`,
+      name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       options: opts,
       value: functions.getItemValue(col),
       onChange: functions.onCellValueChange(col, editValueParser),
@@ -108,7 +105,6 @@ export default {
       isClearable: true,
       tabSelectsValue: false,
       openMenuOnFocus: true,
-      inputId: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       tabIndex,
       ...col.filterComponentProps,
       ...selectTranslations,

@@ -42,8 +42,9 @@ if (module.hot) {
   });
 }
 
+export default
 @hot(module)
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <Provider store={store}>

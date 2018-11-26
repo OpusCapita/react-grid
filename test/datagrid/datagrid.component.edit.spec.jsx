@@ -80,7 +80,7 @@ describe('Datagrid in Edit mode', () => {
   });
 
   it('should render boolean cell', () => {
-    const el = wrapper.find('input[name="boolean-edit-0"]').first();
+    const el = wrapper.find('input[name="ocDatagridEditInput-TestGrid-boolean-0"]').first();
     expect(!!el.prop('value')).to.eql(data[0].boolean);
   });
 
@@ -90,7 +90,7 @@ describe('Datagrid in Edit mode', () => {
   });
 
   it('should render select cell', () => {
-    const el = wrapper.find('input[name="select-edit-0"]').first();
+    const el = wrapper.find('input[name="ocDatagridEditInput-TestGrid-select-0"]').first();
     expect(el.prop('value')).to.eql(data[0].select);
   });
 });

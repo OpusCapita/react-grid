@@ -11,32 +11,34 @@ export default {
     return valueRender(rowIndex, v => (v ? <FaCheck size={20} /> : null));
   },
 
-  cellEdit(col, column, rowIndex, tabIndex, functions) {
+  cellEdit(col, column, rowIndex, tabIndex, gridId, functions) {
     const cellName = 'edit';
     const cbValueParser = rIndx => () => !(functions.getItemValue(rIndx, col) || false);
-    const cbEditProps = {
+    const cbProps = {
+      id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
       tabIndex,
       checked: functions.getItemValue(rowIndex, col) || false,
       onChange: functions.onCellValueChange(rowIndex, col, cbValueParser(rowIndex)),
       onBlur: functions.onCellBlur(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       ref: functions.handleCellRef(rowIndex, col),
-      ...col.filterComponentProps,
+      ...col.editComponentProps,
     };
-    return checkboxRender({ ...cbEditProps });
+    return checkboxRender(cbProps);
   },
 
-  cellCreate(col, rowIndex, tabIndex, functions) {
+  cellCreate(col, column, rowIndex, tabIndex, gridId, functions) {
     const cbValueParser = rIndx => () => !(functions.getItemValue(rIndx, col) || false);
     const cbProps = {
+      id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       tabIndex,
       checked: functions.getItemValue(rowIndex, col) || false,
       onChange: functions.onCellValueChange(rowIndex, col, cbValueParser(rowIndex)),
       onBlur: functions.onCellBlur(rowIndex, col),
       inputRef: functions.handleCellRef(rowIndex, col),
-      ...col.filterComponentProps,
+      ...col.createComponentProps,
     };
-    return checkboxRender({ ...cbProps });
+    return checkboxRender(cbProps);
   },
 
   cellFilter(col, column, tabIndex, gridId, intl, functions) {
@@ -50,7 +52,7 @@ export default {
       noResultsText: intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
     };
     const cbProps = {
-      name: `${col.valueKeyPath.join()}-filter`,
+      name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       options: selectOptions,
       value: functions.getItemValue(col, selectOptions),
       onChange: functions.onCellValueChange(col, cbValueParser),
@@ -58,7 +60,6 @@ export default {
       isClearable: true,
       tabSelectsValue: false,
       openMenuOnFocus: true,
-      inputId: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       tabIndex,
       ...col.filterComponentProps,
       ...selectTranslations,

@@ -1,6 +1,3 @@
-import React from 'react';
-
-// Application imports
 import Utils from '../datagrid.utils';
 import {
   DateType,
@@ -10,7 +7,6 @@ import {
   CurrencyType,
   PrimitiveType,
 } from './column-types/column-types';
-
 
 export default {
   baseColumn(col) {
@@ -71,7 +67,14 @@ export default {
         }
         // change valRenders to just take props --> saves some 'energy'
         case 'currency': {
-          column.cell = rowIndex => CurrencyType.valRender(col, props.data, rowIndex, props.thousandSeparator, props.decimalSeparator, baseValueRender);
+          column.cell = rowIndex => CurrencyType.valRender(
+            col,
+            props.data,
+            rowIndex,
+            props.thousandSeparator,
+            props.decimalSeparator,
+            baseValueRender,
+          );
           break;
         }
 
@@ -170,14 +173,17 @@ export default {
             column,
             rowIndex,
             tabIndex,
+            props.grid.id,
             ...editFunctions,
           );
         }
         if (props.inlineEdit && !column.cellCreate) {
           column.cellCreate = rowIndex => CheckboxType.cellCreate(
             col,
+            column,
             rowIndex,
             tabIndex,
+            props.grid.id,
             ...createFunctions,
           );
         }
@@ -354,6 +360,5 @@ export default {
       default:
     }
     return column;
-  }
-}
-
+  },
+};

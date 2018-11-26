@@ -25,7 +25,7 @@ export default {
   ) {
     const cellName = 'edit';
     const booleanProps = {
-      name: `${col.valueKeyPath.join()}-${cellName}-${rowIndex}`,
+      name: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: selectOptions,
       value: functions.getItemValue(rowIndex, col, selectOptions),
       onChange: functions.onCellValueChange(rowIndex, col, valueParser),
@@ -36,8 +36,7 @@ export default {
       backSpaceRemovesValue: false,
       tabSelectsValue: false,
       openMenuOnFocus: true,
-      ref: functions.handleCellRef(rowIndex, col),
-      inputId: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
+      innerRef: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
       ...col.editComponentProps,
@@ -62,7 +61,7 @@ export default {
     const cellName = 'create';
     // closeOnMenuSelect
     const booleanProps = {
-      name: `${col.valueKeyPath.join()}-${cellName}-${rowIndex}`,
+      name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: selectOptions,
       value: functions.getItemValue(rowIndex, col, selectOptions),
       onChange: functions.onCellValueChange(rowIndex, col, valueParser),
@@ -73,7 +72,7 @@ export default {
       backspaceRemovesValue: false,
       tabSelectsValue: false,
       openOnFocus: true,
-      ref: functions.handleCellRef(rowIndex, col),
+      innerRef: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
       ...col.createComponentProps,
@@ -92,9 +91,8 @@ export default {
     filterValueParser,
     functions,
   ) {
-    const cellName = 'filter';
     const booleanProps = {
-      name: `${col.valueKeyPath.join()}-${cellName}`,
+      name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       options: selectOptions,
       value: functions.getItemValue(col, selectOptions),
       onChange: functions.onCellValueChange(col, filterValueParser),
@@ -102,7 +100,6 @@ export default {
       isClearable: true,
       tabSelectsValue: false,
       openMenuOnFocus: true,
-      inputId: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       tabIndex,
       ...col.filterComponentProps,
       ...selectTranslations,

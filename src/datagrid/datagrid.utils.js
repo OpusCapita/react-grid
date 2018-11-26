@@ -3,7 +3,6 @@ import moment from 'moment';
 import isNaN from 'lodash/isNaN';
 import { isFunction } from 'util';
 import { Map, fromJS } from 'immutable';
-import { columns } from '../../test/datagrid/datagrid.constants';
 
 const getColumnKey = col => (
   col.columnKey || col.valueKeyPath.join('/')
