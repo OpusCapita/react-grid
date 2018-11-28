@@ -1,15 +1,28 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import FaToggleOn from 'react-icons/lib/fa/toggle-on';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { FormattedMessage as M } from 'react-intl';
-import { Icon } from '@opuscapita/react-icons';
+
 import { DropdownMenu } from '@opuscapita/react-dropdown';
 
 import { gridShape } from './datagrid.props';
 
-
 import './dropdown-controls.component.scss';
+
+const TOGGLE_ON_COLOR = '#3AA57B';
+const TOGGLE_OFF_COLOR = '#67707C';
+const TOGGLE_SIZE = 20;
+
+// ToggleIconComponent
+const Toggle = styled(FaToggleOn)`
+  color: ${props => props.color};
+  margin: ${props => props.margin || 0};
+  padding: ${props => props.padding || 0};
+  transform: rotate(${props => (props.rotate ? `${props.rotate}deg` : '')});
+`;
 
 export default class DropdownControls extends React.PureComponent {
   static propTypes = {
@@ -65,13 +78,9 @@ export default class DropdownControls extends React.PureComponent {
         id: `${this.props.grid.id}-menu-item-filtering`,
         title: <M id="Grid.ShowFilteringRow" />,
         icon: this.props.isFiltering ?
-          <Icon
-            type="indicator"
-            name="ok"
-            width={18}
-            height={18}
-            style={{ padding: '4px' }}
-          /> : undefined,
+          <Toggle color={TOGGLE_ON_COLOR} size={TOGGLE_SIZE} />
+          :
+          <Toggle rotate="180" color={TOGGLE_OFF_COLOR} size={TOGGLE_SIZE} />,
         onClick: this.handleToggleFilteringClick,
       });
     }
