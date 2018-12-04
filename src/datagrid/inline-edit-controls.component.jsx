@@ -109,6 +109,7 @@ export default class InlineEditControls extends React.PureComponent {
       isCreating,
       isEditing,
       tabIndex,
+      data,
     } = this.props;
     if (isCreating || isEditing) {
       return (
@@ -151,6 +152,8 @@ export default class InlineEditControls extends React.PureComponent {
         },
       };
     }
+    const hasData = data.size >= 1;
+
     return (
       <div className="oc-datagrid-inline-edit-controls">
         <CellToolTip
@@ -158,7 +161,7 @@ export default class InlineEditControls extends React.PureComponent {
           {...message}
         >
           <Button
-            disabled={isBusy}
+            disabled={isBusy || !hasData}
             onClick={this.handleEditButtonClick}
             id={`oc-datagrid-controls-edit-${grid.id}`}
           >
