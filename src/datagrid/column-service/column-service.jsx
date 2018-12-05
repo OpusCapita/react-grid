@@ -119,7 +119,7 @@ export default {
       case 'float':
       case 'number':
       case 'text': {
-        const formControlType = col.componentType === 'float' ? 'text' : col.componentType;
+        const formControlType = col.componentType === 'float' || col.componentType === 'number' ? 'text' : col.componentType;
         const primitiveValParser = col.componentType === 'float' ?
           (val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')) : editValueParser;
 
@@ -258,8 +258,14 @@ export default {
 
       case 'boolean': {
         const selectOptions = [
-          { value: true, label: props.intl.formatMessage({ id: 'Grid.Yes' }) },
-          { value: false, label: props.intl.formatMessage({ id: 'Grid.No' }) },
+          {
+            value: true,
+            label: props.intl.formatMessage({ id: 'Grid.Yes' })
+          },
+          {
+            value: false,
+            label: props.intl.formatMessage({ id: 'Grid.No' })
+          },
         ];
         const selectTranslations = col.selectComponentTranslations || {
           placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),

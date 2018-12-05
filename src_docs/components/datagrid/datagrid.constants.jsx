@@ -27,7 +27,10 @@ export const selectTranslations = {
 };
 
 export const countryOptions = countries.all.map(country => (
-  { value: country.alpha3, label: country.name }
+  {
+    value: country.alpha3,
+    label: country.name
+  }
 ));
 
 export const columns = [
@@ -46,7 +49,7 @@ export const columns = [
   {
     header: 'Price',
     valueKeyPath: ['price'],
-    valueType: 'float',
+    valueType: 'currency',
     componentType: 'float',
     isRequired: true,
     width: 80,
@@ -61,29 +64,29 @@ export const columns = [
     componentType: 'number',
     width: 100,
   },
-  // {
-  //   header: 'Country',
-  //   valueKeyPath: ['country'],
-  //   valueType: 'text',
-  //   componentType: 'select',
-  //   selectComponentOptions: countryOptions,
-  //   valueRender: data => countryOptions.find(v => v.value === data.get('country')).label,
-  // },
-  // {
-  //   header: 'Used',
-  //   valueKeyPath: ['isUsed'],
-  //   valueType: 'boolean',
-  //   componentType: 'boolean',
-  //   width: 100,
-  // },
-  // {
-  //   header: 'Checked',
-  //   valueKeyPath: ['isChecked'],
-  //   valueType: 'checkbox',
-  //   componentType: 'checkbox',
-  //   align: 'center',
-  //   width: 100,
-  // },
+  {
+    header: 'Country',
+    valueKeyPath: ['country'],
+    valueType: 'text',
+    componentType: 'select',
+    selectComponentOptions: countryOptions,
+    valueRender: data => countryOptions.find(v => v.value === data.get('country')).label,
+  },
+  {
+    header: 'Used',
+    valueKeyPath: ['isUsed'],
+    valueType: 'boolean',
+    componentType: 'boolean',
+    width: 100,
+  },
+  {
+    header: 'Checked',
+    valueKeyPath: ['isChecked'],
+    valueType: 'checkbox',
+    componentType: 'checkbox',
+    align: 'center',
+    width: 100,
+  },
   {
     header: 'Modified',
     valueKeyPath: ['modified'],
@@ -91,14 +94,14 @@ export const columns = [
     componentType: 'date',
     width: 120,
   },
-  // {
-  //   header: 'Color',
-  //   valueKeyPath: ['color'],
-  //   valueRender: data => <Color value={data.get('color')} />,
-  //   editValueRender: data => <Color value={data.get('color')} />,
-  //   createValueRender: () => null,
-  //   filterValueRender: () => null,
-  // },
+  {
+    header: 'Color',
+    valueKeyPath: ['color'],
+    valueRender: data => <Color value={data.get('color')} />,
+    editValueRender: data => <Color value={data.get('color')} />,
+    createValueRender: () => null,
+    filterValueRender: () => null,
+  },
 ];
 
 // DATA GENERATOR
@@ -107,7 +110,8 @@ export const getData = (count) => {
 
   const randomDate = () => {
     const date = faker.date.past();
-    return moment(date).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+    return moment(date)
+      .format('YYYY-MM-DD[T]HH:mm:ss[Z]');
   };
 
   const randomCountry = () => {

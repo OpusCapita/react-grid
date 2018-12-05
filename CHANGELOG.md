@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Enhanced keyboard navigation
 
 ## 7.0.0
 * Major refactor of column types
