@@ -66,7 +66,7 @@ const mapDispatchToProps = datagridActions;
 
 @injectIntl
 @connect(mapStateToProps, mapDispatchToProps)
-class DataGrid extends React.Component {
+class DataGrid extends React.PureComponent {
   static propTypes = propTypes;
   static defaultProps = defaultProps;
 
@@ -84,13 +84,6 @@ class DataGrid extends React.Component {
     this.focusToCreateCell = false;
     this.focusToEditCell = false; // TODO: Handle focusing when true
     this.focusToErrorCell = false; // TODO: Handle focusing when true
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const { state } = this;
-    return (this.props.isEditing !== nextProps.isEditing) ||
-      !(state.currentColumn !== nextState.currentColumn ||
-        state.currentRow !== nextState.currentRow);
   }
 
   componentWillUnmount() {
