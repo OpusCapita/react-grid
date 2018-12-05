@@ -258,14 +258,8 @@ export default {
 
       case 'boolean': {
         const selectOptions = [
-          {
-            value: true,
-            label: props.intl.formatMessage({ id: 'Grid.Yes' })
-          },
-          {
-            value: false,
-            label: props.intl.formatMessage({ id: 'Grid.No' })
-          },
+          { value: true, label: props.intl.formatMessage({ id: 'Grid.Yes' }) },
+          { value: false, label: props.intl.formatMessage({ id: 'Grid.No' }) },
         ];
         const selectTranslations = col.selectComponentTranslations || {
           placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),

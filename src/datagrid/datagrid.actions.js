@@ -511,8 +511,7 @@ export const editCellValueValidate = (
         } else if (validator.validateWithRowData) {
           const gridData = getState().datagrid.get(grid.id);
           const editData = gridData.getIn(['editData', dataId], Map());
-          let rowData = gridData.get('allData')
-            .find(item => item.getIn(grid.idKeyPath) === dataId);
+          let rowData = gridData.get('allData').find(item => item.getIn(grid.idKeyPath) === dataId);
           if (rowData) {
             rowData = rowData.mergeDeep(editData);
             const params = validator.params ? Object.values(validator.params) : [];
@@ -792,9 +791,7 @@ export const validateEditedRows = (grid, columns) =>
 export const removeEmptyCreatedRows = (grid, columns) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
-    const createData = getState()
-      .datagrid
-      .getIn([grid.id, 'createData'], Map());
+    const createData = getState().datagrid.getIn([grid.id, 'createData'], Map());
     const indexes = [];
     createData.forEach((createDataRow, rowIndex) => {
       let isEmpty = true;
