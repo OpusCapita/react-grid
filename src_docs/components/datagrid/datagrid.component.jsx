@@ -193,7 +193,8 @@ class DatagridView extends React.Component {
         columnSettings
         inlineEdit
         removing
-        cellSelect
+        multiSelect
+        rowSelect
         rowSelectCheckboxColumn
         enableArrowNavigation
         onSave={this.handleOnSave}
