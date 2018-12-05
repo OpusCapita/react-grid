@@ -5,23 +5,19 @@ import { DateInput } from '@opuscapita/react-datetime';
 
 export const dateRender = dateProps => (<DateInput {...dateProps} />);
 
-const dateIsValid = val => moment(val)
-  .isValid();
+const dateIsValid = val => moment(val).isValid();
 
-const dateIsValidFormat = (val, dateFormat) => moment(val, dateFormat, true)
-  .isValid();
+const dateIsValidFormat = (val, dateFormat) => moment(val, dateFormat, true).isValid();
 
 export default {
   // dateValueRender
   valRender(rowIndex, dateFormat, valueRender) {
     return valueRender(rowIndex, (v) => {
       if (dateIsValidFormat(v, dateFormat)) {
-        return moment.utc(v, dateFormat)
-          .format(dateFormat);
+        return moment.utc(v, dateFormat).format(dateFormat);
       }
       if (dateIsValid(v)) {
-        return moment.utc(v)
-          .format(dateFormat);
+        return moment.utc(v).format(dateFormat);
       }
       return <M id="Grid.InvalidDate" />;
     });

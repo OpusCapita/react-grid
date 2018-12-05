@@ -93,9 +93,7 @@ export const applyFilters = (grid, columns) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
     if (!columns || !columns.forEach) return false;
-    const gridData = getState()
-      .datagrid
-      .get(grid.id);
+    const gridData = getState().datagrid.get(grid.id);
     if (!gridData) return false;
     const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
     const allData = gridData.get('allData');
@@ -170,9 +168,7 @@ export const applySort = (grid, columns) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
     if (!columns || !columns.forEach) return false;
-    const gridData = getState()
-      .datagrid
-      .get(grid.id);
+    const gridData = getState().datagrid.get(grid.id);
     if (!gridData) return false;
     const sortData = gridData.getIn(['config', 'sortingData']);
     if (!sortData) return false;
@@ -207,19 +203,18 @@ export const applySort = (grid, columns) =>
     let data;
     // Sort also filtered data separately
     if (gridData.getIn(['config', 'filteringData', 'isFiltering'], false)) {
-      data = gridData.get('data')
-        .sort((a, b) => {
-          const valA = valueGetter(a);
-          const valB = valueGetter(b);
-          if (sortOrder === 'asc') {
-            if (valueEmptyChecker(valA)) return -1;
-            if (valueEmptyChecker(valB)) return 1;
-            return comparator(valA, valB);
-          }
-          if (valueEmptyChecker(valA)) return 1;
-          if (valueEmptyChecker(valB)) return -1;
-          return comparator(valB, valA);
-        });
+      data = gridData.get('data').sort((a, b) => {
+        const valA = valueGetter(a);
+        const valB = valueGetter(b);
+        if (sortOrder === 'asc') {
+          if (valueEmptyChecker(valA)) return -1;
+          if (valueEmptyChecker(valB)) return 1;
+          return comparator(valA, valB);
+        }
+        if (valueEmptyChecker(valA)) return 1;
+        if (valueEmptyChecker(valB)) return -1;
+        return comparator(valB, valA);
+      });
     } else {
       data = allData;
     }
@@ -238,10 +233,7 @@ export const sortChange = (grid, columns, column, newSort) =>
     Utils.checkGridParam(grid);
     const sortOrder = newSort || 'asc';
     const sortColumn = Utils.getColumnKey(column);
-    Utils.saveSortData(grid, {
-      sortColumn,
-      sortOrder
-    });
+    Utils.saveSortData(grid, { sortColumn, sortOrder });
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SORT_CHANGE,
       id: grid.id,
@@ -257,10 +249,9 @@ export const setData = (grid, columns, data) =>
     Utils.checkColumnsParam(columns);
     const configData = Utils.loadGridConfig(grid, columns);
     const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
-    const selectedItems = Utils.loadSelectedItems(grid)
-      .filter(item => (
-        !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
-      ));
+    const selectedItems = Utils.loadSelectedItems(grid).filter(item => (
+      !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
+    ));
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_SET_DATA,
       id: grid.id,
@@ -335,8 +326,7 @@ export const cancel = grid =>
     });
   };
 
-export const save = (grid, cb = () => {
-}) =>
+export const save = (grid, cb = () => {}) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
     dispatch({
@@ -432,8 +422,7 @@ export const removeNewItems = (grid, indexes) =>
     });
   };
 
-export const remove = (grid, cb = () => {
-}) =>
+export const remove = (grid, cb = () => {}) =>
   (dispatch) => {
     Utils.checkGridParam(grid);
     dispatch({
@@ -490,9 +479,7 @@ export const editCellValueValidate = (
         if (validator.unique) {
           if (value !== '' || value !== null || value !== undefined) {
             // combine real data with current unsaved edited data
-            const gridData = getState()
-              .datagrid
-              .get(grid.id);
+            const gridData = getState().datagrid.get(grid.id);
             const editData = gridData.get('editData');
             let allData = gridData.get('allData');
             if (editData) {
@@ -522,9 +509,7 @@ export const editCellValueValidate = (
             }
           }
         } else if (validator.validateWithRowData) {
-          const gridData = getState()
-            .datagrid
-            .get(grid.id);
+          const gridData = getState().datagrid.get(grid.id);
           const editData = gridData.getIn(['editData', dataId], Map());
           let rowData = gridData.get('allData')
             .find(item => item.getIn(grid.idKeyPath) === dataId);
@@ -607,9 +592,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
             }
           }
         } else if (validator.validateWithRowData) {
-          const rowData = getState()
-            .datagrid
-            .getIn([grid.id, 'createData', rowIndex]);
+          const rowData = getState().datagrid.getIn([grid.id, 'createData', rowIndex]);
           const params = validator.params ? Object.values(validator.params) : [];
           validationState = validator.validateWithRowData(value, rowData, ...params);
         } else {
@@ -738,9 +721,7 @@ export const itemSelectionChange = (
       ctrlPressed,
       shiftPressed,
     });
-    Utils.saveSelectedItems(grid, getState()
-      .datagrid
-      .getIn([grid.id, 'selectedItems']));
+    Utils.saveSelectedItems(grid, getState().datagrid.getIn([grid.id, 'selectedItems']));
   };
 
 export const selectAllItemsChange = grid =>
@@ -751,9 +732,7 @@ export const selectAllItemsChange = grid =>
       id: grid.id,
       idKeyPath: grid.idKeyPath,
     });
-    Utils.saveSelectedItems(grid, getState()
-      .datagrid
-      .getIn([grid.id, 'selectedItems']));
+    Utils.saveSelectedItems(grid, getState().datagrid.getIn([grid.id, 'selectedItems']));
   };
 
 export const clearSelectedItems = grid =>
@@ -763,9 +742,7 @@ export const clearSelectedItems = grid =>
       type: TYPES.PLATFORM_DATAGRID_CLEAR_SELECTED_ITEMS,
       id: grid.id,
     });
-    Utils.saveSelectedItems(grid, getState()
-      .datagrid
-      .getIn([grid.id, 'selectedItems']));
+    Utils.saveSelectedItems(grid, getState().datagrid.getIn([grid.id, 'selectedItems']));
   };
 
 export const toggleFiltering = grid =>
@@ -785,9 +762,7 @@ export const toggleFiltering = grid =>
 export const validateEditedRows = (grid, columns) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
-    const gridData = getState()
-      .datagrid
-      .get(grid.id);
+    const gridData = getState().datagrid.get(grid.id);
     const editData = gridData.get('editData', Map());
     let allGood = true;
     editData.forEach((editDataRow, dataId) => {
@@ -842,9 +817,7 @@ export const validateCreatedRows = (grid, columns) =>
   (dispatch, getState) => {
     Utils.checkGridParam(grid);
     removeEmptyCreatedRows(grid, columns)(dispatch, getState);
-    const createData = getState()
-      .datagrid
-      .getIn([grid.id, 'createData'], Map());
+    const createData = getState().datagrid.getIn([grid.id, 'createData'], Map());
     let allGood = true;
     createData.forEach((createDataRow, rowIndex) => {
       columns.forEach((col) => {
