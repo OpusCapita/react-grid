@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.0.1
 * Toggle On/Off icon in Grid menu Filtering row
 * Disable Edit-button when grid has no data
 
