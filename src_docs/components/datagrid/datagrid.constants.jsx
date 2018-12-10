@@ -46,7 +46,7 @@ export const columns = [
   {
     header: 'Price',
     valueKeyPath: ['price'],
-    valueType: 'float',
+    valueType: 'currency',
     componentType: 'float',
     isRequired: true,
     width: 80,

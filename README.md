@@ -159,6 +159,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onCreateValueChange        | function       |         | Called on create value change, called with (value, valueKeyPath, rowIndex) |
 | onCreateBlur               | function       |         | Called on create cell input blur, called with (value, rowIndex) |
 | onEditBlur                 | function       |         | Called on edit cell input blur, called with (value, rowIndex, dataId) |
+| onLastCellTabPress         | function       |         | Called on tab keypress in edit/create cell when the last cell in the grid is being focused, called with original KeyPress event |
 | selectComponentOptions     | array          |         | Options data fot the react-select component |
 
 #### Datagrid - `valueOptions` prop attributes for `currency` value type

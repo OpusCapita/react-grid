@@ -70,7 +70,7 @@ class DatagridView extends React.Component {
   }
 
   componentWillMount() {
-    this.props.setData(GRID, columns, getData(1000));
+    this.props.setData(GRID, columns, getData(100));
   }
 
   getRegionComponent = () => {
@@ -196,6 +196,7 @@ class DatagridView extends React.Component {
         multiSelect
         rowSelect
         rowSelectCheckboxColumn
+        enableArrowNavigation
         onSave={this.handleOnSave}
         onRemove={this.handleOnRemove}
         contextMenuItems={[
@@ -212,5 +213,7 @@ class DatagridView extends React.Component {
         ]}
       />
     );
+
+
   }
 }

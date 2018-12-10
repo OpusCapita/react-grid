@@ -5,9 +5,7 @@ export const selectRender = selectProps => (
   <FloatingSelectPortal {...selectProps} />
 );
 
-
 export default {
-
   cellEdit(
     col,
     column,
@@ -31,12 +29,13 @@ export default {
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       onBlur: functions.onCellBlur(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
+      onKeyDown: functions.onCellKeyDown(rowIndex, col),
       isSearchable: selectOptions && (selectOptions.length > 9),
       isClearable: !col.isRequired,
       backSpaceRemovesValue: false,
       tabSelectsValue: false,
-      openMenuOnFocus: true,
-      innerRef: functions.handleCellRef(rowIndex, col),
+      openMenuOnFocus: false,
+      ref: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
       ...col.editComponentProps,
@@ -68,13 +67,14 @@ export default {
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       onBlur: functions.onCellBlur(rowIndex, col),
+      onKeyDown: functions.onCellKeyDown(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       isSearchable: selectOptions && (selectOptions.length > 9),
       isClearable: !col.isRequired,
       backspaceRemovesValue: false,
       tabSelectsValue: false,
-      openMenuOnFocus: true,
-      innerRef: functions.handleCellRef(rowIndex, col),
+      openMenuOnFocus: false,
+      ref: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
       ...col.createComponentProps,
@@ -104,7 +104,6 @@ export default {
       isSearchable: selectOptions && (selectOptions.length > 9),
       isClearable: true,
       tabSelectsValue: false,
-      openMenuOnFocus: true,
       tabIndex,
       ...col.filterComponentProps,
       ...selectTranslations,

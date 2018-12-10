@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 const pagination = (WrappedComponent) => {
   const mapStateToProps = state => ({
+    paginationPageSize: state.paginationPageSize,
   });
 
   const mapDispatchToProps = dispatch => ({

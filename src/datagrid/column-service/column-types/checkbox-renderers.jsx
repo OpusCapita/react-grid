@@ -19,9 +19,10 @@ export default {
       tabIndex,
       checked: functions.getItemValue(rowIndex, col) || false,
       onChange: functions.onCellValueChange(rowIndex, col, cbValueParser(rowIndex)),
+      onKeyDown: functions.onCellKeyDown(rowIndex, col),
       onBlur: functions.onCellBlur(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
-      ref: functions.handleCellRef(rowIndex, col),
+      inputRef: functions.handleCellRef(rowIndex, col),
       ...col.editComponentProps,
     };
     return checkboxRender(cbProps);
@@ -34,6 +35,7 @@ export default {
       tabIndex,
       checked: functions.getItemValue(rowIndex, col) || false,
       onChange: functions.onCellValueChange(rowIndex, col, cbValueParser(rowIndex)),
+      onKeyDown: functions.onCellKeyDown(rowIndex, col),
       onBlur: functions.onCellBlur(rowIndex, col),
       inputRef: functions.handleCellRef(rowIndex, col),
       ...col.createComponentProps,
