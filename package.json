@@ -112,10 +112,10 @@
   },
   "dependencies": {
     "@opuscapita/format-utils": "2.0.0",
-    "@opuscapita/react-checkbox": "1.3.1",
-    "@opuscapita/react-datetime": "3.2.5",
+    "@opuscapita/react-checkbox": "1.4.1",
+    "@opuscapita/react-datetime": "3.2.6",
     "@opuscapita/react-dropdown": "2.2.1",
-    "@opuscapita/react-floating-select": "3.1.0",
+    "@opuscapita/react-floating-select": "3.2.1",
     "@opuscapita/react-icons": "3.0.3",
     "@opuscapita/react-perfect-scrollbar": "3.0.4",
     "@opuscapita/react-select-order-list": "3.2.3",

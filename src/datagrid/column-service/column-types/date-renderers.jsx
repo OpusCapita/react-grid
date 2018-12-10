@@ -45,7 +45,7 @@ export default {
       inputProps: {
         tabIndex,
         id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
-        onKeyDown: functions.onCellKeyDown(col, rowIndex),
+        onKeyDown: functions.onCellKeyDown(rowIndex, col),
         onBlur: functions.onCellBlur(rowIndex, col),
         onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
         style: column.style,
@@ -78,7 +78,7 @@ export default {
       inputProps: {
         tabIndex,
         id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
-        onKeyDown: functions.onCellKeyDown(col, rowIndex),
+        onKeyDown: functions.onCellKeyDown(rowIndex, col),
         onBlur: functions.onCellBlur(rowIndex, col),
         onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
         style: column.style,

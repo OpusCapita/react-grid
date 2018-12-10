@@ -192,6 +192,7 @@ export const propTypes = {
   onCancel: func,
   onAddClick: func,
   onEditClick: func,
+  onLastCellTabPress: func,
   tabIndex: number,                   // tabIndex value for inputs in cells
   extraColumn: shape({                // Extra fixed column that can't be re-ordered or hidden
     width: string,

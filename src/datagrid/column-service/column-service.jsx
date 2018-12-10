@@ -119,7 +119,7 @@ export default {
       case 'float':
       case 'number':
       case 'text': {
-        const formControlType = col.componentType === 'float' ? 'text' : col.componentType;
+        const formControlType = col.componentType === 'float' || col.componentType === 'number' ? 'text' : col.componentType;
         const primitiveValParser = col.componentType === 'float' ?
           (val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')) : editValueParser;
 

@@ -9,4 +9,5 @@ export const KEY_CODES = {
   UP: 38,
   RIGHT: 39,
   DOWN: 40,
+  ESC: 27,
 };
