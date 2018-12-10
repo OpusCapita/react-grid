@@ -47,6 +47,7 @@ export const TYPES = {
   PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE',
   PLATFORM_DATAGRID_FORCE_REFRESH: 'PLATFORM_DATAGRID_FORCE_REFRESH',
   PLATFORM_DATAGRID_SET_FOCUS_TO: 'PLATFORM_DATAGRID_SET_FOCUS_TO',
+  PLATFORM_DATAGRID_SET_PAGINATION_PAGE: 'PLATFORM_DATAGRID_SET_PAGINATION_PAGE',
 };
 
 export const invalidate = grid =>
@@ -886,3 +887,11 @@ export const saveColumnSettings = (grid, hiddenColumns, columnOrder) =>
     });
   };
 
+export const setPaginationPage = (grid, paginationPage) =>
+  (dispatch) => {
+    dispatch({
+      paginationPage,
+      id: grid.id,
+      type: TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE,
+    });
+  };

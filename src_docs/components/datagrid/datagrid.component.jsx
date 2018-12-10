@@ -211,9 +211,12 @@ class DatagridView extends React.Component {
             onClick: this.handleContextClick,
           },
         ]}
+        pagination={{
+          pageSize: 5,
+          totalSize: 32,
+          getData: (offset, count) => console.log(`offset ${offset} count ${count}`),
+        }}
       />
     );
-
-
   }
 }

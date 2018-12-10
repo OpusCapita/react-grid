@@ -230,6 +230,11 @@ export const propTypes = {
   onContentHeightChange: func,
   className: string,
   focusType: map.isRequired,
+  pagination: shape({
+    pageSize: number.isRequired,
+    totalSize: number.isRequired,
+    getData: func.isRequired,
+  }),
 };
 
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */

@@ -2,11 +2,11 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Disable Edit-button when grid has no data
+* Enhanced keyboard navigation
 
 ## 7.0.1
 * Toggle On/Off icon in Grid menu Filtering row
-* Disable Edit-button when grid has no data
-* Enhanced keyboard navigation
 
 ## 7.0.0
 * Major refactor of column types
@@ -46,7 +46,7 @@
 * Added className prop
 
 ## 5.6.6
-* fix to arrow key navigation 
+* fix to arrow key navigation
 
 ## 5.6.5
 * ExtendData action modified to allow data prepend to existing grid
@@ -112,7 +112,7 @@
 * Fixed :before color-corner shown only for grid cells, not for action bar items
 
 ## 5.1.3
-* Fixed a bug: renamed passed CellTooltip prop messageId->infoMessage  
+* Fixed a bug: renamed passed CellTooltip prop messageId->infoMessage
 
 ## 5.1.2
 * Fixed a bug: when clearSelectedItems action called, it doesn't change saved selected items in a session storage
