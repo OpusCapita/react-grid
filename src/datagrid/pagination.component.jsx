@@ -1,7 +1,8 @@
 /* eslint-disable no-plusplus */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import { List, Map } from 'immutable';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ListItems from '@opuscapita/react-list-items';
@@ -20,6 +21,9 @@ const paginationComponent = (WrappedComponent) => {
     const GRID = ownProps.grid;
     return {
       paginationPage: state.datagrid.getIn([GRID.id, 'pagination', 'page']),
+      filterData: state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'filterData'], Map()),
+      sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
+      sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
     };
   };
 
@@ -27,8 +31,10 @@ const paginationComponent = (WrappedComponent) => {
     setPaginationPage: (grid, page) => dispatch(setPaginationPage(grid, page)),
   });
 
+  @connect(mapStateToProps, mapDispatchToProps)
   class Pager extends React.PureComponent {
     static propTypes = {
+      filterData: ImmutablePropTypes.map.isRequired,
       paginationPage: PropTypes.number,
       pagination: PropTypes.shape({
         pageSize: PropTypes.number.isRequired,
@@ -42,16 +48,39 @@ const paginationComponent = (WrappedComponent) => {
       pagination: undefined,
     };
 
+    getData = (datagrid) => {
+      const {
+      //   filterData,
+        pagination,
+      //   paginationPage,
+      //   sortColumn,
+      //   sortOrder,
+      } = this.props;
+      const paginationPage = datagrid.getIn(['pagination', 'page']);
+      const filterData = datagrid.getIn(['config', 'filteringData', 'filterData'], Map());
+      const sortColumn = datagrid.getIn(['config', 'sortingData', 'sortColumn'], null);
+      const sortOrder = datagrid.getIn(['config', 'sortingData', 'sortOrder'], null);
+      const offset = ((paginationPage) - 1) * pagination.pageSize;
+      pagination.getData(offset, pagination.pageSize, filterData, sortColumn, sortOrder);
+    }
+
     gotoPage = (page) => {
-      const { grid, pagination } = this.props;
+      const { grid } = this.props;
       this.props.setPaginationPage(grid, page);
-      const offset = (page - 1) * pagination.pageSize;
-      pagination.getData(offset, pagination.pageSize);
+      const {
+        filterData,
+        pagination,
+        sortColumn,
+        sortOrder,
+      } = this.props;
+      const offset = ((page) - 1) * pagination.pageSize;
+      pagination.getData(offset, pagination.pageSize, filterData, sortColumn, sortOrder);
     }
 
     render = () => {
       const {
         children,
+        grid,
         paginationPage,
         pagination,
       } = this.props;
@@ -61,10 +90,9 @@ const paginationComponent = (WrappedComponent) => {
       for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
       }
-      return (
-        <WrappedComponent {...this.props}>
+      return (pagination ?
+        <WrappedComponent {...this.props} grid={{ ...grid, getData: this.getData }}>
           {children}
-          {pagination &&
           <Pagination>
             <ListItems
               goToItem={this.gotoPage}
@@ -72,13 +100,14 @@ const paginationComponent = (WrappedComponent) => {
               itemId={paginationPage}
               itemIds={List(pages)}
             />
-          </Pagination>}
+          </Pagination>
         </WrappedComponent>
+        : <WrappedComponent {...this.props} />
       );
     }
   }
 
-  return connect(mapStateToProps, mapDispatchToProps)(Pager);
+  return Pager;
 };
 
 export default paginationComponent;

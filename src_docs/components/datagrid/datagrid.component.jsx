@@ -214,7 +214,7 @@ class DatagridView extends React.Component {
         pagination={{
           pageSize: 5,
           totalSize: 32,
-          getData: (offset, count) => console.log(`offset ${offset} count ${count}`),
+          getData: (offset, count, filters, sortColumn, sortOrder) => console.log(`offset ${offset} count ${count} filters ${JSON.stringify(filters)} sortColumn ${sortColumn} sortOder ${sortOrder}`),
         }}
       />
     );

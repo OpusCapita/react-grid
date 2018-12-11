@@ -100,7 +100,10 @@ export const applyFilters = (grid, columns) =>
     const allData = gridData.get('allData');
     setBusy(grid)(dispatch);
     let data;
-    if (filterData.isEmpty()) {
+    if (grid.getData) {
+      grid.getData(gridData);
+      return true;
+    } else if (filterData.isEmpty()) {
       data = allData;
     } else {
       const dateFormat = Utils.getDateFormat(grid, getState().user);
@@ -185,6 +188,10 @@ export const applySort = (grid, columns) =>
     if (!column) return false;
 
     setBusy(grid)(dispatch);
+    if (grid.getData) {
+      grid.getData(gridData);
+      return true;
+    }
     const origAllData = gridData.get('allData');
     const comparator = Utils.getSortComparator(column);
     const valueGetter = Utils.getSortValueGetter(column);
@@ -260,9 +267,32 @@ export const setData = (grid, columns, data) =>
       config: configData,
       selectedItems,
     });
-    applyFilters(grid, columns)(dispatch, getState);
-    applySort(grid, columns)(dispatch, getState);
+    if (!grid.getData) {
+      applyFilters(grid, columns)(dispatch, getState);
+      applySort(grid, columns)(dispatch, getState);
+    } else {
+      const gridData = getState().datagrid.get(grid.id);
+      if (!gridData) return false;
+      const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
+      if (!filterData.isEmpty()) {
+        dispatch({
+          type: TYPES.PLATFORM_DATAGRID_APPLY_FILTERS,
+          id: grid.id,
+          data,
+        });
+      }
+      const sortData = gridData.getIn(['config', 'sortingData']);
+      if (sortData) {
+        dispatch({
+          type: TYPES.PLATFORM_DATAGRID_APPLY_SORT,
+          id: grid.id,
+          data,
+          allData: data,
+        });
+      }
+    }
   };
+
 /**
  * Action to set focus to either last editedRow, createdRow or to validation error
  * @param {Object} grid
