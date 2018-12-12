@@ -2,13 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { List, Map, fromJS, toJS } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
 import Utils from '../../../src/datagrid/datagrid.utils';
 import { getLocaleFormatData } from '../../services/internationalization.service';
-import { PAGINATED_GRID as GRID, columns, getData, REGIONS } from './datagrid.constants';
+import { GRID, columns, getData, REGIONS } from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -157,7 +157,7 @@ class DatagridView extends React.Component {
       data = this.sort(sortColumn, sortOrder, data);
     }
     this.setState({ totalSize: data.length });
-console.log(`offset ${offset} count ${count} filters ${JSON.stringify(filters)} sortColumn ${sortColumn} sortOder ${sortOrder}`);
+    console.log(`offset ${offset} count ${count} filters ${JSON.stringify(filters)} sortColumn ${sortColumn} sortOder ${sortOrder}`);
     const paginatedData = data.slice(offset, offset + count);
     this.props.setData(GRID, columns, paginatedData);
   }

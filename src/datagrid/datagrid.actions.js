@@ -289,6 +289,7 @@ export const setData = (grid, columns, data) =>
         });
       }
     }
+    return true;
   };
 
 /**
