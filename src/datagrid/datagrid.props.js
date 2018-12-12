@@ -29,7 +29,7 @@ export const gridShape = shape({
   thousandSeparator: string,
   decimalSeparator: string,
   configStorage: configStorageShape,
-  getData: func,
+  pagination: bool,
 });
 
 export const columnShape = shape({

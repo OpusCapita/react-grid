@@ -100,8 +100,7 @@ export const applyFilters = (grid, columns) =>
     const allData = gridData.get('allData');
     setBusy(grid)(dispatch);
     let data;
-    if (grid.getData) {
-      grid.getData(gridData);
+    if (grid.pagination) {
       return true;
     } else if (filterData.isEmpty()) {
       data = allData;
@@ -188,8 +187,7 @@ export const applySort = (grid, columns) =>
     if (!column) return false;
 
     setBusy(grid)(dispatch);
-    if (grid.getData) {
-      grid.getData(gridData);
+    if (grid.pagination) {
       return true;
     }
     const origAllData = gridData.get('allData');
@@ -267,7 +265,7 @@ export const setData = (grid, columns, data) =>
       config: configData,
       selectedItems,
     });
-    if (!grid.getData) {
+    if (!grid.pagination) {
       applyFilters(grid, columns)(dispatch, getState);
       applySort(grid, columns)(dispatch, getState);
     } else {

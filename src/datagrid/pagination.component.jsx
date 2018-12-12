@@ -42,19 +42,52 @@ const paginationComponent = (WrappedComponent) => {
         totalSize: PropTypes.number.isRequired,
         getData: PropTypes.func.isRequired,
       }),
+      sortColumn: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      sortOrder: PropTypes.string,
     };
 
     static defaultProps = {
       paginationPage: 1,
       pagination: undefined,
+      sortColumn: undefined,
+      sortOrder: undefined,
     };
 
-    getData = (datagrid) => {
+    componentDidMount = () => {
       const { pagination } = this.props;
-      const paginationPage = datagrid.getIn(['config', 'pagination', 'page']);
-      const filterData = datagrid.getIn(['config', 'filteringData', 'filterData'], Map());
-      const sortColumn = datagrid.getIn(['config', 'sortingData', 'sortColumn'], null);
-      const sortOrder = datagrid.getIn(['config', 'sortingData', 'sortOrder'], null);
+      if (pagination) this.requestData();
+    }
+
+    componentDidUpdate = (prevProps) => {
+      const {
+        filterData,
+        pagination,
+        paginationPage,
+        sortColumn,
+        sortOrder,
+      } = this.props;
+      if (pagination && !filterData.equals(prevProps.filterData) && paginationPage > 1) {
+        this.gotoPage(1);
+      } else if (pagination && (
+        !filterData.equals(prevProps.filterData) ||
+        paginationPage !== prevProps.paginationPage ||
+        sortColumn !== prevProps.sortColumn ||
+        sortOrder !== prevProps.sortOrder)) {
+        this.requestData();
+      }
+    };
+
+    requestData = () => {
+      const {
+        filterData,
+        pagination,
+        paginationPage,
+        sortColumn,
+        sortOrder,
+      } = this.props;
       const offset = ((paginationPage) - 1) * pagination.pageSize;
       pagination.getData(offset, pagination.pageSize, filterData, sortColumn, sortOrder);
     }
@@ -62,14 +95,6 @@ const paginationComponent = (WrappedComponent) => {
     gotoPage = (page) => {
       const { grid } = this.props;
       this.props.setPaginationPage(grid, page);
-      const {
-        filterData,
-        pagination,
-        sortColumn,
-        sortOrder,
-      } = this.props;
-      const offset = ((page) - 1) * pagination.pageSize;
-      pagination.getData(offset, pagination.pageSize, filterData, sortColumn, sortOrder);
       Utils.savePaginationPage(grid, { page });
     }
 
@@ -87,7 +112,7 @@ const paginationComponent = (WrappedComponent) => {
         pages.push(i);
       }
       return (pagination ?
-        <WrappedComponent {...this.props} grid={{ ...grid, getData: this.getData }}>
+        <WrappedComponent {...this.props} grid={{ ...grid, pagination: true }}>
           {children}
           <Pagination>
             <ListItems

@@ -21,6 +21,11 @@ export const GRID = {
   thousandSeparator: ',',
 };
 
+export const PAGINATED_GRID = {
+  ...GRID,
+  id: 'TestPaginatedGrid',
+};
+
 export const selectTranslations = {
   placeholder: 'Select...',
   noResultsText: 'No hits found',
