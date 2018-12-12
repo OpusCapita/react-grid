@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ListItems from '@opuscapita/react-list-items';
 import { setPaginationPage } from './datagrid.actions';
+import Utils from './datagrid.utils';
 
 const Pagination = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ const paginationComponent = (WrappedComponent) => {
   const mapStateToProps = (state, ownProps) => {
     const GRID = ownProps.grid;
     return {
-      paginationPage: state.datagrid.getIn([GRID.id, 'pagination', 'page']),
+      paginationPage: state.datagrid.getIn([GRID.id, 'config', 'pagination', 'page']),
       filterData: state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'filterData'], Map()),
       sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
       sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
@@ -49,14 +50,8 @@ const paginationComponent = (WrappedComponent) => {
     };
 
     getData = (datagrid) => {
-      const {
-      //   filterData,
-        pagination,
-      //   paginationPage,
-      //   sortColumn,
-      //   sortOrder,
-      } = this.props;
-      const paginationPage = datagrid.getIn(['pagination', 'page']);
+      const { pagination } = this.props;
+      const paginationPage = datagrid.getIn(['config', 'pagination', 'page']);
       const filterData = datagrid.getIn(['config', 'filteringData', 'filterData'], Map());
       const sortColumn = datagrid.getIn(['config', 'sortingData', 'sortColumn'], null);
       const sortOrder = datagrid.getIn(['config', 'sortingData', 'sortOrder'], null);
@@ -75,6 +70,7 @@ const paginationComponent = (WrappedComponent) => {
       } = this.props;
       const offset = ((page) - 1) * pagination.pageSize;
       pagination.getData(offset, pagination.pageSize, filterData, sortColumn, sortOrder);
+      Utils.savePaginationPage(grid, { page });
     }
 
     render = () => {

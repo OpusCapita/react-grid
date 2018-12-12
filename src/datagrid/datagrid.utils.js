@@ -153,6 +153,7 @@ export default {
     const sortingData = sessionStorage.getItem(`oc_grid_sorting_${grid.id}`);
     const filterData = sessionStorage.getItem(`oc_grid_filtering_${grid.id}`);
     const isFilteringData = localStorage.getItem(`oc_grid_isFiltering_${grid.id}`);
+    const pagination = sessionStorage.getItem(`oc_grid_pagination_${grid.id}`);
     let loadedConfig = {};
     let hiddenColumns;
     let columnOrder;
@@ -223,6 +224,12 @@ export default {
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
       }
     }
+    if (pagination) {
+      try { config.pagination = JSON.parse(pagination); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing pagination from sessionStorage', e);
+      }
+    }
 
     if (!config.sortingData && grid.defaultSortColumn) {
       config.sortingData = {
@@ -276,6 +283,11 @@ export default {
     if (!isFiltering) {
       sessionStorage.removeItem(`oc_grid_filtering_${grid.id}`);
     }
+    return true;
+  },
+  savePaginationPage: (grid, pagination) => {
+    if (!pagination) return false;
+    sessionStorage.setItem(`oc_grid_pagination_${grid.id}`, JSON.stringify(pagination));
     return true;
   },
   /* eslint-disable max-len */

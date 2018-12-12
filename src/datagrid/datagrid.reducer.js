@@ -448,7 +448,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
     case TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE:
       return state
-        .setIn([action.id, 'pagination', 'page'], action.paginationPage);
+        .setIn([action.id, 'config', 'pagination', 'page'], action.paginationPage);
 
     default:
       return state;
