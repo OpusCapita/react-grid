@@ -4,6 +4,7 @@
 ## <next>
 * Disable Edit-button when grid has no data
 * Enhanced keyboard navigation
+* Added pagination support
 
 ## 7.0.1
 * Toggle On/Off icon in Grid menu Filtering row

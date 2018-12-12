@@ -94,6 +94,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(rowData, rowIndex) is called for each row and the returned value overrides rowHeight for particular row |
 | onContentHeightChange    | function         |                                          | Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content |
 | contextMenuItems         | array            |                                          | Array of items in the context menu |
+| pagination               | object           |                                          | Object of pagination options |
 
 #### Datagrid - `grid` prop attributes
 
@@ -213,6 +214,13 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | disabled      | boolean, function | false   | Is item disabled, parameters (selectedIds :: List, selectedData :: List) |
 | header        | boolean           | false   | Is item a header                                   |
 | divider       | boolean           | false   | Is item a divider                                  |
+
+#### Datagrid - `pagination` prop attributes
+| Name          | Type              | Default | Description                                        |
+| ------------- | ------------------| ------- | -------------------------------------------------- |
+| pageSize      | number            |         | Row count on page                                  |
+| totalSize     | number            |         | Total amount of rows                               |
+| getData       | function          |         | Callback function to request paginated data, parameters (offset :: number, count :: number, filters :: Map, sortColumn :: string or number, sortOrder :: string) |
 
 ### Code example
 
