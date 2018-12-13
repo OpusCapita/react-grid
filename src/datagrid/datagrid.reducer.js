@@ -1,6 +1,7 @@
 import Immutable, { Map, List } from 'immutable';
 import { TYPES } from './datagrid.actions';
 import { INITIAL_STATE } from './datagrid.constants';
+import Utils from './datagrid.utils';
 
 export default function datagridReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -93,7 +94,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       // when requesting same type of focus several times
       return state.setIn(
         [action.id, 'session', 'focusType'],
-        Map({ type: action.focusTo, focusToLastRow: action.focusToLastRow }),
+        Map({
+          type: action.focusTo,
+          focusToLastRow: action.focusToLastRow,
+        }),
       );
     }
 
@@ -135,18 +139,25 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
     case TYPES.PLATFORM_DATAGRID_SAVE_SUCCESS: {
       let allData = state.getIn([action.id, 'allData']);
+      let firstCreatedId = null;
+
       action.savedItems.forEach((savedItemJS) => {
         const savedItem = Immutable.fromJS(savedItemJS);
         const foundIndex = allData.findIndex(d => (
           d.getIn(action.idKeyPath) === savedItem.getIn(action.idKeyPath)
         ));
         if (foundIndex === -1) {
+          if (!firstCreatedId && savedItem.getIn(action.idKeyPath)) {
+            firstCreatedId = savedItem.getIn(action.idKeyPath);
+          }
           allData = allData.push(savedItem);
         } else {
           allData = allData.mergeDeepIn([foundIndex], savedItem);
         }
       });
-      return state
+
+
+      let newState = state
         .setIn([action.id, 'data'], allData)
         .setIn([action.id, 'allData'], allData)
         .mergeIn([action.id, 'session'], {
@@ -158,6 +169,13 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .deleteIn([action.id, 'createData'])
         .deleteIn([action.id, 'createCellMessages', 'error'])
         .deleteIn([action.id, 'cellMessages', 'error']);
+
+      if (firstCreatedId) {
+        Utils.saveSelectedItems(action.id, [firstCreatedId]);
+        newState = newState.setIn([action.id, 'selectedItems'], List([firstCreatedId]));
+      }
+
+      return newState;
     }
 
     case TYPES.PLATFORM_DATAGRID_SAVE_PARTIAL_SUCCESS: {
@@ -230,7 +248,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn(
           [action.id, 'cellMessages', action.messageType, action.dataId, ...action.keyPath],
-          { id: action.messageId, values: action.messageValues },
+          {
+            id: action.messageId,
+            values: action.messageValues,
+          },
         );
 
     case TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGES:
@@ -263,7 +284,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn(
           [action.id, 'createCellMessages', action.messageType, action.rowIndex, ...action.keyPath],
-          { id: action.messageId, values: action.messageValues },
+          {
+            id: action.messageId,
+            values: action.messageValues,
+          },
         );
 
     case TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE: {
@@ -336,7 +360,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
       const dataId = state.getIn([action.id, 'data', action.rowIndex, ...action.idKeyPath]);
       const foundIndex = state
-        .getIn([action.id, 'selectedItems'], List()).indexOf(dataId);
+        .getIn([action.id, 'selectedItems'], List())
+        .indexOf(dataId);
       if (foundIndex === -1) {
         if (action.ctrlPressed) {
           return newState
