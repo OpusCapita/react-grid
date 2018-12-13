@@ -29,6 +29,7 @@ export const gridShape = shape({
   thousandSeparator: string,
   decimalSeparator: string,
   configStorage: configStorageShape,
+  pagination: bool,
 });
 
 export const columnShape = shape({
@@ -230,6 +231,11 @@ export const propTypes = {
   onContentHeightChange: func,
   className: string,
   focusType: map.isRequired,
+  pagination: shape({
+    pageSize: number.isRequired,
+    totalSize: number.isRequired,
+    getData: func.isRequired,
+  }),
 };
 
 /* eslint-enable max-len, prefer-template, react/no-unused-prop-types, react/forbid-prop-types */

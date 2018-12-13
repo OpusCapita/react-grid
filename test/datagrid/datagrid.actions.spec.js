@@ -835,4 +835,17 @@ describe('Datagrid actions', () => {
     expect(allActions[0]).to.eql(expectedAction);
     expect(allActions[2].type).to.eql(actions.TYPES.PLATFORM_DATAGRID_APPLY_FILTERS);
   });
+
+  it('set pagination page', function () {
+    const paginationPage = 3;
+    const action = actions.setPaginationPage(GRID, paginationPage);
+    const expectedAction = {
+      paginationPage,
+      id: GRID.id,
+      type: actions.TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE,
+    };
+
+    this.store.dispatch(action);
+    expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
 });

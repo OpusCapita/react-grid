@@ -2,10 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
+import Utils from '../../../src/datagrid/datagrid.utils';
 import { getLocaleFormatData } from '../../services/internationalization.service';
 import { GRID, columns, getData, REGIONS } from './datagrid.constants';
 import './datagrid.component.scss';
@@ -49,7 +50,15 @@ class DatagridView extends React.Component {
     removeSuccess: PropTypes.func.isRequired,
     saveFail: PropTypes.func.isRequired,
     removeFail: PropTypes.func.isRequired,
+    // pagination
+    pageSize: PropTypes.number,
+    totalSize: PropTypes.number,
   };
+
+  static defaultProps = {
+    pageSize: 15,
+    totalSize: 100,
+  }
 
   constructor() {
     super();
@@ -66,11 +75,8 @@ class DatagridView extends React.Component {
     this.state = {
       gridSettings,
       region,
+      totalSize: 100,
     };
-  }
-
-  componentWillMount() {
-    this.props.setData(GRID, columns, getData(100));
   }
 
   getRegionComponent = () => {
@@ -93,6 +99,67 @@ class DatagridView extends React.Component {
         ))}
       </DropdownButton>
     );
+  }
+
+  filter = (filterData, data) => {
+    const filteredData = fromJS(data).filter((row) => {
+      let hits = 0;
+      filterData.forEach((filterValue, filterColumn) => {
+        columns.forEach((column) => {
+          if (Utils.getColumnKey(column) === filterColumn) {
+            const value = row.getIn(column.valueKeyPath);
+            if (value || value === 0 || value === false) {
+              const filterMatcher = Utils.getFilterMatcher(column, GRID.dateFormat);
+              if (filterMatcher(row, filterValue)) {
+                hits += 1;
+              }
+            }
+          }
+        });
+      });
+      return hits === filterData.size;
+    }).toJS();
+    return filteredData;
+  }
+
+  sort = (sortColumn, sortOrder, data) => {
+    let column;
+    columns.forEach((col) => {
+      if (Utils.getColumnKey(col) === sortColumn) {
+        column = col;
+      }
+    });
+    if (!column) return false;
+    const comparator = Utils.getSortComparator(column);
+    const valueGetter = Utils.getSortValueGetter(column);
+    const valueEmptyChecker = Utils.getValueEmptyChecker(column);
+    return fromJS(data).sort((a, b) => {
+      const valA = valueGetter(a);
+      const valB = valueGetter(b);
+      if (sortOrder === 'asc') {
+        if (valueEmptyChecker(valA)) return -1;
+        if (valueEmptyChecker(valB)) return 1;
+        return comparator(valA, valB);
+      }
+      if (valueEmptyChecker(valA)) return 1;
+      if (valueEmptyChecker(valB)) return -1;
+      return comparator(valB, valA);
+    }).toJS();
+  }
+
+  requestData = (offset, count, filters, sortColumn, sortOrder) => {
+    const { totalSize } = this.props;
+    let data = getData(totalSize);
+    if (filters && !filters.isEmpty()) {
+      data = this.filter(filters, data);
+    }
+    if (sortColumn) {
+      data = this.sort(sortColumn, sortOrder, data);
+    }
+    this.setState({ totalSize: data.length });
+    console.log(`offset ${offset} count ${count} filters ${JSON.stringify(filters)} sortColumn ${sortColumn} sortOder ${sortOrder}`);
+    const paginatedData = data.slice(offset, offset + count);
+    this.props.setData(GRID, columns, paginatedData);
   }
 
   handleRegionSelect = (eventKey) => {
@@ -164,6 +231,8 @@ class DatagridView extends React.Component {
   }
 
   render() {
+    const { pageSize } = this.props;
+    const { totalSize } = this.state;
     const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
@@ -211,6 +280,11 @@ class DatagridView extends React.Component {
             onClick: this.handleContextClick,
           },
         ]}
+        pagination={{
+          pageSize,
+          totalSize,
+          getData: this.requestData,
+        }}
       />
     );
   }

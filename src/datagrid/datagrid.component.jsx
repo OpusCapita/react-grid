@@ -25,6 +25,7 @@ import CellTooltip from './cell-tooltip.component';
 import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';
 import { KEY_CODES } from './datagrid.constants';
+import pagination from './pagination.component';
 import Utils from './datagrid.utils';
 import GridColumnService from './column-service/column-service';
 import './datagrid.component.scss';
@@ -64,6 +65,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = datagridActions;
 
+@pagination
 @injectIntl
 @connect(mapStateToProps, mapDispatchToProps)
 class DataGrid extends React.PureComponent {
