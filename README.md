@@ -115,6 +115,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | dateFormat                  | string           | 'L'                                      | Default taken from redux user state used in OC apps        |
 | thousandSeparator           | string           | ''                                       | Default taken from redux user state used in OC apps        |
 | decimalSeparator            | string           | '.'                                      | Default taken from redux user state used in OC apps        |
+| pagination                  | boolean          | false                                    | True, if grid data is paginated. Otherwise false.          |
 
 #### Datagrid - `column` prop attributes
 

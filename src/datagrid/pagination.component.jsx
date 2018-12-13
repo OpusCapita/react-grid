@@ -23,6 +23,8 @@ const paginationComponent = (WrappedComponent) => {
     return {
       paginationPage: state.datagrid.getIn([GRID.id, 'config', 'pagination', 'page']),
       filterData: state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'filterData'], Map()),
+      isCreating: state.datagrid.getIn([GRID.id, 'session', 'isCreating'], false),
+      isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
       sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
       sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
     };
@@ -102,6 +104,8 @@ const paginationComponent = (WrappedComponent) => {
       const {
         children,
         grid,
+        isCreating,
+        isEditing,
         paginationPage,
         pagination,
       } = this.props;
@@ -116,6 +120,7 @@ const paginationComponent = (WrappedComponent) => {
           {children}
           <Pagination>
             <ListItems
+              disabled={isCreating || isEditing}
               goToItem={this.gotoPage}
               id="listPaginationItems"
               itemId={paginationPage}
