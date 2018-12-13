@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Newly created rows are now selected automatically
 
 ## 7.1.0
 * Disable Edit-button when grid has no data

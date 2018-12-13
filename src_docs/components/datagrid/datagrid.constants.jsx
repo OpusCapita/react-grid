@@ -67,7 +67,10 @@ export const columns = [
     valueType: 'text',
     componentType: 'select',
     selectComponentOptions: countryOptions,
-    valueRender: data => countryOptions.find(v => v.value === data.get('country')).label,
+    valueRender: (data) => {
+      const country = countryOptions.find(v => v.value === data.get('country'));
+      return country ? country.label : null;
+    },
   },
   {
     header: 'Used',

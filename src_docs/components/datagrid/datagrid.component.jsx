@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
+import uuid from 'uuid';
+// app
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { getLocaleFormatData } from '../../services/internationalization.service';
 import { GRID, columns, getData, REGIONS } from './datagrid.constants';
@@ -127,6 +129,7 @@ class DatagridView extends React.Component {
     if (createData.size) {
       // Creating mode
       newData = createData.toJS();
+      newData = newData.map(item => Object.assign(item, { id: uuid() }));
     } else if (editData.size) {
       // Editing mode
       editData.forEach((editItem, editId) => {

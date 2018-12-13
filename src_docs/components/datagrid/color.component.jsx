@@ -8,7 +8,11 @@ const Color = ({ value }) => (
 );
 
 Color.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
+};
+
+Color.defaultProps = {
+  value: '#fff',
 };
 
 export default Color;
