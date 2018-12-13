@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.1.0
 * Disable Edit-button when grid has no data
 * Enhanced keyboard navigation
 * Added pagination support
