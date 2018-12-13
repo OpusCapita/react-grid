@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
-
+import uuid from 'uuid';
 // app
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { getLocaleFormatData } from '../../services/internationalization.service';
 import { GRID, columns, getData, REGIONS } from './datagrid.constants';
 import './datagrid.component.scss';
-import uuid from 'uuid';
 
 // Needed grid actions are mapped here
 // There's more in /src/datagrid/datagrid.actions.js
