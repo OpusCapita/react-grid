@@ -94,10 +94,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       // when requesting same type of focus several times
       return state.setIn(
         [action.id, 'session', 'focusType'],
-        Map({
-          type: action.focusTo,
-          focusToLastRow: action.focusToLastRow,
-        }),
+        Map({ type: action.focusTo, focusToLastRow: action.focusToLastRow }),
       );
     }
 
@@ -248,10 +245,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn(
           [action.id, 'cellMessages', action.messageType, action.dataId, ...action.keyPath],
-          {
-            id: action.messageId,
-            values: action.messageValues,
-          },
+          { id: action.messageId, values: action.messageValues },
         );
 
     case TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGES:
@@ -284,10 +278,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn(
           [action.id, 'createCellMessages', action.messageType, action.rowIndex, ...action.keyPath],
-          {
-            id: action.messageId,
-            values: action.messageValues,
-          },
+          { id: action.messageId, values: action.messageValues },
         );
 
     case TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE: {
@@ -360,8 +351,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
       const dataId = state.getIn([action.id, 'data', action.rowIndex, ...action.idKeyPath]);
       const foundIndex = state
-        .getIn([action.id, 'selectedItems'], List())
-        .indexOf(dataId);
+        .getIn([action.id, 'selectedItems'], List()).indexOf(dataId);
       if (foundIndex === -1) {
         if (action.ctrlPressed) {
           return newState
