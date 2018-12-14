@@ -62,9 +62,9 @@ export default {
     }
   },
   isSortable: col => (
-    col.valueType &&
-    (col.sortValueGetter || col.valueKeyPath) &&
-    !col.disableSorting
+    col.valueType
+    && (col.sortValueGetter || col.valueKeyPath)
+    && !col.disableSorting
   ),
   getSortComparator: (col) => {
     if (col.sortComparator) {
@@ -100,10 +100,10 @@ export default {
       case 'float':
       case 'currency':
         return val => (
-          val === '' ||
-          isNaN(val) ||
-          val === null ||
-          val === undefined
+          val === ''
+          || isNaN(val)
+          || val === null
+          || val === undefined
         );
       case 'text':
       case 'boolean':

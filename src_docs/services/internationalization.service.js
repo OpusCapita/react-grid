@@ -26,9 +26,9 @@ export const getLocaleFormatData = (region) => {
     .replace('5', 'D')
     .replace('2017', 'YYYY');
   if (
-    determinedFormat.indexOf('M') > -1 &&
-    determinedFormat.indexOf('D') > -1 &&
-    determinedFormat.indexOf('Y') > -1
+    determinedFormat.indexOf('M') > -1
+    && determinedFormat.indexOf('D') > -1
+    && determinedFormat.indexOf('Y') > -1
   ) {
     dateFormat = determinedFormat;
   }

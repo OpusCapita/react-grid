@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.2.0
 * Newly created rows are now selected automatically
 * `isCreatableSelect` column prop for creatable select boxes
 
