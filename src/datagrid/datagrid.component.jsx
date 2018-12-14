@@ -127,6 +127,12 @@ class DataGrid extends React.PureComponent {
       let currentCell = cellRefs[`${grid.id}_${columnKey}_${rowIndex}`];
       let proxy = null;
 
+      const getSelectRef = (component) => {
+        if (!component) return null;
+        if (component.selectRef.select.select) return component.selectRef.select.select.inputRef;
+        return component.selectRef.select.inputRef;
+      };
+
       const isCursorAtStart = () => {
         if (currentCell.type !== 'text') return true;
         return currentCell.selectionStart === 0;
@@ -140,7 +146,7 @@ class DataGrid extends React.PureComponent {
       // If current cell holds a react-floating-select component
       if (currentCell && currentCell.selectRef) {
         proxy = currentCell;
-        currentCell = currentCell.selectRef.select.inputRef;
+        currentCell = getSelectRef(proxy);
       }
 
       // Prevents up/down arrow from changing number field value
@@ -164,7 +170,7 @@ class DataGrid extends React.PureComponent {
           if (proxy && proxy.selectRef && !proxy.selectRef.state.menuIsOpen) {
             e.preventDefault();
             if (!nextElement) break;
-            nextElement = nextElement.selectRef.select.inputRef;
+            nextElement = getSelectRef(nextElement);
           }
           this.moveCellFocus(nextElement, rowIndex + 1, -1);
           break;
@@ -176,7 +182,7 @@ class DataGrid extends React.PureComponent {
           if (proxy && proxy.selectRef && !proxy.selectRef.state.menuIsOpen) {
             e.preventDefault();
             if (!nextElement) break;
-            nextElement = nextElement.selectRef.select.inputRef;
+            nextElement = getSelectRef(nextElement);
           }
           this.moveCellFocus(nextElement, rowIndex - 1, -1);
           break;
@@ -256,7 +262,7 @@ class DataGrid extends React.PureComponent {
               disabled = nextElement ? nextElement.disabled : false;
             }
             if (!disabled && nextElement) {
-              if (nextElement.selectRef) nextElement = nextElement.selectRef.select.inputRef;
+              if (nextElement.selectRef) nextElement = getSelectRef(nextElement);
               this.moveCellFocus(nextElement, rowInd, columnInd);
             }
           }

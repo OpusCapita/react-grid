@@ -1,8 +1,15 @@
 import React from 'react';
-import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
+import {
+  FloatingSelectPortal,
+  FloatingSelectPortalCreatable,
+} from '@opuscapita/react-floating-select';
 
 export const selectRender = selectProps => (
   <FloatingSelectPortal {...selectProps} />
+);
+
+export const creatableSelectRender = selectProps => (
+  <FloatingSelectPortalCreatable {...selectProps} />
 );
 
 export default {
@@ -41,6 +48,8 @@ export default {
       ...col.editComponentProps,
       ...selectTranslations,
     };
+
+    if (col.isCreatableSelect) return creatableSelectRender({ ...fsProps });
     return selectRender({ ...fsProps });
   },
 
@@ -80,6 +89,8 @@ export default {
       ...col.createComponentProps,
       ...selectTranslations,
     };
+
+    if (col.isCreatableSelect) return creatableSelectRender({ ...fsProps });
     return selectRender({ ...fsProps });
   },
 

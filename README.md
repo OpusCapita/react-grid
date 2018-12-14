@@ -65,6 +65,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | multiSelect              | boolean          | false                                    | Enable multi selecting on row selecting  |
 | selectComponentOptions   | Immutable.Map    |                                          | Options data for the react-select components |
 | selectComponentTranslations | object        |                                          | Translation strings for react-select placeholder and noResultsText texts. |
+| isCreatableSelect        | bool             |                                          | With this option it's possible to create new select options on the fly |
 | disableActions           | boolean          | false                                    | Disable action bar actions, eg. when other grid busy |
 | disableActionsMessage    | object           | { messageId: 'GridActionsDisabledOtherGridBusy' } | Message about the reason of disabled action bar actions |
 | disableActionBar         | boolean          | false                                    | Disable action bar rendering             |
@@ -162,7 +163,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onCreateBlur               | function       |         | Called on create cell input blur, called with (value, rowIndex) |
 | onEditBlur                 | function       |         | Called on edit cell input blur, called with (value, rowIndex, dataId) |
 | onLastCellTabPress         | function       |         | Called on tab keypress in edit/create cell when the last cell in the grid is being focused, called with original KeyPress event |
-| selectComponentOptions     | array          |         | Options data fot the react-select component |
+| selectComponentOptions     | array          |         | Options data for the react-select component |
 
 #### Datagrid - `valueOptions` prop attributes for `currency` value type
 | Name              | Type   | Default      | Description                                          |
