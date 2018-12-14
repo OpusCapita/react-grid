@@ -3,6 +3,7 @@
 
 ## <next>
 * Newly created rows are now selected automatically
+* `isCreatableSelect` column prop for creatable select boxes
 
 ## 7.1.0
 * Disable Edit-button when grid has no data

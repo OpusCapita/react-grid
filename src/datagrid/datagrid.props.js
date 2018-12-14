@@ -94,6 +94,7 @@ export const columnShape = shape({
     placeholder: string,
     noResultsText: string,
   }),
+  isCreatableSelect: bool,
 });
 
 export const propTypes = {
