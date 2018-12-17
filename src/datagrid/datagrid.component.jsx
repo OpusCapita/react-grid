@@ -705,6 +705,7 @@ class DataGrid extends React.PureComponent {
       isCreating,
       extraColumn,
       rowSelectCheckboxColumn,
+      showSelectAllCheckbox,
     } = this.props;
 
     const columns = [];
@@ -733,6 +734,7 @@ class DataGrid extends React.PureComponent {
         isSortable: false,
         columnKey: 'selectionCheckbox',
         header: (
+          showSelectAllCheckbox &&
           <Checkbox
             id={`ocDatagridSelectAllCheckBox-${grid.id}`}
             className="oc-datagrid-select-all-checkbox-cell no-row-select"
