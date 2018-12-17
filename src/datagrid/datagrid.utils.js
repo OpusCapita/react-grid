@@ -135,7 +135,14 @@ export default {
         return (row, filterVal) => getVal(row) === filterVal;
       case 'text':
       default:
-        return (row, filterVal) => (new RegExp(filterVal, 'i')).test(getVal(row));
+        return (row, filterVal) => {
+          let escapedVal = filterVal;
+          const specialChars = '[]\\^$.|?*+()';
+
+          // If filter val starts with a Regex special character, we must escape it
+          if (specialChars.includes(filterVal[0])) escapedVal = `\\${filterVal}`;
+          return (new RegExp(escapedVal, 'i')).test(getVal(row));
+        };
     }
   },
   loadSelectedItems: (grid) => {
