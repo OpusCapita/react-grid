@@ -772,7 +772,6 @@ class DataGrid extends React.PureComponent {
       });
     });
     visibleColumns.forEach((col) => {
-
       const valueEmptyChecker = Utils.getValueEmptyChecker(col);
       // Cell value rendering
       const valueRender = (rowIndex, format) => {
