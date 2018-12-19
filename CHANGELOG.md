@@ -2,7 +2,11 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.3.0
+* fix to selectComponentOptions handling
 * Fixed an issue where filtering would break if search query started with Regex special character
+* Select all checkbox in the Grid header
 
 ## 7.2.0
 * Newly created rows are now selected automatically
