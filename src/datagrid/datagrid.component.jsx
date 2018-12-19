@@ -681,12 +681,33 @@ class DataGrid extends React.PureComponent {
     }
   };
 
+  handleSelectAllCheckBoxOnChange = () => {
+    this.props.selectAllItemsChange(this.props.grid);
+  };
+
   handleSelectionCheckBoxOnChange = rowIndex => () => {
     this.props.itemSelectionChange(this.props.grid, rowIndex, true, false);
   };
 
   generateColumns = () => {
-    const { extraColumn } = this.props;
+    const {
+      data,
+      selectedItems,
+      dateFormat,
+      thousandSeparator,
+      decimalSeparator,
+      grid,
+      inlineEdit,
+      filtering,
+      region,
+      intl,
+      selectComponentOptions,
+      isCreating,
+      extraColumn,
+      rowSelectCheckboxColumn,
+      showSelectAllCheckbox,
+    } = this.props;
+
     const columns = [];
     const tabIndex = String(this.props.tabIndex);
     if (extraColumn) {
@@ -697,7 +718,7 @@ class DataGrid extends React.PureComponent {
         columnKey: 'extraColumn',
         cell: rowIndex => (
           <div className="oc-datagrid-extra-column-cell no-row-select">
-            {extraColumn.valueRender(this.props.data.get(rowIndex), tabIndex)}
+            {extraColumn.valueRender(data.get(rowIndex), tabIndex)}
           </div>
         ),
         cellEdit: rowIndex => (extraColumn.cellEdit ? extraColumn.cellEdit(rowIndex) : null),
@@ -706,16 +727,26 @@ class DataGrid extends React.PureComponent {
       });
     }
 
-    if (this.props.rowSelectCheckboxColumn) {
+    if (rowSelectCheckboxColumn) {
       columns.push({
         width: 40,
         isResizable: false,
         isSortable: false,
         columnKey: 'selectionCheckbox',
+        header: (
+          showSelectAllCheckbox &&
+          <Checkbox
+            id={`ocDatagridSelectAllCheckBox-${grid.id}`}
+            className="oc-datagrid-select-all-checkbox-cell no-row-select"
+            checked={data.size !== 0 && data.size === selectedItems.size}
+            onChange={this.handleSelectAllCheckBoxOnChange}
+            tabIndex={tabIndex}
+          />
+        ),
         cell: (rowIndex) => {
-          const rowItem = this.props.data.get(rowIndex);
-          const itemId = rowItem.getIn(this.props.grid.idKeyPath);
-          const selected = this.props.selectedItems.includes(itemId);
+          const rowItem = data.get(rowIndex);
+          const itemId = rowItem.getIn(grid.idKeyPath);
+          const selected = selectedItems.includes(itemId);
           return (
             <Checkbox
               id={`ocDatagridSelectCheckBox-${this.props.grid.id}-${rowIndex}`}
@@ -741,18 +772,6 @@ class DataGrid extends React.PureComponent {
       });
     });
     visibleColumns.forEach((col) => {
-      const {
-        data,
-        dateFormat,
-        thousandSeparator,
-        decimalSeparator,
-        grid,
-        inlineEdit,
-        filtering,
-        region,
-        intl,
-        selectComponentOptions,
-      } = this.props;
 
       const valueEmptyChecker = Utils.getValueEmptyChecker(col);
       // Cell value rendering
@@ -820,7 +839,7 @@ class DataGrid extends React.PureComponent {
       columns.push(column);
     });
 
-    if (this.props.isCreating) {
+    if (isCreating) {
       columns.push({
         width: 37,
         isResizable: false,
@@ -829,13 +848,13 @@ class DataGrid extends React.PureComponent {
         cellEdit: () => null,
         cellCreate: rowIndex => (
           <Icon
-            id={`oc-datagrid-new-item-remove-${this.props.grid.id}-${rowIndex}`}
+            id={`oc-datagrid-new-item-remove-${grid.id}-${rowIndex}`}
             type="indicator"
             name="delete"
             width={30}
             height={30}
             style={{ padding: '7px' }}
-            onClick={() => this.props.removeNewItem(this.props.grid, rowIndex)}
+            onClick={() => this.props.removeNewItem(grid, rowIndex)}
           />
         ),
         cellFilter: () => null,

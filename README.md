@@ -94,6 +94,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | rowClassNameGetter       | function         |                                          | To get any additional CSS classes that should be added to a row, rowClassNameGetter(index) is called |
 | rowHeightGetter          | function         |                                          | If specified, rowHeightGetter(rowData, rowIndex) is called for each row and the returned value overrides rowHeight for particular row |
 | onContentHeightChange    | function         |                                          | Callback that is called when rowHeightGetter returns a different height for a row than the rowHeight prop. This is necessary because initially table estimates heights of some parts of the content |
+| showSelectAllCheckbox    | bool             | true                                     | Show Select all checkbox in the header when `rowSelectCheckboxColumn` is set to `true` |
 | contextMenuItems         | array            |                                          | Array of items in the context menu |
 | pagination               | object           |                                          | Object of pagination options |
 
