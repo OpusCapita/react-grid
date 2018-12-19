@@ -441,7 +441,7 @@ class DataGrid extends React.PureComponent {
       // Format by component type
       switch (col.componentType) {
         case 'select':
-          return col.selectComponentOptions.find(obj => obj.value === editValue);
+          return options.selectOptions.find(obj => obj.value === editValue);
         case 'boolean':
           return options.find(obj => obj.value === editValue);
         default:
@@ -462,7 +462,7 @@ class DataGrid extends React.PureComponent {
         return originalValue;
       }
       case 'select':
-        return col.selectComponentOptions.find(obj => obj.value === originalValue);
+        return options.selectOptions.find(obj => obj.value === originalValue);
       case 'boolean':
         return options.find(obj => obj.value === originalValue);
       default:
@@ -475,7 +475,7 @@ class DataGrid extends React.PureComponent {
     if (val === null) {
       return '';
     } else if (col.componentType === 'select') {
-      return col.selectComponentOptions.find(obj => obj.value === val);
+      return options.selectOptions.find(obj => obj.value === val);
     } else if (['boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
     }
@@ -487,7 +487,7 @@ class DataGrid extends React.PureComponent {
     if (val === null) {
       return '';
     } else if (col.componentType === 'select') {
-      return col.selectComponentOptions.find(obj => obj.value === val);
+      return options.selectOptions.find(obj => obj.value === val);
     } else if (['checkbox', 'boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
     }

@@ -32,7 +32,7 @@ export default {
     const fsProps = {
       name: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: opts,
-      value: functions.getItemValue(rowIndex, col),
+      value: functions.getItemValue(rowIndex, col, { selectOptions }),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       onBlur: functions.onCellBlur(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
@@ -69,11 +69,10 @@ export default {
     const opts = col.createSelectOptionsMod && selectOptions ?
       col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
       selectOptions;
-
     const fsProps = {
       name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: opts,
-      value: functions.getItemValue(rowIndex, col),
+      value: functions.getItemValue(rowIndex, col, { selectOptions }),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       onBlur: functions.onCellBlur(rowIndex, col),
       onKeyDown: functions.onCellKeyDown(rowIndex, col),
@@ -110,7 +109,7 @@ export default {
     const fsProps = {
       name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       options: opts,
-      value: functions.getItemValue(col),
+      value: functions.getItemValue(col, { selectOptions }),
       onChange: functions.onCellValueChange(col, editValueParser),
       isSearchable: selectOptions && (selectOptions.length > 9),
       isClearable: true,
