@@ -86,7 +86,7 @@
       border: 1px solid $oc-grid-color-warning !important;
       border-bottom: 2px solid $oc-grid-color-warning !important;
     }
-    
+
     .form-control, .Select-control, .Select-input {
       height: 31px !important;
     }
@@ -264,4 +264,8 @@
       color: black;
     }
   }
+}
+
+.oc-data-grid-date {
+  z-index: 1;
 }
