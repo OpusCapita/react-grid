@@ -9,6 +9,8 @@ const dateIsValid = val => moment(val).isValid();
 
 const dateIsValidFormat = (val, dateFormat) => moment(val, dateFormat, true).isValid();
 
+const className = 'oc-data-grid-date';
+
 export default {
   // dateValueRender
   valRender(rowIndex, dateFormat, valueRender) {
@@ -37,6 +39,7 @@ export default {
   ) {
     const cellName = 'edit';
     const dateProps = {
+      className,
       dateFormat,
       locale: region,
       value: functions.getItemValue(rowIndex, col),
@@ -70,6 +73,7 @@ export default {
   ) {
     const cellName = 'create';
     const dateProps = {
+      className,
       dateFormat,
       locale: region,
       value: functions.getItemValue(rowIndex, col),
@@ -100,6 +104,7 @@ export default {
     functions,
   ) {
     const dateProps = {
+      className,
       dateFormat,
       value: functions.getItemValue(col),
       onChange: functions.onCellValueChange(col, valueParser),
