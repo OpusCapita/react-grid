@@ -114,7 +114,7 @@
   "dependencies": {
     "@opuscapita/format-utils": "2.0.0",
     "@opuscapita/react-checkbox": "1.4.1",
-    "@opuscapita/react-datetime": "3.2.6",
+    "@opuscapita/react-datetime": "3.2.8",
     "@opuscapita/react-dropdown": "2.2.1",
     "@opuscapita/react-floating-select": "3.2.1",
     "@opuscapita/react-icons": "3.0.3",

@@ -37,6 +37,7 @@ export default {
   ) {
     const cellName = 'edit';
     const dateProps = {
+      className: 'oc-data-grid-date',
       dateFormat,
       locale: region,
       value: functions.getItemValue(rowIndex, col),
@@ -70,6 +71,7 @@ export default {
   ) {
     const cellName = 'create';
     const dateProps = {
+      className: 'oc-data-grid-date',
       dateFormat,
       locale: region,
       value: functions.getItemValue(rowIndex, col),
@@ -100,6 +102,7 @@ export default {
     functions,
   ) {
     const dateProps = {
+      className: 'oc-data-grid-date',
       dateFormat,
       value: functions.getItemValue(col),
       onChange: functions.onCellValueChange(col, valueParser),

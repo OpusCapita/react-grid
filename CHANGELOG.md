@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed datepicker rendering, overlap grid column header
 
 ## 7.3.0
 * fix to selectComponentOptions handling
