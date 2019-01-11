@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.2
+* fix to visibleColumns function valueKeyPath handling
+
 ## 7.3.1
 * Fixed datepicker rendering, overlap grid column header
 

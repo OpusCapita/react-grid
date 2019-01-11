@@ -390,7 +390,9 @@ export default {
     if (!visibleColumns) return origColumns;
     const filtered = visibleColumns.map(  // eslint-disable-line
       searchCol => origColumns.find(  // eslint-disable-line
-        col => JSON.stringify(col.valueKeyPath) === JSON.stringify([searchCol])));
+        // valueKeyPath is joined here as it can be an array like ['key1', 'key2'].
+        // searchCol is similarly joined in onCellKeyDown in datagrid.component.jsx
+        col => JSON.stringify(col.valueKeyPath.join('/')) === JSON.stringify(searchCol)));
     return filtered.toJS();
   },
 };
