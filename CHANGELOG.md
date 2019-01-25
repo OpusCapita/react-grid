@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.3.3
 * Fixed cell focusing when moving to create/edit mode
 
 ## 7.3.2
