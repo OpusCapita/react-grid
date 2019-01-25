@@ -106,7 +106,6 @@ class DataGrid extends React.PureComponent {
     this.props.resizeColumn(this.props.grid, columnKey, newColumnWidth);
   };
 
-
   /**
    * @param rowIndex (int)
    * @param col (obj). Column object.
@@ -127,12 +126,6 @@ class DataGrid extends React.PureComponent {
       let currentCell = cellRefs[`${grid.id}_${columnKey}_${rowIndex}`];
       let proxy = null;
 
-      const getSelectRef = (component) => {
-        if (!component) return null;
-        if (component.selectRef.select.select) return component.selectRef.select.select.inputRef;
-        return component.selectRef.select.inputRef;
-      };
-
       const isCursorAtStart = () => {
         if (currentCell.type !== 'text') return true;
         return currentCell.selectionStart === 0;
@@ -146,7 +139,7 @@ class DataGrid extends React.PureComponent {
       // If current cell holds a react-floating-select component
       if (currentCell && currentCell.selectRef) {
         proxy = currentCell;
-        currentCell = getSelectRef(proxy);
+        currentCell = this.getSelectRef(proxy);
       }
 
       // Prevents up/down arrow from changing number field value
@@ -170,7 +163,7 @@ class DataGrid extends React.PureComponent {
           if (proxy && proxy.selectRef && !proxy.selectRef.state.menuIsOpen) {
             e.preventDefault();
             if (!nextElement) break;
-            nextElement = getSelectRef(nextElement);
+            nextElement = this.getSelectRef(nextElement);
           }
           this.moveCellFocus(nextElement, rowIndex + 1, -1);
           break;
@@ -182,7 +175,7 @@ class DataGrid extends React.PureComponent {
           if (proxy && proxy.selectRef && !proxy.selectRef.state.menuIsOpen) {
             e.preventDefault();
             if (!nextElement) break;
-            nextElement = getSelectRef(nextElement);
+            nextElement = this.getSelectRef(nextElement);
           }
           this.moveCellFocus(nextElement, rowIndex - 1, -1);
           break;
@@ -262,7 +255,7 @@ class DataGrid extends React.PureComponent {
               disabled = nextElement ? nextElement.disabled : false;
             }
             if (!disabled && nextElement) {
-              if (nextElement.selectRef) nextElement = getSelectRef(nextElement);
+              if (nextElement.selectRef) nextElement = this.getSelectRef(nextElement);
               this.moveCellFocus(nextElement, rowInd, columnInd);
             }
           }
@@ -416,6 +409,12 @@ class DataGrid extends React.PureComponent {
         columnKey,
       }));
     }
+  };
+
+  getSelectRef = (component) => {
+    if (!component) return null;
+    if (component.selectRef.select.select) return component.selectRef.select.select.inputRef;
+    return component.selectRef.select.inputRef;
   };
 
   getDataIdByRowIndex = rowIndex =>
@@ -623,13 +622,15 @@ class DataGrid extends React.PureComponent {
   handleCreateCellRef = (rowIndex, col) => (ref) => {
     // Focus to create cell
     const columnKey = Utils.getColumnKey(col);
+    const selectRef = !ref || ref.focus ? ref : this.getSelectRef(ref);
     if (
       this.props.createData.size &&
       this.props.createData.size === rowIndex + 1 &&
       this.focusToCreateCell &&
-      !this.getComponentDisabledState(rowIndex, col, 'create')
+      !this.getComponentDisabledState(rowIndex, col, 'create') &&
+      selectRef
     ) {
-      ref.focus();
+      selectRef.focus();
       this.focusToCreateCell = false;
     }
 
@@ -645,17 +646,22 @@ class DataGrid extends React.PureComponent {
         this.props.data.size - 1 : this.getSelectedItemIndex(this.props.selectedItems.first());
 
       const { selectedCell } = this.props;
+      const selectRef = !ref || ref.focus ? ref : this.getSelectRef(ref);
       if (selectedCell.size > 0) {
-        if (selectedCell.get('rowIndex') === rowIndex && selectedCell.get('columnKey') === columnKey) {
-          ref.focus();
+        if (
+          selectedCell.get('rowIndex') === rowIndex &&
+          selectedCell.get('columnKey') === columnKey &&
+          selectRef
+        ) {
+          selectRef.focus();
           this.focusToEditCell = false;
           this.focusToLastRow = false;
         }
       } else if (selectedRowIndex === undefined) {
         this.focusToEditCell = false;
         this.focusToLastRow = false;
-      } else if (selectedRowIndex === rowIndex) {
-        ref.focus();
+      } else if (selectedRowIndex === rowIndex && selectRef) {
+        selectRef.focus();
         this.focusToEditCell = false;
         this.focusToLastRow = false;
       }

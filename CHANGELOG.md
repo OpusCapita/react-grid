@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed cell focusing when moving to create/edit mode
 
 ## 7.3.2
 * fix to visibleColumns function valueKeyPath handling
