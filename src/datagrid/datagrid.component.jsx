@@ -1092,6 +1092,7 @@ class DataGrid extends React.PureComponent {
         isResizable={col.isResizable}
         flexGrow={col.flexGrow ? col.flexGrow : 0}
         fixed={col.fixed}
+        fixedRight={col.fixedRight}
         allowCellsRecycling={col.allowCellsRecycling}
       />));
   };

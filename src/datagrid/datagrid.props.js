@@ -61,6 +61,7 @@ export const columnShape = shape({
   maxWidth: number,
   align: string,                  // vertical cell alignment, defaults to 'left'
   fixed: bool,                    // is column fixed
+  fixedRight: bool,               // is column fixed to right
   allowCellsRecycling: bool,      // allow cells to be recycled for better horizontal scrolling perf
   disableResizing: bool,          // disable column resizing
   disableEditing: bool,           // disable input component (make read-only) when editing/creating

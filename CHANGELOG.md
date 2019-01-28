@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 7.3.4
+* Replace base64 shadow with CSS gradient background
+* Add missing `fixedRight` column prop
+
 ## 7.3.3
 * Fixed cell focusing when moving to create/edit mode
 
