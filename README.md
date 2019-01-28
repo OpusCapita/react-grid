@@ -146,7 +146,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | maxWidth                   | number         |         | The maximum pixel width of the column    |
 | align                      | number         |         | The horizontal alignment of the column   |
 | fixed                      | boolean        |         | Column is fixed                          |
-| fixedRIght                 | boolean        |         | Column is fixed to right                 |
+| fixedRight                 | boolean        |         | Column is fixed to right                 |
 | allowCellsRecycling        | boolean        |         | Recycle cells that are outside viewport horizontally, better horizontal scrolling performance. |
 | disableResizing            | boolean        |         | Disable column resizing this column      |
 | disableSorting             | boolean        |         | Disable column sorting this column       |
