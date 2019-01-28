@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import ListItems from '@opuscapita/react-list-items';
 import { setPaginationPage } from './datagrid.actions';
 import Utils from './datagrid.utils';
+import { gridShape } from './datagrid.props';
 
 const Pagination = styled.div`
   display: flex;
@@ -37,6 +38,9 @@ const paginationComponent = (WrappedComponent) => {
   @connect(mapStateToProps, mapDispatchToProps)
   class Pager extends React.PureComponent {
     static propTypes = {
+      children: PropTypes.node,
+      grid: gridShape.isRequired,
+      setPaginationPage: PropTypes.func.isRequired,
       filterData: ImmutablePropTypes.map.isRequired,
       paginationPage: PropTypes.number,
       pagination: PropTypes.shape({
@@ -49,9 +53,12 @@ const paginationComponent = (WrappedComponent) => {
         PropTypes.number,
       ]),
       sortOrder: PropTypes.string,
+      isEditing: PropTypes.bool.isRequired,
+      isCreating: PropTypes.bool.isRequired,
     };
 
     static defaultProps = {
+      children: null,
       paginationPage: 1,
       pagination: undefined,
       sortColumn: undefined,

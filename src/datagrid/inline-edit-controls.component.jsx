@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage as M } from 'react-intl';
 import CellToolTip from './cell-tooltip.component';
@@ -37,6 +38,7 @@ export default class InlineEditControls extends React.PureComponent {
     disableActionSave: PropTypes.bool,
     inlineAdd: PropTypes.bool,
     tabIndex: PropTypes.number,
+    data: ImmutablePropTypes.list.isRequired,
   };
 
   static defaultProps = {
