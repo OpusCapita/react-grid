@@ -1,0 +1,27 @@
+diff --git a/node_modules/fixed-data-table-2/dist/fixed-data-table.css b/node_modules/fixed-data-table-2/dist/fixed-data-table.css
+index dc23dee..74eed77 100644
+--- a/node_modules/fixed-data-table-2/dist/fixed-data-table.css
++++ b/node_modules/fixed-data-table-2/dist/fixed-data-table.css
+@@ -411,11 +411,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+ }
+ 
+ .public_fixedDataTable_topShadow {
+-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
++  background-image: linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0));
+ }
+ 
+ .public_fixedDataTable_bottomShadow {
+-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
++  background-image: linear-gradient(0deg,rgba(0,0,0,0.1),rgba(0,0,0,0));
+ }
+ 
+ .public_fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
+@@ -519,7 +519,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+ }
+ 
+ .public_fixedDataTableRow_columnsShadow {
+-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
++  background-image: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0))
+ }
+ 
+ .public_fixedDataTableRow_columnsRightShadow {

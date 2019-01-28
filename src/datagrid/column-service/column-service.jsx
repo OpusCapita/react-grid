@@ -18,6 +18,7 @@ export default {
       maxWidth: col.maxWidth,
       isResizable: !col.disableResizing,
       fixed: !!col.fixed,
+      fixedRight: !!col.fixedRight,
       allowCellsRecycling: !!col.allowCellsRecycling,
       disableSorting: !!col.disableSorting,
       isRequired: !!col.isRequired,
