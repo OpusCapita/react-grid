@@ -26,8 +26,7 @@
     "test": "cross-env NODE_ENV=production BUILD_ENV=test mocha",
     "preversion": "npm run lint && npm test",
     "version": "npm run build && git add -A lib docs",
-    "postversion": "git push && git push --tags",
-    "postinstall": "patch-package"
+    "postversion": "git push && git push --tags"
   },
   "engines": {
     "node": ">=6.10.0",
@@ -81,7 +80,6 @@
     "mocha": "5.2.0",
     "node-sass": "4.11.0",
     "npm-run-all": "4.1.5",
-    "patch-package": "6.0.2",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "2.1.6",
     "precss": "3.1.2",
@@ -125,7 +123,7 @@
     "@opuscapita/react-select-order-list": "3.2.3",
     "@opuscapita/react-spinner": "3.0.0",
     "classnames": "2.2.6",
-    "fixed-data-table-2": "0.8.16",
+    "fixed-data-table-2": "opuscapita/fixed-data-table-2#feature/csp",
     "lodash": "4.17.11",
     "moment": "2.24.0",
     "react-icons": "2.2.7",

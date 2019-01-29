@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 7.3.5
+* Remove patch-package patch
+* Use forked `fixed-data-table-2` to remove base64 images
+
 ## 7.3.4
 * Replace base64 shadow with CSS gradient background
 * Add missing `fixedRight` column prop
