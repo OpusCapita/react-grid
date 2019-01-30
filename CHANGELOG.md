@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.6
+* Update `@opuscapita/react-datetime` to get rid of base64 CSP errors
+
 ## 7.3.5
 * Remove patch-package patch
 * Use forked `fixed-data-table-2` to remove base64 images
