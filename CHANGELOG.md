@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.7
+* Update `@opuscapita/react-floating-select`
+
 ## 7.3.6
 * Update `@opuscapita/react-datetime` to get rid of base64 CSP errors
 
