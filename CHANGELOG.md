@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.10
+* More specific actionbar button style selector to avoid style bugs
+
 ## 7.3.9
 * Replace forked version of `fixed-data-table-2` with new release that has CSP fixes
 
