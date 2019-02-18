@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.11
+* Upgrade `@opuscapita/react-datetime` and other components
+
 ## 7.3.10
 * More specific actionbar button style selector to avoid style bugs
 
