@@ -17,7 +17,7 @@
   display: flex;
   flex: 1 1 auto;
   flex-flow: row wrap;
-  button:not(.dropdown-toggle) {
+  button.btn:not(.dropdown-toggle) {
     margin-left: 5px;
     min-width: 100px;
   }
