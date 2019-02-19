@@ -104,7 +104,6 @@ const paginationComponent = (WrappedComponent) => {
     gotoPage = (page) => {
       const { grid } = this.props;
       this.props.setPaginationPage(grid, page);
-      Utils.savePaginationPage(grid, { page });
     }
 
     render = () => {
