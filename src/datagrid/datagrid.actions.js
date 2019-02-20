@@ -873,6 +873,7 @@ export const saveColumnSettings = (grid, hiddenColumns, columnOrder) => (dispatc
 };
 
 export const setPaginationPage = (grid, paginationPage) => (dispatch) => {
+  Utils.savePaginationPage(grid, { page: paginationPage });
   dispatch({
     paginationPage,
     id: grid.id,

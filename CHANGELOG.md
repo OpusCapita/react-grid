@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.12
+* Fixed pagination page being overridden from session store after calling setPaginationPage 
+
 ## 7.3.11
 * Upgrade `@opuscapita/react-datetime` and other components
 
