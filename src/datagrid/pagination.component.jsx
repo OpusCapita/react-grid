@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ListItems from '@opuscapita/react-list-items';
 import { setPaginationPage } from './datagrid.actions';
-import Utils from './datagrid.utils';
 import { gridShape } from './datagrid.props';
 
 const Pagination = styled.div`
