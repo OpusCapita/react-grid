@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.3.13
+* Fixed linting issue 
+
 ## 7.3.12
 * Fixed pagination page being overridden from session store after calling setPaginationPage 
 
