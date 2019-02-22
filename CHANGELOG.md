@@ -2,12 +2,13 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed filtering data in paginated grid
 
 ## 7.3.13
-* Fixed linting issue 
+* Fixed linting issue
 
 ## 7.3.12
-* Fixed pagination page being overridden from session store after calling setPaginationPage 
+* Fixed pagination page being overridden from session store after calling setPaginationPage
 
 ## 7.3.11
 * Upgrade `@opuscapita/react-datetime` and other components
