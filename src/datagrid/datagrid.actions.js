@@ -267,7 +267,7 @@ export const setData = (grid, columns, data) => (dispatch, getState) => {
       dispatch({
         type: TYPES.PLATFORM_DATAGRID_APPLY_FILTERS,
         id: grid.id,
-        data,
+        data: immutableData,
       });
     }
     const sortData = gridData.getIn(['config', 'sortingData']);
@@ -275,8 +275,8 @@ export const setData = (grid, columns, data) => (dispatch, getState) => {
       dispatch({
         type: TYPES.PLATFORM_DATAGRID_APPLY_SORT,
         id: grid.id,
-        data,
-        allData: data,
+        data: immutableData,
+        allData: immutableData,
       });
     }
   }
