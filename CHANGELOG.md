@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.3.14
 * Fixed filtering data in paginated grid
 
 ## 7.3.13
