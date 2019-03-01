@@ -46,7 +46,7 @@ export default {
     // No default align if component is select
     // Because rendered data is most likely text
     // Even if valueType is number
-    if (col.componentType === 'select') {
+    if (col.componentType === 'select' || col.componentType === 'multiselect') {
       return {};
     }
     switch (col.valueType) {
@@ -95,6 +95,10 @@ export default {
     if (col.valueEmptyChecker) {
       return col.valueEmptyChecker;
     }
+    if (col.componentType === 'multiselect') {
+      return val => val === '' || val === null || val === undefined || val.length === 0;
+    }
+
     switch (col.valueType) {
       case 'number':
       case 'float':
@@ -117,6 +121,15 @@ export default {
     if (col.filterMatcher) return col.filterMatcher;
     const getVal = row => row.getIn(col.valueKeyPath);
 
+    if (col.componentType === 'multiselect') {
+      return (row, filterVal) => {
+        const value = getVal(row);
+        // filterVal is immutable list if it is from session storage
+        const filters = filterVal && filterVal.toJS ? filterVal.toJS() : filterVal;
+        return filters.some(filter => filter.value === value);
+      };
+    }
+
     switch (col.valueType) {
       case 'number':
         return (row, filterVal) => parseInt(getVal(row), 10) === parseInt(filterVal, 10);
@@ -132,6 +145,7 @@ export default {
         };
       case 'boolean':
       case 'select':
+        // select is componentType not valueType -> the case could be removed
         return (row, filterVal) => getVal(row) === filterVal;
       case 'text':
       default:

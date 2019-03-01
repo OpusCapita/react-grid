@@ -65,7 +65,7 @@ export const columns = [
     header: 'Country',
     valueKeyPath: ['country'],
     valueType: 'text',
-    componentType: 'select',
+    componentType: 'multiselect',
     selectComponentOptions: countryOptions,
     valueRender: (data) => {
       const country = countryOptions.find(v => v.value === data.get('country'));

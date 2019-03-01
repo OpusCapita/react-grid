@@ -439,6 +439,7 @@ class DataGrid extends React.PureComponent {
       // Value is found from editData
       // Format by component type
       switch (col.componentType) {
+        case 'multiselect':
         case 'select':
           return options.selectOptions.find(obj => obj.value === editValue);
         case 'boolean':
@@ -460,6 +461,7 @@ class DataGrid extends React.PureComponent {
         }
         return originalValue;
       }
+      case 'multiselect':
       case 'select':
         return options.selectOptions.find(obj => obj.value === originalValue);
       case 'boolean':
@@ -473,7 +475,7 @@ class DataGrid extends React.PureComponent {
     const val = this.props.createData.getIn([rowIndex, ...col.valueKeyPath], '');
     if (val === null) {
       return '';
-    } else if (col.componentType === 'select') {
+    } else if (col.componentType === 'select' || col.componentType === 'multiselect') {
       return options.selectOptions.find(obj => obj.value === val);
     } else if (['boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
@@ -489,6 +491,8 @@ class DataGrid extends React.PureComponent {
       return options.selectOptions.find(obj => obj.value === val);
     } else if (['checkbox', 'boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
+    } else if (col.componentType === 'multiselect') {
+      return val && val.toJS ? val.toJS() : val || undefined;
     }
     return val;
   };
