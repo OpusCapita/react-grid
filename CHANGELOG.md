@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added multi-select filter
 
 ## 7.3.14
 * Fixed filtering data in paginated grid
