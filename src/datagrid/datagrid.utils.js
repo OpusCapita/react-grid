@@ -124,7 +124,8 @@ export default {
     if (col.componentType === 'multiselect') {
       return (row, filterVal) => {
         const value = getVal(row);
-        // filterVal is immutable list if it is from session storage
+        // session storage content is converted to immutable and multiselect
+        // filters is then list otherwise array
         const filters = filterVal && filterVal.toJS ? filterVal.toJS() : filterVal;
         return filters.some(filter => filter.value === value);
       };

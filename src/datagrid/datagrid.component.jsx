@@ -492,6 +492,8 @@ class DataGrid extends React.PureComponent {
     } else if (['checkbox', 'boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
     } else if (col.componentType === 'multiselect') {
+      // session storage content is converted to immutable and multiselect
+      // filters is then list otherwise array
       return val && val.toJS ? val.toJS() : val || undefined;
     }
     return val;
