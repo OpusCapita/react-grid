@@ -210,8 +210,7 @@ export default {
           {
             placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
             noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
-            selected: '{n} selected',
-            // selected: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Selected' }),
+            selected: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Selected' }),
           };
 
         if (props.inlineEdit && !column.cellEdit) {
