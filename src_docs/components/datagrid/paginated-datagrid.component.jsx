@@ -56,7 +56,7 @@ class DatagridView extends React.Component {
   };
 
   static defaultProps = {
-    pageSize: 15,
+    pageSize: 50,
     totalSize: 100,
   }
 
