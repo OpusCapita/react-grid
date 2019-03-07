@@ -223,6 +223,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | Name          | Type              | Default | Description                                        |
 | ------------- | ------------------| ------- | -------------------------------------------------- |
 | pageSize      | number            |         | Row count on page                                  |
+| totalLimit    | number            |         | Limit for total amount of rows                     |
 | totalSize     | number            |         | Total amount of rows                               |
 | getData       | function          |         | Callback function to request paginated data, parameters (offset :: number, count :: number, filters :: Map, sortColumn :: string or number, sortOrder :: string) |
 

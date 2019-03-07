@@ -8,7 +8,7 @@ import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
 import Utils from '../../../src/datagrid/datagrid.utils';
 import { getLocaleFormatData } from '../../services/internationalization.service';
-import { GRID, columns, getData, REGIONS } from './datagrid.constants';
+import { PAGINATION_GRID as GRID, columns, getData, REGIONS } from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -56,7 +56,7 @@ class DatagridView extends React.Component {
   };
 
   static defaultProps = {
-    pageSize: 15,
+    pageSize: 50,
     totalSize: 100,
   }
 

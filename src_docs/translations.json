@@ -21,10 +21,13 @@
   "Grid.ColumnSettings.Header": "Select columns",
   "Grid.ColumnSettings.SelectedColumns": "Selected columns",
   "Grid.ColumnSettings.SearchTooltip": "Search starts when you have entered enough characters",
-
   "Grid.FloatingSelect.Select": "Select...",
+  "Grid.FloatingSelect.Selected": "{n} selected",
   "Grid.FloatingSelect.NoResults": "No search results",
-
+  "Grid.Pagination.RowsOnPage": "Rows on page:",
+  "Grid.Pagination.TotalPlural": "Total {n} rows",
+  "Grid.Pagination.TotalSingular": "Total 1 row",
+  "Grid.Pagination.TotalOver": "Total {n}+ rows (only the first {n} shown)",
 
   "Validation.Unique": "Value must be unique",
   "Validation.IsRequired": "Value is required",
