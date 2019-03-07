@@ -47,7 +47,8 @@ export const TYPES = {
   PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE: 'PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE',
   PLATFORM_DATAGRID_FORCE_REFRESH: 'PLATFORM_DATAGRID_FORCE_REFRESH',
   PLATFORM_DATAGRID_SET_FOCUS_TO: 'PLATFORM_DATAGRID_SET_FOCUS_TO',
-  PLATFORM_DATAGRID_SET_PAGINATION_PAGE: 'PLATFORM_DATAGRID_SET_PAGINATION_PAGE',
+  PLATFORM_DATAGRID_SET_PAGE: 'PLATFORM_DATAGRID_SET_PAGE',
+  PLATFORM_DATAGRID_SET_ROWS_ON_PAGE: 'PLATFORM_DATAGRID_SET_ROWS_ON_PAGE',
 };
 
 export const invalidate = grid => (dispatch) => {
@@ -872,11 +873,20 @@ export const saveColumnSettings = (grid, hiddenColumns, columnOrder) => (dispatc
   });
 };
 
-export const setPaginationPage = (grid, paginationPage) => (dispatch) => {
-  Utils.savePaginationPage(grid, { page: paginationPage });
+export const setPage = (grid, page) => (dispatch) => {
+  Utils.savePage(grid, page);
   dispatch({
-    paginationPage,
+    page,
     id: grid.id,
-    type: TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE,
+    type: TYPES.PLATFORM_DATAGRID_SET_PAGE,
+  });
+};
+
+export const setRowsOnPage = (grid, rowsOnPage) => (dispatch) => {
+  Utils.saveRowsOnPage(grid, rowsOnPage);
+  dispatch({
+    rowsOnPage,
+    id: grid.id,
+    type: TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE,
   });
 };

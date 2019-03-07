@@ -836,13 +836,26 @@ describe('Datagrid actions', () => {
     expect(allActions[2].type).to.eql(actions.TYPES.PLATFORM_DATAGRID_APPLY_FILTERS);
   });
 
-  it('set pagination page', function () {
-    const paginationPage = 3;
-    const action = actions.setPaginationPage(GRID, paginationPage);
+  it('set page', function () {
+    const page = 3;
+    const action = actions.setPage(GRID, page);
     const expectedAction = {
-      paginationPage,
+      page,
       id: GRID.id,
-      type: actions.TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE,
+      type: actions.TYPES.PLATFORM_DATAGRID_SET_PAGE,
+    };
+
+    this.store.dispatch(action);
+    expect(this.store.getActions()[0]).to.eql(expectedAction);
+  });
+
+  it('set rows on page', function () {
+    const rowsOnPage = 50;
+    const action = actions.setRowsOnPage(GRID, rowsOnPage);
+    const expectedAction = {
+      rowsOnPage,
+      id: GRID.id,
+      type: actions.TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE,
     };
 
     this.store.dispatch(action);

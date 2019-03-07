@@ -437,14 +437,25 @@ describe('Datagrid reducers', () => {
     expect(newState.getIn([id, 'cellMessages'])).to.eql(Map());
   });
 
-  it('set pagination page', () => {
+  it('set page', () => {
     const state = INITIAL_STATE.setIn([id, 'data'], data);
     const action = {
       id,
-      paginationPage: 3,
-      type: TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE,
+      page: 3,
+      type: TYPES.PLATFORM_DATAGRID_SET_PAGE,
     };
     const newState = datagridReducer(state, action);
-    expect(newState.getIn([id, 'config', 'pagination', 'page'])).to.eql(3);
+    expect(newState.getIn([id, 'config', 'page'])).to.eql(3);
+  });
+
+  it('set rows on page', () => {
+    const state = INITIAL_STATE.setIn([id, 'data'], data);
+    const action = {
+      id,
+      rowsOnPage: 50,
+      type: TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE,
+    };
+    const newState = datagridReducer(state, action);
+    expect(newState.getIn([id, 'config', 'rowsOnPage'])).to.eql(50);
   });
 });

@@ -160,7 +160,8 @@ export default {
     const sortingData = sessionStorage.getItem(`oc_grid_sorting_${grid.id}`);
     const filterData = sessionStorage.getItem(`oc_grid_filtering_${grid.id}`);
     const isFilteringData = localStorage.getItem(`oc_grid_isFiltering_${grid.id}`);
-    const pagination = sessionStorage.getItem(`oc_grid_pagination_${grid.id}`);
+    const page = sessionStorage.getItem(`oc_grid_page_${grid.id}`);
+    const rowsOnPage = sessionStorage.getItem(`oc_grid_rowsOnPage_${grid.id}`);
     let loadedConfig = {};
     let hiddenColumns;
     let columnOrder;
@@ -231,8 +232,14 @@ export default {
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
       }
     }
-    if (pagination) {
-      try { config.pagination = JSON.parse(pagination); } catch (e) {
+    if (page) {
+      try { config.page = JSON.parse(page); } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Datagrid: error parsing pagination from sessionStorage', e);
+      }
+    }
+    if (rowsOnPage) {
+      try { config.rowsOnPage = JSON.parse(rowsOnPage); } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing pagination from sessionStorage', e);
       }
@@ -292,9 +299,14 @@ export default {
     }
     return true;
   },
-  savePaginationPage: (grid, pagination) => {
-    if (!pagination) return false;
-    sessionStorage.setItem(`oc_grid_pagination_${grid.id}`, JSON.stringify(pagination));
+  savePage: (grid, page) => {
+    if (!page) return false;
+    sessionStorage.setItem(`oc_grid_page_${grid.id}`, JSON.stringify(page));
+    return true;
+  },
+  saveRowsOnPage: (grid, rowsOnPage) => {
+    if (!rowsOnPage) return false;
+    sessionStorage.setItem(`oc_grid_rowsOnPage_${grid.id}`, JSON.stringify(rowsOnPage));
     return true;
   },
   /* eslint-disable max-len */

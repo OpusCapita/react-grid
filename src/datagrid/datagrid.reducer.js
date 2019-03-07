@@ -461,9 +461,13 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state
         .setIn([action.id, 'config', 'visibleColumns'], Immutable.fromJS(action.columnOrder));
 
-    case TYPES.PLATFORM_DATAGRID_SET_PAGINATION_PAGE:
+    case TYPES.PLATFORM_DATAGRID_SET_PAGE:
       return state
-        .setIn([action.id, 'config', 'pagination', 'page'], action.paginationPage);
+        .setIn([action.id, 'config', 'page'], action.page);
+
+    case TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE:
+      return state
+        .setIn([action.id, 'config', 'rowsOnPage'], action.rowsOnPage);
 
     default:
       return state;
