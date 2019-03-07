@@ -21,6 +21,18 @@ export const GRID = {
   thousandSeparator: ',',
 };
 
+export const PAGINATION_GRID = {
+  id: 'TestPaginationGrid',
+  idKeyPath: ['id'],
+  defaultSortColumn: 'country',
+  defaultSortOrder: 'desc',
+  language: 'en',
+  dateFormat: 'L',
+  decimalSeparator: '.',
+  thousandSeparator: ',',
+  pagination: true,
+};
+
 export const selectTranslations = {
   placeholder: 'Select...',
   noResultsText: 'No hits found',

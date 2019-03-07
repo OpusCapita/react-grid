@@ -68,8 +68,8 @@ const paginationComponent = (WrappedComponent) => {
       isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
       page: state.datagrid.getIn([GRID.id, 'config', 'page']),
       rowsOnPage: state.datagrid.getIn([GRID.id, 'config', 'rowsOnPage']),
-      sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
-      sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
+      sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], GRID.defaultSortColumn),
+      sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], GRID.defaultSortOrder),
     };
   };
 
@@ -135,11 +135,6 @@ const paginationComponent = (WrappedComponent) => {
       }
     }
 
-    componentDidMount = () => {
-      const { pagination } = this.props;
-      if (pagination) this.requestData();
-    }
-
     componentDidUpdate = (prevProps) => {
       const {
         filterData,
@@ -189,7 +184,7 @@ const paginationComponent = (WrappedComponent) => {
       const rowsOnPage = rowsOnPageOption.value;
       this.props.setRowsOnPage(grid, rowsOnPage);
       if (page > Math.ceil(pagination.totalSize / rowsOnPage)) {
-        this.props.setPage(grid, 1);
+        this.gotoPage(1);
       }
     }
 
@@ -202,10 +197,10 @@ const paginationComponent = (WrappedComponent) => {
           label = intl.formatMessage({ id: 'Grid.Pagination.TotalSingular' });
           break;
         case totalLimit:
-          label = intl.formatMessage({ id: 'Grid.Pagination.TotalOver' }).replace('{n}', totalSize);
+          label = intl.formatMessage({ id: 'Grid.Pagination.TotalOver' }, { n: totalSize });
           break;
         default:
-          label = intl.formatMessage({ id: 'Grid.Pagination.TotalPlural' }).replace('{n}', totalSize);
+          label = intl.formatMessage({ id: 'Grid.Pagination.TotalPlural' }, { n: totalSize });
           break;
       }
       return <span>{label}</span>;
