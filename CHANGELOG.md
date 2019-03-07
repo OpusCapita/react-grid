@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added pagination footer and changed requesting/sorting/filtering of paginated data
 
 ## 7.3.14
 * Fixed filtering data in paginated grid
