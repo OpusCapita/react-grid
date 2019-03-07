@@ -220,7 +220,7 @@ const paginationComponent = (WrappedComponent) => {
         rowsOnPage,
         rowsOnPageOptions,
       } = this.props;
-      const pageCount = pagination
+      const pageCount = pagination && pagination.totalSize > 0 && rowsOnPage > 0
         ? Math.ceil(pagination.totalSize / rowsOnPage) : 1;
       const pages = [];
       for (let i = 1; i <= pageCount; i++) {
