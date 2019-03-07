@@ -13,7 +13,7 @@ import { gridShape } from './datagrid.props';
 
 import './datagrid.variables.scss';
 
-const PER_PAGE_OPTIONS = [
+const ROWS_ON_PAGE_OPTIONS = [
   {
     label: '10',
     value: 10,
@@ -113,8 +113,8 @@ const paginationComponent = (WrappedComponent) => {
       children: null,
       page: 1,
       pagination: undefined,
-      rowsOnPage: PER_PAGE_OPTIONS[0].value,
-      rowsOnPageOptions: PER_PAGE_OPTIONS,
+      rowsOnPage: undefined,
+      rowsOnPageOptions: ROWS_ON_PAGE_OPTIONS,
       sortColumn: undefined,
       sortOrder: undefined,
     };
@@ -128,7 +128,9 @@ const paginationComponent = (WrappedComponent) => {
         rowsOnPage,
       } = props;
       if (pagination && rowsOnPageOptions && rowsOnPageOptions.length > 0) {
-        const defaultRowsOnPage = rowsOnPageOptions.find(option => option.value === pagination.pageSize);
+        const defaultRowsOnPage =
+          rowsOnPageOptions.find(option => option.value === pagination.pageSize)
+          || rowsOnPageOptions[0];
         if (defaultRowsOnPage && defaultRowsOnPage.value !== rowsOnPage) {
           props.setRowsOnPage(grid, defaultRowsOnPage.value);
         }
