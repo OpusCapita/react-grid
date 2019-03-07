@@ -136,7 +136,10 @@ export default {
         return (row, filterVal) => parseInt(getVal(row), 10) === parseInt(filterVal, 10);
       case 'float':
       case 'currency':
-        return (row, filterVal) => parseFloat(filterVal.replace(',', '.')) === getVal(row);
+        return (row, filterVal) => {
+          const value = getVal(row);
+          return value && value.includes(filterVal);
+        };
       case 'date':
         return (row, filterVal) => {
           if (moment(getVal(row)).isValid()) {
