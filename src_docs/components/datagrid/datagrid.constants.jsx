@@ -38,9 +38,13 @@ export const selectTranslations = {
   noResultsText: 'No hits found',
 };
 
-export const countryOptions = countries.all.map(country => (
-  { value: country.alpha3, label: country.name }
-));
+export const countryOptions = countries.all
+  .filter(country => country.alpha3)
+  .map(country => ({ value: country.alpha3, label: country.name }));
+
+export const currencyOptions = countries.all
+  .filter(country => country.alpha3 && country.currencies && country.currencies.length >= 1)
+  .map(country => ({ value: country.alpha3, label: country.currencies[0] }));
 
 export const columns = [
   {
@@ -82,6 +86,17 @@ export const columns = [
     valueRender: (data) => {
       const country = countryOptions.find(v => v.value === data.get('country'));
       return country ? country.label : null;
+    },
+  },
+  {
+    header: 'Currency',
+    valueKeyPath: ['currency'],
+    valueType: 'text',
+    componentType: 'select',
+    selectComponentOptions: currencyOptions,
+    valueRender: (data) => {
+      const currency = currencyOptions.find(v => v.value === data.get('country'));
+      return currency ? currency.label : null;
     },
   },
   {
