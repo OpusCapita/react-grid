@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.4.0
 * Added multi-select filter
 * Added pagination footer and changed requesting/sorting/filtering of paginated data
 * Fixed currency&float filtering
