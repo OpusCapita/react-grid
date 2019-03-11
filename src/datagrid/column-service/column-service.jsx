@@ -6,6 +6,7 @@ import {
   CheckboxType,
   CurrencyType,
   PrimitiveType,
+  MultiSelectType,
 } from './column-types/column-types';
 
 export default {
@@ -196,6 +197,62 @@ export default {
               tabIndex,
               props.grid.id,
               props.intl,
+              ...filterFunctions,
+            );
+        }
+        break;
+      }
+
+      case 'multiselect': {
+        const selectOptions = col.selectComponentOptions ||
+          props.selectComponentOptions.get(column.columnKey);
+        const selectTranslations = col.selectComponentTranslations ||
+          {
+            placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
+            noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
+            selected: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Selected' }),
+          };
+
+        if (props.inlineEdit && !column.cellEdit) {
+          column.cellEdit = rowIndex =>
+            SelectType.cellEdit(
+              col,
+              column,
+              rowIndex,
+              tabIndex,
+              props.grid.id,
+              selectOptions,
+              selectTranslations,
+              editValueParser,
+              ...editFunctions,
+              getDisabledState,
+            );
+        }
+        if (props.inlineEdit && !column.cellCreate) {
+          column.cellCreate = rowIndex =>
+            SelectType.cellCreate(
+              col,
+              column,
+              rowIndex,
+              tabIndex,
+              props.grid.id,
+              selectOptions,
+              selectTranslations,
+              editValueParser,
+              ...createFunctions,
+              getDisabledState,
+            );
+        }
+        if (props.filtering && !column.cellFilter) {
+          column.cellFilter = () =>
+            MultiSelectType.cellFilter(
+              col,
+              column,
+              tabIndex,
+              props.grid.id,
+              selectOptions,
+              selectTranslations,
+              editValueParser,
               ...filterFunctions,
             );
         }

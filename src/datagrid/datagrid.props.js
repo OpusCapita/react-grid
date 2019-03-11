@@ -43,7 +43,7 @@ export const columnShape = shape({
     thousandSeparator: string,    // thousand separator override
     decimalSeparator: string,     // decimal separator override
   }),
-  componentType: string,          // edit component type [text/number/float/select/boolean/date]
+  componentType: string,          // edit component type [text/number/float/select/multiselect/boolean/date]
   valueRender: func,              // custom renderer for the value, data as parameter
   editValueRender: func,          // custom renderer for the edit value, data as parameter
   createValueRender: func,        // custom renderer for the create value, data as parameter
@@ -91,9 +91,10 @@ export const columnShape = shape({
     value: oneOfType([number, string, bool]).isRequired,
     label: oneOfType([number, string]).isRequired,
   })),
-  selectComponentTranslations: shape({ // customize select components placeholder and noResults texts.
+  selectComponentTranslations: shape({ // customize select components placeholder, multi-select label and noResults texts.
     placeholder: string,
     noResultsText: string,
+    selected: string,
   }),
   isCreatableSelect: bool,
 });
@@ -181,6 +182,7 @@ export const propTypes = {
   selectComponentTranslations: shape({  // Options for react-select text translations
     placeholder: string.isRequired,
     noResultsText: string.isRequired,
+    selected: string.isRequired,
   }),
   disableActions: bool,               // Disable actions in the action bar
   disableActionsMessage: shape({

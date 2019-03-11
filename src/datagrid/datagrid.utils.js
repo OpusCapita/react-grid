@@ -46,7 +46,7 @@ export default {
     // No default align if component is select
     // Because rendered data is most likely text
     // Even if valueType is number
-    if (col.componentType === 'select') {
+    if (col.componentType === 'select' || col.componentType === 'multiselect') {
       return {};
     }
     switch (col.valueType) {
@@ -95,6 +95,10 @@ export default {
     if (col.valueEmptyChecker) {
       return col.valueEmptyChecker;
     }
+    if (col.componentType === 'multiselect') {
+      return val => val === '' || val === null || val === undefined || val.length === 0;
+    }
+
     switch (col.valueType) {
       case 'number':
       case 'float':
@@ -117,12 +121,25 @@ export default {
     if (col.filterMatcher) return col.filterMatcher;
     const getVal = row => row.getIn(col.valueKeyPath);
 
+    if (col.componentType === 'multiselect') {
+      return (row, filterVal) => {
+        const value = getVal(row);
+        // session storage content is converted to immutable and multiselect
+        // filters is then list otherwise array
+        const filters = filterVal && filterVal.toJS ? filterVal.toJS() : filterVal;
+        return filters.some(filter => filter.value === value);
+      };
+    }
+
     switch (col.valueType) {
       case 'number':
         return (row, filterVal) => parseInt(getVal(row), 10) === parseInt(filterVal, 10);
       case 'float':
       case 'currency':
-        return (row, filterVal) => parseFloat(filterVal.replace(',', '.')) === getVal(row);
+        return (row, filterVal) => {
+          const value = getVal(row);
+          return value && value.includes(filterVal);
+        };
       case 'date':
         return (row, filterVal) => {
           if (moment(getVal(row)).isValid()) {
@@ -132,6 +149,7 @@ export default {
         };
       case 'boolean':
       case 'select':
+        // select is componentType not valueType -> the case could be removed
         return (row, filterVal) => getVal(row) === filterVal;
       case 'text':
       default:
