@@ -144,7 +144,6 @@ class DataGrid extends React.PureComponent {
 
       // Prevents up/down arrow from changing number field value
       if (arrowKeys.includes(e.keyCode) && currentCell.type === 'number') e.preventDefault();
-
       switch (e.keyCode) {
         case KEY_CODES.ENTER:
         case KEY_CODES.ESC: {
@@ -249,6 +248,13 @@ class DataGrid extends React.PureComponent {
               } else if (!nextElement && e.keyCode === KEY_CODES.LEFT) {
                 while (columnInd > 0 && !nextElement) {
                   columnInd -= 1;
+                  nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
+                }
+                // if no element was found, try moving to previous row
+                // (needed in case first column is not editable e.g. an ExtraColumn)
+                if (rowInd > 0 && !nextElement) {
+                  columnInd = gridColumns.length - 1;
+                  rowInd -= 1;
                   nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
                 }
               }
