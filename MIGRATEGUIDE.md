@@ -1,6 +1,11 @@
-# Upgrading to version 2
+# Migrate guide between major versions
 
-## Make new `grid` config object
+## Version 7
+React 15 is no longer supported
+
+## Version 2
+
+### Make new `grid` config object
 1. Make `GRID` object that contains `id` and `idKeyPath` attributes.
 2. Pass it to `Datagrid` component as `grid` prop instead of `id` and `idKeyPath` props.
 
@@ -30,7 +35,7 @@ const GRID = {
 />
 ```
 
-## Update action calls
+### Update action calls
 1. Update action parameters, the first parameter is always new `GRID` object.
 2. Some actions needs `columns` array as parameter as well.
 3. `id` and `idKeyPath` parameters are removed.

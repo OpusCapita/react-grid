@@ -14,6 +14,12 @@ npm install react-immutable-proptypes
 ### Demo
 View the [DEMO](https://opuscapita.github.io/react-grid)
 
+### Change log
+View the [Change log](CHANGELOG.md) between major versions
+
+### Migrate guide
+View the [Migrate guide](MIGRATEGUIDE.md) between major versions
+
 ### Redux dependency
 Datagrid uses redux as data store, so you must have redux set up in your project. It also depends on redux-thunk and react-intl-redux to be present. These dependencies comes from the fact that this component is separated from another project and it is known that these dependencies should be removed at some point.
 
@@ -26,7 +32,7 @@ First you have to connect your component to the redux. Then you can map the data
 - Then to set the data to the grid, call setData action with `grid`, `columns` and `data` parameters.
 - You should now have a grid with data loaded.
 - Check the API section below to see what props the Datagrid supports, also GRID object and columns are documented there.
-- To see what actions are available, check the [actions file](datagrid.actions.js).
+- To see what actions are available, check the [actions file](src/datagrid/datagrid.actions.js).
 
 ### Builds
 #### UMD
