@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* fix to scrollToRow in edit mode
 
 ## 7.4.0
 * Added multi-select filter
