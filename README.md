@@ -15,7 +15,7 @@ npm install react-immutable-proptypes
 View the [DEMO](https://opuscapita.github.io/react-grid)
 
 ### Change log
-View the [Change log](CHANGELOG.md) between major versions
+View the [Change log](CHANGELOG.md)
 
 ### Migrate guide
 View the [Migrate guide](MIGRATEGUIDE.md) between major versions
