@@ -8,7 +8,6 @@ Underneath it uses originally Facebook's, but later continued by Schrodinger [fi
 ### Installation
 ```
 npm install @opuscapita/react-grid
-npm install font-awesome
 npm install react-immutable-proptypes
 ```
 
