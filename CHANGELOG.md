@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.4.1
 * fix to scrollToRow in edit mode
 
 ## 7.4.0
