@@ -600,7 +600,7 @@ class DataGrid extends React.PureComponent {
         scrollToRow = scrollNewRow;
       }
     } else {
-      if (this.props.isEditing) {
+      if (this.props.isEditing && !this.props.scrollInEditMode) {
         scrollToRow = this.state.currentRow;
       } else {
         scrollToRow = this.props.scrollToRow; // eslint-disable-line

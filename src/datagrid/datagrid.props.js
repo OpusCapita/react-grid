@@ -223,6 +223,7 @@ export const propTypes = {
   scrollToColumn: number,
   scrollTop: number,
   scrollToRow: number,
+  scrollInEditMode: bool,
   showSelectAllCheckbox: bool,
   onRowClick: func,
   onRowDoubleClick: func,
@@ -262,4 +263,5 @@ export const defaultProps = {
   tabIndex: 1,
   disableFilteringControls: false,
   className: '',
+  scrollInEditMode: false,
 };

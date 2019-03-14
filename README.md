@@ -89,6 +89,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | scrollToColumn           | number           |                                          | Index of column to scroll to             |
 | scrollTop                | number           |                                          | Value of vertical scroll                 |
 | scrollToRow              | number           |                                          | Index of row to scroll to                |
+| scrollInEditMode         | boolean          | false                                    | Allow the usage of scrollToRow in edit mode   |
 | onRowClick               | function         |                                          | Callback that is called when a row is clicked |
 | onRowDoubleClick         | function         |                                          | Callback that is called when a row is double clicked |
 | onRowMouseDown           | function         |                                          | Callback that is called when a mouse-down event happens on a row |
