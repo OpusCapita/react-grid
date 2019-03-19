@@ -852,7 +852,6 @@ class DataGrid extends React.PureComponent {
         columnFunctions,
         this.getComponentDisabledState,
       );
-
       columns.push(column);
     });
 
@@ -978,6 +977,12 @@ class DataGrid extends React.PureComponent {
   handleRowHeightGetter = rowIndex =>
     this.props.rowHeightGetter(this.props.data.get(rowIndex), rowIndex);
 
+  setExternalRef = (columnKey, rowIndex) => (ref) => {
+    if (this.props.enableArrowNavigation) {
+      this.cellRefs[`${this.props.grid.id}_${columnKey}_${rowIndex}`] = ref;
+    }
+  }
+
   renderCell = col => (cellProps) => {
     const {
       isCreating,
@@ -1004,7 +1009,11 @@ class DataGrid extends React.PureComponent {
         cell = col.cell(rowIndex - extraRowCount);
       }
     } else if (isEditing && col.cellEdit) {
-      cell = col.cellEdit(rowIndex - extraRowCount);
+      cell = col.cellEdit(
+        rowIndex - extraRowCount,
+        this.setExternalRef(props.columnKey, rowIndex - extraRowCount),
+        this.onEditCellKeyDown(rowIndex - extraRowCount, col),
+      );
       cellType = 'edit';
     } else {
       cell = col.cell(rowIndex - extraRowCount);

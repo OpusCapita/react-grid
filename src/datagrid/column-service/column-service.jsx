@@ -90,7 +90,8 @@ export default {
     if (col.cellEdit) {
       column.cellEdit = col.cellEdit;
     } else if (col.editValueRender) {
-      column.cellEdit = rowIndex => col.editValueRender(props.data.get(rowIndex), rowIndex);
+      column.cellEdit = (rowIndex, setRef, onKeyDown) =>
+        col.editValueRender(props.data.get(rowIndex), rowIndex, setRef, onKeyDown);
     }
 
     // cellCreate render
