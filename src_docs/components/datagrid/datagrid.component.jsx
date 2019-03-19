@@ -72,7 +72,7 @@ class DatagridView extends React.Component {
   }
 
   componentWillMount() {
-    this.props.setData(GRID, columns, getData(100));
+    this.props.setData(GRID, columns, getData(5));
   }
 
   getRegionComponent = () => {

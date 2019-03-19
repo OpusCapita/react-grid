@@ -1,9 +1,15 @@
 import React from 'react';
 import faker from 'faker';
 import moment from 'moment';
+import ComboboxWithSearch from '@opuscapita/react-async-select';
+import {
+  FloatingSelectPortal,
+} from '@opuscapita/react-floating-select';
 import { countries } from 'country-data';
 import Color from './color.component';
 import * as VALIDATE from './datagrid.validators';
+
+import CustomComponent from './custom.component';
 
 export const REGIONS = {
   'en-GB': 'English (GB)',
@@ -46,6 +52,28 @@ export const currencyOptions = countries.all
   .filter(country => country.alpha3 && country.currencies && country.currencies.length >= 1)
   .map(country => ({ value: country.alpha3, label: country.currencies[0] }));
 
+const getCustomSelect = () => (
+  <ComboboxWithSearch
+    loadOptions={() => {}}
+    localizationTexts={this.texts}
+    onSelect={() => {}}
+  />
+);
+
+const getCustomX = (setRef, onKeyDown) => (
+  <CustomComponent
+    setRef={setRef}
+    onKeyDown={onKeyDown}
+  />
+);
+
+const getSelect = () => (
+  <FloatingSelectPortal
+    value={1}
+    options={[{ value: 1, label: '1' }, { value: 2, label: '2' }]}
+  />
+);
+
 export const columns = [
   {
     header: 'Name',
@@ -76,6 +104,19 @@ export const columns = [
     valueType: 'number',
     componentType: 'number',
     width: 100,
+  },
+  {
+    header: 'Custom component',
+    valueKeyPath: ['custom'],
+    valueType: 'text',
+    componentType: 'text',
+    width: 100,
+    valueRender: (rowData) => {
+      const value = rowData.get('custom');
+      return value;
+    },
+    editValueRender: (rowData, rowIndex, setRef, onKeyDown) =>
+      getCustomX(setRef, onKeyDown),
   },
   {
     header: 'Country',
@@ -152,6 +193,7 @@ export const getData = (count) => {
       price: faker.commerce.price(),
       amount: faker.finance.amount(),
       stock: faker.random.number(),
+      custom: null,
       country: randomCountry(),
       isUsed: faker.random.boolean(),
       isChecked: faker.random.boolean(),

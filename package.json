@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@opuscapita/oc-cm-common-styles": "3.0.0",
+    "@opuscapita/react-async-select": "2.4.3",
     "autoprefixer": "9.4.7",
     "babel-cli": "6.26.0",
     "babel-eslint": "10.0.1",
