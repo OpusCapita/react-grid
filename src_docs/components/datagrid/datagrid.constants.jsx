@@ -2,8 +2,11 @@ import React from 'react';
 import faker from 'faker';
 import moment from 'moment';
 import { countries } from 'country-data';
+
 import Color from './color.component';
 import * as VALIDATE from './datagrid.validators';
+import CustomInputComponent from './custom.component';
+
 
 export const REGIONS = {
   'en-GB': 'English (GB)',
@@ -122,6 +125,28 @@ export const columns = [
     width: 120,
   },
   {
+    header: 'Custom component',
+    valueKeyPath: ['custom'],
+    valueType: 'text',
+    componentType: 'text',
+    width: 100,
+    valueRender: rowData => rowData.get('custom'),
+    editValueRender: (rowData, rowIndex, setRef, onKeyDown) => (
+      <CustomInputComponent
+        setRef={setRef}
+        onKeyDown={onKeyDown}
+        value={rowData.get('custom')}
+      />
+    ),
+    createValueRender: (rowData, rowIndex, setRef, onKeyDown) => (
+      <CustomInputComponent
+        setRef={setRef}
+        onKeyDown={onKeyDown}
+        value={rowData.get('custom')}
+      />
+    ),
+  },
+  {
     header: 'Color',
     valueKeyPath: ['color'],
     valueRender: data => <Color value={data.get('color')} />,
@@ -157,6 +182,7 @@ export const getData = (count) => {
       isChecked: faker.random.boolean(),
       color: faker.internet.color(),
       modified: randomDate(),
+      custom: faker.lorem.word(),
     });
   }
 
