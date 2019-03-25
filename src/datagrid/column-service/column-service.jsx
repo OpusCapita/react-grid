@@ -90,21 +90,24 @@ export default {
     if (col.cellEdit) {
       column.cellEdit = col.cellEdit;
     } else if (col.editValueRender) {
-      column.cellEdit = rowIndex => col.editValueRender(props.data.get(rowIndex), rowIndex);
+      column.cellEdit = (rowIndex, setRef, onKeyDown) =>
+        col.editValueRender(props.data.get(rowIndex), rowIndex, setRef, onKeyDown);
     }
 
     // cellCreate render
     if (col.cellCreate) {
       column.cellCreate = col.cellCreate;
     } else if (col.createValueRender) {
-      column.cellCreate = rowIndex => col.createValueRender(props.data.get(rowIndex), rowIndex);
+      column.cellCreate = (rowIndex, setRef, onKeyDown) =>
+        col.createValueRender(props.data.get(rowIndex), rowIndex, setRef, onKeyDown);
     }
 
     // cellFilter render
     if (col.cellFilter) {
       column.cellFilter = col.cellFilter;
     } else if (col.filterValueRender) {
-      column.cellFilter = rowIndex => col.filterValueRender(props.data.get(rowIndex), rowIndex);
+      column.cellFilter = rowIndex =>
+        col.filterValueRender(props.data.get(rowIndex), rowIndex);
     }
     return column;
   },

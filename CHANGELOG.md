@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Support external refs in key navigation
 
 ## 7.4.1
 * fix to scrollToRow in edit mode

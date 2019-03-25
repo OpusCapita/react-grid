@@ -852,7 +852,6 @@ class DataGrid extends React.PureComponent {
         columnFunctions,
         this.getComponentDisabledState,
       );
-
       columns.push(column);
     });
 
@@ -991,23 +990,40 @@ class DataGrid extends React.PureComponent {
     let cellType = 'view';
     let extraRowCount = 0; // how many rows to ignore from top, new + filter rows
     if (isCreating) extraRowCount = createData.size;
+    const existingRowsIndex = rowIndex - extraRowCount;
     if (isCreating) {
       if (rowIndex <= (extraRowCount - 1)) {
         if (col.cellCreate) {
-          cell = col.cellCreate(rowIndex);
+          cell = col.cellCreate(
+            rowIndex,
+            this.handleCreateCellRef(rowIndex, col),
+            this.onCreateCellKeyDown(rowIndex, col),
+          );
           cellType = 'create';
         } else {
           cell = null;
           cellType = null;
         }
       } else {
-        cell = col.cell(rowIndex - extraRowCount);
+        cell = col.cell(
+          existingRowsIndex,
+          this.handleCreateCellRef(existingRowsIndex, col),
+          this.onCreateCellKeyDown(existingRowsIndex, col),
+        );
       }
     } else if (isEditing && col.cellEdit) {
-      cell = col.cellEdit(rowIndex - extraRowCount);
+      cell = col.cellEdit(
+        existingRowsIndex,
+        this.handleEditCellRef(existingRowsIndex, col),
+        this.onEditCellKeyDown(existingRowsIndex, col),
+      );
       cellType = 'edit';
     } else {
-      cell = col.cell(rowIndex - extraRowCount);
+      cell = col.cell(
+        existingRowsIndex,
+        this.handleEditCellRef(existingRowsIndex, col),
+        this.onEditCellKeyDown(existingRowsIndex, col),
+      );
     }
     const isSpecial = props.columnKey === 'selectionCheckbox' || props.columnKey === 'extraColumn';
     if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isSpecial) {
