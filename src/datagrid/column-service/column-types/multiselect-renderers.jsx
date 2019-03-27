@@ -1,12 +1,24 @@
 import React from 'react';
 import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
+import Checkbox from '@opuscapita/react-checkbox';
 
 const MultiValueContainer = label => properties => (
   properties.selectProps.value
   && properties.selectProps.value.findIndex(selectProp =>
     selectProp.value === properties.data.value) === 0
-    ? <span>{label.replace('{n}', properties.selectProps.value.length)}</span>
+    ? <span>{label.replace('<n>', properties.selectProps.value.length)}</span>
     : null
+);
+
+const handleChange = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+const Option = ({ data: { checked, label }, innerProps }) => (
+  <span {...innerProps}>
+    <Checkbox onChange={handleChange} onBlur={handleChange} label={label} checked={checked} />
+  </span>
 );
 
 export default {
@@ -33,8 +45,7 @@ export default {
     const fsProps = {
       ...col.filterComponentProps,
       ...selectTranslations,
-      closeMenuOnSelect: false,
-      components: { MultiValueContainer: MultiValueContainer(selectTranslations.selected) },
+      components: { MultiValueContainer: MultiValueContainer(selectTranslations.selected), Option },
       hideSelectedOptions: false,
       isSearchable: selectOptions && (selectOptions.length > 9),
       isClearable: true,
@@ -45,6 +56,8 @@ export default {
       tabSelectsValue: false,
       tabIndex,
       value,
+      closeMenuOnSelect: false,
+      blurInputOnSelect: false,
     };
 
     return <FloatingSelectPortal {...fsProps} />;
