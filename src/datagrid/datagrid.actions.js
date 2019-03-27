@@ -130,11 +130,13 @@ export const applyFilters = (grid, columns) => (dispatch, getState) => {
   return true;
 };
 
-export const setAndApplyFilters = (grid, columns, filteringData) => (dispatch) => {
+export const setAndApplyFilters = (grid, columns, data) => (dispatch) => {
+  const filteringData = Utils.normalizeFilteringData(data);
+  Utils.saveFilterData(grid, filteringData.get('filterData'));
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_SET_FILTERS,
     id: grid.id,
-    filteringData: Utils.normalizeFilteringData(filteringData),
+    filteringData,
   });
   dispatch(applyFilters(grid, columns));
   return true;
