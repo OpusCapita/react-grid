@@ -1116,6 +1116,7 @@ class DataGrid extends React.PureComponent {
             onSortChange={this.props.sortChange}
             isBusy={this.props.isBusy}
             filtering={this.props.isFiltering}
+            width={this.props.columnWidths.get(col.columnKey, col.width)}
           >
             {col.header}
           </HeaderCell>
