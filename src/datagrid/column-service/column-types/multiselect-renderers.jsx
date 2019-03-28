@@ -52,7 +52,6 @@ export default {
       tabIndex,
       value,
       closeMenuOnSelect: false,
-      blurInputOnSelect: false,
     };
 
     return <FloatingSelectPortal {...fsProps} />;
