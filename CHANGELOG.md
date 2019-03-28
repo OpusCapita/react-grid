@@ -3,6 +3,11 @@
 
 ## <next>
 * Support external refs in key navigation
+* Column header is truncated if it does not fit in one line
+* Added checkboxes for multiselect filter options
+* Fix: when filterData is set & applied, filterData is saved also to local storage
+* Fix: Headers of unfilterable columns are vertically aligned with headers of filterable column when filtering row is shown
+* Fix: Error: The intl string context variable 'n' was not provided to the string '{n} selected
 
 ## 7.4.1
 * fix to scrollToRow in edit mode
