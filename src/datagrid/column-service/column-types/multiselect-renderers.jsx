@@ -10,17 +10,6 @@ const MultiValueContainer = label => properties => (
     : null
 );
 
-const handleChange = (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-};
-
-const Option = ({ data: { checked, label }, innerProps }) => (
-  <span {...innerProps}>
-    <Checkbox onChange={handleChange} onBlur={handleChange} label={label} checked={checked} />
-  </span>
-);
-
 export default {
   cellFilter(
     col,
@@ -41,6 +30,12 @@ export default {
         ? { ...option, checked: true }
         : option
     ));
+
+    const Option = ({ data: { checked, label }, innerProps }) => (
+      <span {...innerProps}>
+        <Checkbox onChange={() => {}} label={label} checked={checked} />
+      </span>
+    );
 
     const fsProps = {
       ...col.filterComponentProps,
