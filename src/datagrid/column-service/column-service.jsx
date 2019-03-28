@@ -214,8 +214,9 @@ export default {
             placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
             noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
             // Variable 'n' must be provided in this phase in order to avoid
-            // Error: The intl string context variable 'n' was not provided to the string '{n} selected
-            // Variable n is replaced later, when its value comes up
+            // Error: The intl string context variable 'n' was not provided to the string {n}
+            // selected
+            // Variable n is replaced later, when its value is available
             selected: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Selected' }, { n: '<n>' }),
           };
 

@@ -31,6 +31,7 @@ export default {
         : option
     ));
 
+    // eslint-disable-next-line react/prop-types
     const Option = ({ data: { checked, label }, innerProps }) => (
       <span {...innerProps}>
         <Checkbox onChange={() => {}} label={label} checked={checked} />
