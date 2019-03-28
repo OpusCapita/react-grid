@@ -37,7 +37,7 @@ export default class HeaderCell extends React.PureComponent {
     onSortChange: PropTypes.func.isRequired,
     isBusy: PropTypes.bool.isRequired,
     filtering: PropTypes.bool.isRequired,
-    width: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
