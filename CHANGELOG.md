@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.4.2
 * Support external refs in key navigation
 * Column header is truncated if it does not fit in one line
 * Added checkboxes for multiselect filter options
