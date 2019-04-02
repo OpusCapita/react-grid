@@ -115,7 +115,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | defaultSortOrder            | string           | 'asc'                                    | Default sort order of default sort [asc/desc]              |
 | disableRememberSelectedItems| boolean          | false                                    | Disable remembering the selected rows                      |
 | disableRememberIsFiltering  | boolean          | false                                    | Disable remembering is filtering ebabled                   |
-| disableRememberFilteData    | boolean          | false                                    | Disable remembering the filters                            |
+| disableRememberFilterData    | boolean          | false                                    | Disable remembering the filters                            |
 | disableRememberSortData     | boolean          | false                                    | Disable remembering the sorting                            |
 | disableRememberColumnWidths | boolean          | false                                    | Disable remembering the column widths                      |
 | language                    | string           | 'en'                                     | Default taken from redux user state used in OC apps        |
