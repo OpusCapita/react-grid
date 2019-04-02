@@ -244,7 +244,7 @@ export default {
         console.error('Datagrid: error parsing sortingData from sessionStorage', e);
       }
     }
-    if (filterData && isFiltering && !grid.disableRememberFilteData) {
+    if (filterData && isFiltering && !grid.disableRememberFilterData) {
       try { config.filteringData.filterData = JSON.parse(filterData); } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
@@ -303,7 +303,7 @@ export default {
     return true;
   },
   saveFilterData: (grid, filterData) => {
-    if (grid.disableRememberFilteData) return false;
+    if (grid.disableRememberFilterData) return false;
     if (!filterData) return false;
     sessionStorage.setItem(`oc_grid_filtering_${grid.id}`, JSON.stringify(filterData));
     return true;

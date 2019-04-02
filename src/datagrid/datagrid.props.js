@@ -21,7 +21,7 @@ export const gridShape = shape({
   disableRememberColumnWidths: bool,
   disableRememberSortData: bool,
   disableRememberIsFiltering: bool,
-  disableRememberFilteData: bool,
+  disableRememberFilterData: bool,
   disableRememberSelectedItems: bool,
   language: string,
   region: string,
