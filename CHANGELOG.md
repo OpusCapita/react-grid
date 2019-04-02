@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.5.0
 * Fix: multiselect filter unselect
 * Fix: spelling mistake disableRememberFilteData -> disableRememberFilterData
 
