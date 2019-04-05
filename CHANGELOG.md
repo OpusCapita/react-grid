@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* editValueParser ovveride added to column props
 
 ## 7.5.0
 * Fix: multiselect filter unselect

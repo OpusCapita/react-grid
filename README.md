@@ -137,6 +137,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | componentType              | string         |         | Input component type [text/number/float/select/multiselect/boolean/date] |
 | valueRender                | function       |         | Override value render, (rowData, rowIndex) as parameters     |
 | editValueRender            | function       |         | Override value render in editing mode, (rowData, rowIndex, setRef, onKeyDown) as parameters |
+| editValueParser            | function       |         | Override value parser in editing mode, (value) as parameter |
 | createValueRender          | function       |         | Override value render in creating mode, (rowData, rowIndex, setRef, onKeyDown) as parameters |
 | filterValueRender          | function       |         | Override value render in filtering mode, (rowData, rowIndex) as parameters |
 | cell                       | function       |         | Override cell content renderer, rowIndex as parameter        |

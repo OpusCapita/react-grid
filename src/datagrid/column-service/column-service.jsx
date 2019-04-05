@@ -115,7 +115,7 @@ export default {
   columnComponentType(baseColumn, tabIndex, props, col, functions, getDisabledState) {
     if (!col.componentType) return baseColumn;
     const column = baseColumn;
-    let editValueParser = val => val; // eslint-disable-line
+    let editValueParser = col.editValueParser ? col.editValueParser : val => val; // eslint-disable-line
     // Grid internal functions separated
     const editFunctions = { ...functions.edit };
     const createFunctions = { ...functions.create };
@@ -125,7 +125,8 @@ export default {
       case 'number':
       case 'text': {
         const formControlType = col.componentType === 'float' || col.componentType === 'number' ? 'text' : col.componentType;
-        const primitiveValParser = col.componentType === 'float' ?
+        // always use col.editValueParser override if available
+        const primitiveValParser = !col.editValueParser && col.componentType === 'float' ?
           (val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')) : editValueParser;
 
         if (props.inlineEdit && !column.cellEdit) {
