@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.6.1
+* added translated string for ColumnSettings 'Search'-placeholder
+
 ## 7.6.0
 * editValueParser ovveride added to column props
 
