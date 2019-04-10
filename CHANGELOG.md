@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add key navigation support for normal and wrapped select components
 
 ## 7.6.0
 * editValueParser ovveride added to column props
