@@ -1,4 +1,6 @@
 {
+  "Common.Search": "Search",
+
   "Grid.Add": "Add",
   "Grid.Cancel": "Cancel",
   "Grid.DisableActionsMessage": "Finish other tasks before editing",

@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Modal, Button } from 'react-bootstrap';
-import { FormattedMessage as M } from 'react-intl';
+import { FormattedMessage as M, injectIntl, intlShape } from 'react-intl';
 import SelectOrderList from '@opuscapita/react-select-order-list';
 
 import { gridShape } from '../datagrid.props';
 import ColumnSettingsUtils from './column-settings.utils';
 
-export default class ColumnSettings extends React.PureComponent {
+export default
+@injectIntl
+class ColumnSettings extends React.PureComponent {
   static propTypes = {
+    intl: intlShape.isRequired,
     grid: gridShape.isRequired,
     columns: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     visibleColumns: ImmutablePropTypes.list.isRequired,
@@ -65,6 +68,7 @@ export default class ColumnSettings extends React.PureComponent {
             id={`ocDatagridColumnSettings-${this.props.grid.id}`}
             onChange={this.handleSelectionChange}
             selectedData={List(this.state.selectedColumns)}
+            searchPlaceholder={this.props.intl.formatMessage({ id: 'Common.Search' })}
             translations={{
               allLabel: <M id="Grid.ColumnSettings.All" />,
               availableListLabel: <M id="Grid.ColumnSettings.AvailableColumns" />,
