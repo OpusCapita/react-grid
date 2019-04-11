@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 7.7.0
 * Add key navigation support for normal and wrapped select components
 
 ## 7.6.1
