@@ -137,7 +137,8 @@ class DataGrid extends React.PureComponent {
       };
 
       // If current cell holds a react-floating-select component
-      if (currentCell && currentCell.selectRef) {
+      if (currentCell &&
+         (currentCell.selectRef || typeof currentCell.select === 'object')) {
         proxy = currentCell;
         currentCell = this.getSelectRef(proxy);
       }
@@ -261,7 +262,9 @@ class DataGrid extends React.PureComponent {
               disabled = nextElement ? nextElement.disabled : false;
             }
             if (!disabled && nextElement) {
-              if (nextElement.selectRef) nextElement = this.getSelectRef(nextElement);
+              if (typeof nextElement.select === 'object' || nextElement.selectRef) {
+                nextElement = this.getSelectRef(nextElement);
+              }
               this.moveCellFocus(nextElement, rowInd, columnInd);
             }
           }
@@ -419,7 +422,15 @@ class DataGrid extends React.PureComponent {
 
   getSelectRef = (component) => {
     if (!component) return null;
-    if (component.selectRef.select.select) return component.selectRef.select.select.inputRef;
+    if (component.select && component.select.inputRef) {
+      return component.select.inputRef;
+    }
+    if (component.select && component.select.select) {
+      return component.select.select.inputRef;
+    }
+    if (component.selectRef && component.selectRef.select.select) {
+      return component.selectRef.select.select.inputRef;
+    }
     return component.selectRef.select.inputRef;
   };
 
