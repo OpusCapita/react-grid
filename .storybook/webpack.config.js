@@ -7,13 +7,16 @@
 // to "React Create App". This only has babel loader to load JavaScript.
 const path = require('path');
 
-module.exports = function(storybookBaseConfig) {
+module.exports = function (storybookBaseConfig) {
   const ownConfig = require('../webpack.config');
 
   storybookBaseConfig.module.rules = storybookBaseConfig.module.rules.concat(ownConfig.module.rules);
   storybookBaseConfig.resolve = {
     extensions: ['.js', '.jsx'],
     modules: [path.join(__dirname, 'src'), 'node_modules'],
+    alias: {
+      'styled-components': path.resolve('node_modules', 'styled-components'),
+    }
   };
 
   // custom Plugins if required:

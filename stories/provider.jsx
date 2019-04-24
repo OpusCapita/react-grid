@@ -6,12 +6,19 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 // App
 import reducers from './reducers';
+import translations from './translations.json';
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+const initialState = {
+  intl: {
+    locale: 'en',
+    messages: translations,
+  },
+};
 export const store = createStore(
   reducers,
+  initialState,
   composeEnhancers(applyMiddleware(thunk)),
 );
 

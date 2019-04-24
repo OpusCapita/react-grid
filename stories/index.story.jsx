@@ -1,38 +1,18 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { object, text } from '@storybook/addon-knobs';
-import { Store, StateDecorator } from '@sambego/storybook-state';
-
 // Application
 import './scss/app.component.scss';
-import Grid from '../src/datagrid/datagrid.component';
-import { setData } from '../src/datagrid/datagrid.actions';
-import { columns, getData } from './story-constants';
-import ProviderHOC, { store } from './provider';
 
-/* eslint-disable no-underscore-dangle */
-const state = new Store({});
-const { dispatch } = store;
-const GRID = {
-  id: 'demo',
-  idKeyPath: ['id'],
-};
+// Other stories
+import columnSettings from './pages/column-settings.story';
+import headerSettings from './pages/header-settings.story';
+import selecting from './pages/selecting.story';
+import editing from './pages/editing.story';
+import miscSettings from './pages/misc-settings.story';
 
-
-storiesOf('@opuscapita/react-grid', module)
-  .addDecorator(StateDecorator(state))
-  .add('Grid', () => (state) => {
-    const knobs = {};
-    dispatch(setData(GRID, columns, getData(100)));
-
-
-    return (
-      <ProviderHOC>
-        <Grid
-          grid={GRID}
-          columns={columns}
-        />
-      </ProviderHOC>
-    );
-  });
+export default storiesOf('@opuscapita/react-grid', module)
+  .add('Column settings', columnSettings)
+  .add('Selecting rows', selecting)
+  .add('Editing rows', editing)
+  .add('Header settings', headerSettings)
+  .add('Misc. settings', miscSettings);
 

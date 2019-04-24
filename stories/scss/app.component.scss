@@ -12,3 +12,12 @@
 #oc-datagrid-demo {
   height: 100vh;
 }
+
+.custom-action-bar {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  display: flex;
+  height: calc(100% - 1px);
+  align-items: center;
+  padding: 0 2rem;
+}
