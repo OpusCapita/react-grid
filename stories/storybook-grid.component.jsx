@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // App imports
 import Grid from '../src/datagrid/datagrid.component';
@@ -13,10 +14,9 @@ export const GRID = {
   idKeyPath: ['id'],
   defaultShowFilteringRow: true,
 };
-dispatch(setData(GRID, columns, getData(100)));
 
 const StorybookGrid = (props) => {
-  if (!store.getState().datagrid.getIn(['demo', 'data'])) {
+  if (!props.disableDataLoad && !store.getState().datagrid.getIn(['demo', 'data'])) {
     dispatch(setData(GRID, columns, getData(100)));
   }
 
@@ -31,6 +31,14 @@ const StorybookGrid = (props) => {
       />
     </ProviderHOC>
   );
+};
+
+StorybookGrid.propTypes = {
+  disableDataLoad: PropTypes.bool,
+};
+
+StorybookGrid.defaultProps = {
+  disableDataLoad: false,
 };
 
 export default StorybookGrid;

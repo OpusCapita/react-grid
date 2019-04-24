@@ -9,6 +9,7 @@ import selecting from './pages/selecting.story';
 import editing from './pages/editing.story';
 import miscSettings from './pages/misc-settings.story';
 import pagination from './pages/pagination.story';
+import contextMenu from './pages/context-menu.story';
 
 export default storiesOf('@opuscapita/react-grid', module)
   .add('Column settings', columnSettings)
@@ -16,5 +17,6 @@ export default storiesOf('@opuscapita/react-grid', module)
   .add('Editing rows', editing)
   .add('Header settings', headerSettings)
   .add('Pagination', pagination)
+  .add('Context menu', contextMenu)
   .add('Misc. settings', miscSettings);
 
