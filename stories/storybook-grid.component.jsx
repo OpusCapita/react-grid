@@ -1,7 +1,8 @@
 import React from 'react';
+
 // App imports
 import Grid from '../src/datagrid/datagrid.component';
-import { columns, getData } from './story-constants';
+import { columns, getData } from './storybook-utils';
 import { setData } from '../src/datagrid/datagrid.actions';
 import ProviderHOC, { store } from './provider';
 
@@ -14,7 +15,7 @@ export const GRID = {
 };
 dispatch(setData(GRID, columns, getData(100)));
 
-const StorybookGrid = props => {
+const StorybookGrid = (props) => {
   if (!store.getState().datagrid.getIn(['demo', 'data'])) {
     dispatch(setData(GRID, columns, getData(100)));
   }
@@ -29,7 +30,7 @@ const StorybookGrid = props => {
         {...props}
       />
     </ProviderHOC>
-  )
+  );
 };
 
 export default StorybookGrid;
