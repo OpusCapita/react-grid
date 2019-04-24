@@ -6,7 +6,7 @@ import StorybookGrid from '../storybook-grid.component';
 
 
 const GRID = {
-  id: 'TestGrid',
+  id: 'demo',
   idKeyPath: ['id'],
   defaultSortColumn: 'name',
   defaultSortOrder: 'desc',

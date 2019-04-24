@@ -9,8 +9,10 @@
 '~@opuscapita/oc-cm-common-styles/styles/inputs',
 '~@opuscapita/oc-cm-common-styles/styles/variables';
 
-#oc-datagrid-demo {
-  height: 100vh;
+#root {
+  .oc-datagrid-container {
+    height: 100vh;
+  }
 }
 
 .custom-action-bar {
