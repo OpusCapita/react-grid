@@ -1,5 +1,8 @@
 # Migrate guide between major versions
 
+## Version 8
+styled-components is now a peer dependency
+
 ## Version 7
 React 15 is no longer supported
 

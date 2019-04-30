@@ -39,7 +39,8 @@
     "prop-types": "15",
     "react": "16",
     "react-dom": "16",
-    "react-immutable-proptypes": "2"
+    "react-immutable-proptypes": "2",
+    "styled-components": "4.1.3"
   },
   "devDependencies": {
     "@opuscapita/oc-cm-common-styles": "3.0.0",
@@ -129,8 +130,7 @@
     "moment": "2.24.0",
     "react-icons": "2.2.7",
     "react-intl": "2.8.0",
-    "react-redux": "5.1.1",
-    "styled-components": "4.1.3"
+    "react-redux": "5.1.1"
   },
   "repository": {
     "type": "git",

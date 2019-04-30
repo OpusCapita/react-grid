@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 8.0.0
+* Moved styled-components to peer dependencies
+
 ## 7.7.0
 * Add key navigation support for normal and wrapped select components
 
