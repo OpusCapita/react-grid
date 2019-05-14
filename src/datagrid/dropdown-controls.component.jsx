@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import FaToggleOn from 'react-icons/lib/fa/toggle-on';
+import { FaToggleOn } from 'react-icons/fa';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { FormattedMessage as M } from 'react-intl';
 
@@ -57,30 +57,31 @@ export default class DropdownControls extends React.PureComponent {
     if (this.props.selectedItems.size > 0) {
       this.props.onRemove();
     }
-  }
+  };
 
   handleToggleFilteringClick = () => {
     this.props.toggleFiltering(this.props.grid);
-  }
+  };
 
   handleColumnSettingsClick = () => {
     this.props.openColumnSettingsModal(this.props.grid);
-  }
+  };
 
   render() {
     const disabled = this.props.isBusy
-                  || this.props.isCreating
-                  || this.props.isEditing
-                  || this.props.disableActions;
+      || this.props.isCreating
+      || this.props.isEditing
+      || this.props.disableActions;
     let menuItems = [];
     if (this.props.filtering) {
       menuItems.push({
         id: `${this.props.grid.id}-menu-item-filtering`,
         title: <M id="Grid.ShowFilteringRow" />,
-        icon: this.props.isFiltering ?
+        icon: this.props.isFiltering ? (
           <Toggle color={TOGGLE_ON_COLOR} size={TOGGLE_SIZE} />
-          :
-          <Toggle rotate="180" color={TOGGLE_OFF_COLOR} size={TOGGLE_SIZE} />,
+        ) : (
+          <Toggle rotate="180" color={TOGGLE_OFF_COLOR} size={TOGGLE_SIZE} />
+        ),
         onClick: this.handleToggleFilteringClick,
       });
     }
@@ -102,12 +103,6 @@ export default class DropdownControls extends React.PureComponent {
         onClick: this.handleRemoveClick,
       });
     }
-    return (
-      <DropdownMenu
-        id={this.props.grid.id}
-        disabled={disabled}
-        menuItems={menuItems}
-      />
-    );
+    return <DropdownMenu id={this.props.grid.id} disabled={disabled} menuItems={menuItems} />;
   }
 }

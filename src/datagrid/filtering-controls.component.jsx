@@ -21,7 +21,7 @@ export default class FilteringControls extends React.PureComponent {
 
   toggleFiltering = () => {
     this.props.toggleFiltering(this.props.grid);
-  }
+  };
 
   render() {
     return (

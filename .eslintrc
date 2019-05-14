@@ -35,6 +35,7 @@
       "devDependencies": true,
       "optionalDependencies": true,
       "peerDependencies": true}],
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": "off"
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Panel, Grid, Row, Col } from 'react-bootstrap';
+import {
+  Panel, Grid, Row, Col,
+} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import GithubLogo from '../images/logo-github.svg';
 import './example.container.scss';

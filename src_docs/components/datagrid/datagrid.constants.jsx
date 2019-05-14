@@ -7,7 +7,6 @@ import Color from './color.component';
 import * as VALIDATE from './datagrid.validators';
 import CustomInputComponent from './custom.component';
 
-
 export const REGIONS = {
   'en-GB': 'English (GB)',
   'fi-FI': 'Finnish (FI)',
@@ -57,10 +56,7 @@ export const columns = [
     componentType: 'text',
     isRequired: true,
     isLocked: true,
-    validators: [
-      { unique: true },
-      { validate: VALIDATE.isRequired },
-    ],
+    validators: [{ unique: true }, { validate: VALIDATE.isRequired }],
   },
   {
     header: 'Price',
@@ -69,9 +65,7 @@ export const columns = [
     componentType: 'float',
     isRequired: true,
     width: 80,
-    validators: [
-      { validate: VALIDATE.isRequired },
-    ],
+    validators: [{ validate: VALIDATE.isRequired }],
   },
   {
     header: 'Stock',
@@ -132,18 +126,10 @@ export const columns = [
     width: 100,
     valueRender: rowData => rowData.get('custom'),
     editValueRender: (rowData, rowIndex, setRef, onKeyDown) => (
-      <CustomInputComponent
-        setRef={setRef}
-        onKeyDown={onKeyDown}
-        value={rowData.get('custom')}
-      />
+      <CustomInputComponent setRef={setRef} onKeyDown={onKeyDown} value={rowData.get('custom')} />
     ),
     createValueRender: (rowData, rowIndex, setRef, onKeyDown) => (
-      <CustomInputComponent
-        setRef={setRef}
-        onKeyDown={onKeyDown}
-        value={rowData.get('custom')}
-      />
+      <CustomInputComponent setRef={setRef} onKeyDown={onKeyDown} value={rowData.get('custom')} />
     ),
   },
   {

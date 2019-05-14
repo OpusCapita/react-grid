@@ -54,10 +54,7 @@ export default class InlineEditControls extends React.PureComponent {
   handleSaveButtonClick = () => {
     let valid = true;
     if (this.props.isEditing) {
-      valid = this.props.validateEditedRows(
-        this.props.grid,
-        this.props.columns,
-      );
+      valid = this.props.validateEditedRows(this.props.grid, this.props.columns);
     }
     if (valid && this.props.isCreating) {
       valid = this.props.validateCreatedRows(this.props.grid, this.props.columns);
@@ -67,17 +64,17 @@ export default class InlineEditControls extends React.PureComponent {
     } else {
       this.props.afterValidationError();
     }
-  }
+  };
 
   handleCancelButtonClick = () => {
     this.props.cancel(this.props.grid);
     this.props.onCancel();
-  }
+  };
 
   handleAddButtonClick = () => {
     this.props.addNewItem(this.props.grid, Utils.getColumnDefaultValues(this.props.columns));
     this.props.afterAddItem();
-  }
+  };
 
   handleEditButtonClick = () => {
     if (!this.props.disableActions) {
@@ -87,7 +84,7 @@ export default class InlineEditControls extends React.PureComponent {
         this.props.onEditClick();
       }
     }
-  }
+  };
 
   handleCreateButtonClick = () => {
     if (!this.props.disableActions) {
@@ -98,7 +95,7 @@ export default class InlineEditControls extends React.PureComponent {
         this.props.afterAddItem();
       }
     }
-  }
+  };
 
   render() {
     const {
@@ -132,7 +129,7 @@ export default class InlineEditControls extends React.PureComponent {
           >
             <M id="Grid.Cancel" />
           </Button>
-          {isCreating &&
+          {isCreating && (
             <Button
               disabled={isBusy || disableActions}
               onClick={this.handleAddButtonClick}
@@ -141,7 +138,7 @@ export default class InlineEditControls extends React.PureComponent {
             >
               <M id="Grid.Add" />
             </Button>
-          }
+          )}
         </div>
       );
     }
@@ -158,10 +155,7 @@ export default class InlineEditControls extends React.PureComponent {
 
     return (
       <div className="oc-datagrid-inline-edit-controls">
-        <CellToolTip
-          id={`oc-datagrid-controls-tooltip-${grid.id}`}
-          {...message}
-        >
+        <CellToolTip id={`oc-datagrid-controls-tooltip-${grid.id}`} {...message}>
           <Button
             disabled={isBusy || !hasData}
             onClick={this.handleEditButtonClick}
@@ -169,7 +163,7 @@ export default class InlineEditControls extends React.PureComponent {
           >
             <M id="Grid.Edit" />
           </Button>
-          {inlineAdd &&
+          {inlineAdd && (
             <Button
               disabled={isBusy}
               onClick={this.handleCreateButtonClick}
@@ -177,7 +171,7 @@ export default class InlineEditControls extends React.PureComponent {
             >
               <M id="Grid.Add" />
             </Button>
-          }
+          )}
         </CellToolTip>
       </div>
     );

@@ -1,14 +1,12 @@
 import Utils from '../datagrid.utils';
 
 export default {
-  getAvailableColumns: columns => (
-    columns.map((col) => {
-      const value = Utils.getColumnKey(col);
-      const label = col.header;
-      const { isLocked } = col;
-      return { isLocked, label, value };
-    })
-  ),
+  getAvailableColumns: columns => columns.map((col) => {
+    const value = Utils.getColumnKey(col);
+    const label = col.header;
+    const { isLocked } = col;
+    return { isLocked, label, value };
+  }),
   getSelectedColumns: (columns, visibleColumns) => {
     const selectedColumns = [];
     visibleColumns.forEach((value) => {

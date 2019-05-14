@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FormattedMessage as M } from 'react-intl';
 import { DateInput } from '@opuscapita/react-datetime';
 
-export const dateRender = dateProps => (<DateInput {...dateProps} />);
+export const dateRender = dateProps => <DateInput {...dateProps} />;
 
 const dateIsValid = val => moment(val).isValid();
 
@@ -93,16 +93,7 @@ export default {
     return dateRender({ ...dateProps });
   },
   // dateFilterCell
-  cellFilter(
-    col,
-    column,
-    tabIndex,
-    gridId,
-    region,
-    dateFormat,
-    valueParser,
-    functions,
-  ) {
+  cellFilter(col, column, tabIndex, gridId, region, dateFormat, valueParser, functions) {
     const dateProps = {
       className,
       dateFormat,

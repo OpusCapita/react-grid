@@ -99,7 +99,8 @@ export const applyFilters = (grid, columns) => (dispatch, getState) => {
   let data;
   if (grid.pagination) {
     return true;
-  } if (filterData.isEmpty()) {
+  }
+  if (filterData.isEmpty()) {
     data = allData;
   } else {
     const dateFormat = Utils.getDateFormat(grid, getState().user);
@@ -144,9 +145,10 @@ export const setAndApplyFilters = (grid, columns, data) => (dispatch) => {
 
 export const filterCellValueChange = (grid, columns, column, value) => (dispatch, getState) => {
   Utils.checkGridParam(grid);
-  const origFilterData = getState()
-    .datagrid
-    .getIn([grid.id, 'config', 'filteringData', 'filterData'], Map());
+  const origFilterData = getState().datagrid.getIn(
+    [grid.id, 'config', 'filteringData', 'filterData'],
+    Map(),
+  );
   const columnKey = Utils.getColumnKey(column);
   const valueEmptyChecker = Utils.getValueEmptyChecker(column);
   let filterData;
@@ -249,9 +251,9 @@ export const setData = (grid, columns, data) => (dispatch, getState) => {
   Utils.checkColumnsParam(columns);
   const configData = Utils.loadGridConfig(grid, columns);
   const immutableData = Immutable.Iterable.isIterable(data) ? data : Immutable.fromJS(data);
-  const selectedItems = Utils.loadSelectedItems(grid).filter(item => (
-    !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item)
-  ));
+  const selectedItems = Utils.loadSelectedItems(grid).filter(
+    item => !!immutableData.find(dataItem => dataItem.getIn(grid.idKeyPath) === item),
+  );
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_SET_DATA,
     id: grid.id,
@@ -319,8 +321,7 @@ export const extendData = (grid, columns, data, prepend = false) => (dispatch, g
 export const resizeColumn = (grid, columnKey, width) => (dispatch, getState) => {
   Utils.checkGridParam(grid);
   const columnWidths = getState()
-    .datagrid
-    .getIn([grid.id, 'config', 'columnWidths'], Map())
+    .datagrid.getIn([grid.id, 'config', 'columnWidths'], Map())
     .set(columnKey, width);
   Utils.saveColumnWidths(grid, columnWidths);
   dispatch({
@@ -471,13 +472,10 @@ export const editCellValueChange = (grid, dataId, keyPath, value) => (dispatch) 
   });
 };
 
-export const editCellValueValidate = (
-  grid,
-  dataId,
-  keyPath,
-  value,
-  validators = [],
-) => (dispatch, getState) => {
+export const editCellValueValidate = (grid, dataId, keyPath, value, validators = []) => (
+  dispatch,
+  getState,
+) => {
   Utils.checkGridParam(grid);
   let validationState = { valid: true };
   validators.forEach((validator) => {
@@ -565,7 +563,10 @@ export const createCellValueChange = (grid, rowIndex, keyPath, value) => (dispat
 };
 
 // eslint-disable-next-line max-len
-export const createCellValueValidate = (grid, rowIndex, keyPath, value, validators = []) => (dispatch, getState) => {
+export const createCellValueValidate = (grid, rowIndex, keyPath, value, validators = []) => (
+  dispatch,
+  getState,
+) => {
   Utils.checkGridParam(grid);
   let validationState = { valid: true };
   validators.forEach((validator) => {
@@ -573,8 +574,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
       if (validator.unique) {
         if (value !== '' || value !== null || value !== undefined) {
           const finding = getState()
-            .datagrid
-            .getIn([grid.id, 'allData'])
+            .datagrid.getIn([grid.id, 'allData'])
             .find(item => item.getIn(keyPath) === value);
           if (finding) {
             validationState = {
@@ -583,8 +583,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
             };
           } else {
             const find2 = getState()
-              .datagrid
-              .getIn([grid.id, 'createData'])
+              .datagrid.getIn([grid.id, 'createData'])
               .find((item, i) => i !== rowIndex && item.getIn(keyPath) === value);
             if (find2) {
               validationState = {
@@ -630,7 +629,14 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
 };
 
 // eslint-disable-next-line max-len
-export const cellShowMessage = (grid, messageType, dataId, keyPath, messageId, messageValues) => (dispatch) => {
+export const cellShowMessage = (
+  grid,
+  messageType,
+  dataId,
+  keyPath,
+  messageId,
+  messageValues,
+) => (dispatch) => {
   Utils.checkGridParam(grid);
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGE,
@@ -653,7 +659,12 @@ export const cellShowMessages = (grid, messages) => (dispatch) => {
 };
 
 // eslint-disable-next-line max-len
-export const cellHideMessage = (grid, messageType = null, dataId = null, keyPath = null) => (dispatch) => {
+export const cellHideMessage = (
+  grid,
+  messageType = null,
+  dataId = null,
+  keyPath = null,
+) => (dispatch) => {
   Utils.checkGridParam(grid);
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_CELL_HIDE_MESSAGE,
@@ -685,7 +696,12 @@ export const createCellShowMessage = (
 };
 
 // eslint-disable-next-line max-len
-export const createCellHideMessage = (grid, messageType = null, rowIndex = null, keyPath = null) => (dispatch) => {
+export const createCellHideMessage = (
+  grid,
+  messageType = null,
+  rowIndex = null,
+  keyPath = null,
+) => (dispatch) => {
   Utils.checkGridParam(grid);
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE,
@@ -705,12 +721,10 @@ export const cellSelectionChange = (grid, selectedCell = null) => (dispatch) => 
   });
 };
 
-export const itemSelectionChange = (
-  grid,
-  rowIndex,
-  ctrlPressed = false,
-  shiftPressed = false,
-) => (dispatch, getState) => {
+export const itemSelectionChange = (grid, rowIndex, ctrlPressed = false, shiftPressed = false) => (
+  dispatch,
+  getState,
+) => {
   Utils.checkGridParam(grid);
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_ITEM_SELECTION_CHANGE,
@@ -744,9 +758,10 @@ export const clearSelectedItems = grid => (dispatch, getState) => {
 
 export const toggleFiltering = grid => (dispatch, getState) => {
   Utils.checkGridParam(grid);
-  const isFiltering = !getState()
-    .datagrid
-    .getIn([grid.id, 'config', 'filteringData', 'isFiltering'], false);
+  const isFiltering = !getState().datagrid.getIn(
+    [grid.id, 'config', 'filteringData', 'isFiltering'],
+    false,
+  );
   Utils.saveIsFiltering(grid, isFiltering);
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_TOGGLE_FILTERING,
@@ -769,13 +784,10 @@ export const validateEditedRows = (grid, columns) => (dispatch, getState) => {
           .find(data => data.getIn(grid.idKeyPath) === dataId)
           .getIn(col.valueKeyPath);
       }
-      const isValid = editCellValueValidate(
-        grid,
-        dataId,
-        col.valueKeyPath,
-        value,
-        col.validators,
-      )(dispatch, getState);
+      const isValid = editCellValueValidate(grid, dataId, col.valueKeyPath, value, col.validators)(
+        dispatch,
+        getState,
+      );
       if (allGood && !isValid) {
         allGood = false;
       }

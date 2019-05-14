@@ -7,10 +7,7 @@ import classNames from 'classnames';
 
 export default class DatagridTooltip extends React.Component {
   static propTypes = {
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     children: PropTypes.node,
     isEdited: PropTypes.bool,
     isError: PropTypes.bool,
@@ -74,7 +71,7 @@ export default class DatagridTooltip extends React.Component {
         placement: 'top',
         overlay: (
           <Tooltip id={`Tooltip_${id}`} bsClass={tooltipClassName}>
-            { message.id ? <M id={message.id} values={message.values} /> : <span>{message}</span> }
+            {message.id ? <M id={message.id} values={message.values} /> : <span>{message}</span>}
           </Tooltip>
         ),
       };
@@ -88,11 +85,8 @@ export default class DatagridTooltip extends React.Component {
     });
     return (
       <OverlayTrigger {...overlayAttrs}>
-        <div
-          id={id}
-          className={wrapperClassName}
-        >
-          { children }
+        <div id={id} className={wrapperClassName}>
+          {children}
         </div>
       </OverlayTrigger>
     );

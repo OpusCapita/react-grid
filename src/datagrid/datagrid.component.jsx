@@ -2,10 +2,7 @@
 import React from 'react';
 import { Map, List } from 'immutable';
 import { connect } from 'react-redux';
-import {
-  injectIntl,
-  FormattedMessage as M,
-} from 'react-intl';
+import { injectIntl, FormattedMessage as M } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
 import { MenuItem } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -36,10 +33,11 @@ const mapStateToProps = (state, ownProps) => {
     isBusy: state.datagrid.getIn([GRID.id, 'session', 'isBusy'], true),
     isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
     isCreating: state.datagrid.getIn([GRID.id, 'session', 'isCreating'], false),
-    isFiltering:
-      state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'isFiltering'], false),
-    isColumnSettingsModalOpen:
-      state.datagrid.getIn([GRID.id, 'session', 'columnSettingsModal', 'open'], false),
+    isFiltering: state.datagrid.getIn([GRID.id, 'config', 'filteringData', 'isFiltering'], false),
+    isColumnSettingsModalOpen: state.datagrid.getIn(
+      [GRID.id, 'session', 'columnSettingsModal', 'open'],
+      false,
+    ),
     sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], null),
     sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], null),
     visibleColumns: state.datagrid.getIn([GRID.id, 'config', 'visibleColumns'], List()),
@@ -67,9 +65,13 @@ const mapDispatchToProps = datagridActions;
 
 @pagination
 @injectIntl
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)
 class DataGrid extends React.PureComponent {
   static propTypes = propTypes;
+
   static defaultProps = defaultProps;
 
   constructor(props) {
@@ -137,8 +139,7 @@ class DataGrid extends React.PureComponent {
       };
 
       // If current cell holds a react-floating-select component
-      if (currentCell &&
-         (currentCell.selectRef || typeof currentCell.select === 'object')) {
+      if (currentCell && (currentCell.selectRef || typeof currentCell.select === 'object')) {
         proxy = currentCell;
         currentCell = this.getSelectRef(proxy);
       }
@@ -297,12 +298,7 @@ class DataGrid extends React.PureComponent {
       }
     }
     const value = valueParser(rawValue);
-    this.props.filterCellValueChange(
-      this.props.grid,
-      this.props.columns,
-      col,
-      value,
-    );
+    this.props.filterCellValueChange(this.props.grid, this.props.columns, col, value);
   };
 
   onCreateCellValueChange = (rowIndex, col, valueParser) => (eventOrData) => {
@@ -380,9 +376,9 @@ class DataGrid extends React.PureComponent {
 
   onCreateCellBlur = (rowIndex, col, valueParser) => (e) => {
     if (col.onCreateBlur) {
-      let value = (e && e.target && e.target.value !== undefined) ?
-        e.target.value :
-        this.getEditItemValue(rowIndex, col);
+      let value = e && e.target && e.target.value !== undefined
+        ? e.target.value
+        : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
@@ -392,9 +388,9 @@ class DataGrid extends React.PureComponent {
 
   onEditCellBlur = (rowIndex, col, valueParser) => (e) => {
     if (col.onEditBlur) {
-      let value = (e && e.target && e.target.value !== undefined) ?
-        e.target.value :
-        this.getEditItemValue(rowIndex, col);
+      let value = e && e.target && e.target.value !== undefined
+        ? e.target.value
+        : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
@@ -413,10 +409,13 @@ class DataGrid extends React.PureComponent {
       e.target.select();
     }
     if (cellType === 'edit' && cellSelect) {
-      cellSelectionChange(grid, Map({
-        rowIndex,
-        columnKey,
-      }));
+      cellSelectionChange(
+        grid,
+        Map({
+          rowIndex,
+          columnKey,
+        }),
+      );
     }
   };
 
@@ -434,8 +433,7 @@ class DataGrid extends React.PureComponent {
     return component.selectRef.select.inputRef;
   };
 
-  getDataIdByRowIndex = rowIndex =>
-    this.props.data.getIn([rowIndex, ...this.props.grid.idKeyPath]);
+  getDataIdByRowIndex = rowIndex => this.props.data.getIn([rowIndex, ...this.props.grid.idKeyPath]);
 
   getSelectedItemIndex = (id) => {
     if (!id) return undefined;
@@ -473,8 +471,7 @@ class DataGrid extends React.PureComponent {
     switch (col.componentType) {
       case 'float': {
         if (String(originalValue).length > 0) {
-          return String(originalValue)
-            .replace('.', this.props.decimalSeparator);
+          return String(originalValue).replace('.', this.props.decimalSeparator);
         }
         return originalValue;
       }
@@ -492,9 +489,11 @@ class DataGrid extends React.PureComponent {
     const val = this.props.createData.getIn([rowIndex, ...col.valueKeyPath], '');
     if (val === null) {
       return '';
-    } else if (col.componentType === 'select' || col.componentType === 'multiselect') {
+    }
+    if (col.componentType === 'select' || col.componentType === 'multiselect') {
       return options.selectOptions.find(obj => obj.value === val);
-    } else if (['boolean'].includes(col.componentType)) {
+    }
+    if (['boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
     }
     return val;
@@ -504,11 +503,14 @@ class DataGrid extends React.PureComponent {
     const val = this.props.filterData.get(Utils.getColumnKey(col), '');
     if (val === null) {
       return '';
-    } else if (col.componentType === 'select') {
+    }
+    if (col.componentType === 'select') {
       return options.selectOptions.find(obj => obj.value === val);
-    } else if (['checkbox', 'boolean'].includes(col.componentType)) {
+    }
+    if (['checkbox', 'boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
-    } else if (col.componentType === 'multiselect') {
+    }
+    if (col.componentType === 'multiselect') {
       // session storage content is converted to immutable and multiselect
       // filters is then list otherwise array
       return val && val.toJS ? val.toJS() : val || [];
@@ -521,15 +523,13 @@ class DataGrid extends React.PureComponent {
     // check if component is disabled by other column data
     if (!componentDisabled && col.disableEditingOnValueMatch) {
       if (mode === 'create') {
-        componentDisabled = this.getCreateItemValue(
-          rowIndex,
-          { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
-        ) === col.disableEditingOnValueMatch.matchValue;
+        componentDisabled = this.getCreateItemValue(rowIndex, {
+          valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath,
+        }) === col.disableEditingOnValueMatch.matchValue;
       } else {
-        componentDisabled = this.getEditItemValue(
-          rowIndex,
-          { valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath },
-        ) === col.disableEditingOnValueMatch.matchValue;
+        componentDisabled = this.getEditItemValue(rowIndex, {
+          valueKeyPath: col.disableEditingOnValueMatch.matchValueKeyPath,
+        }) === col.disableEditingOnValueMatch.matchValue;
       }
     }
     return componentDisabled;
@@ -537,31 +537,22 @@ class DataGrid extends React.PureComponent {
 
   getRowClassName = (rowIndex) => {
     const {
-      grid,
-      isCreating,
-      isEditing,
-      createData,
-      selectedItems,
-      data,
+      grid, isCreating, isEditing, createData, selectedItems, data,
     } = this.props;
     const rowClassNames = ['oc-datagrid-row'];
     let extraRowCount = 0; // how many rows to ignore from top, new + filter rows
     if (isCreating) extraRowCount = createData.size;
     if (isCreating) {
-      if (rowIndex <= (extraRowCount - 1)) {
+      if (rowIndex <= extraRowCount - 1) {
         rowClassNames.push('oc-datagrid-row-new');
       }
     } else if (isEditing) {
       rowClassNames.push('oc-datagrid-row-edit');
     }
 
-
     // check if row is selected
-    if ((!isCreating && !isEditing) &&
-      (selectedItems && grid.idKeyPath)) {
-      if (
-        selectedItems.indexOf(data.getIn([rowIndex - extraRowCount, ...grid.idKeyPath])) !== -1
-      ) {
+    if (!isCreating && !isEditing && (selectedItems && grid.idKeyPath)) {
+      if (selectedItems.indexOf(data.getIn([rowIndex - extraRowCount, ...grid.idKeyPath])) !== -1) {
         rowClassNames.push('is-selected');
       }
     }
@@ -583,7 +574,11 @@ class DataGrid extends React.PureComponent {
     if (cellType === 'create') {
       infoMessage = this.props.createCellMessages.getIn(['info', rowIndex, ...col.valueKeyPath]);
       errorMessage = this.props.createCellMessages.getIn(['error', rowIndex, ...col.valueKeyPath]);
-      warningMessage = this.props.createCellMessages.getIn(['warning', rowIndex, ...col.valueKeyPath]);
+      warningMessage = this.props.createCellMessages.getIn([
+        'warning',
+        rowIndex,
+        ...col.valueKeyPath,
+      ]);
     } else {
       const id = this.getDataIdByRowIndex(rowIndex);
       infoMessage = this.props.cellMessages.getIn(['info', id, ...col.valueKeyPath]);
@@ -635,10 +630,13 @@ class DataGrid extends React.PureComponent {
 
   handleCellSelect = (cellType, rowIndex, columnKey) => () => {
     if (cellType === 'view' && this.props.cellSelect) {
-      this.props.cellSelectionChange(this.props.grid, Map({
-        rowIndex,
-        columnKey,
-      }));
+      this.props.cellSelectionChange(
+        this.props.grid,
+        Map({
+          rowIndex,
+          columnKey,
+        }),
+      );
     }
   };
 
@@ -647,11 +645,11 @@ class DataGrid extends React.PureComponent {
     const columnKey = Utils.getColumnKey(col);
     const selectRef = !ref || ref.focus ? ref : this.getSelectRef(ref);
     if (
-      this.props.createData.size &&
-      this.props.createData.size === rowIndex + 1 &&
-      this.focusToCreateCell &&
-      !this.getComponentDisabledState(rowIndex, col, 'create') &&
-      selectRef
+      this.props.createData.size
+      && this.props.createData.size === rowIndex + 1
+      && this.focusToCreateCell
+      && !this.getComponentDisabledState(rowIndex, col, 'create')
+      && selectRef
     ) {
       selectRef.focus();
       this.focusToCreateCell = false;
@@ -665,16 +663,17 @@ class DataGrid extends React.PureComponent {
   handleEditCellRef = (rowIndex, col) => (ref) => {
     const columnKey = Utils.getColumnKey(col);
     if (this.focusToEditCell && !this.getComponentDisabledState(rowIndex, col, 'edit')) {
-      const selectedRowIndex = this.focusToLastRow && this.props.data.size > 0 ?
-        this.props.data.size - 1 : this.getSelectedItemIndex(this.props.selectedItems.first());
+      const selectedRowIndex = this.focusToLastRow && this.props.data.size > 0
+        ? this.props.data.size - 1
+        : this.getSelectedItemIndex(this.props.selectedItems.first());
 
       const { selectedCell } = this.props;
       const selectRef = !ref || ref.focus ? ref : this.getSelectRef(ref);
       if (selectedCell.size > 0) {
         if (
-          selectedCell.get('rowIndex') === rowIndex &&
-          selectedCell.get('columnKey') === columnKey &&
-          selectRef
+          selectedCell.get('rowIndex') === rowIndex
+          && selectedCell.get('columnKey') === columnKey
+          && selectRef
         ) {
           selectRef.focus();
           this.focusToEditCell = false;
@@ -762,8 +761,7 @@ class DataGrid extends React.PureComponent {
         isResizable: false,
         isSortable: false,
         columnKey: 'selectionCheckbox',
-        header: (
-          showSelectAllCheckbox &&
+        header: showSelectAllCheckbox && (
           <Checkbox
             id={`ocDatagridSelectAllCheckBox-${grid.id}`}
             className="oc-datagrid-select-all-checkbox-cell no-row-select"
@@ -918,29 +916,28 @@ class DataGrid extends React.PureComponent {
   handleRowClick = (e, rowIndex) => {
     if (this.props.rowSelect && !this.props.isCreating && !this.props.isEditing) {
       if (e.ctrlKey || e.shiftKey) {
-        document.getSelection()
-          .removeAllRanges();
+        document.getSelection().removeAllRanges();
       }
       // Don't trigger selection change on when user clicks on special cells like checkbox/extra
       // Check that clicked node's parent or parent's parent doesn't have no-row-select class
       const { parentNode } = e.target;
-      const parent1class = parentNode.className && parentNode.className.indexOf
-        ? parentNode.className
-        : '';
-      const parent2class = parentNode.parentNode.className && parentNode.parentNode.className.indexOf // eslint-disable-line
+      const parent1class = parentNode.className && parentNode.className.indexOf ? parentNode.className : '';
+      const parent2class =        parentNode.parentNode.className && parentNode.parentNode.className.indexOf // eslint-disable-line
         ? parentNode.parentNode.className
         : '';
-      const parent3class = parentNode.parentNode.parentNode.className && parentNode.parentNode.parentNode.className.indexOf // eslint-disable-line
+      const parent3class = parentNode.parentNode.parentNode.className
+        && parentNode.parentNode.parentNode.className.indexOf // eslint-disable-line
         ? parentNode.parentNode.parentNode.className
         : '';
-      const parent4class = parentNode.parentNode.parentNode.parentNode.className && parentNode.parentNode.parentNode.parentNode.className.indexOf // eslint-disable-line
+      const parent4class = parentNode.parentNode.parentNode.parentNode.className
+        && parentNode.parentNode.parentNode.parentNode.className.indexOf // eslint-disable-line
         ? parentNode.parentNode.parentNode.parentNode.className
         : '';
       if (
-        parent1class.indexOf('no-row-select') === -1 &&
-        parent2class.indexOf('no-row-select') === -1 &&
-        parent3class.indexOf('no-row-select') === -1 &&
-        parent4class.indexOf('no-row-select') === -1
+        parent1class.indexOf('no-row-select') === -1
+        && parent2class.indexOf('no-row-select') === -1
+        && parent3class.indexOf('no-row-select') === -1
+        && parent4class.indexOf('no-row-select') === -1
       ) {
         this.props.itemSelectionChange(
           this.props.grid,
@@ -959,10 +956,7 @@ class DataGrid extends React.PureComponent {
   handleContextMenu = (e, rowIndex) => {
     if (this.props.contextMenuItems) {
       const {
-        itemSelectionChange,
-        selectedItems,
-        grid,
-        data,
+        itemSelectionChange, selectedItems, grid, data,
       } = this.props;
       e.preventDefault();
       e.stopPropagation();
@@ -985,16 +979,14 @@ class DataGrid extends React.PureComponent {
     onClick(selectedItems, selectedData);
   };
 
-  handleRowHeightGetter = rowIndex =>
-    this.props.rowHeightGetter(this.props.data.get(rowIndex), rowIndex);
+  handleRowHeightGetter = rowIndex => this.props.rowHeightGetter(
+    this.props.data.get(rowIndex),
+    rowIndex,
+  );
 
   renderCell = col => (cellProps) => {
     const {
-      isCreating,
-      isEditing,
-      createData,
-      selectedCell,
-      grid,
+      isCreating, isEditing, createData, selectedCell, grid,
     } = this.props;
     const { rowIndex, ...props } = cellProps;
     let cell;
@@ -1003,7 +995,7 @@ class DataGrid extends React.PureComponent {
     if (isCreating) extraRowCount = createData.size;
     const existingRowsIndex = rowIndex - extraRowCount;
     if (isCreating) {
-      if (rowIndex <= (extraRowCount - 1)) {
+      if (rowIndex <= extraRowCount - 1) {
         if (col.cellCreate) {
           cell = col.cellCreate(
             rowIndex,
@@ -1038,11 +1030,13 @@ class DataGrid extends React.PureComponent {
     }
     const isSpecial = props.columnKey === 'selectionCheckbox' || props.columnKey === 'extraColumn';
     if ((cellType === 'view' || cellType === 'edit' || cellType === 'create') && !isSpecial) {
-      const getRowIndex = (cellType === 'create') ? rowIndex : (rowIndex - extraRowCount);
+      const getRowIndex = cellType === 'create' ? rowIndex : rowIndex - extraRowCount;
       const messageData = this.getCellMessages(getRowIndex, col, cellType);
       const isEdited = this.isCellEdited(getRowIndex, col, cellType);
-      const className = (selectedCell.get('rowIndex') === rowIndex && selectedCell.get('columnKey') === props.columnKey) ?
-        'oc-datagrid-cell is-selected' : 'oc-datagrid-cell';
+      const className = selectedCell.get('rowIndex') === rowIndex
+        && selectedCell.get('columnKey') === props.columnKey
+        ? 'oc-datagrid-cell is-selected'
+        : 'oc-datagrid-cell';
       return (
         <Cell
           {...props}
@@ -1065,23 +1059,25 @@ class DataGrid extends React.PureComponent {
       );
     }
     return (
-      <Cell {...props} className="oc-datagrid-cell" style={col.style}>{cell}</Cell>
+      <Cell {...props} className="oc-datagrid-cell" style={col.style}>
+        {cell}
+      </Cell>
     );
   };
 
   renderColumns = () => {
     const {
-      allDataSize,
-      grid,
-      isCreating,
-      isBusy,
-      visibleColumns,
+      allDataSize, grid, isCreating, isBusy, visibleColumns,
     } = this.props;
     if (!allDataSize && !isBusy && !isCreating && !grid.pagination) {
       return (
         <Column
           columnKey="dataEmptyColumn"
-          header={<Cell style={{ textAlign: 'center' }}><M id="Grid.NoItems" /></Cell>}
+          header={(
+            <Cell style={{ textAlign: 'center' }}>
+              <M id="Grid.NoItems" />
+            </Cell>
+)}
           width={10}
           isResizable={false}
           flexGrow={1}
@@ -1103,7 +1099,11 @@ class DataGrid extends React.PureComponent {
       return (
         <Column
           columnKey="dataEmptyColumn"
-          header={<Cell style={{ textAlign: 'center' }}><M id="Grid.NoColumns" /></Cell>}
+          header={(
+            <Cell style={{ textAlign: 'center' }}>
+              <M id="Grid.NoColumns" />
+            </Cell>
+)}
           width={10}
           isResizable={false}
           flexGrow={1}
@@ -1116,7 +1116,7 @@ class DataGrid extends React.PureComponent {
       <Column
         key={col.columnKey}
         columnKey={col.columnKey}
-        header={
+        header={(
           <HeaderCell
             id={`ocDatagridHeader-${this.props.grid.id}-${col.columnKey}`}
             grid={this.props.grid}
@@ -1131,7 +1131,7 @@ class DataGrid extends React.PureComponent {
           >
             {col.header}
           </HeaderCell>
-        }
+)}
         cell={this.renderCell(col)}
         width={this.props.columnWidths.get(col.columnKey, col.width)}
         minWidth={col.minWidth}
@@ -1141,20 +1141,15 @@ class DataGrid extends React.PureComponent {
         fixed={col.fixed}
         fixedRight={col.fixedRight}
         allowCellsRecycling={col.allowCellsRecycling}
-      />));
+      />
+    ));
   };
 
   renderContextMenu = () => {
     const {
-      contextMenuItems,
-      data,
-      grid,
-      selectedItems,
+      contextMenuItems, data, grid, selectedItems,
     } = this.props;
-    const {
-      contextMenuX,
-      contextMenuY,
-    } = this.state;
+    const { contextMenuX, contextMenuY } = this.state;
     const style = {
       display: 'block',
       zIndex: 10000,
@@ -1165,28 +1160,30 @@ class DataGrid extends React.PureComponent {
     const selectedData = data.filter(d => selectedItems.includes(d.getIn(grid.idKeyPath)));
     return (
       <ul className="dropdown-menu oc-datagrid-context-menu open" style={style}>
-        {contextMenuItems && contextMenuItems.map && contextMenuItems.map((item, i) => {
-          let { disabled } = item;
-          if (typeof item.disabled === 'function') {
-            disabled = item.disabled(selectedItems, selectedData);
-          }
-          return (
-            <MenuItem
-              key={i} // eslint-disable-line
-              header={item.header}
-              divider={item.divider}
-              disabled={disabled}
-              title={item.title}
-              onClick={(disabled || !item.onClick) ? null : this.handleContextMenuItemClick(
-                item.onClick,
-                selectedItems,
-                selectedData,
-              )}
-            >
-              {item.value}
-            </MenuItem>
-          );
-        })}
+        {contextMenuItems
+          && contextMenuItems.map
+          && contextMenuItems.map((item, i) => {
+            let { disabled } = item;
+            if (typeof item.disabled === 'function') {
+              disabled = item.disabled(selectedItems, selectedData);
+            }
+            return (
+              <MenuItem
+                key={i} // eslint-disable-line
+                header={item.header}
+                divider={item.divider}
+                disabled={disabled}
+                title={item.title}
+                onClick={
+                  disabled || !item.onClick
+                    ? null
+                    : this.handleContextMenuItemClick(item.onClick, selectedItems, selectedData)
+                }
+              >
+                {item.value}
+              </MenuItem>
+            );
+          })}
       </ul>
     );
   };
@@ -1208,32 +1205,32 @@ class DataGrid extends React.PureComponent {
     let actionBarRight = null;
     let actionBarLeft = null;
     if (
-      (this.props.actionBar ||
-        this.props.inlineEdit ||
-        this.props.filtering ||
-        this.props.removing) &&
-      !this.props.disableActionBar
+      (this.props.actionBar
+        || this.props.inlineEdit
+        || this.props.filtering
+        || this.props.removing)
+      && !this.props.disableActionBar
     ) {
       actionBarRight = (
         <ActionBar position="right">
           <div className="oc-datagrid-actionbar-right">{this.props.actionBar}</div>
-          {(this.props.filtering && this.props.disableDropdown &&
-            !this.props.disableFilteringControls) && <FilteringControls {...this.props} />
-          }
-          {this.props.inlineEdit &&
-          <InlineEditControls
-            afterAddItem={this.handleAfterAddItem}
-            afterEditPress={this.handleAfterEditPress}
-            afterValidationError={this.handleAfterValidationError}
-            {...this.props}
-          />
-          }
-          {(this.props.dropdownMenuItems ||
-            this.props.removing ||
-            this.props.columnSettings ||
-            (this.props.filtering &&
-              !this.props.disableDropdown)) && <DropdownControls {...this.props} />
-          }
+          {this.props.filtering
+            && this.props.disableDropdown
+            && !this.props.disableFilteringControls && <FilteringControls {...this.props} />}
+          {this.props.inlineEdit && (
+            <InlineEditControls
+              afterAddItem={this.handleAfterAddItem}
+              afterEditPress={this.handleAfterEditPress}
+              afterValidationError={this.handleAfterValidationError}
+              {...this.props}
+            />
+          )}
+          {(this.props.dropdownMenuItems
+            || this.props.removing
+            || this.props.columnSettings
+            || (this.props.filtering && !this.props.disableDropdown)) && (
+            <DropdownControls {...this.props} />
+          )}
         </ActionBar>
       );
     }
@@ -1253,10 +1250,9 @@ class DataGrid extends React.PureComponent {
         </div>
       );
     }
-    let rowsCount =
-      (this.props.rowsCount || this.props.rowsCount === 0) ?
-        this.props.rowsCount :
-        this.props.data.size;
+    let rowsCount = this.props.rowsCount || this.props.rowsCount === 0
+      ? this.props.rowsCount
+      : this.props.data.size;
     if (this.props.isCreating) rowsCount += this.props.createData.size;
     if (!this.props.visibleColumns.size) rowsCount = 0;
     return (
@@ -1271,9 +1267,11 @@ class DataGrid extends React.PureComponent {
         <ResponsiveFixedDataTable
           id={this.props.grid.id}
           rowsCount={rowsCount}
-          headerHeight={this.props.isFiltering ?
-            this.props.headerHeight + this.props.filterRowHeight
-            : this.props.headerHeight}
+          headerHeight={
+            this.props.isFiltering
+              ? this.props.headerHeight + this.props.filterRowHeight
+              : this.props.headerHeight
+          }
           rowHeight={this.props.rowHeight}
           onColumnResizeEndCallback={this.onColumnResizeEndCallback}
           isColumnResizing={false}
@@ -1294,15 +1292,15 @@ class DataGrid extends React.PureComponent {
         >
           {this.renderColumns()}
         </ResponsiveFixedDataTable>
-        {this.props.isColumnSettingsModalOpen &&
-        <ColumnSettingsModal
-          grid={this.props.grid}
-          columns={this.props.columns}
-          visibleColumns={this.props.visibleColumns}
-          closeColumnSettingsModal={this.props.closeColumnSettingsModal}
-          saveColumnSettings={this.props.saveColumnSettings}
-        />
-        }
+        {this.props.isColumnSettingsModalOpen && (
+          <ColumnSettingsModal
+            grid={this.props.grid}
+            columns={this.props.columns}
+            visibleColumns={this.props.visibleColumns}
+            closeColumnSettingsModal={this.props.closeColumnSettingsModal}
+            saveColumnSettings={this.props.saveColumnSettings}
+          />
+        )}
         {this.props.children}
       </div>
     );

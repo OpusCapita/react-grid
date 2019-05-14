@@ -48,11 +48,13 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .setIn([action.id, 'allData'], action.allData);
 
     case TYPES.PLATFORM_DATAGRID_SORT_CHANGE:
-      return state
-        .setIn([action.id, 'config', 'sortingData'], Map({
+      return state.setIn(
+        [action.id, 'config', 'sortingData'],
+        Map({
           sortColumn: action.sortColumn,
           sortOrder: action.sortOrder,
-        }));
+        }),
+      );
 
     case TYPES.PLATFORM_DATAGRID_RESIZE_COLUMN:
       return state.setIn([action.id, 'config', 'columnWidths'], action.columnWidths);
@@ -69,17 +71,19 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         });
 
     case TYPES.PLATFORM_DATAGRID_ADD_NEW_ITEM:
-      return state
-        .updateIn([
-          action.id,
-          'createData',
-        ], List(), items => items.push(Immutable.fromJS(action.columnDefaultValues)));
+      return state.updateIn(
+        [action.id, 'createData'],
+        List(),
+        items => items.push(Immutable.fromJS(action.columnDefaultValues)),
+      );
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_ITEM: {
-      const allDataIndex = state.getIn([action.id, 'allData'], List())
-        .findIndex(item => (item.getIn(action.idKeyPath) === action.rowId));
-      const dataIndex = state.getIn([action.id, 'data'], List())
-        .findIndex(item => (item.getIn(action.idKeyPath) === action.rowId));
+      const allDataIndex = state
+        .getIn([action.id, 'allData'], List())
+        .findIndex(item => item.getIn(action.idKeyPath) === action.rowId);
+      const dataIndex = state
+        .getIn([action.id, 'data'], List())
+        .findIndex(item => item.getIn(action.idKeyPath) === action.rowId);
       return state
         .deleteIn([action.id, 'data', dataIndex])
         .deleteIn([action.id, 'allData', allDataIndex])
@@ -102,20 +106,22 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state.deleteIn([action.id, 'createData', action.index]);
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_NEW_ITEMS:
-      return state
-        .setIn(
-          [action.id, 'createData'],
-          state
-            .getIn([action.id, 'createData'], List())
-            .filter((val, idx) => action.indexes.indexOf(idx) === -1),
-        );
+      return state.setIn(
+        [action.id, 'createData'],
+        state
+          .getIn([action.id, 'createData'], List())
+          .filter((val, idx) => action.indexes.indexOf(idx) === -1),
+      );
 
     case TYPES.PLATFORM_DATAGRID_CANCEL:
       return state
-        .mergeIn([action.id, 'session'], Map({
-          isEditing: false,
-          isCreating: false,
-        }))
+        .mergeIn(
+          [action.id, 'session'],
+          Map({
+            isEditing: false,
+            isCreating: false,
+          }),
+        )
         .deleteIn([action.id, 'editData'])
         .deleteIn([action.id, 'createData'])
         .deleteIn([action.id, 'createCellMessages', 'error'])
@@ -127,7 +133,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     case TYPES.PLATFORM_DATAGRID_EXTEND_DATA: {
       const allData = state.getIn([action.id, 'allData']);
       const extendedData = action.prepend
-        ? action.data.concat(allData) : allData.concat(action.data);
+        ? action.data.concat(allData)
+        : allData.concat(action.data);
 
       return state
         .setIn([action.id, 'data'], extendedData)
@@ -140,9 +147,9 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
 
       action.savedItems.forEach((savedItemJS) => {
         const savedItem = Immutable.fromJS(savedItemJS);
-        const foundIndex = allData.findIndex(d => (
-          d.getIn(action.idKeyPath) === savedItem.getIn(action.idKeyPath)
-        ));
+        const foundIndex = allData.findIndex(
+          d => d.getIn(action.idKeyPath) === savedItem.getIn(action.idKeyPath),
+        );
         if (foundIndex === -1) {
           if (!firstCreatedId && savedItem.getIn(action.idKeyPath)) {
             firstCreatedId = savedItem.getIn(action.idKeyPath);
@@ -152,7 +159,6 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
           allData = allData.mergeDeepIn([foundIndex], savedItem);
         }
       });
-
 
       let newState = state
         .setIn([action.id, 'data'], allData)
@@ -182,9 +188,9 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       const isCreating = state.getIn([action.id, 'session', 'isCreating']);
       action.savedItems.forEach((savedItemJS) => {
         const savedItem = Immutable.fromJS(savedItemJS);
-        let foundIndex = allData.findIndex(d => (
-          d.getIn(action.idKeyPath) === savedItem.getIn(action.idKeyPath)
-        ));
+        let foundIndex = allData.findIndex(
+          d => d.getIn(action.idKeyPath) === savedItem.getIn(action.idKeyPath),
+        );
         if (foundIndex === -1) {
           allData = allData.push(savedItem);
         } else {
@@ -216,37 +222,37 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     case TYPES.PLATFORM_DATAGRID_REMOVE_SUCCESS:
       return state
         .setIn([action.id, 'session', 'isBusy'], false)
-        .updateIn([action.id, 'data'], data => data.filterNot(item => (
-          action.removedIds.indexOf(item.getIn(action.idKeyPath)) > -1
-        )))
-        .updateIn([action.id, 'allData'], data => data.filterNot(item => (
-          action.removedIds.indexOf(item.getIn(action.idKeyPath)) > -1
-        )))
+        .updateIn(
+          [action.id, 'data'],
+          data => data.filterNot(
+            item => action.removedIds.indexOf(item.getIn(action.idKeyPath)) > -1,
+          ),
+        )
+        .updateIn(
+          [action.id, 'allData'],
+          data => data.filterNot(
+            item => action.removedIds.indexOf(item.getIn(action.idKeyPath)) > -1,
+          ),
+        )
         .deleteIn([action.id, 'selectedItems']);
 
     case TYPES.PLATFORM_DATAGRID_REMOVE_FAIL:
       return state.setIn([action.id, 'session', 'isBusy'], false);
 
     case TYPES.PLATFORM_DATAGRID_EDIT_CELL_VALUE_CHANGE:
-      return state
-        .setIn(
-          [action.id, 'editData', action.dataId, ...action.keyPath],
-          action.value,
-        );
+      return state.setIn([action.id, 'editData', action.dataId, ...action.keyPath], action.value);
 
     case TYPES.PLATFORM_DATAGRID_CREATE_CELL_VALUE_CHANGE:
-      return state
-        .setIn(
-          [action.id, 'createData', action.rowIndex, ...action.keyPath],
-          action.value,
-        );
+      return state.setIn(
+        [action.id, 'createData', action.rowIndex, ...action.keyPath],
+        action.value,
+      );
 
     case TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGE:
-      return state
-        .setIn(
-          [action.id, 'cellMessages', action.messageType, action.dataId, ...action.keyPath],
-          { id: action.messageId, values: action.messageValues },
-        );
+      return state.setIn(
+        [action.id, 'cellMessages', action.messageType, action.dataId, ...action.keyPath],
+        { id: action.messageId, values: action.messageValues },
+      );
 
     case TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGES:
       return state.mergeIn([action.id, 'cellMessages'], Immutable.fromJS(action.messages));
@@ -275,11 +281,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     }
 
     case TYPES.PLATFORM_DATAGRID_CREATE_CELL_SHOW_MESSAGE:
-      return state
-        .setIn(
-          [action.id, 'createCellMessages', action.messageType, action.rowIndex, ...action.keyPath],
-          { id: action.messageId, values: action.messageValues },
-        );
+      return state.setIn(
+        [action.id, 'createCellMessages', action.messageType, action.rowIndex, ...action.keyPath],
+        { id: action.messageId, values: action.messageValues },
+      );
 
     case TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE: {
       if (action.messageType === null) {
@@ -341,43 +346,26 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
               }
             }
           }
-          return newState
-            .setIn(
-              [action.id, 'selectedItems'],
-              List(selectRowIds),
-            );
+          return newState.setIn([action.id, 'selectedItems'], List(selectRowIds));
         }
       }
 
       const dataId = state.getIn([action.id, 'data', action.rowIndex, ...action.idKeyPath]);
-      const foundIndex = state
-        .getIn([action.id, 'selectedItems'], List()).indexOf(dataId);
+      const foundIndex = state.getIn([action.id, 'selectedItems'], List()).indexOf(dataId);
       if (foundIndex === -1) {
         if (action.ctrlPressed) {
-          return newState
-            .updateIn(
-              [action.id, 'selectedItems'],
-              List(), items => items.push(dataId),
-            );
-        }
-        return newState
-          .setIn(
+          return newState.updateIn(
             [action.id, 'selectedItems'],
-            List([dataId]),
+            List(),
+            items => items.push(dataId),
           );
+        }
+        return newState.setIn([action.id, 'selectedItems'], List([dataId]));
       }
       if (action.ctrlPressed) {
-        return newState
-          .updateIn(
-            [action.id, 'selectedItems'],
-            items => items.delete(foundIndex),
-          );
+        return newState.updateIn([action.id, 'selectedItems'], items => items.delete(foundIndex));
       }
-      return newState
-        .setIn(
-          [action.id, 'selectedItems'],
-          List([dataId]),
-        );
+      return newState.setIn([action.id, 'selectedItems'], List([dataId]));
     }
 
     case TYPES.PLATFORM_DATAGRID_SELECT_ALL_ITEMS_CHANGE:
@@ -387,13 +375,10 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       ) {
         return state.deleteIn([action.id, 'selectedItems']);
       }
-      return state
-        .setIn(
-          [action.id, 'selectedItems'],
-          state
-            .getIn([action.id, 'data'], List())
-            .map(item => item.getIn(action.idKeyPath)),
-        );
+      return state.setIn(
+        [action.id, 'selectedItems'],
+        state.getIn([action.id, 'data'], List()).map(item => item.getIn(action.idKeyPath)),
+      );
 
     case TYPES.PLATFORM_DATAGRID_CLEAR_SELECTED_ITEMS:
       return state.deleteIn([action.id, 'selectedItems']);
@@ -404,43 +389,25 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
           .setIn([action.id, 'config', 'filteringData'], Map({ isFiltering: false }))
           .setIn([action.id, 'data'], state.getIn([action.id, 'allData']));
       }
-      return state
-        .setIn([action.id, 'config', 'filteringData'], Map({ isFiltering: true }));
+      return state.setIn([action.id, 'config', 'filteringData'], Map({ isFiltering: true }));
     }
 
     case TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE:
-      return state
-        .setIn(
-          [action.id, 'config', 'filteringData', 'filterData'],
-          action.filterData,
-        );
+      return state.setIn([action.id, 'config', 'filteringData', 'filterData'], action.filterData);
 
     case TYPES.PLATFORM_DATAGRID_APPLY_FILTERS:
-      return state
-        .setIn(
-          [action.id, 'data'],
-          action.data,
-        );
+      return state.setIn([action.id, 'data'], action.data);
 
     case TYPES.PLATFORM_DATAGRID_SET_FILTERS:
-      return state
-        .setIn(
-          [action.id, 'config', 'filteringData'],
-          action.filteringData,
-        );
+      return state.setIn([action.id, 'config', 'filteringData'], action.filteringData);
 
     case TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: {
-      const newState = state
-        .setIn(
-          [action.id, 'allData', action.dataId, ...action.keyPath],
-          action.value,
-        );
+      const newState = state.setIn(
+        [action.id, 'allData', action.dataId, ...action.keyPath],
+        action.value,
+      );
       if (state.hasIn([action.id, 'data', action.dataId, ...action.keyPath])) {
-        return newState
-          .setIn(
-            [action.id, 'data', action.dataId, ...action.keyPath],
-            action.value,
-          );
+        return newState.setIn([action.id, 'data', action.dataId, ...action.keyPath], action.value);
       }
       return newState;
     }
@@ -458,16 +425,16 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state.deleteIn([action.id, 'session', 'columnSettingsModal']);
 
     case TYPES.PLATFORM_DATAGRID_COLUMN_SETTINGS_SAVE:
-      return state
-        .setIn([action.id, 'config', 'visibleColumns'], Immutable.fromJS(action.columnOrder));
+      return state.setIn(
+        [action.id, 'config', 'visibleColumns'],
+        Immutable.fromJS(action.columnOrder),
+      );
 
     case TYPES.PLATFORM_DATAGRID_SET_PAGE:
-      return state
-        .setIn([action.id, 'config', 'page'], action.page);
+      return state.setIn([action.id, 'config', 'page'], action.page);
 
     case TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE:
-      return state
-        .setIn([action.id, 'config', 'rowsOnPage'], action.rowsOnPage);
+      return state.setIn([action.id, 'config', 'rowsOnPage'], action.rowsOnPage);
 
     default:
       return state;

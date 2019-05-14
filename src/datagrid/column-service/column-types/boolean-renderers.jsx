@@ -5,10 +5,9 @@ import { selectRender } from './select-renderers';
 export default {
   // booleanValueRender
   valRender(col, rowIndex, valueRender) {
-    return valueRender(
-      rowIndex,
-      v => <M id={v ? 'Grid.Yes' : 'Grid.No'} {...col.renderComponentProps} />,
-    );
+    return valueRender(rowIndex, v => (
+      <M id={v ? 'Grid.Yes' : 'Grid.No'} {...col.renderComponentProps} />
+    ));
   },
   // booleanCellEdit
   cellEdit(

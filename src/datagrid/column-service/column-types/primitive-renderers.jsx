@@ -2,15 +2,12 @@ import React from 'react';
 import { FormControl } from 'react-bootstrap';
 import { FormattedNumber as N } from 'react-intl';
 
-export const primitiveRender = primitiveProps => (<FormControl {...primitiveProps} />);
+export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
 
 export default {
   // primitiveNumberValueRender
   numberValRender(col, rowIndex, valueRender) {
-    return valueRender(
-      rowIndex,
-      v => <N value={v} {...col.renderComponentProps} />,
-    );
+    return valueRender(rowIndex, v => <N value={v} {...col.renderComponentProps} />);
   },
   // primitiveCellEdit
   cellEdit(
@@ -71,15 +68,7 @@ export default {
     return primitiveRender({ ...primitiveProps });
   },
   // primitiveCellFilter
-  cellFilter(
-    col,
-    column,
-    tabIndex,
-    gridId,
-    filterValueParser,
-    formControlType,
-    functions,
-  ) {
+  cellFilter(col, column, tabIndex, gridId, filterValueParser, formControlType, functions) {
     const primitiveProps = {
       id: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       style: column.style,

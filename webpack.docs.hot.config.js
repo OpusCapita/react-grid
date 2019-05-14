@@ -29,6 +29,4 @@ const hotConfig = {
   },
 };
 
-const mergedConfig = merge(devConfig, hotConfig);
-
-module.exports = mergedConfig;
+module.exports = merge(devConfig, hotConfig);

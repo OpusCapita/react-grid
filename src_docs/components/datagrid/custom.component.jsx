@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 export default class CustomInputComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -16,8 +15,12 @@ export default class CustomInputComponent extends React.Component {
       <input
         type="text"
         value={this.state.value}
-        onChange={(e) => { this.setState({ value: e.target.value }); }}
-        ref={(node) => { this.props.setRef(node); }}
+        onChange={(e) => {
+          this.setState({ value: e.target.value });
+        }}
+        ref={(node) => {
+          this.props.setRef(node);
+        }}
         onKeyDown={this.props.onKeyDown}
         style={{ width: '100%' }}
       />

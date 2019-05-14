@@ -53,7 +53,7 @@ export default class ResponsiveFixedDataTable extends React.Component {
         gridHeight: offsetHeight || initialPixels,
       });
     }
-  }
+  };
 
   getStyle() {
     return {

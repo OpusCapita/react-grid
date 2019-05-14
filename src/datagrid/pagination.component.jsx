@@ -68,8 +68,14 @@ const paginationComponent = (WrappedComponent) => {
       isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
       page: state.datagrid.getIn([GRID.id, 'config', 'page']),
       rowsOnPage: state.datagrid.getIn([GRID.id, 'config', 'rowsOnPage']),
-      sortColumn: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortColumn'], GRID.defaultSortColumn),
-      sortOrder: state.datagrid.getIn([GRID.id, 'config', 'sortingData', 'sortOrder'], GRID.defaultSortOrder),
+      sortColumn: state.datagrid.getIn(
+        [GRID.id, 'config', 'sortingData', 'sortColumn'],
+        GRID.defaultSortColumn,
+      ),
+      sortOrder: state.datagrid.getIn(
+        [GRID.id, 'config', 'sortingData', 'sortOrder'],
+        GRID.defaultSortOrder,
+      ),
     };
   };
 
@@ -79,7 +85,10 @@ const paginationComponent = (WrappedComponent) => {
   });
 
   @injectIntl
-  @connect(mapStateToProps, mapDispatchToProps)
+  @connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )
   class Pager extends React.PureComponent {
     static propTypes = {
       grid: gridShape.isRequired,
@@ -98,14 +107,14 @@ const paginationComponent = (WrappedComponent) => {
         totalLimit: PropTypes.number,
       }),
       rowsOnPage: PropTypes.number,
-      rowsOnPageOptions: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
-        value: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]).isRequired,
-      })),
-      sortColumn: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-      ]),
+      rowsOnPageOptions: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+          value: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string])
+            .isRequired,
+        }),
+      ),
+      sortColumn: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       sortOrder: PropTypes.string,
     };
 
@@ -122,15 +131,12 @@ const paginationComponent = (WrappedComponent) => {
     constructor(props) {
       super(props);
       const {
-        grid,
-        pagination,
-        rowsOnPageOptions,
-        rowsOnPage,
+        grid, pagination, rowsOnPageOptions, rowsOnPage,
       } = props;
       if (pagination && rowsOnPageOptions && rowsOnPageOptions.length > 0) {
-        const defaultRowsOnPage =
-          rowsOnPageOptions.find(option => option.value === pagination.pageSize)
-          || rowsOnPageOptions[0];
+        const defaultRowsOnPage = rowsOnPageOptions.find(
+          option => option.value === pagination.pageSize,
+        ) || rowsOnPageOptions[0];
         if (defaultRowsOnPage && defaultRowsOnPage.value !== rowsOnPage) {
           props.setRowsOnPage(grid, defaultRowsOnPage.value);
         }
@@ -139,21 +145,18 @@ const paginationComponent = (WrappedComponent) => {
 
     componentDidUpdate = (prevProps) => {
       const {
-        filterData,
-        pagination,
-        page,
-        rowsOnPage,
-        sortColumn,
-        sortOrder,
+        filterData, pagination, page, rowsOnPage, sortColumn, sortOrder,
       } = this.props;
       if (pagination && !filterData.equals(prevProps.filterData) && page > 1) {
         this.gotoPage(1);
-      } else if (pagination && (
-        !filterData.equals(prevProps.filterData) ||
-        page !== prevProps.page ||
-        rowsOnPage !== prevProps.rowsOnPage ||
-        sortColumn !== prevProps.sortColumn ||
-        sortOrder !== prevProps.sortOrder)) {
+      } else if (
+        pagination
+        && (!filterData.equals(prevProps.filterData)
+          || page !== prevProps.page
+          || rowsOnPage !== prevProps.rowsOnPage
+          || sortColumn !== prevProps.sortColumn
+          || sortOrder !== prevProps.sortOrder)
+      ) {
         this.requestData();
       }
     };
@@ -161,25 +164,20 @@ const paginationComponent = (WrappedComponent) => {
     getSelectedRowsOnPageOption = () => {
       const { rowsOnPage, rowsOnPageOptions } = this.props;
       return rowsOnPageOptions.find(option => option.value === rowsOnPage);
-    }
+    };
 
     requestData = () => {
       const {
-        filterData,
-        pagination,
-        page,
-        rowsOnPage,
-        sortColumn,
-        sortOrder,
+        filterData, pagination, page, rowsOnPage, sortColumn, sortOrder,
       } = this.props;
-      const offset = ((page) - 1) * rowsOnPage;
+      const offset = (page - 1) * rowsOnPage;
       pagination.getData(offset, rowsOnPage, filterData, sortColumn, sortOrder);
-    }
+    };
 
     gotoPage = (page) => {
       const { grid } = this.props;
       this.props.setPage(grid, page);
-    }
+    };
 
     handleRowsOnPageChange = (rowsOnPageOption) => {
       const { grid, page, pagination } = this.props;
@@ -188,7 +186,7 @@ const paginationComponent = (WrappedComponent) => {
       if (page > Math.ceil(pagination.totalSize / rowsOnPage)) {
         this.gotoPage(1);
       }
-    }
+    };
 
     renderTotalCount = () => {
       const { intl, pagination } = this.props;
@@ -206,7 +204,7 @@ const paginationComponent = (WrappedComponent) => {
           break;
       }
       return <span>{label}</span>;
-    }
+    };
 
     render = () => {
       const {
@@ -221,12 +219,13 @@ const paginationComponent = (WrappedComponent) => {
         rowsOnPageOptions,
       } = this.props;
       const pageCount = pagination && pagination.totalSize > 0 && rowsOnPage > 0
-        ? Math.ceil(pagination.totalSize / rowsOnPage) : 1;
+        ? Math.ceil(pagination.totalSize / rowsOnPage)
+        : 1;
       const pages = [];
       for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
       }
-      return (pagination ?
+      return pagination ? (
         <WrappedComponent {...this.props} grid={{ ...grid, pagination: true }}>
           {children}
           <Pagination className="footer">
@@ -253,9 +252,10 @@ const paginationComponent = (WrappedComponent) => {
             </RowsOnPage>
           </Pagination>
         </WrappedComponent>
-        : <WrappedComponent {...this.props} />
+      ) : (
+        <WrappedComponent {...this.props} />
       );
-    }
+    };
   }
 
   return Pager;

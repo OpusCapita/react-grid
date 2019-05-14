@@ -3,7 +3,19 @@
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-const { bool, number, string, func, object, node, array, shape, any, oneOfType, arrayOf } = PropTypes;
+const {
+  bool,
+  number,
+  string,
+  func,
+  object,
+  node,
+  array,
+  shape,
+  any,
+  oneOfType,
+  arrayOf,
+} = PropTypes;
 const { list, map, mapOf } = ImmutablePropTypes;
 
 export const configStorageShape = shape({
@@ -15,9 +27,9 @@ export const configStorageShape = shape({
 export const gridShape = shape({
   id: string.isRequired,
   idKeyPath: arrayOf(string).isRequired, // keyPath to id data
-  defaultShowFilteringRow: bool,         // is filtering row shown as default
-  defaultSortColumn: string,             // columnKey of column that is sorted by default
-  defaultSortOrder: string,              // default sort order [asc/desc]
+  defaultShowFilteringRow: bool, // is filtering row shown as default
+  defaultSortColumn: string, // columnKey of column that is sorted by default
+  defaultSortOrder: string, // default sort order [asc/desc]
   disableRememberColumnWidths: bool,
   disableRememberSortData: bool,
   disableRememberIsFiltering: bool,
@@ -34,64 +46,70 @@ export const gridShape = shape({
 
 export const columnShape = shape({
   header: node,
-  columnKey: string,              // Use valueKeyPath if possible, this is calculated from there
-  valueKeyPath: array,            // key path for the cell data value, required if no columnKey is given
-  valueType: string,              // data value type [text/number/float/boolean/date]
-  valueOptions: shape({           // options for the value type
-    currencyKeyPath: array,       // key path to currency code (only for currency data type)
-    decimals: number,             // number of decimals override
-    thousandSeparator: string,    // thousand separator override
-    decimalSeparator: string,     // decimal separator override
+  columnKey: string, // Use valueKeyPath if possible, this is calculated from there
+  valueKeyPath: array, // key path for the cell data value, required if no columnKey is given
+  valueType: string, // data value type [text/number/float/boolean/date]
+  valueOptions: shape({
+    // options for the value type
+    currencyKeyPath: array, // key path to currency code (only for currency data type)
+    decimals: number, // number of decimals override
+    thousandSeparator: string, // thousand separator override
+    decimalSeparator: string, // decimal separator override
   }),
-  componentType: string,          // edit component type [text/number/float/select/multiselect/boolean/date]
-  valueRender: func,              // custom renderer for the value, data as parameter
-  editValueRender: func,          // custom renderer for the edit value, data as parameter
-  createValueRender: func,        // custom renderer for the create value, data as parameter
-  filterValueRender: func,        // custom renderer for the filter value, data as parameter
-  cell: func,                     // override cell renderer, rowIndex as parameter
-  cellEdit: func,                 // override cellEdit renderer, rowIndex as parameter
-  cellCreate: func,               // override cellCreate renderer, rowIndex as parameter
-  cellFilter: func,               // override cellFilter renderer, rowIndex as parameter
-  renderComponentProps: object,   // additional props to the render component
-  editComponentProps: object,     // additional props to the edit component
-  createComponentProps: object,   // additional props to the create component
-  filterComponentProps: object,   // additional props to the filter component
+  componentType: string, // edit component type [text/number/float/select/multiselect/boolean/date]
+  valueRender: func, // custom renderer for the value, data as parameter
+  editValueRender: func, // custom renderer for the edit value, data as parameter
+  createValueRender: func, // custom renderer for the create value, data as parameter
+  filterValueRender: func, // custom renderer for the filter value, data as parameter
+  cell: func, // override cell renderer, rowIndex as parameter
+  cellEdit: func, // override cellEdit renderer, rowIndex as parameter
+  cellCreate: func, // override cellCreate renderer, rowIndex as parameter
+  cellFilter: func, // override cellFilter renderer, rowIndex as parameter
+  renderComponentProps: object, // additional props to the render component
+  editComponentProps: object, // additional props to the edit component
+  createComponentProps: object, // additional props to the create component
+  filterComponentProps: object, // additional props to the filter component
   width: number,
   minWidth: number,
   maxWidth: number,
-  align: string,                  // vertical cell alignment, defaults to 'left'
-  fixed: bool,                    // is column fixed
-  fixedRight: bool,               // is column fixed to right
-  allowCellsRecycling: bool,      // allow cells to be recycled for better horizontal scrolling perf
-  disableResizing: bool,          // disable column resizing
-  disableEditing: bool,           // disable input component (make read-only) when editing/creating
-  disableSorting: bool,           // disable filtering on this column
-  disableEditingOnValueMatch: shape({ // disable editing/creating input when other columns value match
+  align: string, // vertical cell alignment, defaults to 'left'
+  fixed: bool, // is column fixed
+  fixedRight: bool, // is column fixed to right
+  allowCellsRecycling: bool, // allow cells to be recycled for better horizontal scrolling perf
+  disableResizing: bool, // disable column resizing
+  disableEditing: bool, // disable input component (make read-only) when editing/creating
+  disableSorting: bool, // disable filtering on this column
+  disableEditingOnValueMatch: shape({
+    // disable editing/creating input when other columns value match
     matchValueKeyPath: array,
     matchValue: any,
   }),
-  onValueMatchChangeValue: shape({ // Change other column value when data matches
+  onValueMatchChangeValue: shape({
+    // Change other column value when data matches
     matchValue: any,
     newValueKeyPath: array,
     newValue: any,
   }),
   flexGrow: number,
-  valueEmptyChecker: func,        // override function that checks if value is considered as empty
-  sortValueGetter: func,          // override sort value getter, defaults to getIn(valueKeyPath)
-  sortComparator: func,           // override sort comparator function, default sorts by valueType
-  filterMatcher: func,            // override filter matcher function, that defined when filter matches data
-  defaultValue: any,              // default value for the column when creating new item
-  isRequired: bool,               // is column value required
-  isHidden: bool,                 // is column hidden by default
-  onEditValueChange: func,        // callback with (value, valueKeyPath, rowIndex, dataId)
-  onCreateValueChange: func,      // callbac with (value, valueKeyPath, rowIndex)
-  onCreateBlur: func,             // callback with (value, rowIndex)
-  onEditBlur: func,               // callback with (value, rowIndex, dataId)
-  selectComponentOptions: arrayOf(shape({
-    value: oneOfType([number, string, bool]).isRequired,
-    label: oneOfType([number, string]).isRequired,
-  })),
-  selectComponentTranslations: shape({ // customize select components placeholder, multi-select label and noResults texts.
+  valueEmptyChecker: func, // override function that checks if value is considered as empty
+  sortValueGetter: func, // override sort value getter, defaults to getIn(valueKeyPath)
+  sortComparator: func, // override sort comparator function, default sorts by valueType
+  filterMatcher: func, // override filter matcher function, that defined when filter matches data
+  defaultValue: any, // default value for the column when creating new item
+  isRequired: bool, // is column value required
+  isHidden: bool, // is column hidden by default
+  onEditValueChange: func, // callback with (value, valueKeyPath, rowIndex, dataId)
+  onCreateValueChange: func, // callbac with (value, valueKeyPath, rowIndex)
+  onCreateBlur: func, // callback with (value, rowIndex)
+  onEditBlur: func, // callback with (value, rowIndex, dataId)
+  selectComponentOptions: arrayOf(
+    shape({
+      value: oneOfType([number, string, bool]).isRequired,
+      label: oneOfType([number, string]).isRequired,
+    }),
+  ),
+  selectComponentTranslations: shape({
+    // customize select components placeholder, multi-select label and noResults texts.
     placeholder: string,
     noResultsText: string,
     selected: string,
@@ -129,10 +147,7 @@ export const propTypes = {
   isEditing: bool.isRequired,
   isCreating: bool.isRequired,
   isFiltering: bool.isRequired,
-  sortColumn: oneOfType([
-    string,
-    number,
-  ]),
+  sortColumn: oneOfType([string, number]),
   sortOrder: string,
   visibleColumns: list.isRequired,
   columnWidths: map.isRequired,
@@ -158,15 +173,17 @@ export const propTypes = {
   actionBar: node,
   actionBarLeft: node,
   cellSelect: bool,
-  disableDropdown: bool,              // Don't use dropdown menu in the action bar
-  disableFilteringControls: bool,     // Don't display the filtering controls (only valid if disableDropdown is true)
-  dropdownMenuItems: arrayOf(shape({
-    id: string,
-    title: node,
-    icon: node,
-    onClick: func,
-    disabled: oneOfType([bool, func]),
-  })),
+  disableDropdown: bool, // Don't use dropdown menu in the action bar
+  disableFilteringControls: bool, // Don't display the filtering controls (only valid if disableDropdown is true)
+  dropdownMenuItems: arrayOf(
+    shape({
+      id: string,
+      title: node,
+      icon: node,
+      onClick: func,
+      disabled: oneOfType([bool, func]),
+    }),
+  ),
   inlineEdit: bool,
   inlineAdd: bool,
   filtering: bool,
@@ -175,16 +192,22 @@ export const propTypes = {
   rowSelect: bool,
   rowSelectCheckboxColumn: bool,
   multiSelect: bool,
-  selectComponentOptions: mapOf(arrayOf(shape({  // Options data for the react-select components
-    value: oneOfType([number, string, bool]).isRequired,
-    label: oneOfType([number, string]).isRequired,
-  }))),
-  selectComponentTranslations: shape({  // Options for react-select text translations
+  selectComponentOptions: mapOf(
+    arrayOf(
+      shape({
+        // Options data for the react-select components
+        value: oneOfType([number, string, bool]).isRequired,
+        label: oneOfType([number, string]).isRequired,
+      }),
+    ),
+  ),
+  selectComponentTranslations: shape({
+    // Options for react-select text translations
     placeholder: string.isRequired,
     noResultsText: string.isRequired,
     selected: string.isRequired,
   }),
-  disableActions: bool,               // Disable actions in the action bar
+  disableActions: bool, // Disable actions in the action bar
   disableActionsMessage: shape({
     messageId: string,
     messageValues: shape({}),
@@ -198,8 +221,9 @@ export const propTypes = {
   onAddClick: func,
   onEditClick: func,
   onLastCellTabPress: func,
-  tabIndex: number,                   // tabIndex value for inputs in cells
-  extraColumn: shape({                // Extra fixed column that can't be re-ordered or hidden
+  tabIndex: number, // tabIndex value for inputs in cells
+  extraColumn: shape({
+    // Extra fixed column that can't be re-ordered or hidden
     width: string,
     valueRender: func,
     cellEdit: func,
@@ -207,14 +231,17 @@ export const propTypes = {
     cellFilter: func,
     isResizable: bool,
   }),
-  contextMenuItems: arrayOf(shape({   // Context menu items to display when row is right-clicked
-    value: node,
-    onClick: func,
-    title: string,
-    header: bool,
-    disabled: oneOfType([bool, func]),
-    divider: bool,
-  })),
+  contextMenuItems: arrayOf(
+    shape({
+      // Context menu items to display when row is right-clicked
+      value: node,
+      onClick: func,
+      title: string,
+      header: bool,
+      disabled: oneOfType([bool, func]),
+      divider: bool,
+    }),
+  ),
   // Fixed data table built-in features
   headerHeight: number,
   filterRowHeight: number,

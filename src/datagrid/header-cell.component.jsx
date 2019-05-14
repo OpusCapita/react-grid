@@ -49,33 +49,27 @@ export default class HeaderCell extends React.PureComponent {
   onSortChange = (e) => {
     // Check if click target is in actual header table cell, not the filtering input component
     if (
-      e.target.className !== 'public_fixedDataTableCell_cellContent' &&
-      e.target.parentElement.className !== 'public_fixedDataTableCell_cellContent'
+      e.target.className !== 'public_fixedDataTableCell_cellContent'
+      && e.target.parentElement.className !== 'public_fixedDataTableCell_cellContent'
     ) {
       return false;
     }
     if (!Utils.isSortable(this.props.column)) return false;
     if (this.props.isBusy) return false;
     e.preventDefault();
-    const order = (
-      this.props.currentSortColumn === Utils.getColumnKey(this.props.column) &&
-      this.props.currentSortOrder === 'asc'
-    ) ? 'desc' : 'asc';
+    const order = this.props.currentSortColumn === Utils.getColumnKey(this.props.column)
+      && this.props.currentSortOrder === 'asc'
+      ? 'desc'
+      : 'asc';
     if (this.props.onSortChange) {
-      this.props.onSortChange(
-        this.props.grid,
-        this.props.columns,
-        this.props.column,
-        order,
-      );
+      this.props.onSortChange(this.props.grid, this.props.columns, this.props.column, order);
     }
     return true;
-  }
+  };
 
   getFilteringComponent = (filtering, column) => (
-    filtering ?
-      <div className="oc-datagrid-row-filter">{column.cellFilter()}</div> : null
-  )
+    filtering ? <div className="oc-datagrid-row-filter">{column.cellFilter()}</div> : null
+  );
 
   render() {
     const {

@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
+import {
+  DropdownButton, Form, Button, MenuItem,
+} from 'react-bootstrap';
 import uuid from 'uuid';
 // app
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { getLocaleFormatData } from '../../services/internationalization.service';
-import { GRID, columns, getData, REGIONS } from './datagrid.constants';
+import {
+  GRID, columns, getData, REGIONS,
+} from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -34,7 +38,10 @@ const mapStateToProps = state => ({
 });
 
 export default
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)
 class DatagridView extends React.Component {
   static propTypes = {
     // State props
@@ -79,10 +86,7 @@ class DatagridView extends React.Component {
     const { region } = this.state;
     const title = `Region: ${REGIONS[region] || ''}`;
     return (
-      <DropdownButton
-        id="region-selector"
-        title={title}
-      >
+      <DropdownButton id="region-selector" title={title}>
         {Object.keys(REGIONS).map(key => (
           <MenuItem
             eventKey={key}
@@ -95,7 +99,7 @@ class DatagridView extends React.Component {
         ))}
       </DropdownButton>
     );
-  }
+  };
 
   handleRegionSelect = (eventKey) => {
     const { dateFormat, thousandSeparator, decimalSeparator } = getLocaleFormatData(eventKey);
@@ -110,18 +114,18 @@ class DatagridView extends React.Component {
       gridSettings,
       region: eventKey,
     });
-  }
+  };
 
   handleWarnClick = () => {
     this.props.cellShowMessage(GRID, 'warning', 3, ['float'], 'Warning');
-  }
+  };
 
   handleInfoClick = () => {
     const messages = Map()
       .setIn(['info', 1], Map({ text: 'Text message 1', date: 'Date message 1' }))
       .setIn(['info', 3], Map({ text: 'Text message 3' }));
     this.props.cellShowMessages(GRID, messages);
-  }
+  };
 
   handleOnSave = () => {
     const { createData, editData, allData } = this.props;
@@ -148,7 +152,7 @@ class DatagridView extends React.Component {
     } else {
       this.props.saveFail(GRID);
     }
-  }
+  };
 
   handleOnRemove = () => {
     const removedItems = this.props.selectedItems.toJS();
@@ -158,29 +162,21 @@ class DatagridView extends React.Component {
     } else {
       this.props.removeFail(GRID);
     }
-  }
+  };
 
   handleContextClick = (selectedIds, selectedData) => {
     console.log('Context menu clicked');
     console.log(`ID's ${selectedIds.join(', ')}`);
     console.table(selectedData.toSJ());
-  }
+  };
 
   render() {
-    const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
+    const disableActionSave = this.props.isEditing && this.props.editData.size === 0;
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
-        <Button
-          onClick={this.handleWarnClick}
-        >
-          Show Warning
-        </Button>
-        <Button
-          onClick={this.handleInfoClick}
-        >
-          Show Info
-        </Button>
-        { this.getRegionComponent() }
+        <Button onClick={this.handleWarnClick}>Show Warning</Button>
+        <Button onClick={this.handleInfoClick}>Show Info</Button>
+        {this.getRegionComponent()}
       </Form>
     );
     return (
@@ -206,8 +202,7 @@ class DatagridView extends React.Component {
           {
             value: 'Selected items are used',
             onClick: this.handleContextClick,
-            disabled: (selectedIds, selectedData) =>
-              selectedData.count(d => d.get('isUsed', false) === true) !== selectedData.size,
+            disabled: (selectedIds, selectedData) => selectedData.count(d => d.get('isUsed', false) === true) !== selectedData.size,
           },
           {
             value: 'View more details...',

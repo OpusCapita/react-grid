@@ -24,8 +24,10 @@ class ColumnSettings extends React.PureComponent {
   constructor(props) {
     super(props);
     const availableColumns = ColumnSettingsUtils.getAvailableColumns(props.columns);
-    const selectedColumns = ColumnSettingsUtils
-      .getSelectedColumns(props.columns, props.visibleColumns);
+    const selectedColumns = ColumnSettingsUtils.getSelectedColumns(
+      props.columns,
+      props.visibleColumns,
+    );
     this.state = {
       availableColumns,
       selectedColumns,
@@ -35,19 +37,21 @@ class ColumnSettings extends React.PureComponent {
 
   handleCancelClick = () => {
     this.props.closeColumnSettingsModal(this.props.grid);
-  }
+  };
 
   handleOkClick = () => {
-    const hiddenColumns = ColumnSettingsUtils
-      .getHiddenColumns(this.state.availableColumns, this.state.selectedColumns);
+    const hiddenColumns = ColumnSettingsUtils.getHiddenColumns(
+      this.state.availableColumns,
+      this.state.selectedColumns,
+    );
     const columnOrders = ColumnSettingsUtils.getColumnOrders(this.state.selectedColumns);
     this.props.saveColumnSettings(this.props.grid, hiddenColumns, columnOrders);
     this.props.closeColumnSettingsModal(this.props.grid);
-  }
+  };
 
   handleSelectionChange = (data) => {
     this.setState({ allSelected: data.allSelected, selectedColumns: data.selectedData.toJS() });
-  }
+  };
 
   render() {
     return (
@@ -59,7 +63,9 @@ class ColumnSettings extends React.PureComponent {
         onHide={this.handleCancelClick}
       >
         <Modal.Header>
-          <Modal.Title><M id="Grid.ColumnSettings.Header" /></Modal.Title>
+          <Modal.Title>
+            <M id="Grid.ColumnSettings.Header" />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <SelectOrderList

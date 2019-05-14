@@ -1,12 +1,11 @@
 import React from 'react';
-import FaCheck from 'react-icons/lib/fa/check';
+import { FaCheck } from 'react-icons/fa';
 import Checkbox from '@opuscapita/react-checkbox';
 import { selectRender } from './select-renderers';
 
-export const checkboxRender = checkboxProps => (<Checkbox {...checkboxProps} />);
+export const checkboxRender = checkboxProps => <Checkbox {...checkboxProps} />;
 
 export default {
-
   valRender(rowIndex, valueRender) {
     return valueRender(rowIndex, v => (v ? <FaCheck size={20} /> : null));
   },

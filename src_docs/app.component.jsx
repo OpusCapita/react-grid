@@ -2,11 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl-redux';
 import thunk from 'redux-thunk';
@@ -17,8 +13,7 @@ import ExampleContainer from './containers/example.container';
 import './app.component.scss';
 import './images/favicon.ico';
 
-const composeEnhancers = (process.env.NODE_ENV !== 'production' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const composeEnhancers = (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const initialState = {
   intl: {
@@ -27,12 +22,7 @@ const initialState = {
   },
 };
 
-const store = createStore(
-  reducers,
-  initialState,
-  composeEnhancers(applyMiddleware(thunk)),
-);
-
+const store = createStore(reducers, initialState, composeEnhancers(applyMiddleware(thunk)));
 
 if (module.hot) {
   // Enable Webpack hot module replacement for reducers

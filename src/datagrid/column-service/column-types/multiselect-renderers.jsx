@@ -2,13 +2,12 @@ import React from 'react';
 import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
 import Checkbox from '@opuscapita/react-checkbox';
 
-const MultiValueContainer = label => properties => (
-  properties.selectProps.value
-  && properties.selectProps.value.findIndex(selectProp =>
-    selectProp.value === properties.data.value) === 0
-    ? <span>{label.replace('<n>', properties.selectProps.value.length)}</span>
-    : null
-);
+const MultiValueContainer = label => properties => (properties.selectProps.value
+  && properties.selectProps.value.findIndex(
+    selectProp => selectProp.value === properties.data.value,
+  ) === 0 ? (
+    <span>{label.replace('<n>', properties.selectProps.value.length)}</span>
+  ) : null);
 
 export default {
   cellFilter(
@@ -21,15 +20,15 @@ export default {
     editValueParser,
     functions,
   ) {
-    const opts = col.filterSelectOptionsMod && selectOptions ?
-      col.filterSelectOptionsMod(selectOptions.slice(), col) :
-      selectOptions;
+    const opts = col.filterSelectOptionsMod && selectOptions
+      ? col.filterSelectOptionsMod(selectOptions.slice(), col)
+      : selectOptions;
     const value = functions.getItemValue(col, { selectOptions });
-    const options = opts.map(option => (
-      value && value.some(o => option.value === o.value)
+    const options = opts.map(
+      option => (value && value.some(o => option.value === o.value)
         ? { ...option, checked: true }
-        : option
-    ));
+        : option),
+    );
 
     // eslint-disable-next-line react/prop-types
     const Option = ({ data: { checked, label }, innerProps }) => (
@@ -43,7 +42,7 @@ export default {
       ...selectTranslations,
       components: { MultiValueContainer: MultiValueContainer(selectTranslations.selected), Option },
       hideSelectedOptions: false,
-      isSearchable: selectOptions && (selectOptions.length > 9),
+      isSearchable: selectOptions && selectOptions.length > 9,
       isClearable: true,
       isMulti: true,
       name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,

@@ -8,8 +8,6 @@ export default class ComponentView extends React.PureComponent {
   }
 
   render() {
-    return (
-      <Example />
-    );
+    return <Example />;
   }
 }

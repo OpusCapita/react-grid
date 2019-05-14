@@ -14,8 +14,8 @@ export default {
     const baseCol = {
       header: col.header,
       columnKey: Utils.getColumnKey(col),
-      width: (col.width || col.width === 0 ? col.width : 200),
-      minWidth: (col.minWidth || col.minWidth === 0 ? col.minWidth : 40),
+      width: col.width || col.width === 0 ? col.width : 200,
+      minWidth: col.minWidth || col.minWidth === 0 ? col.minWidth : 40,
       maxWidth: col.maxWidth,
       isResizable: !col.disableResizing,
       fixed: !!col.fixed,
@@ -90,24 +90,31 @@ export default {
     if (col.cellEdit) {
       column.cellEdit = col.cellEdit;
     } else if (col.editValueRender) {
-      column.cellEdit = (rowIndex, setRef, onKeyDown) =>
-        col.editValueRender(props.data.get(rowIndex), rowIndex, setRef, onKeyDown);
+      column.cellEdit = (rowIndex, setRef, onKeyDown) => col.editValueRender(
+        props.data.get(rowIndex),
+        rowIndex,
+        setRef,
+        onKeyDown,
+      );
     }
 
     // cellCreate render
     if (col.cellCreate) {
       column.cellCreate = col.cellCreate;
     } else if (col.createValueRender) {
-      column.cellCreate = (rowIndex, setRef, onKeyDown) =>
-        col.createValueRender(props.data.get(rowIndex), rowIndex, setRef, onKeyDown);
+      column.cellCreate = (rowIndex, setRef, onKeyDown) => col.createValueRender(
+        props.data.get(rowIndex),
+        rowIndex,
+        setRef,
+        onKeyDown,
+      );
     }
 
     // cellFilter render
     if (col.cellFilter) {
       column.cellFilter = col.cellFilter;
     } else if (col.filterValueRender) {
-      column.cellFilter = rowIndex =>
-        col.filterValueRender(props.data.get(rowIndex), rowIndex);
+      column.cellFilter = rowIndex => col.filterValueRender(props.data.get(rowIndex), rowIndex);
     }
     return column;
   },
@@ -115,7 +122,7 @@ export default {
   columnComponentType(baseColumn, tabIndex, props, col, functions, getDisabledState) {
     if (!col.componentType) return baseColumn;
     const column = baseColumn;
-    let editValueParser = col.editValueParser ? col.editValueParser : val => val; // eslint-disable-line
+    const editValueParser = col.editValueParser ? col.editValueParser : val => val;
     // Grid internal functions separated
     const editFunctions = { ...functions.edit };
     const createFunctions = { ...functions.create };
@@ -124,24 +131,26 @@ export default {
       case 'float':
       case 'number':
       case 'text': {
-        const formControlType = col.componentType === 'float' || col.componentType === 'number' ? 'text' : col.componentType;
+        const formControlType = col.componentType === 'float' || col.componentType === 'number'
+          ? 'text'
+          : col.componentType;
         // always use col.editValueParser override if available
-        const primitiveValParser = !col.editValueParser && col.componentType === 'float' ?
-          (val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')) : editValueParser;
+        const primitiveValParser = !col.editValueParser && col.componentType === 'float'
+          ? val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')
+          : editValueParser;
 
         if (props.inlineEdit && !column.cellEdit) {
-          column.cellEdit = rowIndex =>
-            PrimitiveType.cellEdit(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              primitiveValParser,
-              formControlType,
-              ...editFunctions,
-              getDisabledState,
-            );
+          column.cellEdit = rowIndex => PrimitiveType.cellEdit(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            primitiveValParser,
+            formControlType,
+            ...editFunctions,
+            getDisabledState,
+          );
         }
 
         if (props.inlineEdit && !column.cellCreate) {
@@ -194,130 +203,121 @@ export default {
           );
         }
         if (props.filtering && !column.cellFilter) {
-          column.cellFilter = () =>
-            CheckboxType.cellFilter(
-              col,
-              column,
-              tabIndex,
-              props.grid.id,
-              props.intl,
-              ...filterFunctions,
-            );
+          column.cellFilter = () => CheckboxType.cellFilter(
+            col,
+            column,
+            tabIndex,
+            props.grid.id,
+            props.intl,
+            ...filterFunctions,
+          );
         }
         break;
       }
 
       case 'multiselect': {
-        const selectOptions = col.selectComponentOptions ||
-          props.selectComponentOptions.get(column.columnKey);
-        const selectTranslations = col.selectComponentTranslations ||
-          {
-            placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
-            noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
-            // Variable 'n' must be provided in this phase in order to avoid
-            // Error: The intl string context variable 'n' was not provided to the string {n}
-            // selected
-            // Variable n is replaced later, when its value is available
-            selected: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Selected' }, { n: '<n>' }),
-          };
+        const selectOptions = col.selectComponentOptions
+          || props.selectComponentOptions.get(column.columnKey);
+        const selectTranslations = col.selectComponentTranslations || {
+          placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
+          noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
+          // Variable 'n' must be provided in this phase in order to avoid
+          // Error: The intl string context variable 'n' was not provided to the string {n}
+          // selected
+          // Variable n is replaced later, when its value is available
+          selected: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Selected' }, { n: '<n>' }),
+        };
 
         if (props.inlineEdit && !column.cellEdit) {
-          column.cellEdit = rowIndex =>
-            SelectType.cellEdit(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...editFunctions,
-              getDisabledState,
-            );
+          column.cellEdit = rowIndex => SelectType.cellEdit(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...editFunctions,
+            getDisabledState,
+          );
         }
         if (props.inlineEdit && !column.cellCreate) {
-          column.cellCreate = rowIndex =>
-            SelectType.cellCreate(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...createFunctions,
-              getDisabledState,
-            );
+          column.cellCreate = rowIndex => SelectType.cellCreate(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...createFunctions,
+            getDisabledState,
+          );
         }
         if (props.filtering && !column.cellFilter) {
-          column.cellFilter = () =>
-            MultiSelectType.cellFilter(
-              col,
-              column,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...filterFunctions,
-            );
+          column.cellFilter = () => MultiSelectType.cellFilter(
+            col,
+            column,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...filterFunctions,
+          );
         }
         break;
       }
 
       case 'select': {
-        const selectOptions = col.selectComponentOptions ||
-          props.selectComponentOptions.get(column.columnKey);
-        const selectTranslations = col.selectComponentTranslations ||
-          {
-            placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
-            noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
-          };
+        const selectOptions = col.selectComponentOptions
+          || props.selectComponentOptions.get(column.columnKey);
+        const selectTranslations = col.selectComponentTranslations || {
+          placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
+          noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
+        };
 
         if (props.inlineEdit && !column.cellEdit) {
-          column.cellEdit = rowIndex =>
-            SelectType.cellEdit(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...editFunctions,
-              getDisabledState,
-            );
+          column.cellEdit = rowIndex => SelectType.cellEdit(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...editFunctions,
+            getDisabledState,
+          );
         }
         if (props.inlineEdit && !column.cellCreate) {
-          column.cellCreate = rowIndex =>
-            SelectType.cellCreate(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...createFunctions,
-              getDisabledState,
-            );
+          column.cellCreate = rowIndex => SelectType.cellCreate(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...createFunctions,
+            getDisabledState,
+          );
         }
         if (props.filtering && !column.cellFilter) {
-          column.cellFilter = () =>
-            SelectType.cellFilter(
-              col,
-              column,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...filterFunctions,
-            );
+          column.cellFilter = () => SelectType.cellFilter(
+            col,
+            column,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...filterFunctions,
+          );
         }
         break;
       }
@@ -333,47 +333,44 @@ export default {
         };
 
         if (props.inlineEdit && !column.cellEdit) {
-          column.cellEdit = rowIndex =>
-            BooleanType.cellEdit(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...editFunctions,
-              getDisabledState,
-            );
+          column.cellEdit = rowIndex => BooleanType.cellEdit(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...editFunctions,
+            getDisabledState,
+          );
         }
         if (props.inlineEdit && !column.cellCreate) {
-          column.cellCreate = rowIndex =>
-            BooleanType.cellCreate(
-              col,
-              column,
-              rowIndex,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...createFunctions,
-              getDisabledState,
-            );
+          column.cellCreate = rowIndex => BooleanType.cellCreate(
+            col,
+            column,
+            rowIndex,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...createFunctions,
+            getDisabledState,
+          );
         }
         if (props.filtering && !column.cellFilter) {
-          column.cellFilter = () =>
-            BooleanType.cellFilter(
-              col,
-              column,
-              tabIndex,
-              props.grid.id,
-              selectOptions,
-              selectTranslations,
-              editValueParser,
-              ...filterFunctions,
-            );
+          column.cellFilter = () => BooleanType.cellFilter(
+            col,
+            column,
+            tabIndex,
+            props.grid.id,
+            selectOptions,
+            selectTranslations,
+            editValueParser,
+            ...filterFunctions,
+          );
         }
         break;
       }
@@ -408,17 +405,16 @@ export default {
           );
         }
         if (props.filtering && !column.cellFilter) {
-          column.cellFilter = () =>
-            DateType.cellFilter(
-              col,
-              column,
-              tabIndex,
-              props.grid.id,
-              props.region,
-              props.dateFormat,
-              editValueParser,
-              ...filterFunctions,
-            );
+          column.cellFilter = () => DateType.cellFilter(
+            col,
+            column,
+            tabIndex,
+            props.grid.id,
+            props.region,
+            props.dateFormat,
+            editValueParser,
+            ...filterFunctions,
+          );
         }
         break;
       }

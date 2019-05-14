@@ -19,10 +19,6 @@ export default class ActionBar extends React.PureComponent {
       'oc-datagrid-actionbar': true,
       [this.props.position]: !!this.props.position,
     });
-    return (
-      <div className={className}>
-        { this.props.children }
-      </div>
-    );
+    return <div className={className}>{this.props.children}</div>;
   }
 }

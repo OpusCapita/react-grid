@@ -4,9 +4,7 @@ import {
   FloatingSelectPortalCreatable,
 } from '@opuscapita/react-floating-select';
 
-export const selectRender = selectProps => (
-  <FloatingSelectPortal {...selectProps} />
-);
+export const selectRender = selectProps => <FloatingSelectPortal {...selectProps} />;
 
 export const creatableSelectRender = selectProps => (
   <FloatingSelectPortalCreatable {...selectProps} />
@@ -26,9 +24,9 @@ export default {
     getComponentDisabledState,
   ) {
     const cellName = 'edit';
-    const opts = col.editSelectOptionsMod && selectOptions ?
-      col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-      selectOptions;
+    const opts = col.editSelectOptionsMod && selectOptions
+      ? col.editSelectOptionsMod(selectOptions.slice(), rowIndex, col)
+      : selectOptions;
     const fsProps = {
       name: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: opts,
@@ -37,7 +35,7 @@ export default {
       onBlur: functions.onCellBlur(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       onKeyDown: functions.onCellKeyDown(rowIndex, col),
-      isSearchable: selectOptions && (selectOptions.length > 9),
+      isSearchable: selectOptions && selectOptions.length > 9,
       isClearable: !col.isRequired,
       backSpaceRemovesValue: false,
       tabSelectsValue: false,
@@ -66,9 +64,9 @@ export default {
     getComponentDisabledState,
   ) {
     const cellName = 'create';
-    const opts = col.createSelectOptionsMod && selectOptions ?
-      col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col) :
-      selectOptions;
+    const opts = col.createSelectOptionsMod && selectOptions
+      ? col.createSelectOptionsMod(selectOptions.slice(), rowIndex, col)
+      : selectOptions;
     const fsProps = {
       name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
       options: opts,
@@ -77,7 +75,7 @@ export default {
       onBlur: functions.onCellBlur(rowIndex, col),
       onKeyDown: functions.onCellKeyDown(rowIndex, col),
       onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
-      isSearchable: selectOptions && (selectOptions.length > 9),
+      isSearchable: selectOptions && selectOptions.length > 9,
       isClearable: !col.isRequired,
       backspaceRemovesValue: false,
       tabSelectsValue: false,
@@ -103,15 +101,15 @@ export default {
     editValueParser,
     functions,
   ) {
-    const opts = col.filterSelectOptionsMod && selectOptions ?
-      col.filterSelectOptionsMod(selectOptions.slice(), col) :
-      selectOptions;
+    const opts = col.filterSelectOptionsMod && selectOptions
+      ? col.filterSelectOptionsMod(selectOptions.slice(), col)
+      : selectOptions;
     const fsProps = {
       name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
       options: opts,
       value: functions.getItemValue(col, { selectOptions }),
       onChange: functions.onCellValueChange(col, editValueParser),
-      isSearchable: selectOptions && (selectOptions.length > 9),
+      isSearchable: selectOptions && selectOptions.length > 9,
       isClearable: true,
       tabSelectsValue: false,
       tabIndex,
@@ -121,5 +119,4 @@ export default {
 
     return selectRender({ ...fsProps });
   },
-
 };

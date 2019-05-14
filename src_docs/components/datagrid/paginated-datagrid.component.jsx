@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List, Map, fromJS } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { DropdownButton, Form, Button, MenuItem } from 'react-bootstrap';
+import {
+  DropdownButton, Form, Button, MenuItem,
+} from 'react-bootstrap';
 import { Datagrid, DatagridActions } from '../../../src/index';
 import Utils from '../../../src/datagrid/datagrid.utils';
 import { getLocaleFormatData } from '../../services/internationalization.service';
-import { PAGINATION_GRID as GRID, columns, getData, REGIONS } from './datagrid.constants';
+import {
+  PAGINATION_GRID as GRID, columns, getData, REGIONS,
+} from './datagrid.constants';
 import './datagrid.component.scss';
 
 // Needed grid actions are mapped here
@@ -33,7 +37,10 @@ const mapStateToProps = state => ({
 });
 
 export default
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)
 class DatagridView extends React.Component {
   static propTypes = {
     // State props
@@ -58,7 +65,7 @@ class DatagridView extends React.Component {
   static defaultProps = {
     pageSize: 50,
     totalSize: 100,
-  }
+  };
 
   constructor() {
     super();
@@ -83,10 +90,7 @@ class DatagridView extends React.Component {
     const { region } = this.state;
     const title = `Region: ${REGIONS[region] || ''}`;
     return (
-      <DropdownButton
-        id="region-selector"
-        title={title}
-      >
+      <DropdownButton id="region-selector" title={title}>
         {Object.keys(REGIONS).map(key => (
           <MenuItem
             eventKey={key}
@@ -99,28 +103,30 @@ class DatagridView extends React.Component {
         ))}
       </DropdownButton>
     );
-  }
+  };
 
   filter = (filterData, data) => {
-    const filteredData = fromJS(data).filter((row) => {
-      let hits = 0;
-      filterData.forEach((filterValue, filterColumn) => {
-        columns.forEach((column) => {
-          if (Utils.getColumnKey(column) === filterColumn) {
-            const value = row.getIn(column.valueKeyPath);
-            if (value || value === 0 || value === false) {
-              const filterMatcher = Utils.getFilterMatcher(column, GRID.dateFormat);
-              if (filterMatcher(row, filterValue)) {
-                hits += 1;
+    const filteredData = fromJS(data)
+      .filter((row) => {
+        let hits = 0;
+        filterData.forEach((filterValue, filterColumn) => {
+          columns.forEach((column) => {
+            if (Utils.getColumnKey(column) === filterColumn) {
+              const value = row.getIn(column.valueKeyPath);
+              if (value || value === 0 || value === false) {
+                const filterMatcher = Utils.getFilterMatcher(column, GRID.dateFormat);
+                if (filterMatcher(row, filterValue)) {
+                  hits += 1;
+                }
               }
             }
-          }
+          });
         });
-      });
-      return hits === filterData.size;
-    }).toJS();
+        return hits === filterData.size;
+      })
+      .toJS();
     return filteredData;
-  }
+  };
 
   sort = (sortColumn, sortOrder, data) => {
     let column;
@@ -133,19 +139,21 @@ class DatagridView extends React.Component {
     const comparator = Utils.getSortComparator(column);
     const valueGetter = Utils.getSortValueGetter(column);
     const valueEmptyChecker = Utils.getValueEmptyChecker(column);
-    return fromJS(data).sort((a, b) => {
-      const valA = valueGetter(a);
-      const valB = valueGetter(b);
-      if (sortOrder === 'asc') {
-        if (valueEmptyChecker(valA)) return -1;
-        if (valueEmptyChecker(valB)) return 1;
-        return comparator(valA, valB);
-      }
-      if (valueEmptyChecker(valA)) return 1;
-      if (valueEmptyChecker(valB)) return -1;
-      return comparator(valB, valA);
-    }).toJS();
-  }
+    return fromJS(data)
+      .sort((a, b) => {
+        const valA = valueGetter(a);
+        const valB = valueGetter(b);
+        if (sortOrder === 'asc') {
+          if (valueEmptyChecker(valA)) return -1;
+          if (valueEmptyChecker(valB)) return 1;
+          return comparator(valA, valB);
+        }
+        if (valueEmptyChecker(valA)) return 1;
+        if (valueEmptyChecker(valB)) return -1;
+        return comparator(valB, valA);
+      })
+      .toJS();
+  };
 
   requestData = (offset, count, filters, sortColumn, sortOrder) => {
     const { totalSize } = this.props;
@@ -157,10 +165,14 @@ class DatagridView extends React.Component {
       data = this.sort(sortColumn, sortOrder, data);
     }
     this.setState({ totalSize: data.length });
-    console.log(`offset ${offset} count ${count} filters ${JSON.stringify(filters)} sortColumn ${sortColumn} sortOder ${sortOrder}`);
+    console.log(
+      `offset ${offset} count ${count} filters ${JSON.stringify(
+        filters,
+      )} sortColumn ${sortColumn} sortOder ${sortOrder}`,
+    );
     const paginatedData = data.slice(offset, offset + count);
     this.props.setData(GRID, columns, paginatedData);
-  }
+  };
 
   handleRegionSelect = (eventKey) => {
     const { dateFormat, thousandSeparator, decimalSeparator } = getLocaleFormatData(eventKey);
@@ -175,18 +187,18 @@ class DatagridView extends React.Component {
       gridSettings,
       region: eventKey,
     });
-  }
+  };
 
   handleWarnClick = () => {
     this.props.cellShowMessage(GRID, 'warning', 3, ['float'], 'Warning');
-  }
+  };
 
   handleInfoClick = () => {
     const messages = Map()
       .setIn(['info', 1], Map({ text: 'Text message 1', date: 'Date message 1' }))
       .setIn(['info', 3], Map({ text: 'Text message 3' }));
     this.props.cellShowMessages(GRID, messages);
-  }
+  };
 
   handleOnSave = () => {
     const { createData, editData, allData } = this.props;
@@ -212,7 +224,7 @@ class DatagridView extends React.Component {
     } else {
       this.props.saveFail(GRID);
     }
-  }
+  };
 
   handleOnRemove = () => {
     const removedItems = this.props.selectedItems.toJS();
@@ -222,31 +234,23 @@ class DatagridView extends React.Component {
     } else {
       this.props.removeFail(GRID);
     }
-  }
+  };
 
   handleContextClick = (selectedIds, selectedData) => {
     console.log('Context menu clicked');
     console.log(`ID's ${selectedIds.join(', ')}`);
     console.table(selectedData.toSJ());
-  }
+  };
 
   render() {
     const { pageSize } = this.props;
     const { totalSize } = this.state;
-    const disableActionSave = (this.props.isEditing && this.props.editData.size === 0);
+    const disableActionSave = this.props.isEditing && this.props.editData.size === 0;
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
-        <Button
-          onClick={this.handleWarnClick}
-        >
-          Show Warning
-        </Button>
-        <Button
-          onClick={this.handleInfoClick}
-        >
-          Show Info
-        </Button>
-        { this.getRegionComponent() }
+        <Button onClick={this.handleWarnClick}>Show Warning</Button>
+        <Button onClick={this.handleInfoClick}>Show Info</Button>
+        {this.getRegionComponent()}
       </Form>
     );
     return (
@@ -272,8 +276,9 @@ class DatagridView extends React.Component {
           {
             value: 'Selected items are used',
             onClick: this.handleContextClick,
-            disabled: (selectedIds, selectedData) =>
-              selectedData.count(d => d.get('isUsed', false) === true) !== selectedData.size,
+            disabled: (selectedIds, selectedData) => selectedData.count(
+              d => d.get('isUsed', false) === true,
+            ) !== selectedData.size,
           },
           {
             value: 'View more details...',

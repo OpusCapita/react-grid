@@ -6,6 +6,7 @@
     "src/**/*",
     "src_docs/**/*",
     "test/**/*",
-    "tools/**/*"
+    "tools/**/*",
+    "webpack.*"
   ]
 }

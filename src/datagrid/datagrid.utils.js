@@ -4,9 +4,7 @@ import isNaN from 'lodash/isNaN';
 import { isFunction } from 'util';
 import { Map, fromJS } from 'immutable';
 
-const getColumnKey = col => (
-  col.columnKey || col.valueKeyPath.join('/')
-);
+const getColumnKey = col => col.columnKey || col.valueKeyPath.join('/');
 
 const getVisibleColumns = (cols, hiddenColumns = [], columnOrder = []) => {
   const orderedColumnList = [];
@@ -17,13 +15,13 @@ const getVisibleColumns = (cols, hiddenColumns = [], columnOrder = []) => {
     if (defaultHidden || hiddenColumns.indexOf(columnKey) > -1) {
       return;
     }
-    const order = colOrderIdx !== -1 ? colOrderIdx : (i + 1);
+    const order = colOrderIdx !== -1 ? colOrderIdx : i + 1;
     orderedColumnList.push({
       columnKey,
       order,
     });
   });
-  return orderedColumnList.sort((a, b) => (a.order - b.order)).map(item => item.columnKey);
+  return orderedColumnList.sort((a, b) => a.order - b.order).map(item => item.columnKey);
 };
 
 export default {
@@ -61,11 +59,9 @@ export default {
         return {};
     }
   },
-  isSortable: col => (
-    col.valueType
+  isSortable: col => col.valueType
     && (col.sortValueGetter || col.valueKeyPath)
-    && !col.disableSorting
-  ),
+    && !col.disableSorting,
   getSortComparator: (col) => {
     if (col.sortComparator) {
       return col.sortComparator;
@@ -76,11 +72,11 @@ export default {
       case 'number':
       case 'float':
       case 'currency':
-        return (a, b) => (a - b);
+        return (a, b) => a - b;
       case 'boolean':
-        return (a, b) => (a === b ? 0 : (a ? -1 : 1));
+        return (a, b) => (a === b ? 0 : a ? -1 : 1);
       case 'date':
-        return (a, b) => (new Date(a) - new Date(b));
+        return (a, b) => new Date(a) - new Date(b);
       default:
         return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
     }
@@ -103,12 +99,7 @@ export default {
       case 'number':
       case 'float':
       case 'currency':
-        return val => (
-          val === ''
-          || isNaN(val)
-          || val === null
-          || val === undefined
-        );
+        return val => val === '' || isNaN(val) || val === null || val === undefined;
       case 'text':
       case 'boolean':
       case 'date':
@@ -159,14 +150,16 @@ export default {
 
           // If filter val starts with a Regex special character, we must escape it
           if (specialChars.includes(filterVal[0])) escapedVal = `\\${filterVal}`;
-          return (new RegExp(escapedVal, 'i')).test(getVal(row));
+          return new RegExp(escapedVal, 'i').test(getVal(row));
         };
     }
   },
   loadSelectedItems: (grid) => {
     const sessionItem = sessionStorage.getItem(`oc_grid_selectedItems_${grid.id}`);
     if (sessionItem && !grid.disableRememberSelectedItems) {
-      try { return JSON.parse(sessionItem); } catch (e) {
+      try {
+        return JSON.parse(sessionItem);
+      } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing selectedItems from sessionStorage', e);
       }
@@ -191,7 +184,9 @@ export default {
 
     if (isFilteringData) {
       if (!grid.disableRememberIsFiltering) {
-        try { isFiltering = JSON.parse(isFilteringData); } catch (e) {
+        try {
+          isFiltering = JSON.parse(isFilteringData);
+        } catch (e) {
           // eslint-disable-next-line no-console
           console.error('Datagrid: error parsing isFilteringData from localStorage', e);
         }
@@ -204,7 +199,9 @@ export default {
     } else {
       const hiddenColumnsJson = localStorage.getItem(`oc_grid_hiddenColumns_${grid.id}`);
       if (hiddenColumnsJson) {
-        try { hiddenColumns = JSON.parse(hiddenColumnsJson); } catch (e) {
+        try {
+          hiddenColumns = JSON.parse(hiddenColumnsJson);
+        } catch (e) {
           // eslint-disable-next-line no-console
           console.error('Datagrid: error parsing hiddenColumns from localStorage', e);
         }
@@ -215,7 +212,9 @@ export default {
     } else {
       const columnOrderJson = localStorage.getItem(`oc_grid_columnOrder_${grid.id}`);
       if (columnOrderJson) {
-        try { columnOrder = JSON.parse(columnOrderJson); } catch (e) {
+        try {
+          columnOrder = JSON.parse(columnOrderJson);
+        } catch (e) {
           // eslint-disable-next-line no-console
           console.error('Datagrid: error parsing columnOrder from localStorage', e);
         }
@@ -232,32 +231,42 @@ export default {
     } else {
       const columnWidths = localStorage.getItem(`oc_grid_columnWidths_${grid.id}`);
       if (columnWidths && !grid.disableRememberColumnWidths) {
-        try { config.columnWidths = JSON.parse(columnWidths); } catch (e) {
+        try {
+          config.columnWidths = JSON.parse(columnWidths);
+        } catch (e) {
           // eslint-disable-next-line no-console
           console.error('Datagrid: error parsing columnWidths from localStorage', e);
         }
       }
     }
     if (sortingData && !grid.disableRememberSortData) {
-      try { config.sortingData = JSON.parse(sortingData); } catch (e) {
+      try {
+        config.sortingData = JSON.parse(sortingData);
+      } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing sortingData from sessionStorage', e);
       }
     }
     if (filterData && isFiltering && !grid.disableRememberFilterData) {
-      try { config.filteringData.filterData = JSON.parse(filterData); } catch (e) {
+      try {
+        config.filteringData.filterData = JSON.parse(filterData);
+      } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing filterData from sessionStorage', e);
       }
     }
     if (page) {
-      try { config.page = JSON.parse(page); } catch (e) {
+      try {
+        config.page = JSON.parse(page);
+      } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing pagination from sessionStorage', e);
       }
     }
     if (rowsOnPage) {
-      try { config.rowsOnPage = JSON.parse(rowsOnPage); } catch (e) {
+      try {
+        config.rowsOnPage = JSON.parse(rowsOnPage);
+      } catch (e) {
         // eslint-disable-next-line no-console
         console.error('Datagrid: error parsing pagination from sessionStorage', e);
       }
@@ -331,10 +340,14 @@ export default {
   checkGridParam: (gridParam) => {
     if (gridParam) {
       if (!gridParam.id) {
-        throw new Error('[Grid] Invalid `grid.id` parameter, update action parameters to new format!');
+        throw new Error(
+          '[Grid] Invalid `grid.id` parameter, update action parameters to new format!',
+        );
       }
       if (!gridParam.idKeyPath) {
-        throw new Error('[Grid] Invalid `grid.idKeyPath` parameter, update action parameters to new format!');
+        throw new Error(
+          '[Grid] Invalid `grid.idKeyPath` parameter, update action parameters to new format!',
+        );
       }
     } else {
       throw new Error('[Grid] Invalid `grid` parameter, update action parameters to new format!');
@@ -342,7 +355,9 @@ export default {
   },
   checkColumnsParam: (columnsParam) => {
     if (!columnsParam) {
-      throw new Error('[Grid] Invalid `columns` parameter, update action parameters to new format!');
+      throw new Error(
+        '[Grid] Invalid `columns` parameter, update action parameters to new format!',
+      );
     }
   },
   // Locale getters, support grid param or user state used in OC applications
@@ -401,9 +416,7 @@ export default {
     const filterData = oldFilteringData.get('filterData', null);
 
     if (isFiltering && filterData && Map.isMap(filterData)) {
-      newFilteringData = newFilteringData
-        .set('isFiltering', true)
-        .set('filterData', filterData);
+      newFilteringData = newFilteringData.set('isFiltering', true).set('filterData', filterData);
     }
 
     return newFilteringData;
@@ -415,14 +428,18 @@ export default {
    * @param origColumns Array of Grid original columns objects
    * @param visibleColumns Array of Grid visible columns valueKeyPaths
    * @returns Array of column objects currently visible for user.
-  */
+   */
   visibleColumns: (origColumns, visibleColumns) => {
     if (!visibleColumns) return origColumns;
-    const filtered = visibleColumns.map(  // eslint-disable-line
-      searchCol => origColumns.find(  // eslint-disable-line
+    const filtered = visibleColumns.map(
+      // eslint-disable-line
+      searchCol => origColumns.find(
+          // eslint-disable-line
         // valueKeyPath is joined here as it can be an array like ['key1', 'key2'].
         // searchCol is similarly joined in onCellKeyDown in datagrid.component.jsx
-        col => JSON.stringify(col.valueKeyPath.join('/')) === JSON.stringify(searchCol)));
+        col => JSON.stringify(col.valueKeyPath.join('/')) === JSON.stringify(searchCol),
+      ),
+    );
     return filtered.toJS();
   },
 };
