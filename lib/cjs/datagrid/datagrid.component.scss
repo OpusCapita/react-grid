@@ -1,4 +1,4 @@
-@import 'datagrid.variables.scss';
+@import "datagrid.variables.scss";
 
 .oc-datagrid-container {
   display: flex;
@@ -85,7 +85,9 @@
     font-size: $oc-grid-font-size-small;
     line-height: 100%;
 
-    &[type="text"], &[type="email"], &[type="password"] {
+    &[type="text"],
+    &[type="email"],
+    &[type="password"] {
       width: 100%;
     }
   }
@@ -96,20 +98,25 @@
       border-bottom: 2px solid $oc-grid-color-warning !important;
     }
 
-    .form-control, .Select-control, .Select-input {
+    .form-control,
+    .Select-control,
+    .Select-input {
       height: 31px !important;
     }
   }
 
-  .oc-datagrid-row-edit, .oc-datagrid-row-new {
+  .oc-datagrid-row-edit,
+  .oc-datagrid-row-new {
     .form-group {
       margin: 0;
     }
 
     // Cell message input element borders when active or highlight
     .oc-datagrid-tooltip.warning {
-      .form-control, .Select-control {
-        &:focus, &:hover {
+      .form-control,
+      .Select-control {
+        &:focus,
+        &:hover {
           border: 1px solid $oc-grid-color-warning !important;
         }
         &:active {
@@ -123,8 +130,10 @@
       }
     }
     .oc-datagrid-tooltip.error {
-      .form-control, .Select-control {
-        &:focus, &:hover {
+      .form-control,
+      .Select-control {
+        &:focus,
+        &:hover {
           border: 1px solid $oc-grid-color-error !important;
         }
         &:active {
@@ -160,7 +169,6 @@
     }
   }
 
-
   // COLUMN RESIZER
   .public_fixedDataTableCell_columnResizerKnob {
     background-color: $oc-grid-color-column-resizer;
@@ -169,7 +177,6 @@
   .public_fixedDataTableColumnResizerLine_main {
     border-color: $oc-grid-color-column-resizer;
   }
-
 
   // CUSTOMIZATIONS
   .oc-datagrid-cell-header-clickable {
@@ -249,7 +256,6 @@
       }
     }
   }
-
 }
 
 .tooltip.bottom {
