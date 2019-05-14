@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 7.7.1
+* Upgraded `fixed-data-table-2` to v0.8.23, fixes scrolling issues
+
 ## 7.7.0
 * Add key navigation support for normal and wrapped select components
 
