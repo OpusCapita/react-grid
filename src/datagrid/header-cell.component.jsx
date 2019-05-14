@@ -51,6 +51,7 @@ export default class HeaderCell extends React.PureComponent {
     if (
       e.target.className !== 'public_fixedDataTableCell_cellContent'
       && e.target.parentElement.className !== 'public_fixedDataTableCell_cellContent'
+      && e.target.parentElement.parentElement.className !== 'public_fixedDataTableCell_cellContent'
     ) {
       return false;
     }
