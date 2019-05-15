@@ -1,10 +1,16 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
-## <next>
+## 8.0.0
+* Major: Cell value is now rendered based on componentType, not valueType. See (MIGRATEGUIDE.md)
+* Minor: componentType select and multiselect values are now rendered automatically from selectOptions, no need for custom valueRender
+* Patch: Number and float componentTypes are now rendered with @opuscapita/format-utils instead of Intl formatted number for better compability
+* Patch: Number filters broken with negative numbers
+* Patch: Header sort click not detected correctly
 
 ## 7.7.1
 * Upgraded `fixed-data-table-2` to v0.8.23, fixes scrolling issues
+* Upgraded all pacakges along with Webpack 4 and Babel 8
 
 ## 7.7.0
 * Add key navigation support for normal and wrapped select components

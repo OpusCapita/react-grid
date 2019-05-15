@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Cell } from 'fixed-data-table-2';
 import classNames from 'classnames';
+import invariant from 'invariant';
 import styled from 'styled-components';
 import { gridShape } from './datagrid.props';
 import Utils from './datagrid.utils';
@@ -38,23 +39,34 @@ export default class HeaderCell extends React.PureComponent {
     isBusy: PropTypes.bool.isRequired,
     filtering: PropTypes.bool.isRequired,
     width: PropTypes.number.isRequired,
-  };
+  }
 
   static defaultProps = {
     children: '',
     currentSortOrder: null,
     currentSortColumn: null,
-  };
+  }
 
   onSortChange = (e) => {
     // Check if click target is in actual header table cell, not the filtering input component
-    if (
-      e.target.className !== 'public_fixedDataTableCell_cellContent'
-      && e.target.parentElement.className !== 'public_fixedDataTableCell_cellContent'
-      && e.target.parentElement.parentElement.className !== 'public_fixedDataTableCell_cellContent'
+    // Filtering component can be anything because of custom renderers
+    let ok = false;
+    if (typeof e.target.className !== 'string') return false;
+    // match cellContent area or header text
+    if (e.target.className === 'public_fixedDataTableCell_cellContent'
+      || e.target.className.split(' ')[0] === 'oc-datagrid-cell-header-text'
     ) {
-      return false;
+      ok = true;
     }
+    // match header-text children
+    if (
+      !ok
+      && typeof e.target.parentElement.className === 'string'
+      && e.target.parentElement.className.split(' ')[0] === 'oc-datagrid-cell-header-text'
+    ) {
+      ok = true;
+    }
+    if (!ok) return false;
     if (!Utils.isSortable(this.props.column)) return false;
     if (this.props.isBusy) return false;
     e.preventDefault();
@@ -66,11 +78,15 @@ export default class HeaderCell extends React.PureComponent {
       this.props.onSortChange(this.props.grid, this.props.columns, this.props.column, order);
     }
     return true;
-  };
+  }
 
-  getFilteringComponent = (filtering, column) => (
-    filtering ? <div className="oc-datagrid-row-filter">{column.cellFilter()}</div> : null
-  );
+  getFilteringComponent = (filtering, column) => {
+    if (filtering) {
+      invariant(column.cellFilter, `No cellFilter for column '${Utils.getColumnKey(column)}'`);
+      return <div className="oc-datagrid-row-filter">{column.cellFilter()}</div>;
+    }
+    return null;
+  }
 
   render() {
     const {
@@ -97,7 +113,7 @@ export default class HeaderCell extends React.PureComponent {
 
     return (
       <Cell className={cellClassNames} onClick={this.onSortChange} {...props}>
-        <Header width={width}>
+        <Header width={width} className="oc-datagrid-cell-header-text">
           <HeaderLabel width={width}>{children}</HeaderLabel>
           <Symbols>{symbols}</Symbols>
         </Header>

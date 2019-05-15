@@ -50,7 +50,6 @@ export default {
     switch (col.valueType) {
       case 'number':
       case 'float':
-      case 'currency':
       case 'date':
         return {
           textAlign: 'right',
@@ -71,7 +70,6 @@ export default {
         return (a, b) => (a.localeCompare ? a.localeCompare(b) : 1);
       case 'number':
       case 'float':
-      case 'currency':
         return (a, b) => a - b;
       case 'boolean':
         return (a, b) => (a === b ? 0 : a ? -1 : 1);
@@ -98,7 +96,6 @@ export default {
     switch (col.valueType) {
       case 'number':
       case 'float':
-      case 'currency':
         return val => val === '' || isNaN(val) || val === null || val === undefined;
       case 'text':
       case 'boolean':
@@ -124,12 +121,33 @@ export default {
 
     switch (col.valueType) {
       case 'number':
-        return (row, filterVal) => parseInt(getVal(row), 10) === parseInt(filterVal, 10);
-      case 'float':
-      case 'currency':
         return (row, filterVal) => {
           const value = getVal(row);
-          return value && value.includes(filterVal);
+          if (value === '' || isNaN(value) || value === null || value === undefined) {
+            return false;
+          }
+          // match exact number value
+          const filterValInt = parseInt(filterVal, 10);
+          const valInt = parseInt(value, 10);
+          if (filterValInt === valInt || filterValInt === valInt * -1) {
+            return true;
+          }
+          // match partial
+          return String(value).includes(filterVal);
+        };
+      case 'float':
+        return (row, filterVal) => {
+          const value = getVal(row);
+          if (value === '' || isNaN(value) || value === null || value === undefined) {
+            return false;
+          }
+          // match exact float value
+          const filterValFloat = parseFloat(filterVal.replace(',', '.'));
+          if (filterValFloat === parseFloat(value) || filterValFloat === parseFloat(value) * -1) {
+            return true;
+          }
+          // match partial
+          return String(value).replace(',', '.').includes(filterVal.replace(',', '.'));
         };
       case 'date':
         return (row, filterVal) => {
@@ -139,9 +157,6 @@ export default {
           return false;
         };
       case 'boolean':
-      case 'select':
-        // select is componentType not valueType -> the case could be removed
-        return (row, filterVal) => getVal(row) === filterVal;
       case 'text':
       default:
         return (row, filterVal) => {

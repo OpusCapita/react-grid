@@ -11,6 +11,16 @@ export const creatableSelectRender = selectProps => (
 );
 
 export default {
+  valRender(
+    rowIndex,
+    selectOptions,
+    valueRender,
+  ) {
+    return valueRender(rowIndex, (v) => {
+      const option = selectOptions.find(o => o.value === v);
+      return option ? option.label : null;
+    });
+  },
   cellEdit(
     col,
     column,

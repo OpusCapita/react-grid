@@ -117,9 +117,9 @@
     "write-file-webpack-plugin": "4.5.0"
   },
   "dependencies": {
-    "@opuscapita/format-utils": "2.0.0",
+    "@opuscapita/format-utils": "2.1.0",
     "@opuscapita/react-checkbox": "2.0.1",
-    "@opuscapita/react-datetime": "3.3.2",
+    "@opuscapita/react-datetime": "3.4.0",
     "@opuscapita/react-dropdown": "2.2.1",
     "@opuscapita/react-floating-select": "3.6.1",
     "@opuscapita/react-icons": "4.0.4",
@@ -130,6 +130,7 @@
     "@opuscapita/react-spinner": "3.0.0",
     "classnames": "2.2.6",
     "fixed-data-table-2": "0.8.23",
+    "invariant": "2.2.4",
     "lodash": "4.17.11",
     "moment": "2.24.0",
     "react-icons": "3.7.0",
