@@ -1,7 +1,7 @@
 import React from 'react';
 import faker from 'faker';
 import moment from 'moment';
-import { countries } from 'country-data';
+import { countries, currencies } from 'country-data';
 
 import Color from './color.component';
 import * as VALIDATE from './datagrid.validators';
@@ -9,14 +9,16 @@ import CustomInputComponent from './custom.component';
 
 export const REGIONS = {
   'en-GB': 'English (GB)',
+  'en-US': 'English (US)',
   'fi-FI': 'Finnish (FI)',
+  'sv-SV': 'Swedish (SV)',
+  'es-ES': 'Spanish (ES)',
+  'de-DE': 'German (DE)',
 };
 
 export const GRID = {
   id: 'TestGrid',
   idKeyPath: ['id'],
-  defaultSortColumn: 'name',
-  defaultSortOrder: 'desc',
   language: 'en',
   dateFormat: 'L',
   decimalSeparator: '.',
@@ -26,8 +28,6 @@ export const GRID = {
 export const PAGINATION_GRID = {
   id: 'TestPaginationGrid',
   idKeyPath: ['id'],
-  defaultSortColumn: 'country',
-  defaultSortOrder: 'desc',
   language: 'en',
   dateFormat: 'L',
   decimalSeparator: '.',
@@ -44,9 +44,9 @@ export const countryOptions = countries.all
   .filter(country => country.alpha3)
   .map(country => ({ value: country.alpha3, label: country.name }));
 
-export const currencyOptions = countries.all
-  .filter(country => country.alpha3 && country.currencies && country.currencies.length >= 1)
-  .map(country => ({ value: country.alpha3, label: country.currencies[0] }));
+export const currencyOptions = currencies.all
+  .filter(currency => !!currency.code)
+  .map(currency => ({ value: currency.code, label: currency.code }));
 
 export const columns = [
   {
@@ -61,8 +61,8 @@ export const columns = [
   {
     header: 'Price',
     valueKeyPath: ['price'],
-    valueType: 'currency',
-    componentType: 'float',
+    valueType: 'float',
+    componentType: 'currency',
     isRequired: true,
     width: 80,
     validators: [{ validate: VALIDATE.isRequired }],
@@ -80,10 +80,6 @@ export const columns = [
     valueType: 'text',
     componentType: 'multiselect',
     selectComponentOptions: countryOptions,
-    valueRender: (data) => {
-      const country = countryOptions.find(v => v.value === data.get('country'));
-      return country ? country.label : null;
-    },
   },
   {
     header: 'Currency',
@@ -91,10 +87,6 @@ export const columns = [
     valueType: 'text',
     componentType: 'select',
     selectComponentOptions: currencyOptions,
-    valueRender: (data) => {
-      const currency = currencyOptions.find(v => v.value === data.get('country'));
-      return currency ? currency.label : null;
-    },
   },
   {
     header: 'Used',
@@ -106,10 +98,10 @@ export const columns = [
   {
     header: 'Checked',
     valueKeyPath: ['isChecked'],
-    valueType: 'checkbox',
+    valueType: 'boolean',
     componentType: 'checkbox',
     align: 'center',
-    width: 100,
+    width: 150,
   },
   {
     header: 'Modified',
@@ -151,19 +143,18 @@ export const getData = (count) => {
     return moment(date).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
   };
 
-  const randomCountry = () => {
-    const code2 = faker.address.countryCode();
-    return countries[code2].alpha3.toUpperCase();
-  };
+  const randomCountry = () => countries.all[Math.floor(Math.random() * countries.all.length)];
 
   for (let i = 1; i <= count; i += 1) {
+    const country = randomCountry();
     data.push({
       id: i,
       name: faker.commerce.productName(),
-      price: faker.commerce.price(),
+      price: faker.commerce.price() * -1,
       amount: faker.finance.amount(),
       stock: faker.random.number(),
-      country: randomCountry(),
+      country: country.alpha3,
+      currency: country.currencies[0] ? country.currencies[0] : 'EUR',
       isUsed: faker.random.boolean(),
       isChecked: faker.random.boolean(),
       color: faker.internet.color(),

@@ -60,8 +60,8 @@ class DatagridView extends React.Component {
     removeFail: PropTypes.func.isRequired,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     const region = 'en-GB';
     const { dateFormat, thousandSeparator, decimalSeparator } = getLocaleFormatData(region);
@@ -113,17 +113,19 @@ class DatagridView extends React.Component {
     this.setState({
       gridSettings,
       region: eventKey,
+    }, () => {
+      this.props.setData(gridSettings, columns, getData(100));
     });
   };
 
   handleWarnClick = () => {
-    this.props.cellShowMessage(GRID, 'warning', 3, ['float'], 'Warning');
+    this.props.cellShowMessage(GRID, 'warning', 3, ['stock'], 'Warning');
   };
 
   handleInfoClick = () => {
     const messages = Map()
-      .setIn(['info', 1], Map({ text: 'Text message 1', date: 'Date message 1' }))
-      .setIn(['info', 3], Map({ text: 'Text message 3' }));
+      .setIn(['info', 1], Map({ currency: 'Info about currency', modified: 'Modified by Yoda' }))
+      .setIn(['info', 3], Map({ currency: 'Another info of currency' }));
     this.props.cellShowMessages(GRID, messages);
   };
 

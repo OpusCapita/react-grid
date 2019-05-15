@@ -1,13 +1,20 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
-import { FormattedNumber as N } from 'react-intl';
+import { formatNumber } from '@opuscapita/format-utils';
 
 export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
 
 export default {
   // primitiveNumberValueRender
-  numberValRender(col, rowIndex, valueRender) {
-    return valueRender(rowIndex, v => <N value={v} {...col.renderComponentProps} />);
+  numberValRender(col, rowIndex, thousandSeparator, decimalSeparator, valueRender) {
+    const decimals = col.componentType === 'number' ? 0 : 2;
+    return valueRender(rowIndex, v => formatNumber(v, {
+      decimals: (col.valueOptions && col.valueOptions.decimals) || decimals,
+      thousandSeparator:
+          (col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator,
+      decimalSeparator:
+          (col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator,
+    }));
   },
   // primitiveCellEdit
   cellEdit(

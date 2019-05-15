@@ -46,10 +46,16 @@ export default {
     } else if (col.valueRender) {
       column.cell = rowIndex => col.valueRender(props.data.get(rowIndex), rowIndex);
     } else {
-      switch (col.valueType) {
+      switch (col.componentType) {
         case 'number': // fall through
         case 'float': {
-          column.cell = rowIndex => PrimitiveType.numberValRender(col, rowIndex, baseValueRender);
+          column.cell = rowIndex => PrimitiveType.numberValRender(
+            col,
+            rowIndex,
+            props.thousandSeparator,
+            props.decimalSeparator,
+            baseValueRender,
+          );
           break;
         }
 
@@ -60,6 +66,18 @@ export default {
 
         case 'checkbox': {
           column.cell = rowIndex => CheckboxType.valRender(rowIndex, baseValueRender);
+          break;
+        }
+
+        case 'multiselect':
+        case 'select': {
+          const selectOptions = col.selectComponentOptions
+            || props.selectComponentOptions.get(column.columnKey);
+          column.cell = rowIndex => SelectType.valRender(
+            rowIndex,
+            selectOptions,
+            baseValueRender,
+          );
           break;
         }
 
@@ -128,6 +146,7 @@ export default {
     const createFunctions = { ...functions.create };
     const filterFunctions = { ...functions.filter };
     switch (col.componentType) {
+      case 'currency':
       case 'float':
       case 'number':
       case 'text': {

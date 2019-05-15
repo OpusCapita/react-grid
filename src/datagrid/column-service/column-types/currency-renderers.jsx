@@ -10,9 +10,9 @@ export default {
       currency: gridData.getIn([rowIndex, ...currencyKeyPath]),
       decimals: col.valueOptions && col.valueOptions.decimals,
       thousandSeparator:
-          col.valueOptions && (col.valueOptions.thousandSeparator || thousandSeparator),
+          (col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator,
       decimalSeparator:
-          col.valueOptions && (col.valueOptions.decimalSeparator || decimalSeparator),
+          (col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator,
     }));
   },
 };
