@@ -2,9 +2,9 @@
 
 ## Version 8
 * Cell values are rendered based on componentType instead of valueType. Make sure you have correct componentType set.
-* componentType select and multiselect values are now rendered automativally from selectOptions. You don't need custom valueRender anymore in basic cases.
+* componentType select and multiselect values are now rendered automatically from selectOptions. You don't need custom valueRender anymore in basic cases.
 
-### currency type
+### Currency type
 Switch valueType and componentType of currency type:
 ```javascript
 OLD:
