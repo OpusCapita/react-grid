@@ -1,6 +1,9 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
+## 8.0.1
+* Fix header cell sort click, check deeper into child tree
+
 ## 8.0.0
 * Major: Cell value is now rendered based on componentType, not valueType. See (MIGRATEGUIDE.md)
 * Minor: componentType select and multiselect values are now rendered automatically from selectOptions, no need for custom valueRender

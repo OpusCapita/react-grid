@@ -27,6 +27,13 @@ const Symbols = styled.span`
   margin-left: ${props => (props.children ? '5px' : '0')};
 `;
 
+const isClassName = (el, className) => {
+  if (typeof el.className === 'string') {
+    return el.className.split(' ').includes(className);
+  }
+  return false;
+};
+
 export default class HeaderCell extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
@@ -50,21 +57,18 @@ export default class HeaderCell extends React.PureComponent {
   onSortChange = (e) => {
     // Check if click target is in actual header table cell, not the filtering input component
     // Filtering component can be anything because of custom renderers
-    let ok = false;
-    if (typeof e.target.className !== 'string') return false;
-    // match cellContent area or header text
-    if (e.target.className === 'public_fixedDataTableCell_cellContent'
-      || e.target.className.split(' ')[0] === 'oc-datagrid-cell-header-text'
-    ) {
-      ok = true;
+    let ok = isClassName(e.target, 'public_fixedDataTableCell_cellContent');
+    if (!ok) {
+      ok = isClassName(e.target, 'public_fixedDataTableCell_wrap3');
     }
-    // match header-text children
-    if (
-      !ok
-      && typeof e.target.parentElement.className === 'string'
-      && e.target.parentElement.className.split(' ')[0] === 'oc-datagrid-cell-header-text'
-    ) {
-      ok = true;
+    if (!ok) {
+      ok = isClassName(e.target, 'oc-datagrid-cell-header-text');
+    }
+    if (!ok) {
+      ok = isClassName(e.target.parentElement, 'oc-datagrid-cell-header-text');
+    }
+    if (!ok) {
+      ok = isClassName(e.target.parentElement.parentElement, 'oc-datagrid-cell-header-text');
     }
     if (!ok) return false;
     if (!Utils.isSortable(this.props.column)) return false;
