@@ -22,7 +22,7 @@
 * added translated string for ColumnSettings 'Search'-placeholder
 
 ## 7.6.0
-* editValueParser ovveride added to column props
+* editValueParser override added to column props
 
 ## 7.5.0
 * Fix: multiselect filter unselect
