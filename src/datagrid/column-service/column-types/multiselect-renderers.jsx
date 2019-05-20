@@ -2,11 +2,11 @@ import React from 'react';
 import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
 import Checkbox from '@opuscapita/react-checkbox';
 
-const MultiValueContainer = label => properties => (properties.selectProps.value
+const MultiValueContainer = (label, optionsCount) => properties => (properties.selectProps.value
   && properties.selectProps.value.findIndex(
     selectProp => selectProp.value === properties.data.value,
   ) === 0 ? (
-    <span>{label.replace('<n>', properties.selectProps.value.length)}</span>
+    <span>{label.replace('<n>', `(${properties.selectProps.value.length}/${optionsCount})`)}</span>
   ) : null);
 
 export default {
@@ -40,7 +40,7 @@ export default {
     const fsProps = {
       ...col.filterComponentProps,
       ...selectTranslations,
-      components: { MultiValueContainer: MultiValueContainer(selectTranslations.selected), Option },
+      components: { MultiValueContainer: MultiValueContainer(selectTranslations.selected, (options || []).length), Option },
       hideSelectedOptions: false,
       isSearchable: selectOptions && selectOptions.length > 9,
       isClearable: true,
