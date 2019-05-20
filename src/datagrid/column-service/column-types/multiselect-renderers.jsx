@@ -40,7 +40,11 @@ export default {
     const fsProps = {
       ...col.filterComponentProps,
       ...selectTranslations,
-      components: { MultiValueContainer: MultiValueContainer(selectTranslations.selected, (options || []).length), Option },
+      components: {
+        MultiValueContainer: MultiValueContainer(selectTranslations.selected,
+          (options || []).length),
+        Option,
+      },
       hideSelectedOptions: false,
       isSearchable: selectOptions && selectOptions.length > 9,
       isClearable: true,
