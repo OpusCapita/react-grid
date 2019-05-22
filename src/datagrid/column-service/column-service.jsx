@@ -145,8 +145,11 @@ export default {
     const editFunctions = { ...functions.edit };
     const createFunctions = { ...functions.create };
     const filterFunctions = { ...functions.filter };
+    const primitiveValParser = !col.editValueParser && col.componentType === 'float'
+      ? val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')
+      : editValueParser;
+
     switch (col.componentType) {
-      case 'currency':
       case 'float':
       case 'number':
       case 'text': {
@@ -154,9 +157,6 @@ export default {
           ? 'text'
           : col.componentType;
         // always use col.editValueParser override if available
-        const primitiveValParser = !col.editValueParser && col.componentType === 'float'
-          ? val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')
-          : editValueParser;
 
         if (props.inlineEdit && !column.cellEdit) {
           column.cellEdit = rowIndex => PrimitiveType.cellEdit(
@@ -437,7 +437,42 @@ export default {
         }
         break;
       }
-
+      case 'currency': {
+        if (props.inlineEdit && !column.cellCreate) {
+          column.cellEdit = rowIndex => CurrencyType.cellEdit(
+            col,
+            column,
+            tabIndex,
+            rowIndex,
+            props.grid.id,
+            ...editFunctions,
+            editValueParser,
+          );
+        }
+        if (props.inlineEdit && !column.cellCreate) {
+          column.cellCreate = rowIndex => CurrencyType.cellCreate(
+            col,
+            column,
+            tabIndex,
+            rowIndex,
+            props.grid.id,
+            ...createFunctions,
+            editValueParser,
+          );
+        }
+        if (props.filtering && !column.cellFilter) {
+          column.cellFilter = () => PrimitiveType.cellFilter(
+            col,
+            column,
+            tabIndex,
+            props.grid.id,
+            primitiveValParser,
+            'text',
+            ...filterFunctions,
+          );
+        }
+        break;
+      }
       default:
     }
     return column;
