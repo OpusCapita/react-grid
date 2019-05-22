@@ -420,7 +420,6 @@ class DataGrid extends React.PureComponent {
   };
 
   getSelectRef = (component) => {
-    console.log(component)
     if (!component) return null;
     if (component.select && component.select.inputRef) {
       return component.select.inputRef;
@@ -643,7 +642,6 @@ class DataGrid extends React.PureComponent {
 
   handleCreateCellRef = (rowIndex, col) => (ref) => {
     // Focus to create cell
-    console.log('ref',ref);
     const columnKey = Utils.getColumnKey(col);
     const selectRef = !ref || ref.focus ? ref : this.getSelectRef(ref);
     if (

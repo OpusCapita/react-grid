@@ -1,14 +1,10 @@
 import { formatCurrencyAmount } from '@opuscapita/format-utils';
 import { FormattedInputCurrency } from '@opuscapita/react-formatted-input/lib/es';
 import React from 'react';
-import { FormControl } from 'react-bootstrap';
 
-export const inputRender = formattedInputProps => {
-  return (<FormattedInputCurrency {...formattedInputProps} />);
-};
-
-export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
-
+export const inputRender = formattedInputProps => (
+  <FormattedInputCurrency {...formattedInputProps} />
+);
 
 export default {
   // currencyValueRender
@@ -77,5 +73,6 @@ export default {
 
     return inputRender({ ...props });
   },
-  // Cell filtering done in primitive-renderers.jsx
+  // Cell filtering is handled by primitive-renderers cellFilter function
+  // Check column-service.jsx
 };
