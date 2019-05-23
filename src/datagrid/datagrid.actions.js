@@ -184,10 +184,11 @@ export const applySort = (grid, columns) => (dispatch, getState) => {
   });
   if (!column) return false;
 
-  setBusy(grid)(dispatch);
   if (grid.pagination) {
     return true;
   }
+  setBusy(grid)(dispatch);
+
   const origAllData = gridData.get('allData');
   const comparator = Utils.getSortComparator(column);
   const valueGetter = Utils.getSortValueGetter(column);

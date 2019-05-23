@@ -53,6 +53,7 @@ const RowsOnPage = styled.div`
 
 const RowsOnPageLabel = styled.span`
   padding: 0 1rem;
+  white-space: nowrap;
 `;
 
 const RowsOnPageSelect = styled(FloatingSelectPortal)`
