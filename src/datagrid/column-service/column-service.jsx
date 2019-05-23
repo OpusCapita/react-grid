@@ -447,6 +447,10 @@ export default {
             props.grid.id,
             ...editFunctions,
             editValueParser,
+            getDisabledState,
+            props.data,
+            props.thousandSeparator,
+            props.decimalSeparator,
           );
         }
         if (props.inlineEdit && !column.cellCreate) {
@@ -458,6 +462,10 @@ export default {
             props.grid.id,
             ...createFunctions,
             editValueParser,
+            getDisabledState,
+            props.data,
+            props.thousandSeparator,
+            props.decimalSeparator,
           );
         }
         if (props.filtering && !column.cellFilter) {

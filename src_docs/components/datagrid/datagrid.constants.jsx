@@ -42,17 +42,11 @@ export const selectTranslations = {
 
 export const countryOptions = countries.all
   .filter(country => country.alpha3)
-  .map(country => ({
-    value: country.alpha3,
-    label: country.name
-  }));
+  .map(country => ({ value: country.alpha3, label: country.name }));
 
 export const currencyOptions = currencies.all
   .filter(currency => !!currency.code)
-  .map(currency => ({
-    value: currency.code,
-    label: currency.code
-  }));
+  .map(currency => ({ value: currency.code, label: currency.code }));
 
 export const columns = [
   {
@@ -72,7 +66,6 @@ export const columns = [
     isRequired: true,
     width: 80,
     validators: [{ validate: VALIDATE.isRequired }],
-    currency: 'EUR',
   },
   {
     header: 'Stock',
@@ -147,8 +140,7 @@ export const getData = (count) => {
 
   const randomDate = () => {
     const date = faker.date.past();
-    return moment(date)
-      .format('YYYY-MM-DD[T]HH:mm:ss[Z]');
+    return moment(date).format('YYYY-MM-DD[T]HH:mm:ss[Z]');
   };
 
   const randomCountry = () => countries.all[Math.floor(Math.random() * countries.all.length)];
