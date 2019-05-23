@@ -840,6 +840,7 @@ class DataGrid extends React.PureComponent {
         dateFormat,
         thousandSeparator,
         decimalSeparator,
+        selectComponentOptions,
       }; // eslint-disable-line
       column = GridColumnService.columnCell(column, cellProps, col, valueRender);
 
