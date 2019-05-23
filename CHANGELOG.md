@@ -2,6 +2,9 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed multiselect & select selectComponentOptions initialization
+* Fixed Rows on page rendering
+* Fixed sorting busy spinner rendering in case of pagination
 
 ## 8.0.2
 * Count of selectable items added to multiselect label
