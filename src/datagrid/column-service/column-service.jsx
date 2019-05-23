@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import Utils from '../datagrid.utils';
 import {
   DateType,
@@ -46,6 +47,7 @@ export default {
     } else if (col.valueRender) {
       column.cell = rowIndex => col.valueRender(props.data.get(rowIndex), rowIndex);
     } else {
+      const { selectComponentOptions = Map() } = props;
       switch (col.componentType) {
         case 'number': // fall through
         case 'float': {
@@ -72,7 +74,7 @@ export default {
         case 'multiselect':
         case 'select': {
           const selectOptions = col.selectComponentOptions
-            || props.selectComponentOptions.get(column.columnKey);
+            || selectComponentOptions.get(column.columnKey);
           column.cell = rowIndex => SelectType.valRender(
             rowIndex,
             selectOptions,
@@ -145,6 +147,7 @@ export default {
     const editFunctions = { ...functions.edit };
     const createFunctions = { ...functions.create };
     const filterFunctions = { ...functions.filter };
+    const { selectComponentOptions = Map() } = props;
     switch (col.componentType) {
       case 'currency':
       case 'float':
@@ -236,7 +239,7 @@ export default {
 
       case 'multiselect': {
         const selectOptions = col.selectComponentOptions
-          || props.selectComponentOptions.get(column.columnKey);
+          || selectComponentOptions.get(column.columnKey);
         const selectTranslations = col.selectComponentTranslations || {
           placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
           noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
@@ -292,7 +295,7 @@ export default {
 
       case 'select': {
         const selectOptions = col.selectComponentOptions
-          || props.selectComponentOptions.get(column.columnKey);
+          || selectComponentOptions.get(column.columnKey);
         const selectTranslations = col.selectComponentTranslations || {
           placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
           noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),

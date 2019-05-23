@@ -13,7 +13,7 @@ export const creatableSelectRender = selectProps => (
 export default {
   valRender(
     rowIndex,
-    selectOptions,
+    selectOptions = [],
     valueRender,
   ) {
     return valueRender(rowIndex, (v) => {
