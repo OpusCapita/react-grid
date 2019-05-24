@@ -1,5 +1,5 @@
 import { formatCurrencyAmount } from '@opuscapita/format-utils';
-import { FormattedInputCurrency } from '@opuscapita/react-formatted-input/lib/es';
+import { FormattedInputCurrency } from '@opuscapita/react-formatted-input';
 import React from 'react';
 
 export const inputRender = formattedInputProps => (
