@@ -1,10 +1,11 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
-## <next>
+## 8.1.0
 * Fixed multiselect & select selectComponentOptions initialization
 * Fixed Rows on page rendering
 * Fixed sorting busy spinner rendering in case of pagination
+* Added edit/create field renderers for currency component type
 
 ## 8.0.2
 * Count of selectable items added to multiselect label

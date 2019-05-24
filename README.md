@@ -181,6 +181,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | decimals          | number |              | Number of decimals                                   |
 | thousandSeparator | string |              | Defaults to datagrid config                          |
 | decimalSeparator  | array  |              | Defaults to datagrid config                          |
+| currency          | string |              | Defaults to datagrid config                          |
 
 
 #### Datagrid - `onValueMatchChangeValue` prop attributes

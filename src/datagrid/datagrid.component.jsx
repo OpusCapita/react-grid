@@ -314,6 +314,7 @@ class DataGrid extends React.PureComponent {
       }
     }
     const value = valueParser(rawValue);
+
     this.props.createCellValueChange(this.props.grid, rowIndex, col.valueKeyPath, value);
     if (col.onCreateValueChange) {
       col.onCreateValueChange(value, col.valueKeyPath, rowIndex);
