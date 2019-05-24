@@ -1,7 +1,7 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
-## <next>
+## 8.1.0
 * Fixed multiselect & select selectComponentOptions initialization
 * Fixed Rows on page rendering
 * Fixed sorting busy spinner rendering in case of pagination
