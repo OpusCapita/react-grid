@@ -149,7 +149,8 @@ const paginationComponent = (WrappedComponent) => {
         filterData, pagination, page, rowsOnPage, sortColumn, sortOrder,
       } = this.props;
       if (pagination) {
-        if (page !== 1 && (rowsOnPage !== prevProps.rowsOnPage || !filterData.equals(prevProps.filterData))) {
+        if (page !== 1 && (rowsOnPage !== prevProps.rowsOnPage
+          || !filterData.equals(prevProps.filterData))) {
           this.gotoPage(1);
         } else if (!filterData.equals(prevProps.filterData)
             || page !== prevProps.page
