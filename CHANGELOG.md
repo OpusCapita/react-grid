@@ -1,7 +1,7 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
-## <next>
+## 8.1.1
 * Pagination: enhanced Rows on page and current page state handling
 
 ## 8.1.0
