@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
 import ListItems from '@opuscapita/react-list-items';
-import { setPage, setRowsOnPage } from './datagrid.actions';
+import { setPage, setRowsOnPage as setRowsOnPageAction } from './datagrid.actions';
 import { gridShape } from './datagrid.props';
 
 import './datagrid.variables.scss';
@@ -57,7 +57,7 @@ const RowsOnPageLabel = styled.span`
 `;
 
 const RowsOnPageSelect = styled(FloatingSelectPortal)`
-  min-width: 60px;
+  min-width: 70px;
 `;
 
 const paginationComponent = (WrappedComponent) => {
@@ -82,7 +82,7 @@ const paginationComponent = (WrappedComponent) => {
 
   const mapDispatchToProps = dispatch => ({
     setPage: (grid, page) => dispatch(setPage(grid, page)),
-    setRowsOnPage: (grid, rowsOnPage) => dispatch(setRowsOnPage(grid, rowsOnPage)),
+    setRowsOnPage: (grid, rowsOnPage) => dispatch(setRowsOnPageAction(grid, rowsOnPage)),
   });
 
   @injectIntl
@@ -121,7 +121,7 @@ const paginationComponent = (WrappedComponent) => {
 
     static defaultProps = {
       children: null,
-      page: 1,
+      page: undefined,
       pagination: undefined,
       rowsOnPage: undefined,
       rowsOnPageOptions: ROWS_ON_PAGE_OPTIONS,
@@ -129,36 +129,35 @@ const paginationComponent = (WrappedComponent) => {
       sortOrder: undefined,
     };
 
-    constructor(props) {
-      super(props);
+    componentDidMount = () => {
       const {
-        grid, pagination, rowsOnPageOptions, rowsOnPage,
-      } = props;
-      if (pagination && rowsOnPageOptions && rowsOnPageOptions.length > 0) {
-        const defaultRowsOnPage = rowsOnPageOptions.find(
-          option => option.value === pagination.pageSize,
-        ) || rowsOnPageOptions[0];
-        if (defaultRowsOnPage && defaultRowsOnPage.value !== rowsOnPage) {
-          props.setRowsOnPage(grid, defaultRowsOnPage.value);
-        }
+        grid, pagination, rowsOnPageOptions, rowsOnPage, setRowsOnPage,
+      } = this.props;
+      if (pagination) {
+        if (!rowsOnPage && rowsOnPageOptions && rowsOnPageOptions.length > 0) {
+          const pageSize = rowsOnPage || pagination.pageSize;
+          const selectedRowsOnPage = rowsOnPageOptions.find(
+            option => option.value === pageSize,
+          ) || rowsOnPageOptions[0];
+          setRowsOnPage(grid, selectedRowsOnPage.value);
+        } else this.requestData();
       }
-    }
+    };
 
     componentDidUpdate = (prevProps) => {
       const {
         filterData, pagination, page, rowsOnPage, sortColumn, sortOrder,
       } = this.props;
-      if (pagination && !filterData.equals(prevProps.filterData) && page > 1) {
-        this.gotoPage(1);
-      } else if (
-        pagination
-        && (!filterData.equals(prevProps.filterData)
-          || page !== prevProps.page
-          || rowsOnPage !== prevProps.rowsOnPage
-          || sortColumn !== prevProps.sortColumn
-          || sortOrder !== prevProps.sortOrder)
-      ) {
-        this.requestData();
+      if (pagination) {
+        if (page !== 1 && (rowsOnPage !== prevProps.rowsOnPage || !filterData.equals(prevProps.filterData))) {
+          this.gotoPage(1);
+        } else if (!filterData.equals(prevProps.filterData)
+            || page !== prevProps.page
+            || rowsOnPage !== prevProps.rowsOnPage
+            || sortColumn !== prevProps.sortColumn
+            || sortOrder !== prevProps.sortOrder) {
+          this.requestData();
+        }
       }
     };
 
