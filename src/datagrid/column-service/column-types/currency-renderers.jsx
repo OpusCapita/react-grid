@@ -69,7 +69,7 @@ export default {
   ) {
     const props = {
       value: functions.getItemValue(rowIndex, col),
-      onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
+      onChange: functions.onCellValueChange(rowIndex, col, val => console.log(val) || val),
       currency: gridData.getIn([rowIndex, ...getCurrencyKeyPath(col)])
         || (col.valueOptions && col.valueOptions.currency),
       inputProps: {

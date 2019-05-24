@@ -122,7 +122,7 @@
     "@opuscapita/react-datetime": "3.4.0",
     "@opuscapita/react-dropdown": "2.2.1",
     "@opuscapita/react-floating-select": "3.6.2",
-    "@opuscapita/react-formatted-input": "1.1.2",
+    "@opuscapita/react-formatted-input": "1.1.4",
     "@opuscapita/react-icons": "4.0.4",
     "@opuscapita/react-list-items": "1.1.1",
     "@opuscapita/react-perfect-scrollbar": "3.0.4",
