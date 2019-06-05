@@ -453,7 +453,7 @@ class DataGrid extends React.PureComponent {
       return '';
     } else {
       // Value is found from editData
-      // Format bype
+      // Format by type
       switch (col.componentType) {
         case 'multiselect':
         case 'select':
