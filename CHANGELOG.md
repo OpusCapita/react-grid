@@ -1,6 +1,12 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
+## 8.2.0
+* Added multiselect cell renderer
+* Added `translations` and `isMultiselectTooltipDisabled` props for columns
+* Fix: custom renderer rowData undefined when grid is empty, use empty immutable map instead.
+* Upgrade packages, including latest `fixed-data-table-2` v0.8.26, fixes scrolling issues
+
 ## 8.1.1
 * Pagination: enhanced Rows on page and current page state handling
 

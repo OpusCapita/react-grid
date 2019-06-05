@@ -80,6 +80,9 @@ export const columns = [
     valueType: 'text',
     componentType: 'multiselect',
     selectComponentOptions: countryOptions,
+    translations: {
+      itemsSelected: 'countries',
+    },
   },
   {
     header: 'Currency',

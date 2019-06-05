@@ -173,6 +173,8 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | onEditBlur                 | function       |         | Called on edit cell input blur, called with (value, rowIndex, dataId) |
 | onLastCellTabPress         | function       |         | Called on tab keypress in edit/create cell when the last cell in the grid is being focused, called with original KeyPress event |
 | selectComponentOptions     | array          |         | Options data for the react-select component                  |
+| translations               | object         |         | Translations object                                          |
+| isMultiselectTooltipDisabled | boolean      | false   | Tooltip that shows selected items in view mode               |
 
 #### Datagrid - `valueOptions` prop attributes for `currency` value type
 | Name              | Type   | Default      | Description                                          |

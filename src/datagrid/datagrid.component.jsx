@@ -453,7 +453,7 @@ class DataGrid extends React.PureComponent {
       return '';
     } else {
       // Value is found from editData
-      // Format by component type
+      // Format bype
       switch (col.componentType) {
         case 'multiselect':
         case 'select':
@@ -837,6 +837,7 @@ class DataGrid extends React.PureComponent {
 
       // handle column.cell / column.cellEdit / column.cellCreate / column.cellFilter
       const cellProps = {
+        grid,
         data,
         dateFormat,
         thousandSeparator,
@@ -848,7 +849,6 @@ class DataGrid extends React.PureComponent {
       // handle columnComponentTypes
       const componentTypeProps = {
         ...cellProps,
-        grid,
         inlineEdit,
         filtering,
         region,

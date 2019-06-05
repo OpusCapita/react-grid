@@ -31,5 +31,9 @@ export default class CustomInputComponent extends React.Component {
 CustomInputComponent.propTypes = {
   setRef: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
+};
+
+CustomInputComponent.defaultProps = {
+  value: undefined,
 };
