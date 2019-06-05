@@ -2,7 +2,7 @@
 import moment from 'moment';
 import isNaN from 'lodash/isNaN';
 import { isFunction } from 'util';
-import { Map, fromJS } from 'immutable';
+import { Map, fromJS, List } from 'immutable';
 
 const getColumnKey = col => col.columnKey || col.valueKeyPath.join('/');
 
@@ -83,14 +83,31 @@ export default {
     if (col.sortValueGetter) {
       return col.sortValueGetter;
     }
-    return data => data.getIn(col.valueKeyPath);
+    return (data) => {
+      const cellData = data.getIn(col.valueKeyPath);
+      // Deal with select and multiselect componentTypes
+      if (col.selectComponentOptions) {
+        if (List.isList(cellData) || Array.isArray(cellData)) {
+          const labels = [];
+          cellData.forEach((d) => {
+            const found = col.selectComponentOptions.find(o => o.value === d);
+            if (found) labels.push(found.label);
+          });
+          return labels.join(' ');
+        }
+        const found = col.selectComponentOptions.find(o => o.value === cellData);
+        if (found) return found.label;
+      }
+      if (cellData && cellData.join) return cellData.join(' ');
+      return cellData;
+    };
   },
   getValueEmptyChecker: (col) => {
     if (col.valueEmptyChecker) {
       return col.valueEmptyChecker;
     }
     if (col.componentType === 'multiselect') {
-      return val => val === '' || val === null || val === undefined || val.length === 0;
+      return val => val === '' || val === null || val === undefined || val.length === 0 || val.size === 0; // eslint-disable-line
     }
 
     switch (col.valueType) {
@@ -111,11 +128,17 @@ export default {
 
     if (col.componentType === 'multiselect') {
       return (row, filterVal) => {
+        // value can be simple value, immutable List or array
         const value = getVal(row);
         // session storage content is converted to immutable and multiselect
         // filters is then list otherwise array
         const filters = filterVal && filterVal.toJS ? filterVal.toJS() : filterVal;
-        return filters.some(filter => filter.value === value);
+        return filters.some((filter) => {
+          if (List.isList(value) || Array.isArray(value)) {
+            return value.findIndex(v => v === filter.value) !== -1;
+          }
+          return filter.value === value;
+        });
       };
     }
 

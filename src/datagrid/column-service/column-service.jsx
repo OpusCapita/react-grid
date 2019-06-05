@@ -1,4 +1,5 @@
 import { Map } from 'immutable';
+import invariant from 'invariant';
 import Utils from '../datagrid.utils';
 import {
   DateType,
@@ -71,10 +72,31 @@ export default {
           break;
         }
 
-        case 'multiselect':
+        case 'multiselect': {
+          const selectOptions = col.selectComponentOptions
+            || selectComponentOptions.get(column.columnKey);
+          invariant(
+            selectOptions,
+            `No selectComponentOptions provided for column '${column.columnKey}'`,
+          );
+          column.cell = rowIndex => MultiSelectType.valRender(
+            col,
+            column,
+            rowIndex,
+            props.grid.id,
+            selectOptions,
+            baseValueRender,
+          );
+          break;
+        }
+
         case 'select': {
           const selectOptions = col.selectComponentOptions
             || selectComponentOptions.get(column.columnKey);
+          invariant(
+            selectOptions,
+            `No selectComponentOptions provided for column '${column.columnKey}'`,
+          );
           column.cell = rowIndex => SelectType.valRender(
             rowIndex,
             selectOptions,
@@ -111,7 +133,7 @@ export default {
       column.cellEdit = col.cellEdit;
     } else if (col.editValueRender) {
       column.cellEdit = (rowIndex, setRef, onKeyDown) => col.editValueRender(
-        props.data.get(rowIndex),
+        props.data.get(rowIndex, Map()),
         rowIndex,
         setRef,
         onKeyDown,
@@ -123,7 +145,7 @@ export default {
       column.cellCreate = col.cellCreate;
     } else if (col.createValueRender) {
       column.cellCreate = (rowIndex, setRef, onKeyDown) => col.createValueRender(
-        props.data.get(rowIndex),
+        props.data.get(rowIndex, Map()),
         rowIndex,
         setRef,
         onKeyDown,
@@ -240,6 +262,10 @@ export default {
       case 'multiselect': {
         const selectOptions = col.selectComponentOptions
           || selectComponentOptions.get(column.columnKey);
+        invariant(
+          selectOptions,
+          `No selectComponentOptions provided for column '${column.columnKey}'`,
+        );
         const selectTranslations = col.selectComponentTranslations || {
           placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
           noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
@@ -296,6 +322,10 @@ export default {
       case 'select': {
         const selectOptions = col.selectComponentOptions
           || selectComponentOptions.get(column.columnKey);
+        invariant(
+          selectOptions,
+          `No selectComponentOptions provided for column '${column.columnKey}'`,
+        );
         const selectTranslations = col.selectComponentTranslations || {
           placeholder: props.intl.formatMessage({ id: 'Grid.FloatingSelect.Select' }),
           noResultsText: props.intl.formatMessage({ id: 'Grid.FloatingSelect.NoResults' }),
