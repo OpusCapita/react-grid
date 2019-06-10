@@ -1,6 +1,9 @@
 # Changelog
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
+## <next>
+* Updated @opuscapita/react-select-order-list
+
 ## 8.2.0
 * Added multiselect cell renderer
 * Added `translations` and `isMultiselectTooltipDisabled` props for columns
