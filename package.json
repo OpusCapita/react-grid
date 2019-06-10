@@ -127,7 +127,7 @@
     "@opuscapita/react-list-items": "1.1.1",
     "@opuscapita/react-perfect-scrollbar": "3.0.4",
     "@opuscapita/react-responsive-navbar": "3.3.2",
-    "@opuscapita/react-select-order-list": "3.2.3",
+    "@opuscapita/react-select-order-list": "3.2.4",
     "@opuscapita/react-spinner": "3.0.0",
     "classnames": "2.2.6",
     "fixed-data-table-2": "0.8.26",
