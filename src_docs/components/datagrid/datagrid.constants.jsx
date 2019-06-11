@@ -126,6 +126,9 @@ export const columns = [
     createValueRender: (rowData, rowIndex, setRef, onKeyDown) => (
       <CustomInputComponent setRef={setRef} onKeyDown={onKeyDown} value={rowData.get('custom')} />
     ),
+    translations: {
+      columnHeaderTooltip: 'Custom component',
+    },
   },
   {
     header: 'Color',

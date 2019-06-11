@@ -4,6 +4,7 @@ import { Cell } from 'fixed-data-table-2';
 import classNames from 'classnames';
 import invariant from 'invariant';
 import styled from 'styled-components';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { gridShape } from './datagrid.props';
 import Utils from './datagrid.utils';
 
@@ -92,6 +93,41 @@ export default class HeaderCell extends React.PureComponent {
     return null;
   }
 
+  renderHeader = () => {
+    const { children, column, currentSortColumn, currentSortOrder, width } = this.props;
+    const requiredSymbol = column.isRequired ? '*' : '';
+    const isSortedByColumn = currentSortColumn === Utils.getColumnKey(column) && currentSortOrder;
+    const sortOrder = currentSortOrder === 'desc' ? ' ↓' : ' ↑';
+    const symbols = isSortedByColumn ? `${requiredSymbol}${sortOrder}` : requiredSymbol;
+
+    return (
+      <Header width={width} className="oc-datagrid-cell-header-text">
+        <HeaderLabel width={width}>{children}</HeaderLabel>
+        <Symbols>{symbols}</Symbols>
+      </Header>
+    );
+  }
+
+  renderColumnHeader = () => {
+    const { grid: { id }, column: { columnKey, translations }, } = this.props;
+    const tooltip = translations ? translations.columnHeaderTooltip : undefined;
+    return (
+      tooltip
+      ? <OverlayTrigger
+          placement="top"
+          overlay={(
+            <Tooltip id={`ocDatagridColumnHeaderTooltip-${id}-${columnKey}`}>
+              {tooltip}
+            </Tooltip>
+          )}
+          delay={500}
+        >
+          {this.renderHeader()}
+        </OverlayTrigger>
+      : this.renderHeader()
+    );
+  };
+
   render() {
     const {
       children,
@@ -108,19 +144,12 @@ export default class HeaderCell extends React.PureComponent {
     } = this.props;
     const cellClassNames = classNames({
       'oc-datagrid-cell-header': true,
-      clickable: !isBusy && Utils.isSortable(this.props.column),
+      clickable: !isBusy && Utils.isSortable(column),
     });
-    const requiredSymbol = column.isRequired ? '*' : '';
-    const isSortedByColumn = currentSortColumn === Utils.getColumnKey(column) && currentSortOrder;
-    const sortOrder = currentSortOrder === 'desc' ? ' ↓' : ' ↑';
-    const symbols = isSortedByColumn ? `${requiredSymbol}${sortOrder}` : requiredSymbol;
 
     return (
       <Cell className={cellClassNames} onClick={this.onSortChange} {...props}>
-        <Header width={width} className="oc-datagrid-cell-header-text">
-          <HeaderLabel width={width}>{children}</HeaderLabel>
-          <Symbols>{symbols}</Symbols>
-        </Header>
+        {this.renderColumnHeader()}
         {this.getFilteringComponent(filtering, column)}
       </Cell>
     );

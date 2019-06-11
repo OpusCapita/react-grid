@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added optional tooltip for column header
 * Updated @opuscapita/react-select-order-list
 
 ## 8.2.0
