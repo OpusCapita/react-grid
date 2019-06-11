@@ -94,7 +94,13 @@ export default class HeaderCell extends React.PureComponent {
   }
 
   renderHeader = () => {
-    const { children, column, currentSortColumn, currentSortOrder, width } = this.props;
+    const {
+      children,
+      column,
+      currentSortColumn,
+      currentSortOrder,
+      width,
+    } = this.props;
     const requiredSymbol = column.isRequired ? '*' : '';
     const isSortedByColumn = currentSortColumn === Utils.getColumnKey(column) && currentSortOrder;
     const sortOrder = currentSortOrder === 'desc' ? ' ↓' : ' ↑';
@@ -109,11 +115,11 @@ export default class HeaderCell extends React.PureComponent {
   }
 
   renderColumnHeader = () => {
-    const { grid: { id }, column: { columnKey, translations }, } = this.props;
+    const { grid: { id }, column: { columnKey, translations } } = this.props;
     const tooltip = translations ? translations.columnHeaderTooltip : undefined;
-    return (
-      tooltip
-      ? <OverlayTrigger
+    return tooltip
+      ? (
+        <OverlayTrigger
           placement="top"
           overlay={(
             <Tooltip id={`ocDatagridColumnHeaderTooltip-${id}-${columnKey}`}>
@@ -124,8 +130,8 @@ export default class HeaderCell extends React.PureComponent {
         >
           {this.renderHeader()}
         </OverlayTrigger>
-      : this.renderHeader()
-    );
+      )
+      : this.renderHeader();
   };
 
   render() {
