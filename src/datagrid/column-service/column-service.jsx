@@ -38,6 +38,8 @@ export default {
     if (col.sortComparator) baseCol.sortComparator = col.sortComparator;
     // sortValueGetter
     if (col.sortValueGetter) baseCol.sortValueGetter = col.sortValueGetter;
+    // translations
+    if (col.translations) baseCol.translations = col.translations;
     return baseCol;
   },
 

@@ -237,6 +237,11 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | totalSize     | number            |         | Total amount of rows                               |
 | getData       | function          |         | Callback function to request paginated data, parameters (offset :: number, count :: number, filters :: Map, sortColumn :: string or number, sortOrder :: string) |
 
+#### Datagrid column - `translations` prop attributes
+| Name                     | Type              | Default | Description                                        |
+| ------------------------ | ------------------| ------- | -------------------------------------------------- |
+| columnHeaderTooltip      | string or node    |         | Specifies optional tooltip for column header       |
+
 ### Code example
 
 ```jsx
