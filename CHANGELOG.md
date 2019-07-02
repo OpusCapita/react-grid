@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 8.2.2
+* Fix dynamic filtering prop change
+
 ## 8.2.1
 * Added optional tooltip for column header
 * Updated @opuscapita/react-select-order-list
