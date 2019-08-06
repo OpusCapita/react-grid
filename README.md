@@ -184,7 +184,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | thousandSeparator | string |              | Defaults to datagrid config                          |
 | decimalSeparator  | array  |              | Defaults to datagrid config                          |
 | currency          | string |              | Defaults to datagrid config                          |
-
+| multiplier        | number |              | If defined, values of columns, with componentType currency, are multiplied by multiplier in view mode. Note that in create and edit mode values are real, not multiplied. |
 
 #### Datagrid - `onValueMatchChangeValue` prop attributes
 | Name            | Type             | Default | Description                          |
