@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 8.2.3
 * Added multiplier support for currency amount values
 
 ## 8.2.2
