@@ -117,7 +117,7 @@
     "write-file-webpack-plugin": "4.5.0"
   },
   "dependencies": {
-    "@opuscapita/format-utils": "2.1.2",
+    "@opuscapita/format-utils": "2.2.0",
     "@opuscapita/react-checkbox": "2.0.2",
     "@opuscapita/react-datetime": "3.4.0",
     "@opuscapita/react-dropdown": "2.2.1",

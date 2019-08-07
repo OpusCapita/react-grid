@@ -19,6 +19,8 @@ export default {
         (col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator,
       decimalSeparator:
         (col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator,
+      multiplier:
+        (col.valueOptions && col.valueOptions.multiplier),
     }));
   },
   cellEdit(

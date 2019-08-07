@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added multiplier support for currency amount values
 
 ## 8.2.2
 * Fix dynamic filtering prop change
