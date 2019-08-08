@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Changed multiselect filtering logic so that filtering is done on blur instead on change
 
 ## 8.2.3
 * Added multiplier support for currency amount values

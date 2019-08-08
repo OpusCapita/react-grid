@@ -87,7 +87,7 @@ export default {
     const opts = col.filterSelectOptionsMod && selectOptions
       ? col.filterSelectOptionsMod(selectOptions.slice(), col)
       : selectOptions;
-    const value = functions.getItemValue(col, { selectOptions });
+    const value = functions.getItemMultiValue(col);
     const options = opts.map(
       option => (value && value.some(o => option.value === o.value)
         ? { ...option, checked: true }
@@ -114,7 +114,8 @@ export default {
       isClearable: true,
       isMulti: true,
       name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
-      onChange: functions.onCellValueChange(col, editValueParser),
+      onChange: functions.onCellMultiValueChange(col, editValueParser),
+      onBlur: functions.onCellMultiValueBlur(col),
       options,
       tabSelectsValue: false,
       tabIndex,

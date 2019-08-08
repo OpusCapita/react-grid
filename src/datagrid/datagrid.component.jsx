@@ -301,6 +301,30 @@ class DataGrid extends React.PureComponent {
     this.props.filterCellValueChange(this.props.grid, this.props.columns, col, value);
   };
 
+  onFilterCellMultiValueBlur = col => () => {
+    const columnKey = Utils.getColumnKey(col);
+    const { columns, filterCellValueChange, grid } = this.props;
+    const selectedFilters = this.state[columnKey];
+    if (selectedFilters) {
+      filterCellValueChange(grid, columns, col, selectedFilters);
+      this.setState({ [columnKey]: undefined });
+    }
+  };
+
+  onFilterCellMultiValueChange = (col, valueParser) => (data = []) => {
+    // data is input of react-select onChange
+    const columnKey = Utils.getColumnKey(col);
+    const selectedFilters = this.state[columnKey];
+    if (!selectedFilters && data.length === 0) {
+      // ends up here in case of clear button
+      const { columns, filterCellValueChange, grid } = this.props;
+      filterCellValueChange(grid, columns, col, data);
+    } else {
+      const value = valueParser(data);
+      this.setState({ [columnKey]: value });
+    }
+  };
+
   onCreateCellValueChange = (rowIndex, col, valueParser) => (eventOrData) => {
     let rawValue;
     // eventOrData can be input onChange event, react-select onChange or react-day-picker onChange
@@ -511,12 +535,18 @@ class DataGrid extends React.PureComponent {
     if (['checkbox', 'boolean'].includes(col.componentType)) {
       return options.find(obj => obj.value === val);
     }
-    if (col.componentType === 'multiselect') {
-      // session storage content is converted to immutable and multiselect
-      // filters is then list otherwise array
-      return val && val.toJS ? val.toJS() : val || [];
-    }
+
     return val;
+  };
+
+  getFilterItemMultiValue = (col) => {
+    const columnKey = Utils.getColumnKey(col);
+    const { filterData } = this.props;
+    const data = this.state[columnKey];
+    const val = data || filterData.get(columnKey, '');
+    // session storage content is converted to immutable and multiselect
+    // filters is then list otherwise array
+    return val && val.toJS ? val.toJS() : val || [];
   };
 
   getComponentDisabledState = (rowIndex, col, mode) => {
@@ -831,7 +861,10 @@ class DataGrid extends React.PureComponent {
         },
         filter: {
           getItemValue: this.getFilterItemValue,
+          getItemMultiValue: this.getFilterItemMultiValue,
           onCellValueChange: this.onFilterCellValueChange,
+          onCellMultiValueBlur: this.onFilterCellMultiValueBlur,
+          onCellMultiValueChange: this.onFilterCellMultiValueChange,
         },
       };
 
