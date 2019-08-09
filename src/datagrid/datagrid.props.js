@@ -115,6 +115,7 @@ export const columnShape = shape({
     selected: string,
   }),
   isCreatableSelect: bool,
+  virtualized: bool,
 });
 
 export const propTypes = {

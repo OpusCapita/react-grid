@@ -83,6 +83,7 @@ export const columns = [
     translations: {
       itemsSelected: 'countries',
     },
+    virtualized: true,
   },
   {
     header: 'Currency',

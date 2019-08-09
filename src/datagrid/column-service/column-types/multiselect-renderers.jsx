@@ -1,7 +1,7 @@
 import React from 'react';
 import { fromJS, List } from 'immutable';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
+import { FloatingSelectInfinite, FloatingSelectPortal } from '@opuscapita/react-floating-select';
 import Checkbox from '@opuscapita/react-checkbox';
 
 // TODO: cellCreate, cellEdit renderers -> multiselect dropdown as cellFilter has
@@ -88,17 +88,21 @@ export default {
       ? col.filterSelectOptionsMod(selectOptions.slice(), col)
       : selectOptions;
     const value = functions.getItemMultiValue(col);
-    const options = opts.map(
-      option => (value && value.some(o => option.value === o.value)
-        ? { ...option, checked: true }
-        : option),
-    );
-
-    // eslint-disable-next-line react/prop-types
+    // const handleClick = (e, onClick) => {
+    //   if (e.target.className !== 'oc-checkbox') {
+    //     // e.stopPropagation();
+    //     // e.preventDefault();
+    //   }
+    //   onClick(e);
+    // }
     const Option = ({ data: { checked, label }, innerProps }) => (
+      // <span {...innerProps} onClick={e => handleClick(e, innerProps.onClick)}>
       <span {...innerProps}>
         <Checkbox onChange={() => {}} label={label} checked={checked} />
       </span>
+    );
+    const options = opts.map(
+      option => ({ ...option, checked: (value && value.some(o => option.value === o.value)) }),
     );
 
     const fsProps = {
@@ -122,7 +126,8 @@ export default {
       value,
       closeMenuOnSelect: false,
     };
-
-    return <FloatingSelectPortal {...fsProps} />;
+    return column.virtualized
+      ? <FloatingSelectInfinite {...fsProps} />
+      : <FloatingSelectPortal {...fsProps} />;
   },
 };

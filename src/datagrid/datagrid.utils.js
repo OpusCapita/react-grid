@@ -183,7 +183,7 @@ export default {
       case 'text':
       default:
         return (row, filterVal) => {
-          const trimmedVal = filterVal.trim();
+          const trimmedVal = filterVal.trim ? filterVal.trim() : filterVal;
           let escapedVal = trimmedVal;
           const specialChars = '[]\\^$.|?*+()';
 
