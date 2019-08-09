@@ -183,11 +183,12 @@ export default {
       case 'text':
       default:
         return (row, filterVal) => {
-          let escapedVal = filterVal;
+          const trimmedVal = filterVal.trim();
+          let escapedVal = trimmedVal;
           const specialChars = '[]\\^$.|?*+()';
 
           // If filter val starts with a Regex special character, we must escape it
-          if (specialChars.includes(filterVal[0])) escapedVal = `\\${filterVal}`;
+          if (specialChars.includes(trimmedVal[0])) escapedVal = `\\${trimmedVal}`;
           return new RegExp(escapedVal, 'i').test(getVal(row));
         };
     }
