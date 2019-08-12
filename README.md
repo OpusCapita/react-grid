@@ -175,6 +175,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | selectComponentOptions     | array          |         | Options data for the react-select component                  |
 | translations               | object         |         | Translations object                                          |
 | isMultiselectTooltipDisabled | boolean      | false   | Tooltip that shows selected items in view mode               |
+| virtualized                | boolean        | false   | If true and input component type is multiselect, filter option list is virtualized |
 
 #### Datagrid - `valueOptions` prop attributes for `currency` value type
 | Name              | Type   | Default      | Description                                          |

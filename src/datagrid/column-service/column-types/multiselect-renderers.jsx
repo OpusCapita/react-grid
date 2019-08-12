@@ -88,15 +88,8 @@ export default {
       ? col.filterSelectOptionsMod(selectOptions.slice(), col)
       : selectOptions;
     const value = functions.getItemMultiValue(col);
-    // const handleClick = (e, onClick) => {
-    //   if (e.target.className !== 'oc-checkbox') {
-    //     // e.stopPropagation();
-    //     // e.preventDefault();
-    //   }
-    //   onClick(e);
-    // }
+    // eslint-disable-next-line react/prop-types
     const Option = ({ data: { checked, label }, innerProps }) => (
-      // <span {...innerProps} onClick={e => handleClick(e, innerProps.onClick)}>
       <span {...innerProps}>
         <Checkbox onChange={() => {}} label={label} checked={checked} />
       </span>
