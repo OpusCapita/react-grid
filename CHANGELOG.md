@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 8.2.4
 * Changed multiselect filtering logic so that filtering is done on blur instead on change
 
 ## 8.2.3
