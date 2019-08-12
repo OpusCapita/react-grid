@@ -27,6 +27,7 @@ export default {
       isRequired: !!col.isRequired,
       componentType: col.componentType,
       style: Utils.getCellStyleByCol(col),
+      virtualized: !!col.virtualized,
     };
     // valueKeyPath
     if (col.valueKeyPath) baseCol.valueKeyPath = col.valueKeyPath;
