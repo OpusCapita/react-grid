@@ -244,6 +244,7 @@ const paginationComponent = (WrappedComponent) => {
                 {intl.formatMessage({ id: 'Grid.Pagination.RowsOnPage' })}
               </RowsOnPageLabel>
               <RowsOnPageSelect
+                id="rowsOnPageSelect"
                 isCrearable={false}
                 isDisabled={isCreating || isEditing}
                 onChange={this.handleRowsOnPageChange}
