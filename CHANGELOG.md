@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 8.3.1
 * Removed multiselect filter option checkbox
 
 ## 8.3.0
