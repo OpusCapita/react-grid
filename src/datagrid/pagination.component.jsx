@@ -234,7 +234,7 @@ const paginationComponent = (WrappedComponent) => {
             <ListItems
               disabled={isCreating || isEditing}
               goToItem={this.gotoPage}
-              id="listPaginationItems"
+              id={`${grid.id}-list-pagination-items`}
               itemId={page}
               itemIds={List(pages)}
               typeable
@@ -244,6 +244,7 @@ const paginationComponent = (WrappedComponent) => {
                 {intl.formatMessage({ id: 'Grid.Pagination.RowsOnPage' })}
               </RowsOnPageLabel>
               <RowsOnPageSelect
+                id={`${grid.id}-rows-on-page-select`}
                 isCrearable={false}
                 isDisabled={isCreating || isEditing}
                 onChange={this.handleRowsOnPageChange}

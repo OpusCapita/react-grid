@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Removed multiselect filter option checkbox
 
 ## 8.3.0
 * Added `virtualized` option for multiselect column

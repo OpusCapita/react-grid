@@ -2,7 +2,6 @@ import React from 'react';
 import { fromJS, List } from 'immutable';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FloatingSelectInfinite, FloatingSelectPortal } from '@opuscapita/react-floating-select';
-import Checkbox from '@opuscapita/react-checkbox';
 
 // TODO: cellCreate, cellEdit renderers -> multiselect dropdown as cellFilter has
 
@@ -84,19 +83,10 @@ export default {
     editValueParser,
     functions,
   ) {
-    const opts = col.filterSelectOptionsMod && selectOptions
+    const options = col.filterSelectOptionsMod && selectOptions
       ? col.filterSelectOptionsMod(selectOptions.slice(), col)
       : selectOptions;
     const value = functions.getItemMultiValue(col);
-    // eslint-disable-next-line react/prop-types
-    const Option = ({ data: { checked, label }, innerProps }) => (
-      <span {...innerProps}>
-        <Checkbox onChange={() => {}} label={label} checked={checked} />
-      </span>
-    );
-    const options = opts.map(
-      option => ({ ...option, checked: (value && value.some(o => option.value === o.value)) }),
-    );
 
     const fsProps = {
       ...col.filterComponentProps,
@@ -104,7 +94,6 @@ export default {
       components: {
         MultiValueContainer: MultiValueContainer(selectTranslations.selected,
           (options || []).length),
-        Option,
       },
       hideSelectedOptions: false,
       isSearchable: selectOptions && selectOptions.length > 9,
