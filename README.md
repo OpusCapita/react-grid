@@ -165,6 +165,7 @@ Also you need to configure sass loader, since all the styles are in sass format.
 | filterMatcher              | function       |         | Matcher function that matches filter to data (parameters: rowData, filterValue) |
 | defaultValue               | string, number |         | Default value for the item when creating new item            |
 | isRequired                 | bool           |         | Indicating if column value is required                       |
+| isHidden                   | bool           |         | Column is hidden by default and can be enabled from column settings, enable columnSettings grid prop |
 | onValueMatchChangeValue    | object         |         | Change other column value if own value matches               |
 | disableEditingOnValueMatch | object         |         | Disable input element of this column when value at keyPath matches |
 | onEditValueChange          | function       |         | Called on edit value change, called with (value, valueKeyPath, rowIndex, dataId) |
