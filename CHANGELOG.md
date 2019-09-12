@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 8.3.2
+* Allow select component translation overrides
+* Upgrade packages
+
 ## 8.3.1
 * Removed multiselect filter option checkbox
 

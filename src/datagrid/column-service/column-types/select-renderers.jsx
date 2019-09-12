@@ -53,8 +53,8 @@ export default {
       ref: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
-      ...col.editComponentProps,
       ...selectTranslations,
+      ...col.editComponentProps,
     };
 
     if (col.isCreatableSelect) return creatableSelectRender({ ...fsProps });
@@ -93,8 +93,8 @@ export default {
       ref: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
-      ...col.createComponentProps,
       ...selectTranslations,
+      ...col.createComponentProps,
     };
 
     if (col.isCreatableSelect) return creatableSelectRender({ ...fsProps });
@@ -123,8 +123,8 @@ export default {
       isClearable: true,
       tabSelectsValue: false,
       tabIndex,
-      ...col.filterComponentProps,
       ...selectTranslations,
+      ...col.filterComponentProps,
     };
 
     return selectRender({ ...fsProps });

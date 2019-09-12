@@ -89,8 +89,6 @@ export default {
     const value = functions.getItemMultiValue(col);
 
     const fsProps = {
-      ...col.filterComponentProps,
-      ...selectTranslations,
       components: {
         MultiValueContainer: MultiValueContainer(selectTranslations.selected,
           (options || []).length),
@@ -107,6 +105,8 @@ export default {
       tabIndex,
       value,
       closeMenuOnSelect: false,
+      ...selectTranslations,
+      ...col.filterComponentProps,
     };
     return column.virtualized
       ? <FloatingSelectInfinite {...fsProps} />
