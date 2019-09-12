@@ -62,8 +62,8 @@ export default {
       tabSelectsValue: false,
       openMenuOnFocus: true,
       tabIndex,
-      ...col.filterComponentProps,
       ...selectTranslations,
+      ...col.filterComponentProps,
     };
     // checkbox filter is rendered as select - so use selectRender instead
     return selectRender({ ...cbProps });

@@ -39,8 +39,8 @@ export default {
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       ref: functions.handleCellRef(rowIndex, col),
       tabIndex,
-      ...col.editComponentProps,
       ...selectTranslations,
+      ...col.editComponentProps,
     };
     return selectRender({ ...booleanProps });
   },
@@ -74,8 +74,8 @@ export default {
       ref: functions.handleCellRef(rowIndex, col),
       isDisabled: getComponentDisabledState(rowIndex, col, cellName),
       tabIndex,
-      ...col.createComponentProps,
       ...selectTranslations,
+      ...col.createComponentProps,
     };
     return selectRender({ ...booleanProps });
   },
@@ -100,8 +100,8 @@ export default {
       tabSelectsValue: false,
       openMenuOnFocus: false,
       tabIndex,
-      ...col.filterComponentProps,
       ...selectTranslations,
+      ...col.filterComponentProps,
     };
     return selectRender({ ...booleanProps });
   },
