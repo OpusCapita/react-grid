@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed immutable convertion of filterData: nested array type of property is converted to immutable list
 
 ## 8.3.2
 * Allow select component translation overrides
