@@ -393,7 +393,7 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
     }
 
     case TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE:
-      return state.setIn([action.id, 'config', 'filteringData', 'filterData'], action.filterData);
+      return state.setIn([action.id, 'config', 'filteringData', 'filterData'], Immutable.fromJS(action.filterData));
 
     case TYPES.PLATFORM_DATAGRID_APPLY_FILTERS:
       return state.setIn([action.id, 'data'], action.data);

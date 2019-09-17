@@ -748,9 +748,9 @@ describe('Datagrid actions', () => {
       { id: 1, name: 'Mary', age: 35, married: true, dob: '1980-10-11T00:00:00Z' },
       { id: 3, name: 'Michael', age: 56, married: false, dob: '1962-10-11T00:00:00Z' },
     ]);
-    const expectedFilterData = Map({
+    const expectedFilterData = {
       name: 'm',
-    });
+    };
     const action = actions.filterCellValueChange(GRID, COLUMNS, COLUMNS[1], 'm');
     const expectedActions = [
       {

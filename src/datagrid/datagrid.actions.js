@@ -161,7 +161,10 @@ export const filterCellValueChange = (grid, columns, column, value) => (dispatch
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_FILTER_DATA_CHANGE,
     id: grid.id,
-    filterData,
+    // The filterData might have property, which value is array (this happens when loaded from
+    // session storage). In order to allow nested convertion of filterData and array type of
+    // property to be converted to immutable list, the filterData must be object instead of map.
+    filterData: filterData.toJS(),
   });
   applyFilters(grid, columns)(dispatch, getState);
 };
