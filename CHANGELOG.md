@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 8.3.3
 * Fixed immutable convertion of filterData: nested array type of property is converted to immutable list
 
 ## 8.3.2
