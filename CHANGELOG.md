@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 8.3.4
 * Prevent paginated grid rendering after data is requested and response is not yet received
 
 ## 8.3.3
