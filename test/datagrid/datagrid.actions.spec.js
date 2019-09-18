@@ -839,26 +839,41 @@ describe('Datagrid actions', () => {
   it('set page', function () {
     const page = 3;
     const action = actions.setPage(GRID, page);
-    const expectedAction = {
-      page,
-      id: GRID.id,
-      type: actions.TYPES.PLATFORM_DATAGRID_SET_PAGE,
-    };
+    const expectedActions = [
+      {
+        type: actions.TYPES.PLATFORM_DATAGRID_BUSY,
+        id: GRID.id,
+      },
+      {
+        page,
+        id: GRID.id,
+        type: actions.TYPES.PLATFORM_DATAGRID_SET_PAGE,
+      },
+    ];
 
     this.store.dispatch(action);
-    expect(this.store.getActions()[0]).to.eql(expectedAction);
+    expect(this.store.getActions()[0]).to.eql(expectedActions[0]);
+    expect(this.store.getActions()[1]).to.eql(expectedActions[1]);
   });
 
   it('set rows on page', function () {
     const rowsOnPage = 50;
     const action = actions.setRowsOnPage(GRID, rowsOnPage);
-    const expectedAction = {
-      rowsOnPage,
-      id: GRID.id,
-      type: actions.TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE,
-    };
+    const expectedActions = [
+      {
+        type: actions.TYPES.PLATFORM_DATAGRID_BUSY,
+        id: GRID.id,
+      },
+      {
+        rowsOnPage,
+        id: GRID.id,
+        type: actions.TYPES.PLATFORM_DATAGRID_SET_ROWS_ON_PAGE,
+      },
+    ];
 
     this.store.dispatch(action);
-    expect(this.store.getActions()[0]).to.eql(expectedAction);
+    expect(this.store.getActions()[0]).to.eql(expectedActions[0]);
+    this.store.dispatch(action);
+    expect(this.store.getActions()[1]).to.eql(expectedActions[1]);
   });
 });

@@ -187,10 +187,10 @@ export const applySort = (grid, columns) => (dispatch, getState) => {
   });
   if (!column) return false;
 
+  setBusy(grid)(dispatch);
   if (grid.pagination) {
     return true;
   }
-  setBusy(grid)(dispatch);
 
   const origAllData = gridData.get('allData');
   const comparator = Utils.getSortComparator(column);
@@ -892,6 +892,7 @@ export const saveColumnSettings = (grid, hiddenColumns, columnOrder) => (dispatc
 };
 
 export const setPage = (grid, page) => (dispatch) => {
+  setBusy(grid)(dispatch);
   Utils.savePage(grid, page);
   dispatch({
     page,
@@ -901,6 +902,7 @@ export const setPage = (grid, page) => (dispatch) => {
 };
 
 export const setRowsOnPage = (grid, rowsOnPage) => (dispatch) => {
+  setBusy(grid)(dispatch);
   Utils.saveRowsOnPage(grid, rowsOnPage);
   dispatch({
     rowsOnPage,

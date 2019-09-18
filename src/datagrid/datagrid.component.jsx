@@ -1300,6 +1300,7 @@ class DataGrid extends React.PureComponent {
         {this.state.contextMenuOpen && this.renderContextMenu()}
         {actionBar}
         <ResponsiveFixedDataTable
+          {...this.props}
           id={this.props.grid.id}
           rowsCount={rowsCount}
           headerHeight={

@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types, react/no-find-dom-node */
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { findDOMNode } from 'react-dom';
 import { Table } from 'fixed-data-table-2';
 import debounce from 'lodash/debounce';
@@ -12,11 +13,23 @@ export default class ResponsiveFixedDataTable extends React.Component {
   static propTypes = {
     containerStyle: PropTypes.object,
     refreshRate: PropTypes.number,
+    filterData: ImmutablePropTypes.map,
+    page: PropTypes.number,
+    pagination: PropTypes.shape({}),
+    rowsOnPage: PropTypes.number,
+    sortColumn: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    sortOrder: PropTypes.string,
   };
 
   static defaultProps = {
     containerStyle: {},
     refreshRate: 250, // ms
+    filterData: undefined,
+    page: undefined,
+    pagination: undefined,
+    rowsOnPage: undefined,
+    sortColumn: undefined,
+    sortOrder: undefined,
   };
 
   state = {
@@ -37,6 +50,28 @@ export default class ResponsiveFixedDataTable extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    const {
+      filterData,
+      page,
+      pagination,
+      rowsOnPage,
+      sortColumn,
+      sortOrder,
+    } = this.props;
+    const {
+      filterData: prevFilterData,
+      page: prevPage,
+      rowsOnPage: prevRowsOnPage,
+      sortColumn: nextSortColumn,
+      sortOrder: nextSortOrder,
+    } = nextProps;
+    if (pagination && (sortColumn !== nextSortColumn
+      || sortOrder !== nextSortOrder
+      || (filterData && !filterData.equals(prevFilterData))
+      || page !== prevPage
+      || rowsOnPage !== prevRowsOnPage)) {
+      return false;
+    }
     return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
   }
 
@@ -76,7 +111,6 @@ export default class ResponsiveFixedDataTable extends React.Component {
 
   render() {
     const { gridWidth, gridHeight } = this.state;
-
     return (
       <div className="oc-datagrid-main-container" style={this.getStyle()}>
         <Table {...this.props} width={gridWidth} height={gridHeight} />
