@@ -111,6 +111,7 @@ export default class ResponsiveFixedDataTable extends React.Component {
 
   render() {
     const { gridWidth, gridHeight } = this.state;
+
     return (
       <div className="oc-datagrid-main-container" style={this.getStyle()}>
         <Table {...this.props} width={gridWidth} height={gridHeight} />
