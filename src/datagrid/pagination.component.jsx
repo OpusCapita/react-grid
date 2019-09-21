@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FloatingSelectPortal } from '@opuscapita/react-floating-select';
 import ListItems from '@opuscapita/react-list-items';
-import { setPage, setRowsOnPage as setRowsOnPageAction } from './datagrid.actions';
+import { setBusy as setBusyAction, setPage, setRowsOnPage as setRowsOnPageAction } from './datagrid.actions';
 import { gridShape } from './datagrid.props';
 
 import './datagrid.variables.scss';
@@ -81,6 +81,7 @@ const paginationComponent = (WrappedComponent) => {
   };
 
   const mapDispatchToProps = dispatch => ({
+    setBusy: grid => dispatch(setBusyAction(grid)),
     setPage: (grid, page) => dispatch(setPage(grid, page)),
     setRowsOnPage: (grid, rowsOnPage) => dispatch(setRowsOnPageAction(grid, rowsOnPage)),
   });
@@ -97,6 +98,7 @@ const paginationComponent = (WrappedComponent) => {
       intl: intlShape.isRequired,
       isEditing: PropTypes.bool.isRequired,
       isCreating: PropTypes.bool.isRequired,
+      setBusy: PropTypes.func.isRequired,
       setPage: PropTypes.func.isRequired,
       setRowsOnPage: PropTypes.func.isRequired,
       children: PropTypes.node,
@@ -169,9 +171,10 @@ const paginationComponent = (WrappedComponent) => {
 
     requestData = () => {
       const {
-        filterData, pagination, page, rowsOnPage, sortColumn, sortOrder,
+        filterData, grid, pagination, page, setBusy, rowsOnPage, sortColumn, sortOrder,
       } = this.props;
       const offset = (page - 1) * rowsOnPage;
+      setBusy(grid);
       pagination.getData(offset, rowsOnPage, filterData, sortColumn, sortOrder);
     };
 

@@ -95,11 +95,11 @@ export const applyFilters = (grid, columns) => (dispatch, getState) => {
   if (!gridData) return false;
   const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
   const allData = gridData.get('allData');
-  setBusy(grid)(dispatch);
   let data;
   if (grid.pagination) {
     return true;
   }
+  setBusy(grid)(dispatch);
   if (filterData.isEmpty()) {
     data = allData;
   } else {
@@ -187,11 +187,11 @@ export const applySort = (grid, columns) => (dispatch, getState) => {
   });
   if (!column) return false;
 
-  setBusy(grid)(dispatch);
   if (grid.pagination) {
     return true;
   }
 
+  setBusy(grid)(dispatch);
   const origAllData = gridData.get('allData');
   const comparator = Utils.getSortComparator(column);
   const valueGetter = Utils.getSortValueGetter(column);
@@ -268,26 +268,6 @@ export const setData = (grid, columns, data) => (dispatch, getState) => {
   if (!grid.pagination) {
     applyFilters(grid, columns)(dispatch, getState);
     applySort(grid, columns)(dispatch, getState);
-  } else {
-    const gridData = getState().datagrid.get(grid.id);
-    if (!gridData) return false;
-    const filterData = gridData.getIn(['config', 'filteringData', 'filterData'], Map());
-    if (!filterData.isEmpty()) {
-      dispatch({
-        type: TYPES.PLATFORM_DATAGRID_APPLY_FILTERS,
-        id: grid.id,
-        data: immutableData,
-      });
-    }
-    const sortData = gridData.getIn(['config', 'sortingData']);
-    if (sortData) {
-      dispatch({
-        type: TYPES.PLATFORM_DATAGRID_APPLY_SORT,
-        id: grid.id,
-        data: immutableData,
-        allData: immutableData,
-      });
-    }
   }
   return true;
 };
@@ -892,7 +872,6 @@ export const saveColumnSettings = (grid, hiddenColumns, columnOrder) => (dispatc
 };
 
 export const setPage = (grid, page) => (dispatch) => {
-  setBusy(grid)(dispatch);
   Utils.savePage(grid, page);
   dispatch({
     page,
@@ -902,7 +881,6 @@ export const setPage = (grid, page) => (dispatch) => {
 };
 
 export const setRowsOnPage = (grid, rowsOnPage) => (dispatch) => {
-  setBusy(grid)(dispatch);
   Utils.saveRowsOnPage(grid, rowsOnPage);
   dispatch({
     rowsOnPage,
