@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 8.3.6
 * Updated `@opuscapita/react-list-items` package
 
 ## 8.3.5
