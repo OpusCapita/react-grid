@@ -123,7 +123,7 @@
     "@opuscapita/react-floating-select": "3.6.4",
     "@opuscapita/react-formatted-input": "1.1.4",
     "@opuscapita/react-icons": "4.0.9",
-    "@opuscapita/react-list-items": "1.1.1",
+    "@opuscapita/react-list-items": "1.1.2",
     "@opuscapita/react-perfect-scrollbar": "3.0.4",
     "@opuscapita/react-responsive-navbar": "3.3.4",
     "@opuscapita/react-select-order-list": "3.2.4",
