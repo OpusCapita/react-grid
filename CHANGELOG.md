@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Updated `@opuscapita/react-list-items` package
 
 ## 8.3.5
 * Fixed busy state of paginated grid
