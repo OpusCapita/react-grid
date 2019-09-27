@@ -3,7 +3,7 @@
 
 ## <next>
 
-## 8.4.0
+## 8.3.7
 
 * options min size limit removed from select renderers
 
