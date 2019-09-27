@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 8.4.0
+
+* options min size limit removed from select renderers
+
 ## 8.3.6
 * Updated `@opuscapita/react-list-items` package
 
