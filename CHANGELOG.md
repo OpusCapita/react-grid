@@ -4,6 +4,10 @@
 ## <next>
 * Updated `@opuscapita/react-floating-select` package
 
+## 8.3.7
+
+* options min size limit removed from select renderers
+
 ## 8.3.6
 * Updated `@opuscapita/react-list-items` package
 
