@@ -3,7 +3,7 @@
 
 ## <next>
 
-## 8.3.8
+## 8.4.0
 * Updated react and `@opuscapita/react-floating-select` versions
 
 ## 8.3.7
