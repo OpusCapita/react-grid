@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Updated react and `@opuscapita/react-floating-select` versions
 
 ## 8.3.7
 
