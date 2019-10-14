@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* A small fix in extraColumn's `valueRender` function
 
 ## 8.4.1
 * Updated `@opuscapita/react-floating-select` versions

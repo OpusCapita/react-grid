@@ -777,7 +777,7 @@ class DataGrid extends React.PureComponent {
         columnKey: 'extraColumn',
         cell: rowIndex => (
           <div className="oc-datagrid-extra-column-cell no-row-select">
-            {extraColumn.valueRender(data.get(rowIndex), tabIndex)}
+            {extraColumn.valueRender(data.get(rowIndex), rowIndex)}
           </div>
         ),
         cellEdit: rowIndex => (extraColumn.cellEdit ? extraColumn.cellEdit(rowIndex) : null),
