@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 8.5.0
+* Add possibility to validate editCell with rowData and allData as parameters
+
 ## 8.4.2
 * A small fix in extraColumn's `valueRender` function
 
