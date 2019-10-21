@@ -1,4 +1,4 @@
-import Immutable, { Map } from 'immutable';
+import Immutable, { Map, List } from 'immutable';
 import Utils from './datagrid.utils';
 
 export const TYPES = {
@@ -496,6 +496,7 @@ export const editCellValueValidate = (grid, dataId, keyPath, value, validators =
           }
         }
       } else if (validator.validateWithRowData) {
+        // Custom validator function with rowData as parameters
         const gridData = getState().datagrid.get(grid.id);
         const editData = gridData.getIn(['editData', dataId], Map());
         let rowData = gridData.get('allData').find(item => item.getIn(grid.idKeyPath) === dataId);
@@ -504,6 +505,28 @@ export const editCellValueValidate = (grid, dataId, keyPath, value, validators =
           const params = validator.params ? Object.values(validator.params) : [];
           validationState = validator.validateWithRowData(value, rowData, ...params);
         }
+      } else if (validator.validateWithGridData) {
+        // Custom validator function with rowData and gridData as parameters
+        const gridData = getState().datagrid.get(grid.id);
+
+        let allData = gridData.get('allData', List());
+        const editData = gridData.get('editData', Map());
+
+        editData.forEach((editRow, editKey) => {
+          const foundIndex = allData.findIndex(d => d.getIn(grid.idKeyPath) === editKey);
+          if (foundIndex !== -1) {
+            allData = allData.mergeDeepIn([foundIndex], editRow);
+          }
+        });
+        const editRowData = editData.get(dataId, Map());
+        let rowData = allData.find(item => item.getIn(grid.idKeyPath) === dataId);
+        if (rowData) {
+          rowData = rowData.mergeDeep(editRowData);
+        } else {
+          rowData = editRowData;
+        }
+        const params = validator.params ? Object.values(validator.params) : [];
+        validationState = validator.validateWithGridData(value, rowData, allData, ...params);
       } else {
         const params = validator.params ? Object.values(validator.params) : [];
         validationState = validator.validate(value, ...params);

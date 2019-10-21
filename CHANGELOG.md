@@ -3,8 +3,10 @@
 
 ## <next>
 
-## 8.3.7
+## 8.3.8
+* Add possibility to validate editCell with rowData and allData as parameters
 
+## 8.3.7
 * options min size limit removed from select renderers
 
 ## 8.3.6
