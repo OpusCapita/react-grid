@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 8.3.9
+* Fix `updateExistingCellValue` action to use dataId as in parameters instead of rowIndex which doesn't work
+
 ## 8.3.8
 * Add possibility to validate editCell with rowData and allData as parameters
 

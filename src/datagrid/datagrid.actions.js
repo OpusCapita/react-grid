@@ -851,7 +851,7 @@ export const updateExistingCellValue = (grid, dataId, keyPath, value) => (dispat
   Utils.checkGridParam(grid);
   dispatch({
     type: TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE,
-    id: grid.id,
+    grid,
     dataId,
     keyPath,
     value,
