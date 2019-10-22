@@ -1,5 +1,20 @@
 # Migrate guide between major versions
 
+## Version 9
+* updateExistingCellValue action had wrong parameters and behavior was bugged.
+* Use GRID as parameter instead of gridId
+* Use dataId as parameter instead of rowIndex
+OLD:
+
+dispatch(DatagridActions.updateExistingCellValue(id, rowIndex, keyPath, value))
+```
+
+```javascript
+NEW:
+
+dispatch(DatagridActions.updateExistingCellValue(grid, dataId, keyPath, value))
+```
+
 ## Version 8
 * Cell values are rendered based on componentType instead of valueType. Make sure you have correct componentType set.
 * componentType select and multiselect values are now rendered automatically from selectOptions. You don't need custom valueRender anymore in basic cases.

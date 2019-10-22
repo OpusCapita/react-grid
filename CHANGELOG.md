@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.0.0
+* Change `updateExistingCellValue` parameters to fix correct behavior. See (MIGRATEGUIDE.md)
+
 ## 8.5.0
 * Add possibility to validate editCell with rowData and allData as parameters
 
@@ -15,8 +18,13 @@
 ## 8.4.0
 * Updated react and `@opuscapita/react-floating-select` versions
 
-## 8.3.7
+## 8.3.9 - hotfix old branch
+* Change `updateExistingCellValue` parameters to fix correct behavior
 
+## 8.3.8 - hotfix old branch
+* Add possibility to validate editCell with rowData and allData as parameters
+
+## 8.3.7
 * options min size limit removed from select renderers
 
 ## 8.3.6

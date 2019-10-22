@@ -402,14 +402,26 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
       return state.setIn([action.id, 'config', 'filteringData'], action.filteringData);
 
     case TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE: {
-      const newState = state.setIn(
-        [action.id, 'allData', action.dataId, ...action.keyPath],
-        action.value,
-      );
-      if (state.hasIn([action.id, 'data', action.dataId, ...action.keyPath])) {
-        return newState.setIn([action.id, 'data', action.dataId, ...action.keyPath], action.value);
+      const indexAllData = state
+        .getIn([action.grid.id, 'allData'], List())
+        .findIndex(d => d.getIn(action.grid.idKeyPath) === action.dataId);
+      const indexData = state
+        .getIn([action.grid.id, 'data'], List())
+        .findIndex(d => d.getIn(action.grid.idKeyPath) === action.dataId);
+      if (indexAllData !== -1 && indexData !== -1) {
+        return state
+          .setIn([action.grid.id, 'allData', indexAllData, ...action.keyPath], action.value)
+          .setIn([action.grid.id, 'data', indexData, ...action.keyPath], action.value);
       }
-      return newState;
+      if (indexAllData !== -1) {
+        return state
+          .setIn([action.grid.id, 'allData', indexAllData, ...action.keyPath], action.value);
+      }
+      if (indexData !== -1) {
+        return state
+          .setIn([action.grid.id, 'data', indexData, ...action.keyPath], action.value);
+      }
+      return state;
     }
 
     case TYPES.PLATFORM_DATAGRID_SET_EDIT_DATA:
