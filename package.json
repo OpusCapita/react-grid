@@ -1,7 +1,7 @@
 {
   "author": "OpusCapita (www.opuscapita.com)",
   "name": "@opuscapita/react-grid",
-  "version": "8.3.8",
+  "version": "8.3.9",
   "private": false,
   "license": "MIT",
   "description": "OpusCapita react grid component",
