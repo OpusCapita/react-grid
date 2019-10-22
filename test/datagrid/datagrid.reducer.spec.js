@@ -409,17 +409,19 @@ describe('Datagrid reducers', () => {
   });
 
   it('set existing cell value', () => {
-    const state = INITIAL_STATE.setIn([id, 'data'], data);
+    const state = INITIAL_STATE
+      .setIn([id, 'data'], data)
+      .setIn([id, 'allData'], data);
     const action = {
       type: TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE,
-      id,
+      grid: { id, idKeyPath: ['id'] },
       dataId: 1,
       keyPath: ['name'],
       value: 'Edith',
     };
     const newState = datagridReducer(state, action);
-    expect(newState.getIn([id, 'data', 1, 'name'])).to.eql('Edith');
-    expect(newState.getIn([id, 'allData', 1, 'name'])).to.eql('Edith');
+    expect(newState.getIn([id, 'data', 0, 'name'])).to.eql('Edith');
+    expect(newState.getIn([id, 'allData', 0, 'name'])).to.eql('Edith');
   });
 
   it('set edited data', () => {
