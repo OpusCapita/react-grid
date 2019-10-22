@@ -788,7 +788,7 @@ describe('Datagrid actions', () => {
     const action = actions.updateExistingCellValue(GRID, 123, ['name'], 'Seth');
     const expectedAction = {
       type: actions.TYPES.PLATFORM_DATAGRID_UPDATE_EXISTING_CELL_VALUE,
-      id: GRID.id,
+      grid: GRID,
       dataId: 123,
       keyPath: ['name'],
       value: 'Seth',
