@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.0.1
+* Fix select-renderers when `editSelectOptionsMod`, `createSelectOptionsMod` or `filterSelectOptionsMod` is used
+
 ## 9.0.0
 * Change `updateExistingCellValue` parameters to fix correct behavior. See (MIGRATEGUIDE.md)
 
