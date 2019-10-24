@@ -94,7 +94,7 @@ export default {
           (options || []).length),
       },
       hideSelectedOptions: false,
-      isSearchable: selectOptions && selectOptions.length > 9,
+      isSearchable: true,
       isClearable: true,
       isMulti: true,
       name: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
