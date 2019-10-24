@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 8.3.10
+* Fix select-renderers when `editSelectOptionsMod`, `createSelectOptionsMod` or `filterSelectOptionsMod` is used
+
 ## 8.3.9
 * Fix `updateExistingCellValue` action to use dataId as in parameters instead of rowIndex which doesn't work
 
