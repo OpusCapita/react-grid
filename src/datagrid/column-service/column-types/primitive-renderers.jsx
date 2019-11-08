@@ -1,8 +1,13 @@
 import React from 'react';
-import { FormControl } from 'react-bootstrap';
+// import { FormControl } from 'react-bootstrap';
+import FormattedInput from '@opuscapita/react-formatted-input';
 import { formatNumber } from '@opuscapita/format-utils';
 
-export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
+// export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
+
+export const primitiveRender = formattedInputProps => (
+  <FormattedInput {...formattedInputProps} />
+);
 
 export default {
   // primitiveNumberValueRender
@@ -29,20 +34,45 @@ export default {
     getComponentDisabledState,
   ) {
     const cellName = 'edit';
+    // const primitiveProps = {
+    //   id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
+    //   style: column.style,
+    //   tabIndex,
+    //   type: formControlType,
+    //   value: functions.getItemValue(rowIndex, col),
+    //   onBlur: functions.onCellBlur(rowIndex, col),
+    //   onKeyDown: functions.onCellKeyDown(rowIndex, col),
+    //   inputRef: functions.handleCellRef(rowIndex, col),
+    //   disabled: getComponentDisabledState(rowIndex, col, cellName),
+    //   onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
+    //   // onChange: functions.onCellValueChange(rowIndex, col, val => val),
+    //   onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
+    //   ...col.editComponentProps,
+    // };
+
     const primitiveProps = {
-      id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
-      style: column.style,
       tabIndex,
-      type: formControlType,
+      className: 'form-control',
+      inputProps: {
+        disabled: getComponentDisabledState(rowIndex, col, cellName),
+        id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
+        onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
+        onKeyDown: functions.onCellKeyDown(rowIndex, col),
+        ref: functions.handleCellRef(rowIndex, col),
+        style: column.style,
+        type: formControlType,
+      },
       value: functions.getItemValue(rowIndex, col),
+      // TODO katso, missä muodossa currencyn tulee olla editin jälkeen
+      // TODO isCellEdited && value !== this.getEditItemValue(rowIndex, col)
+      // TODO createlle samat
+      // onBlur: NaN invalid
+      // TODO toimiiko edit & create text/currency/number/float
       onBlur: functions.onCellBlur(rowIndex, col),
-      onKeyDown: functions.onCellKeyDown(rowIndex, col),
-      inputRef: functions.handleCellRef(rowIndex, col),
-      disabled: getComponentDisabledState(rowIndex, col, cellName),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
-      onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       ...col.editComponentProps,
     };
+
     return primitiveRender({ ...primitiveProps });
   },
   // primitiveCellCreate

@@ -363,6 +363,7 @@ class DataGrid extends React.PureComponent {
   };
 
   onEditCellValueChange = (rowIndex, col, valueParser) => (eventOrData) => {
+    const { editCellValueChange, grid } = this.props;
     const dataId = this.getDataIdByRowIndex(rowIndex);
     let rawValue;
     // eventOrData can be input onChange event, react-select onChange or react-day-picker onChange
@@ -376,7 +377,19 @@ class DataGrid extends React.PureComponent {
       }
     }
     const value = valueParser(rawValue);
-    this.props.editCellValueChange(this.props.grid, dataId, col.valueKeyPath, value);
+    const { componentType } = col;
+    switch (componentType) {
+      case 'currency':
+      case 'float':
+      case 'number':
+      case 'text': {
+        break;
+      }
+      default: {
+        editCellValueChange(grid, dataId, col.valueKeyPath, value);
+        break;
+      }
+    }
     if (col.onEditValueChange) {
       col.onEditValueChange(value, col.valueKeyPath, rowIndex, dataId);
     }
@@ -412,14 +425,35 @@ class DataGrid extends React.PureComponent {
   };
 
   onEditCellBlur = (rowIndex, col, valueParser) => (e) => {
+    const { editCellValueChange, grid } = this.props;
+    const { componentType } = col;
+    const dataId = this.getDataIdByRowIndex(rowIndex);
+    let value = e && e.target && e.target.value !== undefined
+      ? e.target.value
+      : this.getEditItemValue(rowIndex, col);
+    switch (componentType) {
+      case 'currency':
+      case 'float':
+      case 'number':
+      case 'text': {
+        if (value !== this.getEditItemValue(rowIndex, col)) {
+          editCellValueChange(grid, dataId, col.valueKeyPath, value);
+        }
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+
     if (col.onEditBlur) {
-      let value = e && e.target && e.target.value !== undefined
-        ? e.target.value
-        : this.getEditItemValue(rowIndex, col);
+      // let value = e && e.target && e.target.value !== undefined
+      //   ? e.target.value
+      //   : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
-      const dataId = this.getDataIdByRowIndex(rowIndex);
+      // const dataId = this.getDataIdByRowIndex(rowIndex);
       col.onEditBlur(value, rowIndex, dataId);
     }
   };

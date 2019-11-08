@@ -434,7 +434,7 @@ export default {
       return grid.thousandSeparator;
     }
     if (ocUserState) {
-      return ocUserState.getIn(['localeFormat', 'thousandSeparator'], '');
+      return ocUserState.getIn(['localeFormat', 'thousandSeparator']) || ' ';
     }
     return '';
   },

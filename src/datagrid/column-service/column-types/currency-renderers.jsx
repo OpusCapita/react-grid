@@ -37,6 +37,7 @@ export default {
     decimalSeparator,
   ) {
     const props = {
+      className: 'form-control',
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, val => val),
       inputProps: {
@@ -51,6 +52,7 @@ export default {
         || thousandSeparator,
       decimals: col.valueOptions && col.valueOptions.decimals,
       tabIndex,
+      onBlur: functions.onCellBlur(rowIndex, col),
       ...col.editComponentProps,
     };
 
