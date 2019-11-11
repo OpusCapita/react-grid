@@ -67,9 +67,9 @@ export const columns = [
     width: 80,
     validators: [{ validate: VALIDATE.isRequired }],
     valueOptions: {
-      decimals: 3,
-      decimalSeparator: ',',
-      thousandSeparator: ' ',
+      // decimals: 3,
+      // decimalSeparator: ',',
+      // thousandSeparator: ' ',
     },
   },
   {

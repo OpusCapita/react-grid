@@ -63,11 +63,13 @@ export default {
         type: formControlType,
       },
       value: functions.getItemValue(rowIndex, col),
-      // TODO katso, missä muodossa currencyn tulee olla editin jälkeen
-      // TODO isCellEdited && value !== this.getEditItemValue(rowIndex, col)
       // TODO createlle samat
       // onBlur: NaN invalid
       // TODO toimiiko edit & create text/currency/number/float
+      // TODO valueOptions: miksei vaikuta kuin edit modessa
+      // TODO editData -> dataan. string -> number?
+      // TODO jos currencyllä decimaaleja, formatoi silti
+      // TODO JOS SYÖTTÄÄ VALMIIKSI TUHATEROTTIMET?
       onBlur: functions.onCellBlur(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       ...col.editComponentProps,
@@ -89,17 +91,20 @@ export default {
   ) {
     const cellName = 'create';
     const primitiveProps = {
-      id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
-      style: column.style,
       tabIndex,
-      type: formControlType || col.componentType,
+      className: 'form-control',
+      inputProps: {
+        disabled: getComponentDisabledState(rowIndex, col, cellName),
+        id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
+        onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
+        onKeyDown: functions.onCellKeyDown(rowIndex, col, false),
+        ref: functions.handleCellRef(rowIndex, col),
+        style: column.style,
+        type: formControlType || col.componentType,
+      },
       value: functions.getItemValue(rowIndex, col),
       onBlur: functions.onCellBlur(rowIndex, col),
-      onKeyDown: functions.onCellKeyDown(rowIndex, col, false),
-      inputRef: functions.handleCellRef(rowIndex, col),
-      disabled: getComponentDisabledState(rowIndex, col, cellName),
       onChange: functions.onCellValueChange(rowIndex, col, createValueParser),
-      onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       ...col.createComponentProps,
     };
     return primitiveRender({ ...primitiveProps });

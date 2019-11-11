@@ -614,7 +614,8 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
       }
     }
   });
-  if (validationState.valid) {
+  const createCellMessage = getState().datagrid.getIn([grid.id, 'createCellMessages', 'error', rowIndex, ...keyPath]);
+  if (validationState.valid && createCellMessage !== undefined) {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE,
       id: grid.id,
@@ -622,7 +623,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
       rowIndex,
       keyPath,
     });
-  } else {
+  } else if (!validationState.valid) {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_SHOW_MESSAGE,
       id: grid.id,

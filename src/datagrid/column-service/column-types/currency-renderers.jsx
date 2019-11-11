@@ -72,20 +72,22 @@ export default {
     decimalSeparator,
   ) {
     const props = {
+      className: 'form-control',
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, val => val),
-      currency: gridData.getIn([rowIndex, ...getCurrencyKeyPath(col)])
-        || (col.valueOptions && col.valueOptions.currency),
       inputProps: {
         name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
         onKeyDown: functions.onCellKeyDown(rowIndex, col),
         ref: functions.handleCellRef(rowIndex, col),
       },
+      currency: gridData.getIn([rowIndex, ...getCurrencyKeyPath(col)])
+        || (col.valueOptions && col.valueOptions.currency),
       decimalSeparator: (col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator,
       thousandSeparator: (col.valueOptions && col.valueOptions.thousandSeparator)
         || thousandSeparator,
       decimals: col.valueOptions && col.valueOptions.decimals,
       tabIndex,
+      onBlur: functions.onCellBlur(rowIndex, col),
       ...col.createComponentProps,
     };
 
