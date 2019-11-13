@@ -536,6 +536,7 @@ export const editCellValueValidate = (grid, dataId, keyPath, value, validators =
       }
     }
   });
+
   const cellMessage = getState().datagrid.getIn([grid.id, 'cellMessages', 'error', dataId, ...keyPath]);
   if (validationState.valid && cellMessage !== undefined) {
     dispatch({

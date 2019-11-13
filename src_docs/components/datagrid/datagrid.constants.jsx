@@ -66,11 +66,6 @@ export const columns = [
     isRequired: true,
     width: 80,
     validators: [{ validate: VALIDATE.isRequired }],
-    valueOptions: {
-      // decimals: 3,
-      // decimalSeparator: ',',
-      // thousandSeparator: ' ',
-    },
   },
   {
     header: 'Stock',

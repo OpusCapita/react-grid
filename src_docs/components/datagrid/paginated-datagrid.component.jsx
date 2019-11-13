@@ -245,7 +245,6 @@ class DatagridView extends React.Component {
   render() {
     const { pageSize } = this.props;
     const { totalSize } = this.state;
-    const disableActionSave = this.props.isEditing && this.props.editData.size === 0;
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
         <Button onClick={this.handleWarnClick}>Show Warning</Button>
@@ -260,7 +259,6 @@ class DatagridView extends React.Component {
         grid={this.state.gridSettings}
         gridHeader="Example Grid"
         columns={columns}
-        disableActionSave={disableActionSave}
         actionBarLeft={actionBar}
         filtering
         columnSettings

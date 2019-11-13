@@ -34,22 +34,6 @@ export default {
     getComponentDisabledState,
   ) {
     const cellName = 'edit';
-    // const primitiveProps = {
-    //   id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
-    //   style: column.style,
-    //   tabIndex,
-    //   type: formControlType,
-    //   value: functions.getItemValue(rowIndex, col),
-    //   onBlur: functions.onCellBlur(rowIndex, col),
-    //   onKeyDown: functions.onCellKeyDown(rowIndex, col),
-    //   inputRef: functions.handleCellRef(rowIndex, col),
-    //   disabled: getComponentDisabledState(rowIndex, col, cellName),
-    //   onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
-    //   // onChange: functions.onCellValueChange(rowIndex, col, val => val),
-    //   onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
-    //   ...col.editComponentProps,
-    // };
-
     const primitiveProps = {
       tabIndex,
       className: 'form-control',
@@ -63,13 +47,6 @@ export default {
         type: formControlType,
       },
       value: functions.getItemValue(rowIndex, col),
-      // TODO createlle samat
-      // onBlur: NaN invalid
-      // TODO toimiiko edit & create text/currency/number/float
-      // TODO valueOptions: miksei vaikuta kuin edit modessa
-      // TODO editData -> dataan. string -> number?
-      // TODO jos currencyllä decimaaleja, formatoi silti
-      // TODO JOS SYÖTTÄÄ VALMIIKSI TUHATEROTTIMET?
       onBlur: functions.onCellBlur(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       ...col.editComponentProps,

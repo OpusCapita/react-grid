@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-lonely-if, prefer-template, react/require-default-props */
 import React from 'react';
 import { Map, List } from 'immutable';
@@ -425,30 +426,39 @@ class DataGrid extends React.PureComponent {
     }
   };
 
-  onCreateCellBlur = (rowIndex, col, valueParser) => (e) => {
+  getRegEx = separator => (separator ? new RegExp(`\\${separator}`, 'g') : new RegExp('\\s', 'g'));
+
+  onCreateCellBlur = (rowIndex, col, valueParser) => (eventOrData) => {
     const {
       decimalSeparator, createCellValueChange, grid, thousandSeparator,
     } = this.props;
     const { componentType } = col;
-    let value = e && e.target && e.target.value !== undefined
-      ? e.target.value
-      : this.getEditItemValue(rowIndex, col);
+    let value;
+    // eventOrData can be formatted-input, react-select or react-day-picker onChange event
+    if (eventOrData !== undefined) {
+      if (eventOrData.target !== undefined) {
+        value = eventOrData.target.value;
+      } else if (eventOrData.value !== undefined) {
+        value = eventOrData.value;
+      } else {
+        value = eventOrData;
+      }
+    } else {
+      value = this.getEditItemValue(rowIndex, col);
+    }
     switch (componentType) {
       case 'currency': {
-        const numericValue = value ? Number(value.replace(thousandSeparator, '').replace(decimalSeparator, '.')) : value;
+        const numericValue = value
+          ? Number(value.replace(this.getRegEx((col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator), '')
+            .replace(this.getRegEx((col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator), '.'))
+          : value;
         if (numericValue !== this.getEditItemValue(rowIndex, col)) {
-          createCellValueChange(grid, rowIndex, col.valueKeyPath, value);
+          createCellValueChange(grid, rowIndex, col.valueKeyPath, numericValue);
         }
         break;
       }
       case 'float':
-      case 'number': {
-        const numericValue = Number(value);
-        if (numericValue !== this.getEditItemValue(rowIndex, col)) {
-          createCellValueChange(grid, rowIndex, col.valueKeyPath, value);
-        }
-        break;
-      }
+      case 'number':
       case 'text': {
         if (value !== this.getEditItemValue(rowIndex, col)) {
           createCellValueChange(grid, rowIndex, col.valueKeyPath, value);
@@ -461,9 +471,6 @@ class DataGrid extends React.PureComponent {
     }
 
     if (col.onCreateBlur) {
-      // let value = e && e.target && e.target.value !== undefined
-      //   ? e.target.value
-      //   : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
@@ -471,29 +478,38 @@ class DataGrid extends React.PureComponent {
     }
   };
 
-  onEditCellBlur = (rowIndex, col, valueParser) => (e) => {
-    const { decimalSeparator, editCellValueChange, grid, thousandSeparator } = this.props;
+  onEditCellBlur = (rowIndex, col, valueParser) => (eventOrData) => {
+    const {
+      decimalSeparator, editCellValueChange, grid, thousandSeparator,
+    } = this.props;
     const { componentType } = col;
     const dataId = this.getDataIdByRowIndex(rowIndex);
-    let value = e && e.target && e.target.value !== undefined
-      ? e.target.value
-      : this.getEditItemValue(rowIndex, col);
+    let value;
+    // eventOrData can be formatted-input, react-select or react-day-picker onChange event
+    if (eventOrData !== undefined) {
+      if (eventOrData.target !== undefined) {
+        value = eventOrData.target.value;
+      } else if (eventOrData.value !== undefined) {
+        value = eventOrData.value;
+      } else {
+        value = eventOrData;
+      }
+    } else {
+      value = this.getEditItemValue(rowIndex, col);
+    }
     switch (componentType) {
       case 'currency': {
-        const numericValue = value ? Number(value.replace(thousandSeparator, '').replace(decimalSeparator, '.')) : value;
+        const numericValue = value
+          ? Number(value.replace(this.getRegEx((col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator), '')
+            .replace(this.getRegEx((col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator), '.'))
+          : value;
         if (numericValue !== this.getEditItemValue(rowIndex, col)) {
-          editCellValueChange(grid, dataId, col.valueKeyPath, value);
+          editCellValueChange(grid, dataId, col.valueKeyPath, numericValue);
         }
         break;
       }
       case 'float':
-      case 'number': {
-        const numericValue = Number(value);
-        if (numericValue !== this.getEditItemValue(rowIndex, col)) {
-          editCellValueChange(grid, dataId, col.valueKeyPath, value);
-        }
-        break;
-      }
+      case 'number':
       case 'text': {
         if (value !== this.getEditItemValue(rowIndex, col)) {
           editCellValueChange(grid, dataId, col.valueKeyPath, value);
@@ -506,13 +522,9 @@ class DataGrid extends React.PureComponent {
     }
 
     if (col.onEditBlur) {
-      // let value = e && e.target && e.target.value !== undefined
-      //   ? e.target.value
-      //   : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
-      // const dataId = this.getDataIdByRowIndex(rowIndex);
       col.onEditBlur(value, rowIndex, dataId);
     }
   };
