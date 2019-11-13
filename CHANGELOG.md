@@ -2,6 +2,9 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Changed default thousand separator to space
+* Enhanced editing of columns which `componentType` is `currency`, `float`, `number` or `text`. Typed value is not updated on change but on blur instead
+* Upgraded `@opuscapita/react-formatted-input`
 
 ## 9.0.1
 * Fix select-renderers when `editSelectOptionsMod`, `createSelectOptionsMod` or `filterSelectOptionsMod` is used

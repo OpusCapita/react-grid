@@ -1,9 +1,6 @@
 import React from 'react';
-// import { FormControl } from 'react-bootstrap';
 import FormattedInput from '@opuscapita/react-formatted-input';
 import { formatNumber } from '@opuscapita/format-utils';
-
-// export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
 
 export const primitiveRender = formattedInputProps => (
   <FormattedInput {...formattedInputProps} />
