@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed `id` of `currency` column edit input
+* Added `inputProps` for filter input
 
 ## 9.1.1
 * Fixed `onBlur` for `@opuscapita/react-checkbox`
