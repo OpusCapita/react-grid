@@ -434,9 +434,10 @@ class DataGrid extends React.PureComponent {
     } = this.props;
     const { componentType } = col;
     let value;
-    // eventOrData can be formatted-input, react-select or react-day-picker onChange event
+    // eventOrData can be formatted-input, react-select, react-checkbox or react-day-picker
+    // onChange event
     if (eventOrData !== undefined) {
-      if (eventOrData.target !== undefined) {
+      if (eventOrData && eventOrData.target && eventOrData.target.value !== undefined) {
         value = eventOrData.target.value;
       } else if (eventOrData.value !== undefined) {
         value = eventOrData.value;
@@ -485,9 +486,10 @@ class DataGrid extends React.PureComponent {
     const { componentType } = col;
     const dataId = this.getDataIdByRowIndex(rowIndex);
     let value;
-    // eventOrData can be formatted-input, react-select or react-day-picker onChange event
+    // eventOrData can be formatted-input, react-select, react-checkbox or react-day-picker
+    // onChange event
     if (eventOrData !== undefined) {
-      if (eventOrData.target !== undefined) {
+      if (eventOrData && eventOrData.target && eventOrData.target.value !== undefined) {
         value = eventOrData.target.value;
       } else if (eventOrData.value !== undefined) {
         value = eventOrData.value;

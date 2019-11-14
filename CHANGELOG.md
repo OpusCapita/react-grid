@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed `onBlur` for `@opuscapita/react-checkbox`
 
 ## 9.1.0
 * Changed default thousand separator to space
