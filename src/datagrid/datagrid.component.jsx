@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-lonely-if, prefer-template, react/require-default-props */
 import React from 'react';
 import { Map, List } from 'immutable';
@@ -326,6 +327,7 @@ class DataGrid extends React.PureComponent {
   };
 
   onCreateCellValueChange = (rowIndex, col, valueParser) => (eventOrData) => {
+    const { createCellValueChange, grid } = this.props;
     let rawValue;
     // eventOrData can be input onChange event, react-select onChange or react-day-picker onChange
     if (eventOrData) {
@@ -339,7 +341,19 @@ class DataGrid extends React.PureComponent {
     }
     const value = valueParser(rawValue);
 
-    this.props.createCellValueChange(this.props.grid, rowIndex, col.valueKeyPath, value);
+    const { componentType } = col;
+    switch (componentType) {
+      case 'currency':
+      case 'float':
+      case 'number':
+      case 'text': {
+        break;
+      }
+      default: {
+        createCellValueChange(grid, rowIndex, col.valueKeyPath, value);
+        break;
+      }
+    }
     if (col.onCreateValueChange) {
       col.onCreateValueChange(value, col.valueKeyPath, rowIndex);
     }
@@ -363,6 +377,7 @@ class DataGrid extends React.PureComponent {
   };
 
   onEditCellValueChange = (rowIndex, col, valueParser) => (eventOrData) => {
+    const { editCellValueChange, grid } = this.props;
     const dataId = this.getDataIdByRowIndex(rowIndex);
     let rawValue;
     // eventOrData can be input onChange event, react-select onChange or react-day-picker onChange
@@ -376,7 +391,19 @@ class DataGrid extends React.PureComponent {
       }
     }
     const value = valueParser(rawValue);
-    this.props.editCellValueChange(this.props.grid, dataId, col.valueKeyPath, value);
+    const { componentType } = col;
+    switch (componentType) {
+      case 'currency':
+      case 'float':
+      case 'number':
+      case 'text': {
+        break;
+      }
+      default: {
+        editCellValueChange(grid, dataId, col.valueKeyPath, value);
+        break;
+      }
+    }
     if (col.onEditValueChange) {
       col.onEditValueChange(value, col.valueKeyPath, rowIndex, dataId);
     }
@@ -399,11 +426,51 @@ class DataGrid extends React.PureComponent {
     }
   };
 
-  onCreateCellBlur = (rowIndex, col, valueParser) => (e) => {
+  getRegEx = separator => (separator ? new RegExp(`\\${separator}`, 'g') : new RegExp('\\s', 'g'));
+
+  onCreateCellBlur = (rowIndex, col, valueParser) => (eventOrData) => {
+    const {
+      decimalSeparator, createCellValueChange, grid, thousandSeparator,
+    } = this.props;
+    const { componentType } = col;
+    let value;
+    // eventOrData can be formatted-input, react-select or react-day-picker onChange event
+    if (eventOrData !== undefined) {
+      if (eventOrData.target !== undefined) {
+        value = eventOrData.target.value;
+      } else if (eventOrData.value !== undefined) {
+        value = eventOrData.value;
+      } else {
+        value = eventOrData;
+      }
+    } else {
+      value = this.getEditItemValue(rowIndex, col);
+    }
+    switch (componentType) {
+      case 'currency': {
+        const numericValue = value
+          ? Number(value.replace(this.getRegEx((col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator), '')
+            .replace(this.getRegEx((col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator), '.'))
+          : value;
+        if (numericValue !== this.getEditItemValue(rowIndex, col)) {
+          createCellValueChange(grid, rowIndex, col.valueKeyPath, numericValue);
+        }
+        break;
+      }
+      case 'float':
+      case 'number':
+      case 'text': {
+        if (value !== this.getEditItemValue(rowIndex, col)) {
+          createCellValueChange(grid, rowIndex, col.valueKeyPath, value);
+        }
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+
     if (col.onCreateBlur) {
-      let value = e && e.target && e.target.value !== undefined
-        ? e.target.value
-        : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
@@ -411,15 +478,53 @@ class DataGrid extends React.PureComponent {
     }
   };
 
-  onEditCellBlur = (rowIndex, col, valueParser) => (e) => {
+  onEditCellBlur = (rowIndex, col, valueParser) => (eventOrData) => {
+    const {
+      decimalSeparator, editCellValueChange, grid, thousandSeparator,
+    } = this.props;
+    const { componentType } = col;
+    const dataId = this.getDataIdByRowIndex(rowIndex);
+    let value;
+    // eventOrData can be formatted-input, react-select or react-day-picker onChange event
+    if (eventOrData !== undefined) {
+      if (eventOrData.target !== undefined) {
+        value = eventOrData.target.value;
+      } else if (eventOrData.value !== undefined) {
+        value = eventOrData.value;
+      } else {
+        value = eventOrData;
+      }
+    } else {
+      value = this.getEditItemValue(rowIndex, col);
+    }
+    switch (componentType) {
+      case 'currency': {
+        const numericValue = value
+          ? Number(value.replace(this.getRegEx((col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator), '')
+            .replace(this.getRegEx((col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator), '.'))
+          : value;
+        if (numericValue !== this.getEditItemValue(rowIndex, col)) {
+          editCellValueChange(grid, dataId, col.valueKeyPath, numericValue);
+        }
+        break;
+      }
+      case 'float':
+      case 'number':
+      case 'text': {
+        if (value !== this.getEditItemValue(rowIndex, col)) {
+          editCellValueChange(grid, dataId, col.valueKeyPath, value);
+        }
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+
     if (col.onEditBlur) {
-      let value = e && e.target && e.target.value !== undefined
-        ? e.target.value
-        : this.getEditItemValue(rowIndex, col);
       if (valueParser !== undefined) {
         value = valueParser(value);
       }
-      const dataId = this.getDataIdByRowIndex(rowIndex);
       col.onEditBlur(value, rowIndex, dataId);
     }
   };

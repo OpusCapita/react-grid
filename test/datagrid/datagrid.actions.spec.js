@@ -552,6 +552,12 @@ describe('Datagrid actions', () => {
   });
 
   it('validate edited cell value', function () {
+    const state = getState(GRID.id, {}, Map({
+      cellMessages: Map({
+        error: Map().set(1, Map({ name: 'invalid value' })),
+      }),
+    }));
+    this.store = mockStore(state);
     const validator = {
       validate: () => ({ valid: true }),
     };
@@ -585,6 +591,12 @@ describe('Datagrid actions', () => {
   });
 
   it('validate created cell value', function () {
+    const state = getState(GRID.id, {}, Map({
+      createCellMessages: Map({
+        error: Map().set(1, Map({ name: 'invalid value' })),
+      }),
+    }));
+    this.store = mockStore(state);
     const validator = {
       validate: () => ({ valid: true }),
     };

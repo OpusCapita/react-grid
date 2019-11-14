@@ -536,7 +536,9 @@ export const editCellValueValidate = (grid, dataId, keyPath, value, validators =
       }
     }
   });
-  if (validationState.valid) {
+
+  const cellMessage = getState().datagrid.getIn([grid.id, 'cellMessages', 'error', dataId, ...keyPath]);
+  if (validationState.valid && cellMessage !== undefined) {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CELL_HIDE_MESSAGE,
       id: grid.id,
@@ -544,7 +546,7 @@ export const editCellValueValidate = (grid, dataId, keyPath, value, validators =
       dataId,
       keyPath,
     });
-  } else {
+  } else if (!validationState.valid) {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CELL_SHOW_MESSAGE,
       id: grid.id,
@@ -613,7 +615,8 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
       }
     }
   });
-  if (validationState.valid) {
+  const createCellMessage = getState().datagrid.getIn([grid.id, 'createCellMessages', 'error', rowIndex, ...keyPath]);
+  if (validationState.valid && createCellMessage !== undefined) {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_HIDE_MESSAGE,
       id: grid.id,
@@ -621,7 +624,7 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
       rowIndex,
       keyPath,
     });
-  } else {
+  } else if (!validationState.valid) {
     dispatch({
       type: TYPES.PLATFORM_DATAGRID_CREATE_CELL_SHOW_MESSAGE,
       id: grid.id,

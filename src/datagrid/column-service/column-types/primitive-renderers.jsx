@@ -1,8 +1,10 @@
 import React from 'react';
-import { FormControl } from 'react-bootstrap';
+import FormattedInput from '@opuscapita/react-formatted-input';
 import { formatNumber } from '@opuscapita/format-utils';
 
-export const primitiveRender = primitiveProps => <FormControl {...primitiveProps} />;
+export const primitiveRender = formattedInputProps => (
+  <FormattedInput {...formattedInputProps} />
+);
 
 export default {
   // primitiveNumberValueRender
@@ -30,19 +32,23 @@ export default {
   ) {
     const cellName = 'edit';
     const primitiveProps = {
-      id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
-      style: column.style,
       tabIndex,
-      type: formControlType,
+      className: 'form-control',
+      inputProps: {
+        disabled: getComponentDisabledState(rowIndex, col, cellName),
+        id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
+        onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
+        onKeyDown: functions.onCellKeyDown(rowIndex, col),
+        ref: functions.handleCellRef(rowIndex, col),
+        style: column.style,
+        type: formControlType,
+      },
       value: functions.getItemValue(rowIndex, col),
       onBlur: functions.onCellBlur(rowIndex, col),
-      onKeyDown: functions.onCellKeyDown(rowIndex, col),
-      inputRef: functions.handleCellRef(rowIndex, col),
-      disabled: getComponentDisabledState(rowIndex, col, cellName),
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
-      onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       ...col.editComponentProps,
     };
+
     return primitiveRender({ ...primitiveProps });
   },
   // primitiveCellCreate
@@ -59,17 +65,20 @@ export default {
   ) {
     const cellName = 'create';
     const primitiveProps = {
-      id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
-      style: column.style,
       tabIndex,
-      type: formControlType || col.componentType,
+      className: 'form-control',
+      inputProps: {
+        disabled: getComponentDisabledState(rowIndex, col, cellName),
+        id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
+        onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
+        onKeyDown: functions.onCellKeyDown(rowIndex, col, false),
+        ref: functions.handleCellRef(rowIndex, col),
+        style: column.style,
+        type: formControlType || col.componentType,
+      },
       value: functions.getItemValue(rowIndex, col),
       onBlur: functions.onCellBlur(rowIndex, col),
-      onKeyDown: functions.onCellKeyDown(rowIndex, col, false),
-      inputRef: functions.handleCellRef(rowIndex, col),
-      disabled: getComponentDisabledState(rowIndex, col, cellName),
       onChange: functions.onCellValueChange(rowIndex, col, createValueParser),
-      onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
       ...col.createComponentProps,
     };
     return primitiveRender({ ...primitiveProps });

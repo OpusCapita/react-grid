@@ -34,7 +34,6 @@ const mapStateToProps = state => ({
   createData: state.datagrid.getIn([GRID.id, 'createData'], List()),
   editData: state.datagrid.getIn([GRID.id, 'editData'], Map()),
   selectedItems: state.datagrid.getIn([GRID.id, 'selectedItems'], List()),
-  isEditing: state.datagrid.getIn([GRID.id, 'session', 'isEditing'], false),
 });
 
 export default
@@ -49,7 +48,6 @@ class DatagridView extends React.Component {
     createData: ImmutablePropTypes.list.isRequired,
     editData: ImmutablePropTypes.map.isRequired,
     selectedItems: ImmutablePropTypes.list.isRequired,
-    isEditing: PropTypes.bool.isRequired,
     // Action props
     cellShowMessage: PropTypes.func.isRequired,
     cellShowMessages: PropTypes.func.isRequired,
@@ -173,7 +171,6 @@ class DatagridView extends React.Component {
   };
 
   render() {
-    const disableActionSave = this.props.isEditing && this.props.editData.size === 0;
     const actionBar = (
       <Form inline style={{ marginLeft: '20px' }}>
         <Button onClick={this.handleWarnClick}>Show Warning</Button>
@@ -188,7 +185,6 @@ class DatagridView extends React.Component {
         grid={this.state.gridSettings}
         gridHeader="Example Grid"
         columns={columns}
-        disableActionSave={disableActionSave}
         actionBarLeft={actionBar}
         filtering
         columnSettings
