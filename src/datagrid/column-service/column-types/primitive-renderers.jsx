@@ -86,10 +86,13 @@ export default {
   // primitiveCellFilter
   cellFilter(col, column, tabIndex, gridId, filterValueParser, formControlType, functions) {
     const primitiveProps = {
-      id: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
-      style: column.style,
       tabIndex,
-      type: formControlType,
+      className: 'form-control',
+      inputProps: {
+        id: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
+        style: column.style,
+        type: formControlType,
+      },
       value: functions.getItemValue(col),
       onChange: functions.onCellValueChange(col, filterValueParser),
       ...col.filterComponentProps,
