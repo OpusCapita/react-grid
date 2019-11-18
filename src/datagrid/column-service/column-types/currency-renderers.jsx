@@ -31,20 +31,24 @@ export default {
     gridId,
     functions,
     editValueParser,
-    getDisabledState,
+    getComponentDisabledState,
     gridData,
     thousandSeparator,
     decimalSeparator,
   ) {
+    const cellName = 'edit';
     const props = {
       className: 'form-control',
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, val => val),
       inputProps: {
+        disabled: getComponentDisabledState(rowIndex, col, cellName),
         id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
         name: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
+        onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
         onKeyDown: functions.onCellKeyDown(rowIndex, col),
         ref: functions.handleCellRef(rowIndex, col),
+        style: column.style,
       },
       currency: gridData.getIn([rowIndex, ...getCurrencyKeyPath(col)])
         || (col.valueOptions && col.valueOptions.currency),
@@ -67,20 +71,24 @@ export default {
     gridId,
     functions,
     editValueParser,
-    getDisabledState,
+    getComponentDisabledState,
     gridData,
     thousandSeparator,
     decimalSeparator,
   ) {
+    const cellName = 'create';
     const props = {
       className: 'form-control',
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, val => val),
       inputProps: {
+        disabled: getComponentDisabledState(rowIndex, col, cellName),
         id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
         name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
+        onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
         onKeyDown: functions.onCellKeyDown(rowIndex, col),
         ref: functions.handleCellRef(rowIndex, col),
+        style: column.style,
       },
       currency: gridData.getIn([rowIndex, ...getCurrencyKeyPath(col)])
         || (col.valueOptions && col.valueOptions.currency),
