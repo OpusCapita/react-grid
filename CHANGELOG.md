@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added id for currency input
 
 ## 9.1.2
 * Fixed `id` of `currency` column edit input
