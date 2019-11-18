@@ -41,6 +41,7 @@ export default {
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, val => val),
       inputProps: {
+        id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
         name: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
         onKeyDown: functions.onCellKeyDown(rowIndex, col),
         ref: functions.handleCellRef(rowIndex, col),
@@ -76,6 +77,7 @@ export default {
       value: functions.getItemValue(rowIndex, col),
       onChange: functions.onCellValueChange(rowIndex, col, val => val),
       inputProps: {
+        id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
         name: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
         onKeyDown: functions.onCellKeyDown(rowIndex, col),
         ref: functions.handleCellRef(rowIndex, col),
