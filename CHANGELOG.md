@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 9.1.4
 * Added props for currency input
 * Upgraded `@opuscapita/format-utils` and `@opuscapita/react-formatted-input` versions
 
