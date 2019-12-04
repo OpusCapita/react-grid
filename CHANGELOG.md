@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 9.1.6
+* Fix context menu to open up if there's no room to open down
+* Refactor context menu to own component
+
 ## 9.1.5
 * Upgraded `@opuscapita/react-formatted-input` version
 
@@ -42,6 +46,7 @@
 
 ## 8.4.0
 * Updated react and `@opuscapita/react-floating-select` versions
+* CSP BREAKING CHANGE: nonce must be provided to react-select 3 with NonceProvider. See (MIGRATEGUIDE.md)
 
 ## 8.3.9 - hotfix old branch
 * Change `updateExistingCellValue` parameters to fix correct behavior

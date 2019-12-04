@@ -167,17 +167,35 @@ class DatagridView extends React.Component {
   handleContextClick = (selectedIds, selectedData) => {
     console.log('Context menu clicked');
     console.log(`ID's ${selectedIds.join(', ')}`);
-    console.table(selectedData.toSJ());
+    console.table(selectedData.toJS());
   };
 
+  getActionBar = () => (
+    <Form inline style={{ marginLeft: '20px' }}>
+      <Button onClick={this.handleWarnClick}>Show Warning</Button>
+      <Button onClick={this.handleInfoClick}>Show Info</Button>
+      {this.getRegionComponent()}
+    </Form>
+  )
+
+  getContextMenu = () => ([{
+    value: 'Selected items are used',
+    onClick: this.handleContextClick,
+    disabled: (selectedIds, selectedData) => selectedData.count(d => d.get('isUsed', false) === true) !== selectedData.size,
+  }, {
+    value: 'View more details...',
+    onClick: this.handleContextClick,
+  }, {
+    value: 'Menu item 3',
+  }, {
+    value: 'Menu item 4',
+  }, {
+    value: 'Menu item 5',
+  }, {
+    value: 'Menu item 6',
+  }])
+
   render() {
-    const actionBar = (
-      <Form inline style={{ marginLeft: '20px' }}>
-        <Button onClick={this.handleWarnClick}>Show Warning</Button>
-        <Button onClick={this.handleInfoClick}>Show Info</Button>
-        {this.getRegionComponent()}
-      </Form>
-    );
     return (
       <Datagrid
         id="test-grid"
@@ -185,7 +203,7 @@ class DatagridView extends React.Component {
         grid={this.state.gridSettings}
         gridHeader="Example Grid"
         columns={columns}
-        actionBarLeft={actionBar}
+        actionBarLeft={this.getActionBar()}
         filtering
         columnSettings
         inlineEdit
@@ -196,17 +214,7 @@ class DatagridView extends React.Component {
         enableArrowNavigation
         onSave={this.handleOnSave}
         onRemove={this.handleOnRemove}
-        contextMenuItems={[
-          {
-            value: 'Selected items are used',
-            onClick: this.handleContextClick,
-            disabled: (selectedIds, selectedData) => selectedData.count(d => d.get('isUsed', false) === true) !== selectedData.size,
-          },
-          {
-            value: 'View more details...',
-            onClick: this.handleContextClick,
-          },
-        ]}
+        contextMenuItems={this.getContextMenu()}
       />
     );
   }

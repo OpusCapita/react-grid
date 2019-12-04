@@ -5,7 +5,6 @@ import { Map, List } from 'immutable';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage as M } from 'react-intl';
 import { Column, Cell } from 'fixed-data-table-2';
-import { MenuItem } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Icon } from '@opuscapita/react-icons';
 import Spinner from '@opuscapita/react-spinner';
@@ -24,6 +23,7 @@ import ColumnSettingsModal from './column-settings/column-settings.component';
 import { propTypes, defaultProps } from './datagrid.props';
 import { KEY_CODES } from './datagrid.constants';
 import pagination from './pagination.component';
+import ContextMenu from './context-menu.component';
 import Utils from './datagrid.utils';
 import GridColumnService from './column-service/column-service';
 import './datagrid.component.scss';
@@ -81,8 +81,8 @@ class DataGrid extends React.PureComponent {
       currentRow: 0,
       currentColumn: 0,
       contextMenuOpen: false,
-      contextMenuX: null,
-      contextMenuY: null,
+      contextMenuX: 0,
+      contextMenuY: 0,
     };
     this.cellRefs = {};
     this.createCellRefs = {};
@@ -1117,10 +1117,6 @@ class DataGrid extends React.PureComponent {
     return true;
   };
 
-  handleContextMenuItemClick = (onClick, selectedItems, selectedData) => () => {
-    onClick(selectedItems, selectedData);
-  };
-
   handleRowHeightGetter = rowIndex => this.props.rowHeightGetter(
     this.props.data.get(rowIndex),
     rowIndex,
@@ -1287,49 +1283,6 @@ class DataGrid extends React.PureComponent {
     ));
   };
 
-  renderContextMenu = () => {
-    const {
-      contextMenuItems, data, grid, selectedItems,
-    } = this.props;
-    const { contextMenuX, contextMenuY } = this.state;
-    const style = {
-      display: 'block',
-      zIndex: 10000,
-      position: 'absolute',
-      top: `${contextMenuY}px`,
-      left: `${contextMenuX}px`,
-    };
-    const selectedData = data.filter(d => selectedItems.includes(d.getIn(grid.idKeyPath)));
-    return (
-      <ul className="dropdown-menu oc-datagrid-context-menu open" style={style}>
-        {contextMenuItems
-          && contextMenuItems.map
-          && contextMenuItems.map((item, i) => {
-            let { disabled } = item;
-            if (typeof item.disabled === 'function') {
-              disabled = item.disabled(selectedItems, selectedData);
-            }
-            return (
-              <MenuItem
-                key={i} // eslint-disable-line
-                header={item.header}
-                divider={item.divider}
-                disabled={disabled}
-                title={item.title}
-                onClick={
-                  disabled || !item.onClick
-                    ? null
-                    : this.handleContextMenuItemClick(item.onClick, selectedItems, selectedData)
-                }
-              >
-                {item.value}
-              </MenuItem>
-            );
-          })}
-      </ul>
-    );
-  };
-
   render() {
     const gridClassName = classNames({
       'oc-datagrid-container': true,
@@ -1404,7 +1357,17 @@ class DataGrid extends React.PureComponent {
         style={this.props.containerStyle}
       >
         {this.props.isBusy && <Spinner />}
-        {this.state.contextMenuOpen && this.renderContextMenu()}
+        {this.state.contextMenuOpen && (
+          <ContextMenu
+            x={this.state.contextMenuX}
+            y={this.state.contextMenuY}
+            isVisible={this.state.contextMenuOpen}
+            contextMenuItems={this.props.contextMenuItems}
+            data={this.props.data}
+            grid={this.props.grid}
+            selectedItems={this.props.selectedItems}
+          />
+        )}
         {actionBar}
         <ResponsiveFixedDataTable
           {...this.props}
