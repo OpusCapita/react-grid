@@ -15,6 +15,19 @@ NEW:
 dispatch(DatagridActions.updateExistingCellValue(grid, dataId, keyPath, value))
 ```
 
+## Version 8.4
+* Nonce must be provided with NonceProvider:
+
+```javascript
+import { NonceProvider } from 'react-select';
+
+const nonce='nonce_hash_here';
+
+<NonceProvider nonce={nonce}>
+  <App />
+</NonceProvider>
+```
+
 ## Version 8
 * Cell values are rendered based on componentType instead of valueType. Make sure you have correct componentType set.
 * componentType select and multiselect values are now rendered automatically from selectOptions. You don't need custom valueRender anymore in basic cases.
