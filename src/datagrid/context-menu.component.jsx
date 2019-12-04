@@ -78,10 +78,6 @@ export default class DatagridTooltip extends React.PureComponent {
     onClick(selectedItems, selectedData);
   };
 
-  menuRef = (c) => {
-    this.menu = c;
-  }
-
   render() {
     const {
       contextMenuItems, data, grid, selectedItems,
