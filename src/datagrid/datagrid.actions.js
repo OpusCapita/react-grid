@@ -250,7 +250,13 @@ export const sortChange = (grid, columns, column, newSort) => (dispatch, getStat
   applySort(grid, columns)(dispatch, getState);
 };
 
-export const setData = (grid, columns, data) => (dispatch, getState) => {
+export const setData = (
+  grid,
+  columns,
+  data,
+  isEditing = false,
+  isCreating = false,
+) => (dispatch, getState) => {
   Utils.checkGridParam(grid);
   Utils.checkColumnsParam(columns);
   const configData = Utils.loadGridConfig(grid, columns);
@@ -264,6 +270,8 @@ export const setData = (grid, columns, data) => (dispatch, getState) => {
     data: immutableData,
     config: configData,
     selectedItems,
+    isEditing,
+    isCreating,
   });
   if (!grid.pagination) {
     applyFilters(grid, columns)(dispatch, getState);

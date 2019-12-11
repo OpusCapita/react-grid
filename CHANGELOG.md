@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.1.7
+* Add 'isEditing', and 'isCreating' parameters to setData
+
 ## 9.1.6
 * Fix context menu to open up if there's no room to open down
 * Refactor context menu to own component
