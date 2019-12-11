@@ -112,6 +112,8 @@ describe('Datagrid actions', () => {
           'dob',
         ],
       },
+      isEditing: false,
+      isCreating: false,
       selectedItems: [],
     };
 
