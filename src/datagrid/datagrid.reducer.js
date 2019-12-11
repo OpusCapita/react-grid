@@ -26,8 +26,8 @@ export default function datagridReducer(state = INITIAL_STATE, action) {
         .setIn([action.id, 'config'], Immutable.fromJS(action.config))
         .setIn([action.id, 'selectedItems'], Immutable.fromJS(action.selectedItems))
         .mergeIn([action.id, 'session'], {
-          isEditing: false,
-          isCreating: false,
+          isEditing: action.isEditing,
+          isCreating: action.isCreating,
           isBusy: false,
         })
         .deleteIn([action.id, 'selectedCell'])
