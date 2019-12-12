@@ -17,6 +17,10 @@
 * Added props for currency input
 * Upgraded `@opuscapita/format-utils` and `@opuscapita/react-formatted-input` versions
 
+## 9.1.4
+* Upgrade packages, fixes error output to console when currency code is unknown with currency componentType
+* `fixed-data-table-2` upgraded to 1.0.2
+
 ## 9.1.3
 * Added id for currency input
 

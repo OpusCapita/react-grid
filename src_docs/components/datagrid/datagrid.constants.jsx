@@ -157,7 +157,7 @@ export const getData = (count) => {
     data.push({
       id: i,
       name: faker.commerce.productName(),
-      price: faker.commerce.price() * -1,
+      price: faker.commerce.price(),
       amount: faker.finance.amount(),
       stock: faker.random.number(),
       country: country.alpha3,
