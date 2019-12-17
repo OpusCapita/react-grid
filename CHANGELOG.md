@@ -3,17 +3,17 @@
 
 ## <next>
 
-## 9.1.7
+## 9.1.8
 * Add 'isEditing', and 'isCreating' parameters to setData
 
-## 9.1.6
+## 9.1.7
 * Fix context menu to open up if there's no room to open down
 * Refactor context menu to own component
 
-## 9.1.5
+## 9.1.6
 * Upgraded `@opuscapita/react-formatted-input` version
 
-## 9.1.4
+## 9.1.5
 * Added props for currency input
 * Upgraded `@opuscapita/format-utils` and `@opuscapita/react-formatted-input` versions
 
