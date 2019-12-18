@@ -614,6 +614,13 @@ export const createCellValueValidate = (grid, rowIndex, keyPath, value, validato
         const rowData = getState().datagrid.getIn([grid.id, 'createData', rowIndex]);
         const params = validator.params ? Object.values(validator.params) : [];
         validationState = validator.validateWithRowData(value, rowData, ...params);
+      } else if (validator.validateWithGridData) {
+        const createData = getState().datagrid.getIn([grid.id, 'createData']);
+        const rowData = createData.get(rowIndex);
+        const allData = getState().datagrid.getIn([grid.id, 'allData']);
+        const combinedData = allData.concat(createData);
+        const params = validator.params ? Object.values(validator.params) : [];
+        validationState = validator.validateWithGridData(value, rowData, combinedData, ...params);
       } else {
         const params = validator.params ? Object.values(validator.params) : [];
         validationState = validator.validate(value, ...params);

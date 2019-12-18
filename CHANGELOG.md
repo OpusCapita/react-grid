@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Add `validateWithGridData` validator type to `createCellValueValidate` function
 
 ## 9.1.8
 * Upgrade packages, fixes error output to console when currency code is unknown with currency componentType
