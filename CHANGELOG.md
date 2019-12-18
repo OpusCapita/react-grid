@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 9.1.9
 * Add `validateWithGridData` validator type to `createCellValueValidate` function
 
 ## 9.1.8
