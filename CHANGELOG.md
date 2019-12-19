@@ -3,6 +3,11 @@
 
 ## <next>
 
+## 9.1.10
+* downgrade `fixed-data-table-2` to 0.8.28 for now
+  - there was some scrolling changes that we have to deal with later
+* upgrade some packages
+
 ## 9.1.9
 * Add `validateWithGridData` validator type to `createCellValueValidate` function
 
