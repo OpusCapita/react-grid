@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle, global-require */
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';

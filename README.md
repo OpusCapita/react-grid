@@ -34,6 +34,11 @@ First you have to connect your component to the redux. Then you can map the data
 - Check the API section below to see what props the Datagrid supports, also GRID object and columns are documented there.
 - To see what actions are available, check the [actions file](src/datagrid/datagrid.actions.js).
 
+### Responsiveness
+The grid component has logic to always take the space that is available on it's container component. Make sure to determine your container's width and height! If you make your container to grow and shrink with window size, the grid will follow and take the space that is has.
+
+Grid listens to window.resize event. If you modify container size dynamically, remember to fire window.resize event to make grid follow new size. There's also redux action `forceRefresh` for the convenience.
+
 ### Builds
 #### UMD
 The default build with compiled styles in the .js file. Also minified version available in the lib/umd directory.
@@ -253,8 +258,8 @@ import { Datagrid } from '@opuscapita/react-grid';
 export default class DatagridView extends React.Component {
   render() {
     const GRID = {
-      id: 'accounts',
-      idKeyPath: ['accountId'],
+      id: 'accounts', // unique id for the grid
+      idKeyPath: ['accountId'], // path to unique Id in the data to separate rows from eachother
     };
     const columns = [
       {
@@ -289,3 +294,8 @@ export default class DatagridView extends React.Component {
   }
 }
 ```
+
+### Troubleshooting
+- Grid shows only headers, not the data.
+  - Determine the height of your container with CSS. Grid will expand to it's container size!
+  - If you know that your other components height in the page is 100px, you can set grid container height to `calc(100% - 100px)` for responsiveness.
