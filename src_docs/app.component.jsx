@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle, global-require */
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl-redux';
@@ -32,8 +32,6 @@ if (module.hot) {
   });
 }
 
-export default
-@hot(module)
 class App extends React.Component {
   render() {
     return (
@@ -47,3 +45,5 @@ class App extends React.Component {
     );
   }
 }
+
+export default hot(App);

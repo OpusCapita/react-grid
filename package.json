@@ -53,6 +53,7 @@
     "@babel/preset-env": "7.7.7",
     "@babel/preset-react": "7.7.4",
     "@babel/register": "7.7.7",
+    "@hot-loader/react-dom": "16.8.6",
     "@opuscapita/oc-cm-common-styles": "3.0.0",
     "autoprefixer": "9.7.3",
     "babel-eslint": "10.0.3",
@@ -116,7 +117,6 @@
     "write-file-webpack-plugin": "4.5.1"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "16.8.6",
     "@opuscapita/format-utils": "2.2.3",
     "@opuscapita/react-checkbox": "2.0.2",
     "@opuscapita/react-datetime": "3.6.0",
