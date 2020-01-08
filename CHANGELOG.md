@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 9.1.11
+* Upgrade `@opuscapita/format-utils` to fix currency decimal count with Chrome
+* Upgrade some packages
+
 ## 9.1.10
 * downgrade `fixed-data-table-2` to 0.8.28 for now
   - there was some scrolling changes that we have to deal with later
