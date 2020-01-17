@@ -45,6 +45,7 @@ export default {
       },
       value: functions.getItemValue(rowIndex, col),
       onBlur: functions.onCellBlur(rowIndex, col),
+      editFormatter: editValueParser,
       onChange: functions.onCellValueChange(rowIndex, col, editValueParser),
       ...col.editComponentProps,
     };
