@@ -852,7 +852,7 @@ class DataGrid extends React.PureComponent {
   };
 
   handleSelectionCheckBoxOnChange = rowIndex => () => {
-    this.props.itemSelectionChange(this.props.grid, rowIndex, true, false);
+    // Logic for this action contains in handleRowClick (in 'else' block)
   };
 
   generateColumns = () => {
@@ -1056,6 +1056,7 @@ class DataGrid extends React.PureComponent {
   };
 
   handleRowClick = (e, rowIndex) => {
+    e.preventDefault();
     if (this.props.rowSelect && !this.props.isCreating && !this.props.isEditing) {
       if (e.ctrlKey || e.shiftKey) {
         document.getSelection().removeAllRanges();
@@ -1087,6 +1088,8 @@ class DataGrid extends React.PureComponent {
           this.props.multiSelect && e.ctrlKey,
           this.props.multiSelect && e.shiftKey,
         );
+      } else {
+        this.props.itemSelectionChange(this.props.grid, rowIndex, true, false);
       }
     }
     if (this.props.onRowClick) {

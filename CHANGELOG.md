@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 9.1.12
+* Fixed problem with incorrect call sequence when we select element through checkbox click
+* Changed logic for `handleSelectionCheckBoxOnChange` and `handleRowClick`
+
 ## 9.1.11
 * Upgrade `@opuscapita/format-utils` to fix currency decimal count with Chrome
 * Upgrade some packages
