@@ -1056,8 +1056,8 @@ class DataGrid extends React.PureComponent {
   };
 
   handleRowClick = (e, rowIndex) => {
-    e.preventDefault();
     if (this.props.rowSelect && !this.props.isCreating && !this.props.isEditing) {
+      e.preventDefault();
       if (e.ctrlKey || e.shiftKey) {
         document.getSelection().removeAllRanges();
       }
@@ -1091,9 +1091,9 @@ class DataGrid extends React.PureComponent {
       } else {
         this.props.itemSelectionChange(this.props.grid, rowIndex, true, false);
       }
-    }
-    if (this.props.onRowClick) {
-      this.props.onRowClick(e, rowIndex, this.props.data.get(rowIndex));
+      if (this.props.onRowClick) {
+        this.props.onRowClick(e, rowIndex, this.props.data.get(rowIndex));
+      }
     }
     return true;
   };
