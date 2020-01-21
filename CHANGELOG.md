@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 9.1.13
+* Fixed problem with incorrect call sequence when we select element through checkbox click
+* Changed logic for `handleSelectionCheckBoxOnChange` and `handleRowClick`
+
 ## 9.1.12
 * Pass editValueParser to FormattedInput primitive render so, that the value is parsed properly on each key press.
 
