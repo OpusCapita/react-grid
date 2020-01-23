@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 9.1.14
+* Fixed problem with rowSelect property
+* Fixed selection through checkbox
+
 ## 9.1.13
 * Fixed problem with incorrect call sequence when we select element through checkbox click
 * Changed logic for `handleSelectionCheckBoxOnChange` and `handleRowClick`
