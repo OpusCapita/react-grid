@@ -851,7 +851,7 @@ class DataGrid extends React.PureComponent {
     this.props.selectAllItemsChange(this.props.grid);
   };
 
-  handleSelectionCheckBoxOnChange = rowIndex => () => {
+  handleSelectionCheckBoxOnChange = () => () => {
     // Logic for this action contains in handleRowClick (in 'else' block)
   };
 
