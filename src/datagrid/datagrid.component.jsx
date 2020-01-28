@@ -1093,9 +1093,9 @@ class DataGrid extends React.PureComponent {
       } else {
         this.props.itemSelectionChange(this.props.grid, rowIndex, this.props.multiSelect, false);
       }
-      if (this.props.onRowClick) {
-        this.props.onRowClick(e, rowIndex, this.props.data.get(rowIndex));
-      }
+    }
+    if (this.props.onRowClick) {
+      this.props.onRowClick(e, rowIndex, this.props.data.get(rowIndex));
     }
     return true;
   };
