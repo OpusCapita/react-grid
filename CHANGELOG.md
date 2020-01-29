@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.1.15
+* Reverting previous change. onRowClick callback should be called if the grid is in the edit mode.
+
 ## 9.1.14
 * Fixed problem with rowSelect property
 * Fixed selection through checkbox
