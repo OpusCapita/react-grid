@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.1.16
+* react-formatted-input updated to version 1.2.5
+
 ## 9.1.15
 * Reverting previous change. onRowClick callback should be called if the grid is in the edit mode.
 
