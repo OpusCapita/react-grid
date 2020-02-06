@@ -119,7 +119,7 @@
   "dependencies": {
     "@opuscapita/format-utils": "2.2.3",
     "@opuscapita/react-checkbox": "2.0.2",
-    "@opuscapita/react-datetime": "3.6.0",
+    "@opuscapita/react-datetime": "3.6.2",
     "@opuscapita/react-dropdown": "2.2.5",
     "@opuscapita/react-floating-select": "4.0.2",
     "@opuscapita/react-formatted-input": "1.2.5",
