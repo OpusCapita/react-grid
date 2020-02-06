@@ -4,7 +4,7 @@
 ## <next>
 
 ## 9.1.17
-* react-datetime updated to version 3.6.1
+* react-datetime updated to version 3.6.2
 
 ## 9.1.16
 * react-formatted-input updated to version 1.2.5
