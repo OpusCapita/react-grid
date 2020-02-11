@@ -3,6 +3,10 @@
 
 ## <next>
 
+## 9.1.18
+* Fix val undefined bug when user removes filter value with backspace from float type cell
+* Move `styled-components` as peerDependency
+
 ## 9.1.17
 * react-datetime updated to version 3.6.2
 
