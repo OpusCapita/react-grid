@@ -173,9 +173,17 @@ export default {
     const createFunctions = { ...functions.create };
     const filterFunctions = { ...functions.filter };
     const { selectComponentOptions = Map() } = props;
-    const primitiveValParser = !col.editValueParser && col.componentType === 'float'
-      ? val => val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '')
-      : editValueParser;
+
+    // Primitive value parser
+    let primitiveValParser = editValueParser;
+    if (!col.editValueParser && col.componentType === 'float') {
+      primitiveValParser = (val) => {
+        if (val && val.replace) {
+          return val.replace(new RegExp(`[^\\d${props.decimalSeparator}+-]`, 'g'), '');
+        }
+        return '';
+      };
+    }
 
     switch (col.componentType) {
       case 'float':
