@@ -119,12 +119,12 @@
     "write-file-webpack-plugin": "4.5.1"
   },
   "dependencies": {
-    "@opuscapita/format-utils": "2.2.3",
+    "@opuscapita/format-utils": "2.2.4",
     "@opuscapita/react-checkbox": "2.0.2",
     "@opuscapita/react-datetime": "3.6.2",
     "@opuscapita/react-dropdown": "2.2.5",
     "@opuscapita/react-floating-select": "4.0.2",
-    "@opuscapita/react-formatted-input": "1.2.5",
+    "@opuscapita/react-formatted-input": "1.2.6",
     "@opuscapita/react-icons": "4.0.11",
     "@opuscapita/react-list-items": "1.1.2",
     "@opuscapita/react-perfect-scrollbar": "3.0.4",

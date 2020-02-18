@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Upgrade `@opuscapita/format-utils` and `@opuscapita/react-formatted-input`
+* Fixed: in edit/create mode clear button overlaps date input
 
 ## 9.1.18
 * Fix val undefined bug when user removes filter value with backspace from float type cell
