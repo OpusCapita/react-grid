@@ -103,6 +103,16 @@
     .Select-input {
       height: 31px !important;
     }
+
+    .oc-datetime-input-container {
+      input.form-control {
+        padding-right: 28px;
+      }
+      .oc-datetime-clear-value {
+        height: 29px;
+        width: 28px;
+      }
+    }
   }
 
   .oc-datagrid-row-edit,

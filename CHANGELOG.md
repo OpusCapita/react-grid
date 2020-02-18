@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 9.1.19
 * Upgrade `@opuscapita/format-utils` and `@opuscapita/react-formatted-input`
 * Fixed: in edit/create mode clear button overlaps date input
 
