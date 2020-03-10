@@ -32,9 +32,9 @@ export default {
   ) {
     const cellName = 'edit';
     const primitiveProps = {
-      tabIndex,
       className: 'form-control',
       inputProps: {
+        tabIndex,
         disabled: getComponentDisabledState(rowIndex, col, cellName),
         id: `ocDatagridEditInput-${gridId}-${column.columnKey}-${rowIndex}`,
         onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
@@ -66,9 +66,9 @@ export default {
   ) {
     const cellName = 'create';
     const primitiveProps = {
-      tabIndex,
       className: 'form-control',
       inputProps: {
+        tabIndex,
         disabled: getComponentDisabledState(rowIndex, col, cellName),
         id: `ocDatagridCreateInput-${gridId}-${column.columnKey}-${rowIndex}`,
         onFocus: functions.onCellFocus(cellName, col.componentType, rowIndex, column.columnKey),
@@ -87,9 +87,9 @@ export default {
   // primitiveCellFilter
   cellFilter(col, column, tabIndex, gridId, filterValueParser, formControlType, functions) {
     const primitiveProps = {
-      tabIndex,
       className: 'form-control',
       inputProps: {
+        tabIndex,
         id: `ocDatagridFilterInput-${gridId}-${column.columnKey}`,
         style: column.style,
         type: formControlType,

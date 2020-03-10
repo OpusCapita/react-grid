@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.2.20
+* Fix tabIndex prop with text input component
+
 ## 9.1.19
 * Upgrade `@opuscapita/format-utils` and `@opuscapita/react-formatted-input`
 * Fixed: in edit/create mode clear button overlaps date input
