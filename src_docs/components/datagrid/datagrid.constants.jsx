@@ -66,6 +66,9 @@ export const columns = [
     isRequired: true,
     width: 80,
     validators: [{ validate: VALIDATE.isRequired }],
+    editComponentProps: {
+      selectValueOnClick: true,
+    },
   },
   {
     header: 'Stock',
