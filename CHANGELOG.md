@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Upgraded `@opuscapita/react-formatted-input` version
 
 ## 9.2.20
 * Fix tabIndex prop with text input component
