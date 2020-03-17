@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 9.2.21
 * Upgraded `@opuscapita/react-formatted-input` version
 
 ## 9.2.20
