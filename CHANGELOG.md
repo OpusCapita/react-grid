@@ -3,13 +3,13 @@
 
 ## <next>
 
-## 9.2.22
+## 9.1.22
 * Fix: toggling a checkbox is the default action of clicking (on a checkbox) which must not be blocked
 
-## 9.2.21
+## 9.1.21
 * Upgraded `@opuscapita/react-formatted-input` version
 
-## 9.2.20
+## 9.1.20
 * Fix tabIndex prop with text input component
 
 ## 9.1.19
