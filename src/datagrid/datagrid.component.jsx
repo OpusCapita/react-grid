@@ -1057,7 +1057,10 @@ class DataGrid extends React.PureComponent {
 
   handleRowClick = (e, rowIndex) => {
     if (!this.props.isCreating && !this.props.isEditing) {
-      e.preventDefault();
+      const { target: { type } } = e;
+      if (type !== 'checkbox') {
+        e.preventDefault();
+      }
       if (e.ctrlKey || e.shiftKey) {
         document.getSelection().removeAllRanges();
       }
