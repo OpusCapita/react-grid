@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 9.2.22
 * Fix: toggling a checkbox is the default action of clicking (on a checkbox) which must not be blocked
 
 ## 9.2.21
