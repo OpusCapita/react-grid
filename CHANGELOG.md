@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fix: toggling a checkbox is the default action of clicking (on a checkbox) which must not be blocked
 
 ## 9.2.21
 * Upgraded `@opuscapita/react-formatted-input` version
