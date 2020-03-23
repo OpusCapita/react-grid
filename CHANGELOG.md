@@ -2,6 +2,8 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+## 9.1.23
 * Fixed checking changed value on create blur
 
 ## 9.1.22
