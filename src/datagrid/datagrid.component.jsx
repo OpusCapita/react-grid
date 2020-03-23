@@ -445,7 +445,7 @@ class DataGrid extends React.PureComponent {
         value = eventOrData;
       }
     } else {
-      value = this.getEditItemValue(rowIndex, col);
+      value = this.getCreateItemValue(rowIndex, col);
     }
     switch (componentType) {
       case 'currency': {
@@ -453,7 +453,7 @@ class DataGrid extends React.PureComponent {
           ? Number(value.replace(this.getRegEx((col.valueOptions && col.valueOptions.thousandSeparator) || thousandSeparator), '')
             .replace(this.getRegEx((col.valueOptions && col.valueOptions.decimalSeparator) || decimalSeparator), '.'))
           : value;
-        if (numericValue !== this.getEditItemValue(rowIndex, col)) {
+        if (numericValue !== this.getCreateItemValue(rowIndex, col)) {
           createCellValueChange(grid, rowIndex, col.valueKeyPath, numericValue);
         }
         break;
@@ -461,7 +461,7 @@ class DataGrid extends React.PureComponent {
       case 'float':
       case 'number':
       case 'text': {
-        if (value !== this.getEditItemValue(rowIndex, col)) {
+        if (value !== this.getCreateItemValue(rowIndex, col)) {
           createCellValueChange(grid, rowIndex, col.valueKeyPath, value);
         }
         break;
