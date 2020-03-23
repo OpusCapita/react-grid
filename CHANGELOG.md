@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Fixed checking changed value on create blur
 
 ## 9.1.22
 * Fix: toggling a checkbox is the default action of clicking (on a checkbox) which must not be blocked
