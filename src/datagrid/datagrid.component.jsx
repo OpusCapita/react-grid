@@ -120,11 +120,11 @@ class DataGrid extends React.PureComponent {
       const cellRefs = create ? this.createCellRefs : this.cellRefs;
       const arrowKeys = [KEY_CODES.DOWN, KEY_CODES.UP, KEY_CODES.LEFT, KEY_CODES.RIGHT];
       const {
-        columns, visibleColumns, grid, data, onLastCellTabPress,
+        columns, visibleColumns, grid, data, createData, onLastCellTabPress,
       } = this.props;
       const gridColumns = Utils.visibleColumns(columns, visibleColumns);
       const getColumnKeyByIndex = i => Utils.getColumnKey(gridColumns[i]);
-      const rowsSize = data.size;
+      const rowsSize = create ? createData.size : data.size;
       const columnKey = Utils.getColumnKey(col);
       let currentCell = cellRefs[`${grid.id}_${columnKey}_${rowIndex}`];
       let proxy = null;
@@ -195,7 +195,7 @@ class DataGrid extends React.PureComponent {
             let disabled = true;
             let nextElement = null;
             let rowInd = rowIndex;
-            while (disabled) {
+            while (disabled && rowInd <= rowsSize) {
               // Moving to the left
               if (e.keyCode === KEY_CODES.LEFT || (e.keyCode === KEY_CODES.TAB && e.shiftKey)) {
                 if (columnInd - 1 >= 0) {

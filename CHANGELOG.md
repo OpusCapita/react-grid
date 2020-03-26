@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.1.24
+* Fixed infinite loop when TAB is used to move in the grid
+
 ## 9.1.23
 * Fixed checking changed value on create blur
 
