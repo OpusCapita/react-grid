@@ -1,0 +1,5 @@
+{
+  "colors": true,
+  "require": ["test/register.js", "test/test.setup.js"],
+  "spec": "test/**/*.spec.*"
+}

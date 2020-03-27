@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Upgrade packages
 
 ## 9.1.24
 * Fixed infinite loop when TAB is used to move in the grid
