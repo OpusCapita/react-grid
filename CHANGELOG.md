@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Added node type to selectComponentOptions's label prop
 * Upgrade packages
 
 ## 9.1.24

@@ -105,7 +105,7 @@ export const columnShape = shape({
   selectComponentOptions: arrayOf(
     shape({
       value: oneOfType([number, string, bool]).isRequired,
-      label: oneOfType([number, string]).isRequired,
+      label: oneOfType([number, string, node]).isRequired,
     }),
   ),
   selectComponentTranslations: shape({
@@ -198,7 +198,7 @@ export const propTypes = {
       shape({
         // Options data for the react-select components
         value: oneOfType([number, string, bool]).isRequired,
-        label: oneOfType([number, string]).isRequired,
+        label: oneOfType([number, string, node]).isRequired,
       }),
     ),
   ),
