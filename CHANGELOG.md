@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* fix for special characters in text filter
 
 ## 9.2.0
 * Added node type to selectComponentOptions's label prop

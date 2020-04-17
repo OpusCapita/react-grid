@@ -3,6 +3,7 @@ import moment from 'moment';
 import isNaN from 'lodash/isNaN';
 import { isFunction } from 'util';
 import { Map, fromJS, List } from 'immutable';
+import { escapeSpecialCharacters } from '@opuscapita/format-utils';
 
 const getColumnKey = col => col.columnKey || col.valueKeyPath.join('/');
 
@@ -185,11 +186,8 @@ export default {
         return (row, filterVal) => {
           // in case of select filterVal ei not string
           const trimmedVal = filterVal.trim ? filterVal.trim() : filterVal;
-          let escapedVal = trimmedVal;
-          const specialChars = '[]\\^$.|?*+()';
-
-          // If filter val starts with a Regex special character, we must escape it
-          if (specialChars.includes(trimmedVal[0])) escapedVal = `\\${trimmedVal}`;
+          // handle special characters by escaping them
+          const escapedVal = escapeSpecialCharacters(trimmedVal);
           return new RegExp(escapedVal, 'i').test(getVal(row));
         };
     }
