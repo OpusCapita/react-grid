@@ -2,6 +2,9 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+
+
+## 9.3.0
 * fix for special characters in text filter
 
 ## 9.2.0

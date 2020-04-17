@@ -1,5 +1,14 @@
-export Datagrid from './datagrid.component';
-export DropdownControls from './dropdown-controls.component';
-export datagridReducer from './datagrid.reducer';
-export * as DatagridActions from './datagrid.actions';
-export { gridShape, columnShape as gridColumnShape } from './datagrid.props';
+import Datagrid from './datagrid.component';
+import DropdownControls from './dropdown-controls.component';
+import datagridReducer from './datagrid.reducer';
+import * as DatagridActions from './datagrid.actions';
+import { gridShape, columnShape as gridColumnShape } from './datagrid.props';
+
+export {
+  Datagrid,
+  DropdownControls,
+  datagridReducer,
+  DatagridActions,
+  gridShape,
+  gridColumnShape,
+};
