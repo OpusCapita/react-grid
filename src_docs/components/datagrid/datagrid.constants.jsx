@@ -159,7 +159,7 @@ export const getData = (count) => {
     const country = randomCountry();
     data.push({
       id: i,
-      name: faker.commerce.productName(),
+      name: `${faker.commerce.productName()} (${faker.hacker.verb()})`,
       price: faker.commerce.price(),
       amount: faker.finance.amount(),
       stock: faker.random.number(),
