@@ -3,6 +3,8 @@
 
 ## <next>
 
+## 9.3.1
+* Allow react component in multiselect translation
 
 ## 9.3.0
 * fix for special characters in text filter

@@ -41,7 +41,9 @@ export default {
       const selectedText = (col.translations && col.translations.itemsSelected) || 'selected';
       const valueText = (
         <span>
-          {`${vals.size} ${selectedText}`}
+          {vals.size}
+          {' '}
+          {selectedText}
         </span>
       );
       // without tooltip
