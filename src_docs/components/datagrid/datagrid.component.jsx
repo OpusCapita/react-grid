@@ -7,7 +7,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import {
   DropdownButton, Form, Button, MenuItem,
 } from 'react-bootstrap';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 // app
 import { Datagrid, DatagridActions } from '../../../src/index';
 import { getLocaleFormatData } from '../../services/internationalization.service';
@@ -133,7 +133,7 @@ class DatagridView extends React.Component {
     if (createData.size) {
       // Creating mode
       newData = createData.toJS();
-      newData = newData.map(item => Object.assign(item, { id: uuid() }));
+      newData = newData.map(item => Object.assign(item, { id: uuidv4() }));
     } else if (editData.size) {
       // Editing mode
       editData.forEach((editItem, editId) => {
