@@ -2,6 +2,7 @@
 * In general follow (https://docs.npmjs.com/getting-started/semantic-versioning) versioning.
 
 ## <next>
+* Updated `@opuscapita/react-formatted-input` version
 
 ## 9.3.1
 * Allow react component in multiselect translation
