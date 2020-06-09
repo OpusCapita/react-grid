@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.3.3
+* Fix filter value parsing errors
+
 ## 9.3.2
 * Updated `@opuscapita/react-formatted-input` version
 
