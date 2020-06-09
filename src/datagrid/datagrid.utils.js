@@ -181,11 +181,12 @@ export default {
           return false;
         };
       case 'boolean':
+        return (row, filterVal) => !!filterVal === !!getVal(row);
       case 'text':
       default:
         return (row, filterVal) => {
-          // in case of select filterVal ei not string
-          const trimmedVal = filterVal.trim ? filterVal.trim() : filterVal;
+          // Ensure value is trimmed string
+          const trimmedVal = filterVal.trim ? filterVal.trim() : String(filterVal);
           // handle special characters by escaping them
           const escapedVal = escapeSpecialCharacters(trimmedVal);
           return new RegExp(escapedVal, 'i').test(getVal(row));
