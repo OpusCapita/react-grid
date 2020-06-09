@@ -127,6 +127,10 @@ export default {
     if (col.filterMatcher) return col.filterMatcher;
     const getVal = row => row.getIn(col.valueKeyPath);
 
+    // Select component values can be matched exactly
+    if (col.componentType === 'select') {
+      return (row, filterVal) => filterVal === getVal(row);
+    }
     if (col.componentType === 'multiselect') {
       return (row, filterVal) => {
         // value can be simple value, immutable List or array

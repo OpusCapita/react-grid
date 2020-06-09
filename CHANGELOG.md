@@ -4,6 +4,9 @@
 ## <next>
 
 ## 9.3.3
+* Fix select component type filter value matcher
+
+## 9.3.3
 * Fix filter value parsing errors
 
 ## 9.3.2
