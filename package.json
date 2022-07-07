@@ -135,7 +135,7 @@
     "fixed-data-table-2": "0.8.28",
     "invariant": "2.2.4",
     "lodash": "4.17.15",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "react-icons": "3.9.0",
     "react-intl": "2.9.0",
     "react-redux": "5.1.1"
