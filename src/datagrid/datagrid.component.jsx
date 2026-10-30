@@ -192,12 +192,13 @@ class DataGrid extends React.PureComponent {
 
           let columnInd = gridColumns.findIndex(c => c.valueKeyPath.join('/') === columnKey);
           if (columnInd !== -1) {
-            let disabled = true;
+            const isShiftTab = e.keyCode === KEY_CODES.TAB && e.shiftKey;
+            const movingLeft = e.keyCode === KEY_CODES.LEFT || isShiftTab;
             let nextElement = null;
             let rowInd = rowIndex;
-            while (disabled && rowInd <= rowsSize) {
-              // Moving to the left
-              if (e.keyCode === KEY_CODES.LEFT || (e.keyCode === KEY_CODES.TAB && e.shiftKey)) {
+            while (!nextElement || nextElement.disabled) {
+              nextElement = null;
+              if (movingLeft) {
                 if (columnInd - 1 >= 0) {
                   columnInd -= 1;
                 } else if (rowInd - 1 >= 0) {
@@ -206,64 +207,18 @@ class DataGrid extends React.PureComponent {
                 } else {
                   break;
                 }
+              } else if (columnInd + 1 < gridColumns.length) {
+                columnInd += 1;
+              } else if (rowInd + 1 < rowsSize) {
+                columnInd = 0;
+                rowInd += 1;
               } else {
-                // Moving to the right
-                if (columnInd + 1 < gridColumns.length) {
-                  columnInd += 1;
-                } else if (rowInd + 1 < rowsSize) {
-                  columnInd = 0;
-                  rowInd += 1;
-                } else if (rowInd + 1 === rowsSize) {
-                  // If trying to select a row, when there is none:
-                  if (onLastCellTabPress && e.keyCode === KEY_CODES.TAB) onLastCellTabPress(e);
-                  break;
-                }
+                if (onLastCellTabPress && e.keyCode === KEY_CODES.TAB) onLastCellTabPress(e);
+                break;
               }
-
               nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
-
-              // If we cannot focus on the next element while moving to the right
-              if (!nextElement && e.keyCode !== KEY_CODES.LEFT) {
-                // If we're not yet in the last focusable column
-                if (columnInd <= gridColumns.length) {
-                  while (columnInd <= gridColumns.length && !nextElement) {
-                    nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
-                    columnInd += 1;
-
-                    // If we are in the last column and we don't have an element to focus on,
-                    // we must move to the next row (if possible)
-                    if (!nextElement && columnInd === gridColumns.length) {
-                      // If trying to select a row, when there is none:
-                      if (rowInd + 1 === rowsSize) {
-                        if (onLastCellTabPress && e.keyCode === KEY_CODES.TAB) {
-                          onLastCellTabPress(e);
-                        }
-                        break;
-                      }
-
-                      columnInd = 0;
-                      rowInd += 1;
-                      nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
-                    }
-                  }
-                }
-                // If we cannot focus on the next element while moving to the left
-              } else if (!nextElement && e.keyCode === KEY_CODES.LEFT) {
-                while (columnInd > 0 && !nextElement) {
-                  columnInd -= 1;
-                  nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
-                }
-                // if no element was found, try moving to previous row
-                // (needed in case first column is not editable e.g. an ExtraColumn)
-                if (rowInd > 0 && !nextElement) {
-                  columnInd = gridColumns.length - 1;
-                  rowInd -= 1;
-                  nextElement = cellRefs[`${grid.id}_${getColumnKeyByIndex(columnInd)}_${rowInd}`];
-                }
-              }
-              disabled = nextElement ? nextElement.disabled : false;
             }
-            if (!disabled && nextElement) {
+            if (nextElement && !nextElement.disabled) {
               if (typeof nextElement.select === 'object' || nextElement.selectRef) {
                 nextElement = this.getSelectRef(nextElement);
               }

@@ -3,6 +3,9 @@
 
 ## <next>
 
+## 9.3.5
+* Fix page freeze when moving over disabled cells with Shift+Tab
+
 ## 9.3.3
 * Fix select component type filter value matcher
 
